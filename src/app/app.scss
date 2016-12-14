@@ -14,3 +14,21 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.toolbar-background-md {
+    background: #fff;
+    border-color: #000;
+}
+i.venus_icon{background: url(../../images/sprit.png) no-repeat -3px -8px  ;  display: inline-block;    height: 40px;    width: 14%;}
+i.invit_icon{background:  url(../../images/sprit.png) no-repeat -84px -12px;    display: inline-block;    height: 39px;    width: 14%;}
+i.supplies{background: url(../../images/sprit.png) no-repeat  -292px -11px;    display: inline-block;    height: 39px;    width: 14%;}
+i.food_map{background: url(../../images/sprit.png) no-repeat -157px -11px ;    display: inline-block;    height: 39px;    width: 14%;}
+i.decor{background: url(../../images/sprit.png) no-repeat  -226px -12px ;    display: inline-block;    height: 37px;    width: 14%;}
+i.entert{background: url(../../images/sprit.png) no-repeat  -363px -10px  ;    display: inline-block;    height: 37px;    width: 14%;}
+i.serv{background: url(../../images/sprit.png) no-repeat  -442px -3px;    display: inline-block;    height: 44px;    width: 14%;}
+i.other{background:url(../../images/sprit.png) no-repeat  -521px -13px   ;    display: inline-block;    height: 34px;    width: 14%;}
+i.say_thank{background:url(../../images/sprit.png) -595px -14px  no-repeat  ;    display: inline-block;    height: 40px;    width: 14%;}
+
+.top-nav .bar-buttons-md[start] {
+    order: 1;
+}

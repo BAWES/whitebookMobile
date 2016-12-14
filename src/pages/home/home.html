@@ -1,17 +1,85 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar class="top-nav">
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Plan</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+      <ion-icon name="cart"></ion-icon>
+    </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-slides [options]="mySlideOptions">
+
+  <ion-slide>
+    <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
+  </ion-slide>
+
+  <ion-slide>
+    <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/1000949_547025268680139_1700284818_n_367_501.jpg" />
+  </ion-slide>
+
+  <ion-slide>
+    <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
+  </ion-slide>
+
+  <ion-slide>
+        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/1000949_547025268680139_1700284818_n_367_501.jpg" />
+  </ion-slide>
+</ion-slides>
+
+
+<ion-item>
+  <ion-label text-center padding>Featured Product</ion-label>
+</ion-item>
+
+<ion-grid class="feature-product">
+ 
+      <ion-row text-center>
+          <ion-col>
+            <img src="http://lorempixel.com/400/400/food/1/" />
+            <h4 class="name">Food</h4>
+             <p class="category">@food</p>
+          </ion-col>
+        <ion-col>
+            <img src="http://lorempixel.com/400/400/fashion" />
+            <h4 class="name">fashion</h4>
+            <p class="category">@fashion</p>
+          </ion-col>
+      </ion-row>
+ 
+      <ion-row text-center>
+          <ion-col>
+            <img src="http://lorempixel.com/400/400/transport" />
+            <h4 class="name">transport</h4>
+            <p class="category">@transport</p>
+          </ion-col>
+          <ion-col>
+            <img src="http://lorempixel.com/400/400/business" />
+              <h4 class="name">Business</h4>
+              <p class="category">@business</p>
+          </ion-col>
+      </ion-row>
+ 
+      <ion-row text-center>
+        <ion-col>
+            <img src="http://lorempixel.com/400/400/nature" />
+            <h4 class="name">nature</h4>
+            <p class="category">@nature</p>
+          </ion-col>
+        
+          <ion-col>
+            <img src="http://lorempixel.com/400/400/sports" />
+            <h4 class="name">sport</h4>
+            <p class="category">@sport</p>
+          </ion-col>
+      </ion-row>
+ 
+    </ion-grid>
 </ion-content>
