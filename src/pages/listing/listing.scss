@@ -1,3 +1,65 @@
 page-listing {
 
 }
+
+.category-product-listing .name,
+.category-product-listing .vendor,
+.category-product-listing .price{
+    font-size: 13px;
+    color:#000;
+    font-weight: normal;
+}
+.category-product-listing .vendor,
+.category-product-listing .price{
+    margin: 0px;
+    font-weight: normal;
+    margin-bottom: 6px;
+}
+
+.category-product-listing .name{
+    margin-top: 9px;
+    margin-bottom:3px;
+}
+.category-product-listing .price{
+    margin-bottom:17px;
+}
+
+.category-product-listing img{
+    margin-top:17px;
+    height: 140px;
+    width: 140px;
+}
+
+.category-product-listing.list-view .item-block .item-inner{
+    border : none;
+}
+.category-product-listing.list-view .item-block{
+    border-bottom:1px solid #dedede;
+    padding-left:0px
+}
+[width-50]{
+    width:50%
+}
+[max-width-100]{
+    max-width:100%
+}
+.bar-buttons-md[end][text-center] {
+    text-align: center;
+}
+[left-border]{border-left: 1px solid #dedede;}
+[border-right]{
+    border-right: 1px solid #dedede;
+}
+[border-bottom]{
+    border-bottom: 1px solid #dedede;
+}
+.top-filter-tool-bar.item-ios.item-block .item-inner{
+    border: none;
+}
+.top-filter-tool-bar.item-ios.item-block .select{
+    color: #c8c7cc;
+}
+.top-filter-tool-bar .searchbar-ios {
+    background: none;
+    border:0.55px solid rgba(0, 0, 0, 0.05);
+}

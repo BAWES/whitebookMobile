@@ -12,7 +12,9 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'listing.html'
 })
 export class ListingPage {
-
+  title : string;
+  productView = 'grid';
+  category:any;
   constructor(
     public navCtrl: NavController,
     private _params : NavParams
@@ -20,7 +22,8 @@ export class ListingPage {
   ) {}
 
   ionViewDidLoad() {
-    console.log(this._params.get('id'));
+    console.log(this._params.get('category'));
+    this.category = this._params.get('category');
+    this.title = this.category.title;
   }
-
 }
