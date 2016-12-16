@@ -19,5 +19,4 @@ export class Home {
     speed :3000,
     pager : true
   };
-
 }

@@ -27,14 +27,14 @@
 
   <ion-grid class="category-product-listing grid-view" *ngIf="productView == 'grid'">
     <ion-row text-center>
-        <ion-col border-right border-bottom>
+        <ion-col border-right border-bottom (click)="productDetail(1)">
           <ion-icon class="like-icon" name="heart-outline"></ion-icon>
           <img src="http://lorempixel.com/150/150/food/1/" />
           <h4 class="name">Food Service</h4>
             <h5 class="vendor">Whitebook Vendor</h5>
             <h6 class="price">KD 20.111</h6>
         </ion-col>
-        <ion-col border-bottom>
+        <ion-col border-bottom (click)="productDetail(2)">
           <ion-icon class="like-icon" name="heart-outline"></ion-icon>
           <img src="http://lorempixel.com/150/150/food/1/" />
           <h4 class="name">Food</h4>
@@ -43,14 +43,14 @@
         </ion-col>
     </ion-row>
     <ion-row text-center>
-        <ion-col border-right border-bottom>
+        <ion-col border-right border-bottom (click)="productDetail(3)">
           <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             <img src="http://lorempixel.com/150/150/fashion" />
             <h4 class="name">fashion</h4>
             <h5 class="vendor">Whitebook Vendor</h5>
             <h6 class="price">KD 20.111</h6>
-          </ion-col>
-      <ion-col border-bottom>
+        </ion-col>
+        <ion-col border-bottom (click)="productDetail(4)">
         <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             <img src="http://lorempixel.com/150/150/fashion" />
             <h4 class="name">fashion</h4>

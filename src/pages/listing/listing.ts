@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { ProductPage } from '../product/product';
 /*
   Generated class for the Listing page.
 
@@ -25,5 +26,10 @@ export class ListingPage {
     console.log(this._params.get('category'));
     this.category = this._params.get('category');
     this.title = this.category.title;
+  }
+
+  productDetail(id) {
+    console.log('opening product detail page of id : '+id);
+    this.navCtrl.push(ProductPage,{productId:id});
   }
 }
