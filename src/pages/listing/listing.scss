@@ -26,8 +26,8 @@ page-listing {
 
 .category-product-listing img{
     margin-top:17px;
-    height: 140px;
-    width: 140px;
+    height: 180px;
+    width: 180px;
 }
 
 .category-product-listing.list-view .item-block .item-inner{
@@ -92,4 +92,13 @@ page-listing {
 
 .search-icon{
     margin-right: 17px !important;
+}
+.like-icon{
+    position: absolute;
+    top: 25px;
+    right: 12px;
+    color: #fff;
+}
+.category-product-listing ion-col {
+    position: relative;
 }
