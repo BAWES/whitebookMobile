@@ -19,8 +19,11 @@
         <ion-slide><img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/1000949_547025268680139_1700284818_n_367_501.jpg" /></ion-slide>
       </ion-slides>
        <h2>Testing Product</h2>
+       <h3 text-center>White Book</h3>
+       <h4 text-center>Price : KD 12.22</h4>
        <!--<p [innerHTML]="product.description"></p>-->
-       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+       <h4 text-center>Product description</h4>
+       <p text-justify>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     </ion-item>  
    <ion-item>
     <ion-icon name="pricetag" primary item-left></ion-icon>
@@ -43,10 +46,13 @@
    <ion-item><button full primary (click)="openImages()">See Images</button></ion-item>
 </ion-content>
 
-<ion-footer>
+<!--<ion-footer>
   <ion-toolbar>
-      <button primary full clear (click)="openCart()">
+      <button start primary full clear (click)="openCart()">
         <ion-icon name="cart"></ion-icon> Go to Cart
       </button>
+      <button end primary full clear (click)="openCart()">
+        <ion-icon name="cart"></ion-icon> Back
+      </button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer>-->
