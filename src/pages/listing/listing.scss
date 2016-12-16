@@ -63,3 +63,33 @@ page-listing {
     background: none;
     border:0.55px solid rgba(0, 0, 0, 0.05);
 }
+[float-left] {
+    float:left;
+}
+
+[float-right] {
+    float:right;
+}
+.order-by-icon,.search-icon,.list-icon,.grid-icon{
+    margin-top: 11px;
+    font-size: 18px;
+}
+.top-filter-tool-bar ion-col{
+    padding:0px;
+}
+.list-icon{
+    margin-left:13px
+}
+.grid-icon{
+    margin-left:17px;
+}
+.filter-icon{
+    margin-top: 11px;
+}
+.order-by-icon{
+    margin-right: 13px !important;
+}
+
+.search-icon{
+    margin-right: 17px !important;
+}

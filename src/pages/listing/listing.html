@@ -12,17 +12,16 @@
 
 <ion-content>
   <ion-row border-bottom no-line class="top-filter-tool-bar">
-    <ion-col>
-      <ion-select item-left max-width-100>
-        <ion-option value="f" selected="true">Order By Date</ion-option>
-        <ion-option value="m">Order By Price</ion-option>
-      </ion-select>
+    <ion-col text-left>
+      <ion-buttons left float-left><ion-icon class="list-icon" name="menu"></ion-icon></ion-buttons>
+      <ion-buttons left float-left ><ion-icon class="grid-icon" name="apps"></ion-icon></ion-buttons>
     </ion-col>
     <ion-col>
-      <ion-buttons end>
-        <ion-searchbar color="primary">
-      </ion-searchbar>
-      </ion-buttons>
+      <ion-buttons text-center><ion-icon class="filter-icon" name="funnel"></ion-icon></ion-buttons>
+    </ion-col>
+    <ion-col text-right>
+        <ion-buttons float-right><ion-icon class="order-by-icon" name="stats"></ion-icon></ion-buttons>
+        <ion-buttons float-right><ion-icon class="search-icon" name="search"></ion-icon></ion-buttons>
     </ion-col>
   </ion-row>
 
@@ -162,18 +161,3 @@
         </ion-item>
   </ion-list>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar no-border-top>
-    <ion-buttons start width-50 text-center>
-      <button ion-button>
-            <ion-icon name="funnel"></ion-icon>&nbsp;Filter
-      </button>
-    </ion-buttons>
-    <ion-buttons end width-50 text-center left-border>
-      <button ion-button>
-          <ion-icon name="apps"></ion-icon>&nbsp;Attributes
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-     </ion-footer>
