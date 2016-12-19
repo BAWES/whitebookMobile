@@ -19,4 +19,12 @@ export class Home {
     speed :3000,
     pager : true
   };
+  
+  categorySlideOptions = {
+    initialSlide: 1,
+    loop: true,
+    autoplay:false,
+    speed :3000,
+    slidesPerView: 2,
+  };
 }

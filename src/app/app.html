@@ -1,15 +1,22 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar >
-      <ion-title padding text-center><img src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
+      <ion-title padding text-center><img class="logo" src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content main-menu>
     <ion-list>
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let p of pages" (click)="openPage(p)">
-          <ion-icon name="home"></ion-icon>
+          <i class="fa fa-{{p.icon}}"></i>
         {{p.title}} 
+      </button>
+    </ion-list>
+    <hr/>
+    <ion-list>
+      <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(p)">
+        <i class="fa fa-{{prsnl.icon}}"></i>
+        {{prsnl.title}} 
       </button>
     </ion-list>
   </ion-content>

@@ -14,6 +14,7 @@ export class MyApp {
   rootPage: any = Home;
 
   pages: Array<{title: string, component: any, icon: any,id:number}>;
+  personal: Array<{title: string, component: any,icon: any}>;
 
   constructor(
     public platform: Platform,
@@ -23,19 +24,29 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: Home, icon : "venus_icon" ,id:1},
-      { title: 'Venues', component: ListingPage, icon : "venus_icon",id:2 },
-      { title: 'Invitations', component: ListingPage , icon : "invit_icon",id:3 },
-      { title: 'Food & Beverage', component: ListingPage , icon : "food_map" ,id:4},
-      { title: 'Decor', component: ListingPage , icon : "decor",id:5 },
-      { title: 'Supplies', component: ListingPage , icon : "supplies" ,id:6},
-      { title: 'Entertainment', component: ListingPage , icon : "entert" ,id:7},
-      { title: 'Services', component: ListingPage , icon : "serv" ,id:8},
-      { title: 'Other', component: ListingPage , icon : "other" ,id:9},
-      { title: 'Gift Favors', component: ListingPage , icon : "say_thank" ,id:10}
+      { title: 'Home', component: Home, icon : "home" ,id:1},
+      { title: 'Venues', component: ListingPage, icon : "map-marker",id:2 },
+      { title: 'Invitations', component: ListingPage , icon : "envelope-open-o",id:3 },
+      { title: 'Food & Beverage', component: ListingPage , icon : "cutlery" ,id:4},
+      { title: 'Decor', component: ListingPage , icon : "building",id:5 },
+      { title: 'Supplies', component: ListingPage , icon : "truck" ,id:6},
+      { title: 'Entertainment', component: ListingPage , icon : "headphones" ,id:7},
+      { title: 'Services', component: ListingPage , icon : "cogs" ,id:8},
+      { title: 'Other', component: ListingPage , icon : "cubes" ,id:9},
+      { title: 'Gift Favors', component: ListingPage , icon : "gift" ,id:10}
     ];
-  }
+    
+    this.personal = [ 
+      { title : 'Sign In', component:Home,icon:'sign-in' },
+      { title : 'My Orders', component:Home,icon:'archive' },
+      { title : 'My Account', component:Home,icon: 'user-circle'},
+      { title : 'My Events', component:Home,icon:'calendar-check-o' },
+      { title : 'Address Book', component:Home,icon:'address-book' },
+      { title : 'Logout', component:Home ,icon:'power-off'},
+    ]
+}
 
+  
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
