@@ -12,16 +12,18 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'product.html'
 })
 export class ProductPage {
-
-mySlideOptions = {
-    initialSlide: 1,
-    loop: true,
-    autoplay:true,
-    speed :3000,
-    pager : true
-  };
+  productSection:string;
+  mySlideOptions = {
+      initialSlide: 1,
+      loop: true,
+      autoplay:true,
+      speed :3000,
+      pager : true
+    };
   
-  constructor(public navCtrl: NavController,private _params : NavParams) {}
+  constructor(public navCtrl: NavController,private _params : NavParams) {
+    this.productSection = "pdescription";
+  }
 
   ionViewDidLoad() {
     console.log('product detail page for id : '+ this._params.get('productId')); 
