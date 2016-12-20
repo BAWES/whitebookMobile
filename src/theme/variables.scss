@@ -2,7 +2,6 @@
 // http://ionicframework.com/docs/v2/theming/
 @import "ionic.globals";
 
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
@@ -68,3 +67,7 @@ $colors: (
 
 $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
+
+
+$fa-font-path: "../assets/fonts";
+@import 'font-awesome';

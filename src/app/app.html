@@ -1,7 +1,17 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" side="left" id="menu1">
   <ion-header>
-    <ion-toolbar >
-      <ion-title padding text-center><img class="logo" src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
+    <ion-toolbar>
+      <ion-buttons start main-menu-search-icon>
+        <button ion-button >
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title text-center><img class="logo" src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
+      <ion-buttons end main-menu-close-icon>
+        <button ion-item menuClose="menu1" class="close-menu">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -21,6 +31,30 @@
     </ion-list>
   </ion-content>
 </ion-menu>
+
+<ion-menu [content]="content" side="right" id="menu2">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>My Events</ion-title>
+      <ion-buttons end>
+        <button ion-item menuClose="menu2" class="close-menu">
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content event-menu>
+    <ion-list>
+      <button ion-item nav-clear menu-close item-icon-right *ngFor="let evnt of events">
+        {{evnt.title}} 
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>

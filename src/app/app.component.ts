@@ -15,6 +15,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, icon: any,id:number}>;
   personal: Array<{title: string, component: any,icon: any}>;
+  events: any[];
 
   constructor(
     public platform: Platform,
@@ -43,6 +44,12 @@ export class MyApp {
       { title : 'My Events', component:Home,icon:'calendar-check-o' },
       { title : 'Address Book', component:Home,icon:'address-book' },
       { title : 'Logout', component:Home ,icon:'power-off'},
+    ]
+
+    this.events = [ 
+      { title : 'Event1' },
+      { title : 'Event2' },
+      { title : 'Event3' },
     ]
 }
 
