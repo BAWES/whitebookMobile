@@ -1,4 +1,4 @@
-<ion-menu [content]="content" side="left" id="menu1">
+<ion-menu [content]="content" side="left" id="menu1" persistent="true" >
   <ion-header>
     <ion-toolbar>
       <ion-buttons start main-menu-search-icon>
@@ -23,8 +23,9 @@
       </button>
     </ion-list>
     <hr/>
+    <hr/>
     <ion-list>
-      <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(p)">
+      <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(prsnl)">
         <i class="fa fa-{{prsnl.icon}}"></i>
         {{prsnl.title}} 
       </button>
@@ -32,7 +33,7 @@
   </ion-content>
 </ion-menu>
 
-<ion-menu [content]="content" side="right" id="menu2">
+<ion-menu [content]="content" side="right" id="menu2" persistent="true" >
 
   <ion-header>
     <ion-toolbar>

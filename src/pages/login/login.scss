@@ -1,0 +1,15 @@
+page-login {
+    .list-md .item-block .item-inner{
+        position: static;
+        border-bottom: 1px solid;
+    }
+    [register-btn].item-md.item-block .item-inner,[login-btn].item-md.item-block .item-inner {padding:0px}
+    [register-btn] .label-md, [login-btn] .label-md{margin:0px}
+    .item-md .item-button {padding:18px;}
+    color: #000;
+    .segment-button{color:#000!important; border-bottom: 1px solid!important;}
+    .segment-activated{color:#fff!important;}
+    [login-btn]{ margin-top: 23px;}
+}
+[width-34]{width: 34%!important;}
+[width-50]{width: 50%!important;}

@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Home } from '../pages/home/home';
 import { ListingPage } from '../pages/listing/listing';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -38,7 +39,7 @@ export class MyApp {
     ];
     
     this.personal = [ 
-      { title : 'Sign In', component:Home,icon:'sign-in' },
+      { title : 'Sign In', component:LoginPage,icon:'sign-in' },
       { title : 'My Orders', component:Home,icon:'archive' },
       { title : 'My Account', component:Home,icon: 'user-circle'},
       { title : 'My Events', component:Home,icon:'calendar-check-o' },
