@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
-
+import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 /*
   Generated class for the CheckoutCart page.
 
@@ -21,5 +21,9 @@ export class CheckoutCartPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  shippingModelPage() {
+      this.navCtrl.push(CheckoutShippingPage);
   }
 }

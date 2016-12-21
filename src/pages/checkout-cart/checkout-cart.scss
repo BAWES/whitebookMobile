@@ -11,6 +11,6 @@ page-checkout-cart {
     [position-relative] {position: relative;}
     [position-relative] img,[position-relative] ion-icon{ position:absolute;left: 0;right: 0;margin:0 auto;top:47%;transform:translateY(-50%);}
     ion-row.header {margin-bottom: 22px;padding-bottom: 16px;}
-    [checkout-btn].item-md.item-block .item-inner {border-bottom: none;}
-    [checkout-btn] button{padding: 22px!important;width: 91%;color: #000;border-color: #000;margin-top: 20px;}
 }
+[checkout-btn].item-md.item-block .item-inner {border-bottom: none;}
+[checkout-btn] button{padding: 22px!important;width: 91%;color: #000;border-color: #000;margin-top: 20px;}

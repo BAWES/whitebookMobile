@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
+import { CheckoutPaymentPage } from '../checkout-payment/checkout-payment';
 /*
   Generated class for the CheckoutShipping page.
 
@@ -19,4 +19,11 @@ export class CheckoutShippingPage {
     console.log('Hello CheckoutShippingPage Page');
   }
 
+  cartModelPage () {
+    this.navCtrl.pop();
+  }
+
+  PaymentModelPage () {
+    this.navCtrl.push(CheckoutPaymentPage);
+  }
 }

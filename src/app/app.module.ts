@@ -8,6 +8,8 @@ import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { CheckoutCartPage } from '../pages/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../pages/search-item/search-item';
+import { CheckoutShippingPage } from '../pages/checkout-shipping/checkout-shipping';
+import { CheckoutPaymentPage } from '../pages/checkout-payment/checkout-payment';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SearchItemPage } from '../pages/search-item/search-item';
     LoginPage,
     ForgotPasswordPage,
     CheckoutCartPage,
-    SearchItemPage
+    SearchItemPage,
+    CheckoutShippingPage,
+    CheckoutPaymentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,7 +36,9 @@ import { SearchItemPage } from '../pages/search-item/search-item';
     LoginPage,
     ForgotPasswordPage,
     CheckoutCartPage,
-    SearchItemPage
+    SearchItemPage,
+    CheckoutShippingPage,
+    CheckoutPaymentPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
