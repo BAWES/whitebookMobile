@@ -19,10 +19,12 @@
 <div [ngSwitch]="loginCase">
   <ion-list *ngSwitchCase="'login'">
       <ion-item>
-        <ion-input type="text" placeholder="Email"></ion-input>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input type="password" placeholder="Password"></ion-input>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password"></ion-input>
       </ion-item>
       <ion-item login-btn text-center>
         <button ion-button width-50 round color="dark">Login</button>
@@ -69,7 +71,7 @@
         <ion-label floating>Confirm Password</ion-label>
         <ion-input type="password"></ion-input>
       </ion-item>
-      <ion-item register-btn >
+      <ion-item register-btn text-center >
         <button ion-button width-34 round color="dark">Register</button>
       </ion-item>
   </ion-list>

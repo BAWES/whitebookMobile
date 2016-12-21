@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, MenuController, Platform } from 'ionic-angular';
+import { Nav, MenuController, Platform, ModalController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Home } from '../pages/home/home';
 import { ListingPage } from '../pages/listing/listing';
 import { LoginPage } from '../pages/login/login';
+import { SearchItemPage } from '../pages/search-item/search-item'
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +21,8 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
-    public menu : MenuController
+    public menu : MenuController,
+    public modalCtnl : ModalController
   ) {
     this.initializeApp();
 
@@ -70,5 +72,11 @@ export class MyApp {
     //this.nav.setRoot(page);
     this.menu.close();
     this.nav.push(page.component,{category:page});
+  }
+
+  openSearchModel() {
+    this.menu.close();
+    let modal = this.modalCtnl.create(SearchItemPage);
+    modal.present();
   }
 }

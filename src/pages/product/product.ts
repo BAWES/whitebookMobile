@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, NavParams,ModalController } from 'ionic-angular';
+import { CheckoutCartPage } from '../checkout-cart/checkout-cart'
 /*
   Generated class for the Product page.
 
@@ -21,11 +21,15 @@ export class ProductPage {
       pager : true
     };
   
-  constructor(public navCtrl: NavController,private _params : NavParams) {
+  constructor(public navCtrl: NavController,private _params : NavParams,public modalCtnl: ModalController) {
     this.productSection = "pdescription";
   }
 
   ionViewDidLoad() {
     console.log('product detail page for id : '+ this._params.get('productId')); 
+  }
+  openModel() {
+    let modal = this.modalCtnl.create(CheckoutCartPage);
+    modal.present();
   }
 }

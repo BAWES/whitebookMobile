@@ -1,16 +1,16 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>testing product</ion-title>
-    <ion-buttons start>
-      <button menuToggle><ion-icon name="menu"></ion-icon></button>
-    </ion-buttons>
     <ion-buttons end>
       <button ion-button menuToggle="right" >
           <ion-icon name="calendar"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end class="product-detail-like-icon">
-      <button><ion-icon name="heart-outline"></ion-icon></button>
+    <ion-buttons end>
+      <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <button ion-button (click)="openModel()" >
+        <ion-icon name="cart"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -29,13 +29,13 @@
        <!--<p [innerHTML]="product.description"></p>-->
        
        <ion-segment [(ngModel)]="productSection">
-          <ion-segment-button value="pdescription">
+          <ion-segment-button round value="pdescription">
             Description
           </ion-segment-button>
-          <ion-segment-button value="adescription">
+          <ion-segment-button round value="adescription">
             Addition
           </ion-segment-button>
-          <ion-segment-button value="contact">
+          <ion-segment-button round value="contact">
             Contact
           </ion-segment-button>
         </ion-segment>
@@ -86,28 +86,10 @@
     </ion-select>
   </ion-item>
   
-  <ion-item>
-    <button full ion-button color="dark" padding-19> <ion-icon name="cart"></ion-icon>Add To Cart</button>
+  <ion-item no-border>
+    <button full round ion-button color="dark" padding-19 add-to-cart> <ion-icon name="cart"></ion-icon> Add To Cart</button>
   </ion-item>
-   <!--<ion-item>
-    <ion-note item-left>Quantity</ion-note>
-    <ion-input type="number" ></ion-input>
-    <ion-note item-right>
-      <button full primary (click)="addToCart(product.id)">
-        <ion-icon name="cart"></ion-icon>
-        Add to Cart
-      </button>
-    </ion-note>
-   </ion-item>-->
+  <ion-item>
+    <button full round border ion-button padding-19 add-to-wishlist> Add To Wishlist</button>
+  </ion-item>
 </ion-content>
-
-<!--<ion-footer>
-  <ion-toolbar>
-      <button start primary full clear (click)="openCart()">
-        <ion-icon name="cart"></ion-icon> Go to Cart
-      </button>
-      <button end primary full clear (click)="openCart()">
-        <ion-icon name="cart"></ion-icon> Back
-      </button>
-  </ion-toolbar>
-</ion-footer>-->

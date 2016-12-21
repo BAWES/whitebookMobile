@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons start main-menu-search-icon>
-        <button ion-button >
+        <button ion-button (click)="openSearchModel()">
           <ion-icon name="search"></ion-icon>
         </button>
       </ion-buttons>
@@ -17,14 +17,15 @@
 
   <ion-content main-menu>
     <ion-list>
+      <ion-list-header>Main Heading</ion-list-header>
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let p of pages" (click)="openPage(p)">
           <i class="fa fa-{{p.icon}}"></i>
         {{p.title}} 
       </button>
     </ion-list>
-    <hr/>
-    <hr/>
     <ion-list>
+      <br/>
+      <ion-list-header>Second  Heading</ion-list-header>
       <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(prsnl)">
         <i class="fa fa-{{prsnl.icon}}"></i>
         {{prsnl.title}} 

@@ -13,9 +13,10 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button>
-      <ion-icon name="cart"></ion-icon>
-    </button>
+      <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <button ion-button (click)="openModel()" >
+        <ion-icon name="cart"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

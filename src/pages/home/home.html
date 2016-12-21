@@ -5,20 +5,17 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
     <ion-title text-left>White Book</ion-title>
-    
     <ion-buttons end>
-      <button ion-button menuToggle="right" >
+      <button ion-button menuToggle="right">
           <ion-icon name="calendar"></ion-icon>
       </button>
     </ion-buttons>
-
-    
     <ion-buttons end>
-      <button ion-button>
-      <ion-icon name="cart"></ion-icon>
-    </button>
+        <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <button ion-button (click)="openModel()" >
+        <ion-icon name="cart"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -27,19 +24,19 @@
   <div class="top-slider">
     <ion-slides [options]="mySlideOptions">
       <ion-slide>
-        <img src="http://lorempixel.com/400/200/food/" />
+        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
       </ion-slide>
 
       <ion-slide>
-        <img src="http://lorempixel.com/400/200/food/" />
+        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
       </ion-slide>
 
       <ion-slide>
-        <img src="http://lorempixel.com/400/200/food/" />
+        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
       </ion-slide>
 
       <ion-slide>
-            <img src="http://lorempixel.com/400/200/food/" />
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
       </ion-slide>
     </ion-slides>
   </div>
@@ -105,12 +102,12 @@
  
       <ion-row text-center>
           <ion-col width-100>
-            <img src="http://lorempixel.com/200/200/food/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
             <h4 class="name">Food</h4>
              <p class="category">@food</p>
           </ion-col>
         <ion-col width-100>
-            <img src="http://lorempixel.com/200/200/fashion/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
             <h4 class="name">fashion</h4>
             <p class="category">@fashion</p>
           </ion-col>
@@ -118,12 +115,12 @@
  
       <ion-row text-center>
           <ion-col>
-            <img src="http://lorempixel.com/200/200/transport/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
             <h4 class="name">transport</h4>
             <p class="category">@transport</p>
           </ion-col>
           <ion-col>
-            <img src="http://lorempixel.com/200/200/business/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
               <h4 class="name">Business</h4>
               <p class="category">@business</p>
           </ion-col>
@@ -131,13 +128,13 @@
  
       <ion-row text-center>
         <ion-col>
-            <img src="http://lorempixel.com/200/200/nature/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
             <h4 class="name">nature</h4>
             <p class="category">@nature</p>
           </ion-col>
         
           <ion-col>
-            <img src="http://lorempixel.com/200/200/sports/1">
+            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
             <h4 class="name">sport</h4>
             <p class="category">@sport</p>
           </ion-col>

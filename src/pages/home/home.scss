@@ -5,8 +5,8 @@ ion-slides {
     height: auto;
 }
 ion-slide img {
-    height: 28vh !important;
-    width: 100% !important;
+    height: 51vh !important;
+    width: auto !important;
 }
 
 .home-feature-product p.category{
@@ -33,4 +33,12 @@ ion-icon{
 }
 .home-inner-slider p.title {
     font-size: 15px;
+}
+.cart-indicator{
+    border-radius: 60%;
+    padding: 0px 0px;
+    position: absolute;
+    right: 3px;
+    top: 1px;
+    z-index: 999;
 }

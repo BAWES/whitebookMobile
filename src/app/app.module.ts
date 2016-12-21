@@ -6,6 +6,8 @@ import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { CheckoutCartPage } from '../pages/checkout-cart/checkout-cart';
+import { SearchItemPage } from '../pages/search-item/search-item';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
     ListingPage,
     ProductPage,
     LoginPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    CheckoutCartPage,
+    SearchItemPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +30,9 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
     ListingPage,
     ProductPage,
     LoginPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    CheckoutCartPage,
+    SearchItemPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

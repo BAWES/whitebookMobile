@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ModalController } from 'ionic-angular';
 
 import { ProductPage } from '../product/product';
+import { CheckoutCartPage } from '../checkout-cart/checkout-cart'
 /*
   Generated class for the Listing page.
 
@@ -18,8 +19,8 @@ export class ListingPage {
   category:any;
   constructor(
     public navCtrl: NavController,
-    private _params : NavParams
-
+    private _params : NavParams,
+    public modalCtnl: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -31,5 +32,9 @@ export class ListingPage {
   productDetail(id) {
     console.log('opening product detail page of id : '+id);
     this.navCtrl.push(ProductPage,{productId:id});
+  }
+  openModel() {
+    let modal = this.modalCtnl.create(CheckoutCartPage);
+    modal.present();
   }
 }
