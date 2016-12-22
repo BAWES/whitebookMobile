@@ -10,6 +10,12 @@ import { CheckoutCartPage } from '../pages/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../pages/search-item/search-item';
 import { CheckoutShippingPage } from '../pages/checkout-shipping/checkout-shipping';
 import { CheckoutPaymentPage } from '../pages/checkout-payment/checkout-payment';
+import { CheckoutCompletedPage } from '../pages/checkout-completed/checkout-completed';
+import { MyEventsPage } from  '../pages/my-events/my-events';
+import { MyOrdersPage } from  '../pages/my-orders/my-orders';
+import { MyAddressBookPage }  from  '../pages/my-address-book/my-address-book';
+import { MyAccountPage }  from  '../pages/my-account/my-account';
+import { OrderDetailPage } from '../pages/order-detail/order-detail';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import { CheckoutPaymentPage } from '../pages/checkout-payment/checkout-payment'
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
-    CheckoutPaymentPage
+    CheckoutPaymentPage,
+    CheckoutCompletedPage,
+    MyOrdersPage,
+    MyEventsPage,
+    MyAddressBookPage,
+    MyAccountPage,
+    OrderDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -38,7 +50,13 @@ import { CheckoutPaymentPage } from '../pages/checkout-payment/checkout-payment'
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
-    CheckoutPaymentPage
+    CheckoutPaymentPage,
+    CheckoutCompletedPage,
+    MyOrdersPage,
+    MyEventsPage,
+    MyAddressBookPage,
+    MyAccountPage,
+    OrderDetailPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

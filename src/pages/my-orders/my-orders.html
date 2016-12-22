@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Orders</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+      <ion-row>
+        <ion-col>Order ID: {{ item.id }}</ion-col>
+        <ion-col>Amount : KD{{ item.Total }}</ion-col>
+        <ion-col>Total Product : {{ item.TotalProducts }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

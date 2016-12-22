@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController,ViewController } from 'ionic-angular';
+import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
 /*
   Generated class for the CheckoutPayment page.
 
@@ -13,10 +13,17 @@ import { NavController } from 'ionic-angular';
 })
 export class CheckoutPaymentPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public viewCtrl:ViewController) {}
 
   ionViewDidLoad() {
     console.log('Hello CheckoutPaymentPage Page');
   }
 
+  completeModelPage() {
+    this.navCtrl.push(CheckoutCompletedPage)
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
+import { Home } from '../home/home';
 /*
   Generated class for the CheckoutCompleted page.
 
@@ -19,4 +19,9 @@ export class CheckoutCompletedPage {
     console.log('Hello CheckoutCompletedPage Page');
   }
 
+  dismiss() {
+    this.navCtrl.setRoot(Home).then(()=>{
+      this.navCtrl.popToRoot();
+    })
+  }
 }
