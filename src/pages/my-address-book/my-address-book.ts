@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { CreateAddressPage } from '../create-address/create-address';
 /*
   Generated class for the MyAddressBook page.
 
@@ -13,10 +13,41 @@ import { NavController } from 'ionic-angular';
 })
 export class MyAddressBookPage {
 
-  constructor(public navCtrl: NavController) {}
-
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl : ModalController,
+    public alertCtrl: AlertController
+  ) {}
+  
   ionViewDidLoad() {
     console.log('Hello MyAddressBookPage Page');
+  }
+
+  createAddress() {
+    let modal = this.modalCtrl.create(CreateAddressPage);
+    modal.present();
+  }
+
+  deleteConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Address Delete?',
+      message: 'Are you sure you want to delete this address permanently from our system?',
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
