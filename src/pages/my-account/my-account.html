@@ -7,12 +7,50 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>myAccount</ion-title>
+    <ion-title>My Account</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Customer Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label floating>Customer Last Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>Gender</ion-label>
+        <ion-select >
+          <ion-option value="male">Male</ion-option>
+          <ion-option value="female">Female</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item floating>
+      <ion-label>Mobile</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+<div padding>
+  <button ion-button round full color="dark">Save</button>
+</div>
 </ion-content>
+
