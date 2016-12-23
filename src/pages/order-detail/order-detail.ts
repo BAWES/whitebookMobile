@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,ViewController } from 'ionic-angular';
 
 /*
   Generated class for the OrderDetail page.
@@ -13,10 +13,16 @@ import { NavController } from 'ionic-angular';
 })
 export class OrderDetailPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(
+    public navCtrl: NavController,
+    public viewCtrl:ViewController
+  ) {}
 
   ionViewDidLoad() {
     console.log('Hello OrderDetailPage Page');
   }
 
+  dismiss () {
+    this.viewCtrl.dismiss();
+  }
 }

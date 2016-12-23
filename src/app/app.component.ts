@@ -10,6 +10,7 @@ import { MyEventsPage } from '../pages/my-events/my-events';
 import { MyOrdersPage } from '../pages/my-orders/my-orders';
 import { MyAddressBookPage }  from  '../pages/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/my-account/my-account';
+import { MyWishListPage } from '../pages/my-wish-list/my-wish-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,6 +50,7 @@ export class MyApp {
       { title : 'My Orders', component:MyOrdersPage,icon:'archive' },
       { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
       { title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
+      { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
       { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
       { title : 'Logout', component:Home ,icon:'power-off'},
     ]

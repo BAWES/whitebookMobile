@@ -16,6 +16,7 @@ import { MyOrdersPage } from  '../pages/my-orders/my-orders';
 import { MyAddressBookPage }  from  '../pages/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/my-account/my-account';
 import { OrderDetailPage } from '../pages/order-detail/order-detail';
+import { MyWishListPage } from '../pages/my-wish-list/my-wish-list';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { OrderDetailPage } from '../pages/order-detail/order-detail';
     MyEventsPage,
     MyAddressBookPage,
     MyAccountPage,
-    OrderDetailPage
+    OrderDetailPage,
+    MyWishListPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -56,7 +58,8 @@ import { OrderDetailPage } from '../pages/order-detail/order-detail';
     MyEventsPage,
     MyAddressBookPage,
     MyAccountPage,
-    OrderDetailPage
+    OrderDetailPage,
+    MyWishListPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
