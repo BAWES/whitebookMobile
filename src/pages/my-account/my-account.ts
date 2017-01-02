@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 /*
   Generated class for the MyAccount page.
@@ -13,10 +13,17 @@ import { NavController } from 'ionic-angular';
 })
 export class MyAccountPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public toastCtrl:ToastController) {}
 
   ionViewDidLoad() {
     console.log('Hello MyAccountPage Page');
   }
 
+  udpate(){
+    let toast = this.toastCtrl.create({
+      message:'Data Saved Successfully',
+      duration:3000,
+    })
+    toast.present();
+  }
 }

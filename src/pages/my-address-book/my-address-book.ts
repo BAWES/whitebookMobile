@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, ModalController, AlertController,ToastController } from 'ionic-angular';
 import { CreateAddressPage } from '../create-address/create-address';
 /*
   Generated class for the MyAddressBook page.
@@ -12,42 +12,54 @@ import { CreateAddressPage } from '../create-address/create-address';
   templateUrl: 'my-address-book.html'
 })
 export class MyAddressBookPage {
-
+  addresses:any[];
   constructor(
     public navCtrl: NavController,
     public modalCtrl : ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public toastCtrl :ToastController
   ) {}
   
   ionViewDidLoad() {
-    console.log('Hello MyAddressBookPage Page');
+    this.addresses = [
+      {'title':'IT Office','address':'The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.'},
+      {'title':'Hospital','address':'The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.'},
+      {'title':'School','address':'The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.'}
+    ]
   }
 
-  createAddress() {
+  create() {
     let modal = this.modalCtrl.create(CreateAddressPage);
     modal.present();
   }
 
-  deleteConfirm() {
+  update() {
+    let modal = this.modalCtrl.create(CreateAddressPage);
+    modal.present();
+  }
+  delete(){
     let confirm = this.alertCtrl.create({
       title: 'Address Delete?',
-      message: 'Are you sure you want to delete this address permanently from our system?',
-      buttons: [
+      message: 'Are you sure you want to delete this Address permanently from our system?',
+      buttons : [
         {
-          text: 'Disagree',
-          handler: () => {
-            console.log('Disagree clicked');
+          text:'Yes',
+          handler:() => {
+            let toast = this.toastCtrl.create({
+              message: 'Address Deleted successfully',
+              duration: 3000
+            });
+            toast.present();
           }
         },
         {
-          text: 'Agree',
+          text: 'No',
           handler: () => {
-            console.log('Agree clicked');
+            console.log('Item Saved');
           }
         }
       ]
     });
     confirm.present();
   }
-
 }

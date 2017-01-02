@@ -7,12 +7,27 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>myEvents</ion-title>
+    <ion-title>Events List</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-item text-center>
+      <button ion-button round color="dark" class="padding-16" (click)="create()">+ Add new Event</button>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let event of events">
+      <ion-row>
+        <ion-col>
+          <h2>{{event.title}}</h2>
+          <h3>  <ion-badge item-right color="{{event.color}}">Type : {{event.event_type}}</ion-badge></h3>
+          <p>On : {{event.date}}</p>
+        </ion-col>
+        <ion-col text-right class="padding-top-21">
+          <button no-background (click)="update()"><ion-icon name="create"></ion-icon></button>
+          <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 </ion-content>

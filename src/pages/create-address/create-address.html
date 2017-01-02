@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Create New Address</ion-title>
+    <ion-title>My Address</ion-title>
     <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close" ></ion-icon>
@@ -17,12 +17,17 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-item>
+    <ion-title text-center>
+      Create New Address
+    </ion-title>
+  </ion-item>
   <ion-list>
     <ion-item>
-      <ion-label>Address Name</ion-label>
+      <ion-label floating>Address Name</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label>Address Type</ion-label>
         <ion-select >
@@ -33,17 +38,17 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Area Name</ion-label>
+      <ion-label floating>Area Name</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label>Address Data</ion-label>
+      <ion-label floating>Address Data</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
   </ion-list>
 
 <div padding>
-  <button ion-button round full color="dark">Save Address</button>
+  <button ion-button round full color="dark" (click)="saveAddress()">Save Address</button>
 </div>
 </ion-content>

@@ -9,7 +9,13 @@ page-login {
     color: #000;
     .segment-button{color:#000!important; border-bottom: 1px solid!important;}
     .segment-activated{color:#fff!important;}
-    [login-btn]{ margin-top: 23px;}
+    [login-btn]{ margin-top: 23px;padding-left: 0px;}
+    [login-btn] button{font-size: 14px! important;}
+    .item-select{ min-height: 63px;}
 }
 [width-34]{width: 34%!important;}
 [width-50]{width: 50%!important;}
+[forget-password] {width:53%}
+
+[register-btn]{padding-left: 0px;}
+[register-btn] button{    width: 50%;font-size: 15px! important;margin-top: 22px;}

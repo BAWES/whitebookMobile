@@ -1,5 +1,9 @@
-page-page1 {
-
+home {
+    [title] {
+        background: #000;
+        color:#fff;
+        margin:0px;
+    }
 }
 ion-slides {
     height: auto;
@@ -35,10 +39,12 @@ ion-icon{
     font-size: 15px;
 }
 .cart-indicator{
-    border-radius: 60%;
-    padding: 0px 0px;
+    border-radius: 50%;
+    height: 10px;
+    padding: 0;
     position: absolute;
     right: 3px;
     top: 1px;
+    width: 3px;
     z-index: 999;
 }

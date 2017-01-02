@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-        <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
         <ion-icon name="cart"></ion-icon>
       </button>
@@ -23,122 +23,33 @@
 <ion-content padding>
   <div class="top-slider">
     <ion-slides [options]="mySlideOptions">
-      <ion-slide>
-        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-      </ion-slide>
-
-      <ion-slide>
-        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-      </ion-slide>
-
-      <ion-slide>
-        <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-      </ion-slide>
-
-      <ion-slide>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
+      <ion-slide *ngFor="let slides of sliderSlides">
+        <img src="{{slides.image}}" />
       </ion-slide>
     </ion-slides>
   </div>
-
-
   <div class="category-slider">
-    <ion-label text-center padding>Top Categories</ion-label>
+    <ion-label text-center padding title>Top Categories</ion-label>
     <div class="home-inner-slider" padding>
       <ion-slides [options]="categorySlideOptions">
-        <ion-slide>
-          <i class="fa fa-map-marker"></i>
-          <p class="title">Venue</p>
-        </ion-slide>
-
-        <ion-slide>
-          <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
-          <p class="title">Invitation</p>
-        </ion-slide>
-
-        <ion-slide>
-          <i class="fa fa-cutlery" aria-hidden="true"></i>
-          <p class="title">Food & Beverage</p>
-        </ion-slide>
-
-        <ion-slide>
-          <i class="fa fa-building" aria-hidden="true"></i>
-          <p class="title">Decor</p>
-        </ion-slide>
-        
-        <ion-slide>
-          <i class="fa fa-truck" aria-hidden="true"></i>
-          <p class="title">Supplies</p>
-        </ion-slide>
-        
-        <ion-slide>
-          <i class="fa fa-headphones" aria-hidden="true"></i>
-          <p class="title">Entertainment</p>
-        </ion-slide>
-        
-        <ion-slide>
-          <i class="fa fa-cogs" aria-hidden="true"></i>
-          <p class="title">Services</p>
-        </ion-slide>
-        
-        <ion-slide>
-          <i class="fa fa-cubes" aria-hidden="true"></i>
-          <p class="title">Other</p>
-        </ion-slide>
-        
-        <ion-slide>
-          <i class="fa fa-gift" aria-hidden="true"></i>
-          <p class="title">Gift Favors</p>
+        <ion-slide *ngFor="let category of categories">
+          <i class="fa {{category.icon}}" aria-hidden="true"></i>
+          <p class="title">{{category.title}}</p>
         </ion-slide>
       </ion-slides>
     </div>
   </div>
-
-<ion-item>
-  <ion-label text-center padding>Featured Product</ion-label>
-</ion-item>
-
-<ion-grid class="home-feature-product">
- 
-      <ion-row text-center>
-          <ion-col width-100>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-            <h4 class="name">Food</h4>
-             <p class="category">@food</p>
-          </ion-col>
-        <ion-col width-100>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-            <h4 class="name">fashion</h4>
-            <p class="category">@fashion</p>
-          </ion-col>
-      </ion-row>
- 
-      <ion-row text-center>
-          <ion-col>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-            <h4 class="name">transport</h4>
-            <p class="category">@transport</p>
-          </ion-col>
-          <ion-col>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-              <h4 class="name">Business</h4>
-              <p class="category">@business</p>
-          </ion-col>
-      </ion-row>
- 
-      <ion-row text-center>
-        <ion-col>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-            <h4 class="name">nature</h4>
-            <p class="category">@nature</p>
-          </ion-col>
-        
-          <ion-col>
-            <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg">
-            <h4 class="name">sport</h4>
-            <p class="category">@sport</p>
-          </ion-col>
-      </ion-row>
- 
+  <div class="featrued-slider">
+    <ion-label text-center padding title>Featured Product</ion-label>
+    <!--<ion-item><ion-label text-center padding>Featured Product</ion-label></ion-item>-->
+    <ion-grid class="home-feature-product">
+      <ion-list>
+          <ion-item no-border text-center width-50 pull-left *ngFor="let product of featureProduct ">
+            <img src="{{product.image}}">
+            <h4 class="name">{{product.title}}</h4>
+              <p class="category">@{{product.category}}</p>
+          </ion-item>
+      </ion-list>
     </ion-grid>
+  </div>
 </ion-content>

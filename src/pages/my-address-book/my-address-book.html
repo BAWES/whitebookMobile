@@ -11,45 +11,20 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-item text-center>
-      <button ion-button round color="dark" (click)="createAddress()">+ Add new address</button>
+      <button ion-button round color="dark" class="padding-16" (click)="create()">+ Add new address</button>
   </ion-item>
-<ion-card>
+<ion-card *ngFor="let address of addresses">
   <ion-card-header position-relative>
-    <ion-title pull-left>IT Office</ion-title>
+    <ion-title pull-left>{{address.title}}</ion-title>
     <ion-buttons pull-right >
-      <button no-background (click)="createAddress()"><ion-icon name="create"></ion-icon></button>
-      <button no-background (click)="deleteConfirm()"><ion-icon name="trash" ></ion-icon></button>
+      <button no-background (click)="create()"><ion-icon name="create"></ion-icon></button>
+      <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
     </ion-buttons>
   </ion-card-header>
   <ion-card-content>
-    The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-  </ion-card-content>
-</ion-card>
-<ion-card>
-  <ion-card-header>
-    <ion-title pull-left>Hospital</ion-title>
-    <ion-buttons pull-right>
-      <button no-background (click)="createAddress()"><ion-icon name="create"></ion-icon></button>
-      <button no-background (click)="deleteConfirm()"><ion-icon name="trash" ></ion-icon></button>
-    </ion-buttons>
-  </ion-card-header>
-  <ion-card-content>
-    The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
-  </ion-card-content>
-</ion-card>
-<ion-card>
-  <ion-card-header>
-    <ion-title pull-left>School</ion-title>
-    <ion-buttons pull-right>
-      <button no-background (click)="createAddress()"><ion-icon name="create"></ion-icon></button>
-      <button no-background (click)="deleteConfirm()"><ion-icon name="trash" ></ion-icon></button>
-    </ion-buttons>
-  </ion-card-header>
-  <ion-card-content>
-    The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+    {{address.address}}
   </ion-card-content>
 </ion-card>
 </ion-content>
