@@ -24,19 +24,35 @@
 <ion-content>
   <ion-row border-bottom no-line class="top-filter-tool-bar">
     <ion-col text-left>
-      <ion-buttons left float-left><ion-icon class="list-icon" name="menu"></ion-icon></ion-buttons>
-      <ion-buttons left float-left ><ion-icon class="grid-icon" name="apps"></ion-icon></ion-buttons>
+      <button (click)="changeView('list-view')" left float-left><ion-icon class="list-icon" name="menu"></ion-icon></button>
+      <button (click)="changeView('grid-view')" left float-left ><ion-icon class="grid-icon" name="apps"></ion-icon></button>
     </ion-col>
-    <ion-col>
-      <ion-buttons text-center><ion-icon class="filter-icon" name="funnel"></ion-icon></ion-buttons>
+    <ion-col  text-center>
+      <button (click)="searchFilter()"><ion-icon class="filter-icon" name="funnel"></ion-icon></button>
     </ion-col>
     <ion-col text-right>
-        <ion-buttons float-right><ion-icon class="order-by-icon" name="stats"></ion-icon></ion-buttons>
-        <ion-buttons float-right><ion-icon class="search-icon" name="search"></ion-icon></ion-buttons>
+        <button  float-right><ion-icon class="order-by-icon" name="stats"></ion-icon></button>
+        <button (click)="openSearchModel()" float-right><ion-icon class="search-icon" name="search"></ion-icon></button>
     </ion-col>
   </ion-row>
 
-  <ion-grid class="category-product-listing grid-view" *ngIf="productView == 'grid'">
+<ion-grid class="category-product-listing {{productView}}" >
+    <ion-list>
+        <button ion-item *ngFor="let product of products " class="product-items" (click)="productDetail(product.id)">
+          <div class="gallery-section">
+            <ion-icon class="like-icon" name="heart-outline"></ion-icon>
+            <img src="{{product.image}}" />
+          </div>
+          <div class="detail-section">
+            <h4 class="name"><strong>{{product.productTitle}}</strong></h4>
+            <h6 class="price">KD {{product.productPrice}}</h6>
+            <h4 class="vendor"> {{product.productVendor}}</h4>
+          </div>
+        </button>
+      </ion-list>
+  </ion-grid>
+  
+  <!--<ion-grid class="category-product-listing grid-view" *ngIf="productView == 'grid'">
     <ion-row text-center>
         <ion-col border-right border-bottom (click)="productDetail(1)">
           <ion-icon class="like-icon" name="heart-outline"></ion-icon>
@@ -124,5 +140,5 @@
           <h6 class="price">KD 20.111</h6>
         </ion-item>
 
-  </ion-list>
+  </ion-list>-->
 </ion-content>

@@ -28,27 +28,30 @@
       </ion-slide>
     </ion-slides>
   </div>
-  <div class="category-slider">
+  <div class="home-feature-category">
     <ion-label text-center padding title>Top Categories</ion-label>
-    <div class="home-inner-slider" padding>
-      <ion-slides [options]="categorySlideOptions">
-        <ion-slide *ngFor="let category of categories">
+      <!--<ion-slides [options]="categorySlideOptions">
+        <button ion-slide *ngFor="let category of categories"  (click)="loadProducts(category.title, category.id)" >
           <i class="fa {{category.icon}}" aria-hidden="true"></i>
           <p class="title">{{category.title}}</p>
-        </ion-slide>
-      </ion-slides>
+        </button>
+      </ion-slides>-->
+      <ion-list class="clearfix">
+          <button ion-item text-center *ngFor="let category of categories"  pull-left width-50 no-line class="item-border"  (click)="loadProducts(category.title, category.id)" >
+            <i class="fa {{category.icon}}" aria-hidden="true"></i> {{category.title}}
+          </button>
+      </ion-list>
     </div>
-  </div>
+
   <div class="featrued-slider">
     <ion-label text-center padding title>Featured Product</ion-label>
-    <!--<ion-item><ion-label text-center padding>Featured Product</ion-label></ion-item>-->
     <ion-grid class="home-feature-product">
       <ion-list>
-          <ion-item no-border text-center width-50 pull-left *ngFor="let product of featureProduct ">
+          <button ion-item no-border text-center width-50 pull-left *ngFor="let product of featureProduct "  (click)="loadProduct()" >
             <img src="{{product.image}}">
             <h4 class="name">{{product.title}}</h4>
               <p class="category">@{{product.category}}</p>
-          </ion-item>
+          </button>
       </ion-list>
     </ion-grid>
   </div>

@@ -36,14 +36,14 @@
 
   <ion-grid class="category-product-listing grid-view" >
     <ion-list>
-        <ion-item no-border text-center width-50 pull-left *ngFor="let product of whishlist ">
+        <button ion-item no-border text-center width-50 pull-left *ngFor="let product of whishlist " (click)="productDetail(product.id)">
           <button ion-button (click)="remove()" class="like-icon">
             <i class="fa fa-heart"></i>
           </button>
           <img src="{{product.image}}" />
           <h4 class="name"><strong>{{product.productTitle}}</strong></h4>
           <h6 class="price">KD {{product.productPrice}}</h6>
-        </ion-item>
+        </button>
       </ion-list>
   </ion-grid>
 </ion-content>

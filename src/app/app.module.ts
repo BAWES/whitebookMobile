@@ -19,6 +19,7 @@ import { OrderDetailPage } from '../pages/order-detail/order-detail';
 import { MyWishListPage } from '../pages/my-wish-list/my-wish-list';
 import { CreateAddressPage } from '../pages/create-address/create-address';
 import { CreateEventPage } from '../pages/create-event/create-event';
+import { SearchFilterPage } from '../pages/search-filter/search-filter';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CreateEventPage } from '../pages/create-event/create-event';
     OrderDetailPage,
     MyWishListPage,
     CreateAddressPage,
-    CreateEventPage
+    CreateEventPage,
+    SearchFilterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -65,7 +67,8 @@ import { CreateEventPage } from '../pages/create-event/create-event';
     OrderDetailPage,
     MyWishListPage,
     CreateAddressPage,
-    CreateEventPage
+    CreateEventPage,
+    SearchFilterPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

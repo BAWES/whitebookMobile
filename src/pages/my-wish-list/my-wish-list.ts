@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 
+import { ProductPage } from '../product/product';
 /*
   Generated class for the MyWishList page.
 
@@ -52,8 +53,12 @@ export class MyWishListPage {
           }
         }
       ]
-
     })
+  }
+
+  productDetail(id) {
+    console.log('opening product detail page of id : '+id);
+    this.navCtrl.push(ProductPage,{productId:id});
   }
 
 }

@@ -48,3 +48,22 @@ ion-icon{
     width: 3px;
     z-index: 999;
 }
+.clearfix:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.item-border{
+    border-bottom: 1px solid #d2d2d2;
+    border-right: 1px solid #d2d2d2;
+}
+.item-border:nth-child(odd) {
+    border-left:  1px solid #d2d2d2;
+}
+.item-border:last-child{
+    width:100%! important
+}
+
+.item-border .item-inner{
+    border-bottom:none! important;
+}
