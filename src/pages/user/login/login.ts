@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, ToastController } from 'ionic-angular';
 
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'
-import { Home } from '../home/home';
+import { Home } from '../../home/home';
 /*
   Generated class for the Login page.
 

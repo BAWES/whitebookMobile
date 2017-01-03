@@ -2,24 +2,31 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
+
+import { LoginPage } from '../pages/user/login/login';
+import { ForgotPasswordPage } from '../pages/user/forgot-password/forgot-password';
+
+import { CheckoutShippingPage } from '../pages/checkout/checkout-shipping/checkout-shipping';
+import { CheckoutPaymentPage } from '../pages/checkout/checkout-payment/checkout-payment';
+import { CheckoutCompletedPage } from '../pages/checkout/checkout-completed/checkout-completed';
+import { CheckoutCartPage } from '../pages/checkout/checkout-cart/checkout-cart';
+
+
+import { MyEventsPage } from  '../pages/events/my-events/my-events';
+import { CreateEventPage } from '../pages/events/create-event/create-event';
+
+import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
+import { MyAccountPage }  from  '../pages/account/my-account/my-account';
+import { MyOrdersPage } from  '../pages/account/my-orders/my-orders';
+import { OrderDetailPage } from '../pages/account/order-detail/order-detail';
+import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
+import { CreateAddressPage } from '../pages/account/create-address/create-address';
+
+import { SearchFilterPage } from '../pages/search-filter/search-filter';
+import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
-import { LoginPage } from '../pages/login/login';
-import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
-import { CheckoutCartPage } from '../pages/checkout-cart/checkout-cart';
-import { SearchItemPage } from '../pages/search-item/search-item';
-import { CheckoutShippingPage } from '../pages/checkout-shipping/checkout-shipping';
-import { CheckoutPaymentPage } from '../pages/checkout-payment/checkout-payment';
-import { CheckoutCompletedPage } from '../pages/checkout-completed/checkout-completed';
-import { MyEventsPage } from  '../pages/my-events/my-events';
-import { MyOrdersPage } from  '../pages/my-orders/my-orders';
-import { MyAddressBookPage }  from  '../pages/my-address-book/my-address-book';
-import { MyAccountPage }  from  '../pages/my-account/my-account';
-import { OrderDetailPage } from '../pages/order-detail/order-detail';
-import { MyWishListPage } from '../pages/my-wish-list/my-wish-list';
-import { CreateAddressPage } from '../pages/create-address/create-address';
-import { CreateEventPage } from '../pages/create-event/create-event';
-import { SearchFilterPage } from '../pages/search-filter/search-filter';
+
 
 @NgModule({
   declarations: [

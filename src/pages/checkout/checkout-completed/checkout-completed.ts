@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Home } from '../home/home';
+import { Home } from '../../home/home';
 /*
   Generated class for the CheckoutCompleted page.
 

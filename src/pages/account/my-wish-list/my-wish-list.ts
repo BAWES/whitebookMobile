@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 
-import { ProductPage } from '../product/product';
+import { ProductPage } from '../../product/product';
 /*
   Generated class for the MyWishList page.
 

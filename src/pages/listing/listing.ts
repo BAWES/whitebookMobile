@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { ProductPage } from '../product/product';
-import { CheckoutCartPage } from '../checkout-cart/checkout-cart';
+import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
 

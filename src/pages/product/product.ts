@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController } from 'ionic-angular';
-import { CheckoutCartPage } from '../checkout-cart/checkout-cart'
+import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 /*
   Generated class for the Product page.
 

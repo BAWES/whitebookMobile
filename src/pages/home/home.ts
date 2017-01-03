@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, ModalController } from 'ionic-angular';
-import { CheckoutCartPage } from '../checkout-cart/checkout-cart'
+import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 import { ProductPage } from '../product/product';
 

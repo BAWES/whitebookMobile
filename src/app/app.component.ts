@@ -4,13 +4,14 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Home } from '../pages/home/home';
 import { ListingPage } from '../pages/listing/listing';
-import { LoginPage } from '../pages/login/login';
 import { SearchItemPage } from '../pages/search-item/search-item'
-import { MyEventsPage } from '../pages/my-events/my-events';
-import { MyOrdersPage } from '../pages/my-orders/my-orders';
-import { MyAddressBookPage }  from  '../pages/my-address-book/my-address-book';
-import { MyAccountPage }  from  '../pages/my-account/my-account';
-import { MyWishListPage } from '../pages/my-wish-list/my-wish-list';
+import { LoginPage } from '../pages/user/login/login';
+import { MyEventsPage } from '../pages/events/my-events/my-events';
+
+import { MyOrdersPage } from '../pages/account/my-orders/my-orders';
+import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
+import { MyAccountPage }  from  '../pages/account/my-account/my-account';
+import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -77,7 +78,7 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     //this.nav.setRoot(page);
     this.menu.close();
-    this.nav.push(page.component,{category:page});
+    this.nav.push(page.component,{title:page.title});
   }
 
   openSearchModel() {
