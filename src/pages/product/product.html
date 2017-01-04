@@ -87,9 +87,9 @@
   </ion-item>
   
   <ion-item no-border>
-    <button full round ion-button color="dark" padding-19 add-to-cart> <ion-icon name="cart"></ion-icon> Add To Cart</button>
+    <button full round ion-button color="dark" (click)="addToCart()" padding-17 add-to-cart> <ion-icon name="cart"></ion-icon>&nbsp;&nbsp;Add To Cart</button>
   </ion-item>
   <ion-item>
-    <button full round border ion-button padding-19 add-to-wishlist> Add To Wishlist</button>
+    <button full round border ion-button padding-17 add-to-wishlist (click)="addToWishList()"> Add To Wishlist</button>
   </ion-item>
 </ion-content>

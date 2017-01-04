@@ -1,69 +1,29 @@
 home {
-    [title] {
-        background: #000;
-        color:#fff;
-        margin:0px;
-    }
+    [title] {background: #000;color:#fff;margin:0px;}
+    .list-ios > .item-block:first-child {border-top: none;}
 }
-ion-slides {
-    height: auto;
-}
-ion-slide img {
-    height: 51vh !important;
-    width: auto !important;
-}
-
-.home-feature-product p.category{
-    color: #c2c2c2;
-}
-.home-inner-slider{
-    border-top: 1px solid #c2c2c2;
-    border-bottom: 1px solid #c2c2c2;
-}
-
-.home-inner-slider .swiper-slide{
-    border-right: 1px solid #c2c2c2;
-    border-left: 1px solid #c2c2c2;
-}
-.home-inner-slider .swiper-slide i.fa {
-    font-size: 20px;
+ion-slides {height: auto;}
+ion-slide img {height: 51vh !important;width: auto !important;}
+.home-feature-product p.category{color: #c2c2c2;}
+.home-inner-slider{border-top: 1px solid #c2c2c2;border-bottom: 1px solid #c2c2c2;}
+.home-inner-slider .swiper-slide{border-right: 1px solid #c2c2c2;border-left: 1px solid #c2c2c2;}
+.home-inner-slider .swiper-slide i.fa {font-size: 20px;}
+.home-feature-product ion-col {border: 1px solid #dedede;}
+ion-icon{font-size: 29px;}
+.home-inner-slider p.title {font-size: 15px;}
+.cart-indicator{border-radius: 50%;height: 10px;padding: 0;position: absolute;right: 3px;top: 1px;width: 3px;z-index: 999;}
+.clearfix:after {display: block;clear: both;content: "";}
+.item-border{border-bottom: 1px solid #d2d2d2;border-right: 1px solid #d2d2d2;}
+.item-border:nth-child(odd) {border-left:  1px solid #d2d2d2;}
+.item-border:last-child{width:100%! important}
+.item-border .item-inner{border-bottom:none! important;}
+.close-menu{background: none;}
+.close-menu.item-ios.item-block .item-inner {
+    padding-right: 0px;
+    border-bottom: none;
 }
 
-.home-feature-product ion-col {
-    border: 1px solid #dedede;
-}
-ion-icon{
-    font-size: 29px;
-}
-.home-inner-slider p.title {
-    font-size: 15px;
-}
-.cart-indicator{
-    border-radius: 50%;
-    height: 10px;
-    padding: 0;
-    position: absolute;
-    right: 3px;
-    top: 1px;
-    width: 3px;
-    z-index: 999;
-}
-.clearfix:after {
-    display: block;
-    clear: both;
-    content: "";
-}
-.item-border{
-    border-bottom: 1px solid #d2d2d2;
-    border-right: 1px solid #d2d2d2;
-}
-.item-border:nth-child(odd) {
-    border-left:  1px solid #d2d2d2;
-}
-.item-border:last-child{
-    width:100%! important
+.list-ios > .item-block:first-child {
+    border-top: none;
 }
 
-.item-border .item-inner{
-    border-bottom:none! important;
-}

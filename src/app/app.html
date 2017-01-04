@@ -8,7 +8,7 @@
       </ion-buttons>
       <ion-title text-center><img class="logo" src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
       <ion-buttons end main-menu-close-icon>
-        <button ion-item menuClose="menu1" class="close-menu">
+        <button detail-none border-none ion-item menuClose="menu1" class="close-menu">
             <ion-icon name="close"></ion-icon>
         </button>
     </ion-buttons>
@@ -17,7 +17,7 @@
 
   <ion-content main-menu>
     <ion-list>
-      <ion-list-header>Main Heading</ion-list-header>
+      <ion-list-header>Categories</ion-list-header>
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let p of pages" (click)="openPage(p)">
           <i class="fa fa-{{p.icon}}"></i>
         {{p.title}} 
@@ -25,7 +25,7 @@
     </ion-list>
     <ion-list>
       <br/>
-      <ion-list-header>Second  Heading</ion-list-header>
+      <ion-list-header>User Section</ion-list-header>
       <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(prsnl)">
         <i class="fa fa-{{prsnl.icon}}"></i>
         {{prsnl.title}} 

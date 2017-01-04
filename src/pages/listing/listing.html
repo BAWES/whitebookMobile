@@ -38,7 +38,7 @@
 
 <ion-grid class="category-product-listing {{productView}}" >
     <ion-list>
-        <button ion-item *ngFor="let product of products " class="product-items" (click)="productDetail(product.id)">
+        <button detail-none ion-item *ngFor="let product of products " class="product-items" (click)="productDetail(product.id)">
           <div class="gallery-section">
             <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             <img src="{{product.image}}" />

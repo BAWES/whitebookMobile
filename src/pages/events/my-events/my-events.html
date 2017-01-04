@@ -20,8 +20,8 @@
       <ion-row>
         <ion-col>
           <h2>{{event.title}}</h2>
-          <h3>  <ion-badge item-right color="{{event.color}}">Type : {{event.event_type}}</ion-badge></h3>
-          <p>On : {{event.date}}</p>
+          <h3><ion-badge item-right color="{{event.color}}">{{event.event_type}}</ion-badge></h3>
+          <p>{{event.date}}</p>
         </ion-col>
         <ion-col text-right class="padding-top-21">
           <button no-background (click)="update()"><ion-icon name="create"></ion-icon></button>

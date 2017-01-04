@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ModalController } from 'ionic-angular';
+import { NavController, NavParams,ModalController, ToastController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 /*
   Generated class for the Product page.
@@ -21,7 +21,12 @@ export class ProductPage {
       pager : true
     };
   
-  constructor(public navCtrl: NavController,private _params : NavParams,public modalCtnl: ModalController) {
+  constructor(
+    public navCtrl: NavController,
+    private _params : NavParams,
+    public modalCtnl: ModalController,
+    public toastCtrl : ToastController
+    ) {
     this.productSection = "pdescription";
   }
 
@@ -32,4 +37,21 @@ export class ProductPage {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
   }
+
+  addToCart() {
+    let toast = this.toastCtrl.create({
+      message : 'Item Added To Cart Successfully',
+      duration : 2000
+    });
+    toast.present();
+  }
+
+  addToWishList() {
+    let toast = this.toastCtrl.create({
+      message : 'Item Added To Wishlist Successfully',
+      duration : 2000
+    });
+    toast.present();
+  }
+
 }

@@ -36,7 +36,7 @@
 
   <ion-grid class="category-product-listing grid-view" >
     <ion-list>
-        <button ion-item no-border text-center width-50 pull-left *ngFor="let product of whishlist " (click)="productDetail(product.id)">
+        <button ion-item detail-none no-border text-center width-50 pull-left *ngFor="let product of whishlist " (click)="productDetail(product.id)">
           <button ion-button (click)="remove()" class="like-icon">
             <i class="fa fa-heart"></i>
           </button>

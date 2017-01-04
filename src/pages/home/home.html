@@ -37,7 +37,7 @@
         </button>
       </ion-slides>-->
       <ion-list class="clearfix">
-          <button ion-item text-center *ngFor="let category of categories"  pull-left width-50 no-line class="item-border"  (click)="loadProducts(category.title, category.id)" >
+          <button detail-none ion-item text-center *ngFor="let category of categories"  pull-left width-50 no-line class="item-border"  (click)="loadProducts(category.title, category.id)" >
             <i class="fa {{category.icon}}" aria-hidden="true"></i> {{category.title}}
           </button>
       </ion-list>
@@ -47,7 +47,7 @@
     <ion-label text-center padding title>Featured Product</ion-label>
     <ion-grid class="home-feature-product">
       <ion-list>
-          <button ion-item no-border text-center width-50 pull-left *ngFor="let product of featureProduct "  (click)="loadProduct()" >
+          <button detail-none ion-item no-border text-center width-50 pull-left *ngFor="let product of featureProduct "  (click)="loadProduct()" >
             <img src="{{product.image}}">
             <h4 class="name">{{product.title}}</h4>
               <p class="category">@{{product.category}}</p>

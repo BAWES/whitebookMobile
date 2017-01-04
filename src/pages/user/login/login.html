@@ -27,7 +27,7 @@
         <ion-input type="password"></ion-input>
       </ion-item>
       <ion-item login-btn text-center>
-        <button ion-button width-50 round color="dark" (click)="login()">Login</button>
+        <button ion-button width-99 round color="dark" (click)="login()">Login</button>
       </ion-item>
   </ion-list>
 
@@ -72,14 +72,12 @@
         <ion-input type="password"></ion-input>
       </ion-item>
       <ion-item register-btn text-center >
-        <button ion-button round color="dark" (click)="register()">Register</button>
+        <button ion-button round width-99 color="dark" (click)="register()">Register</button>
       </ion-item>
   </ion-list>
 </div>
 
-  <ion-item>
-    <ion-buttons text-center>
-      <button (click)='presentModal()' ion-button forget-password color="dark" round>Forget Password</button>
-    </ion-buttons>
+  <ion-item forget-password text-center>
+      <button (click)='presentModal()' ion-button width-99 round color="dark">Forget Password</button>
   </ion-item>
 </ion-content>
