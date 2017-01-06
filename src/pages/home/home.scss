@@ -1,15 +1,18 @@
 home {
     [title] {background: #000;color:#fff;margin:0px;}
     .list-ios > .item-block:first-child {border-top: none;}
+    i.cat-icon{display: inline-block;}
+    .gift-favor-icon,.entertainment-icon,.food-icon,.invitation-icon,.service-icon,.other-icon,.decor-icon,.supplies-icon{width: 33px;}
+    .venus-icon{width: 39px;}
 }
 ion-slides {height: auto;}
 ion-slide img {height: 51vh !important;width: auto !important;}
+ion-icon{font-size: 29px;}
 .home-feature-product p.category{color: #c2c2c2;}
 .home-inner-slider{border-top: 1px solid #c2c2c2;border-bottom: 1px solid #c2c2c2;}
 .home-inner-slider .swiper-slide{border-right: 1px solid #c2c2c2;border-left: 1px solid #c2c2c2;}
 .home-inner-slider .swiper-slide i.fa {font-size: 20px;}
 .home-feature-product ion-col {border: 1px solid #dedede;}
-ion-icon{font-size: 29px;}
 .home-inner-slider p.title {font-size: 15px;}
 .cart-indicator{border-radius: 50%;height: 10px;padding: 0;position: absolute;right: 3px;top: 1px;width: 3px;z-index: 999;}
 .clearfix:after {display: block;clear: both;content: "";}
@@ -18,12 +21,6 @@ ion-icon{font-size: 29px;}
 .item-border:last-child{width:100%! important}
 .item-border .item-inner{border-bottom:none! important;}
 .close-menu{background: none;}
-.close-menu.item-ios.item-block .item-inner {
-    padding-right: 0px;
-    border-bottom: none;
-}
-
-.list-ios > .item-block:first-child {
-    border-top: none;
-}
-
+.close-menu.item-ios.item-block .item-inner {padding-right: 0px;border-bottom: none;}
+.list-ios > .item-block:first-child {border-top: none;}
+[min-height-103]{ min-height: 103px;}

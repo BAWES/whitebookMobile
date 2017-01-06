@@ -1,24 +1,18 @@
 <ion-header>
   <ion-navbar class="top-nav">
-    <ion-title text-left>Login With Email</ion-title>
+    <ion-title text-center>Login</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding >
   
-<div padding>
-  <ion-segment [(ngModel)]="loginCase">
-    <ion-segment-button value="login">
-      Login
-    </ion-segment-button>
-    <ion-segment-button value="register">
-      SignUp
-    </ion-segment-button>
-  </ion-segment>
-</div>
-
-<div [ngSwitch]="loginCase">
-  <ion-list *ngSwitchCase="'login'">
-      <ion-item>
+  
+  <ion-list>
+      <ion-item class="item-profile" no-border>
+        <div class="item-avatar" text-center>
+          <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
+        </div>
+    </ion-item>
+     <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text"></ion-input>
       </ion-item>
@@ -26,58 +20,18 @@
         <ion-label floating>Password</ion-label>
         <ion-input type="password"></ion-input>
       </ion-item>
-      <ion-item login-btn text-center>
-        <button ion-button width-99 round color="dark" (click)="login()">Login</button>
+      <ion-item text-center no-border margin-top-25>
+        <button width-75 ion-button round color="dark" (click)="login()">Login</button>
+      </ion-item>
+      <ion-item text-center no-border>
+        <button no-background (click)='forgetPasswordPage()' font-size-16>Forget password?</button>
+      </ion-item>
+      <ion-item text-center margin-top-25>
+          <div>OR</div>
+          <hr/>
       </ion-item>
   </ion-list>
-
-  <ion-list *ngSwitchCase="'register'">
-    <ion-item>
-        <ion-label floating>First Name</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Last Name</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Date</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
-    </ion-item>
-
-      <ion-item>
-        <ion-label>Gender</ion-label>
-        <ion-select >
-          <ion-option value="male">Male</ion-option>
-          <ion-option value="female">Female</ion-option>
-        </ion-select>
-      </ion-item>
-    
-    <ion-item>
-      <ion-label floating>Mobile Number</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>Confirm Password</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
-      <ion-item register-btn text-center >
-        <button ion-button round width-99 color="dark" (click)="register()">Register</button>
-      </ion-item>
-  </ion-list>
-</div>
-
-  <ion-item forget-password text-center>
-      <button (click)='presentModal()' ion-button width-99 round color="dark">Forget Password</button>
+  <ion-item text-center no-border>
+      Don't have an account?<button (click)="registerPage()" font-size-16 no-background>Sign Up</button>
   </ion-item>
 </ion-content>

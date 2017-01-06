@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 
 import { LoginPage } from '../pages/user/login/login';
+import { RegisterPage } from '../pages/user/register/register';
 import { ForgotPasswordPage } from '../pages/user/forgot-password/forgot-password';
 
 import { CheckoutShippingPage } from '../pages/checkout/checkout-shipping/checkout-shipping';
@@ -35,6 +36,7 @@ import { ProductPage } from '../pages/product/product';
     ListingPage,
     ProductPage,
     LoginPage,
+    RegisterPage,
     ForgotPasswordPage,
     CheckoutCartPage,
     SearchItemPage,
@@ -61,6 +63,7 @@ import { ProductPage } from '../pages/product/product';
     ListingPage,
     ProductPage,
     LoginPage,
+    RegisterPage,
     ForgotPasswordPage,
     CheckoutCartPage,
     SearchItemPage,

@@ -5,8 +5,8 @@ page-listing {
     .category-product-listing .name{margin-top: 9px;margin-bottom:3px;}
     .category-product-listing .price{margin-bottom:17px;}
     .category-product-listing img{margin-top:17px;height: 180px;width: 180px;}
-    .category-product-listing.list-view .item-block .item-inner{border : none;}
-    .category-product-listing.list-view .item-block{border-bottom:1px solid #dedede;padding-left:0px}
+    // .category-product-listing.list-view .item-block .item-inner{border : none;}
+    // .category-product-listing.list-view .item-block{border-bottom:1px solid #dedede;padding-left:0px}
     .bar-buttons-md[end][text-center] {text-align: center;}
     .top-filter-tool-bar.item-ios.item-block .item-inner{border: none;}
     .top-filter-tool-bar.item-ios.item-block .select{color: #c8c7cc;}
@@ -18,25 +18,21 @@ page-listing {
     .filter-icon{margin-top: 11px;}
     .order-by-icon{margin-right: 13px !important;}
     .search-icon{margin-right: 17px !important;}
-    .like-icon{position: absolute;top:17px;right: 18px;color: #fff;}
+    .like-icon{position: absolute;top:17px;left: 144px;color: #fff;}
     .category-product-listing ion-col {position: relative;}
     .product-items{width:100%;}
 
     // Grid View
     .grid-view .product-items{ width: 50%; float: left;text-align: center;padding: 0px;}
-    .grid-view .list-md .item-block .item-inner{padding: 0px; }
     .grid-view .list-md .label-md{margin: 0px; }
     .grid-view .detail-section .vendor{display: none;}
     
     // List View
     .list-view.category-product-listing .gallery-section,.list-view.category-product-listing .detail-section {float: left;width: 50%;text-align: center;}
     .list-view.category-product-listing .detail-section {margin-top: 7px;padding-top: 51px;}
-    .list-view .like-icon {left: 159px;}
-    .list-view .icon-ios.like-icon{left: 109px;}
     .list-view .label-md {margin:0px;}
     .vendor{font-weight: bold;}
     .gallery-section{position:relative;}
-    .item-md.item-block .item-inner{padding:0px;}
     .top-filter-tool-bar button{background: none;}
     
 }

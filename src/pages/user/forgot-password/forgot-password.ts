@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController,ViewController } from 'ionic-angular';
+import { NavController,ViewController,ToastController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
+import { RegisterPage } from '../register/register';
 
 /*
   Generated class for the ForgotPassword page.
@@ -13,13 +15,22 @@ import { NavController,ViewController } from 'ionic-angular';
 })
 export class ForgotPasswordPage {
 
-  constructor(public navCtrl: NavController,public viewCtrl : ViewController) {}
+  constructor(public navCtrl: NavController,public viewCtrl : ViewController,public toastCtrl : ToastController) {}
 
   ionViewDidLoad() {
     console.log('Hello ForgotPasswordPage Page');
   }
 
-dismiss() {
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
+  sendPassword(){
+    let toast = this.toastCtrl.create({
+      message : 'Message Sent successfully',
+      duration:2000
+    });
+    toast.present();
     this.viewCtrl.dismiss();
   }
 }

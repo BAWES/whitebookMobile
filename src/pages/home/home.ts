@@ -38,15 +38,15 @@ export class Home {
     ];
 
   this.categories = [
-    {'title':"Venue",'icon':"fa-map-marker",'id':'1'},
-    {'title':"Invitation",'icon':"fa-envelope-open-o",'id':'2'},
-    {'title':"Food & Beverage",'icon':"fa-cutlery",'id':'3'},
-    {'title':"Decor",'icon':"fa-building",'id':'4'},
-    {'title':"Supplies",'icon':"fa-truck",'id':'5'},
-    {'title':"Entertainment",'icon':"fa-headphones",'id':'6'},
-    {'title':"Services",'icon':"fa-cogs",'id':'7'},
-    {'title':"Other",'icon':"fa-cubes",'id':'8'},
-    {'title':"Gift Favors",'icon':"fa-gift",'id':'9'},
+    {'title':"Venue",'icon':"venus-icon",'id':'1'},
+    {'title':"Invitation",'icon':"invitation-icon",'id':'2'},
+    {'title':"Food & Beverage",'icon':"food-icon",'id':'3'},
+    {'title':"Decor",'icon':"decor-icon",'id':'4'},
+    {'title':"Supplies",'icon':"supplies-icon",'id':'5'},
+    {'title':"Entertainment",'icon':"entertainment-icon",'id':'6'},
+    {'title':"Services",'icon':"service-icon",'id':'7'},
+    {'title':"Other",'icon':"other-icon",'id':'8'},
+    {'title':"Gift Favors",'icon':"gift-favor-icon",'id':'9'},
   ]
   }
 

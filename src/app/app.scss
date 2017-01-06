@@ -15,22 +15,22 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-i.venus_icon{background: url(../../images/sprit.png) no-repeat -3px -8px  ;  display: inline-block;    height: 40px;    width: 14%;}
-i.invit_icon{background:  url(../../images/sprit.png) no-repeat -84px -12px;    display: inline-block;    height: 39px;    width: 14%;}
-i.supplies{background: url(../../images/sprit.png) no-repeat  -292px -11px;    display: inline-block;    height: 39px;    width: 14%;}
-i.food_map{background: url(../../images/sprit.png) no-repeat -157px -11px ;    display: inline-block;    height: 39px;    width: 14%;}
-i.decor{background: url(../../images/sprit.png) no-repeat  -226px -12px ;    display: inline-block;    height: 37px;    width: 14%;}
-i.entert{background: url(../../images/sprit.png) no-repeat  -363px -10px  ;    display: inline-block;    height: 37px;    width: 14%;}
-i.serv{background: url(../../images/sprit.png) no-repeat  -442px -3px;    display: inline-block;    height: 44px;    width: 14%;}
-i.other{background:url(../../images/sprit.png) no-repeat  -521px -13px   ;    display: inline-block;    height: 34px;    width: 14%;}
-i.say_thank{background:url(../../images/sprit.png) -595px -14px  no-repeat  ;    display: inline-block;    height: 40px;    width: 14%;}
+i.venus-icon{background: url(../../images/sprit.png) no-repeat -3px -8px  ; height: 40px;}
+i.invitation-icon{background:  url(../../images/sprit.png) no-repeat -84px -12px;height: 39px;}
+i.supplies-icon{background: url(../../images/sprit.png) no-repeat  -292px -11px;height: 39px;}
+i.food-icon{background: url(../../images/sprit.png) no-repeat -157px -11px ;height: 39px;}
+i.decor-icon{background: url(../../images/sprit.png) no-repeat  -226px -12px;height: 37px;}
+i.entertainment-icon{background: url(../../images/sprit.png) no-repeat  -363px -10px;height: 37px;}
+i.service-icon{background: url(../../images/sprit.png) no-repeat  -442px -3px;height: 44px;}
+i.other-icon{background:url(../../images/sprit.png) no-repeat  -521px -13px;height: 34px;}
+i.gift-favor-icon{background:url(../../images/sprit.png) -595px -14px  no-repeat;height: 40px;}
 .top-nav .bar-buttons-md[start] {order: 1;}
 .logo{width: 20px;}
 .toolbar-background-md {background: #fff;border-color: #000;}
 .close-menu.item-md.item-block .item-inner{border: none;padding: 0px;}
 .ios .menu-inner{width: 263px;}
 [main-menu] ion-label, [event-menu] ion-label{font-size: 15px;touch-action: inherit;}
-[main-menu] .fa {width: 36px;}
+[secondary-menu] .fa {width: 36px;}
 [main-menu-search-icon] {order: 1;margin-left: 9px;}
 [main-menu-close-icon] {margin-left: 0px;margin-right: 4px;}
 #menu2 a ion-label, #menu2 button ion-label, #menu2 [tappable] ion-label{touch-action:inherit;}
@@ -38,3 +38,7 @@ div.menu-inner .toolbar-ios ion-title{    padding: 0px 85px 1px;}
 div.menu-inner .list-ios .item-block .item-inner {border-bottom: 0.55px solid #c8c7cc;}
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{color:#000;}
 [main-menu] .list-ios > .item-block:last-child{border:none;}
+[main-menu] span{position: absolute;top: 26px;}
+[main-menu] i{display: inline-block;width: 20%;}
+span.label-service-icon{top: 34px;}
+span.label-gift-favour-icon{top: 33px;}

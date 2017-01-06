@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 /*
   Generated class for the Register page.
@@ -13,10 +13,23 @@ import { NavController } from 'ionic-angular';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public toastCtrl : ToastController) {}
 
   ionViewDidLoad() {
     console.log('Hello RegisterPage Page');
+  }
+
+  dismiss() {
+    this.navCtrl.pop();
+  }
+
+  register() {
+    let toast = this.toastCtrl.create({
+      message:'Register Successfully',
+      duration:2000
+    });
+    toast.present();
+    this.navCtrl.pop();
   }
 
 }

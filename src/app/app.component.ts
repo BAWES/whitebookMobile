@@ -34,15 +34,16 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Venues', component: ListingPage, icon : "map-marker",id:2 },
-      { title: 'Invitations', component: ListingPage , icon : "envelope-open-o",id:3 },
-      { title: 'Food & Beverage', component: ListingPage , icon : "cutlery" ,id:4},
-      { title: 'Decor', component: ListingPage , icon : "building",id:5 },
-      { title: 'Supplies', component: ListingPage , icon : "truck" ,id:6},
-      { title: 'Entertainment', component: ListingPage , icon : "headphones" ,id:7},
-      { title: 'Services', component: ListingPage , icon : "cogs" ,id:8},
-      { title: 'Other', component: ListingPage , icon : "cubes" ,id:9},
-      { title: 'Gift Favors', component: ListingPage , icon : "gift" ,id:10}
+      { title: 'Venues', component: ListingPage, icon : "venus-icon",id:2 },
+      { title: 'Invitations', component: ListingPage , icon : "invitation-icon",id:3 },
+      { title: 'Food & Beverage', component: ListingPage , icon : "food-icon" ,id:4},
+      { title: 'Decor', component: ListingPage , icon : "decor-icon",id:5 },
+      { title: 'Supplies', component: ListingPage , icon : "supplies-icon" ,id:6},
+      { title: 'Entertainment', component: ListingPage , icon : "entertainment-icon" ,id:7},
+      { title: 'Services', component: ListingPage , icon : "service-icon" ,id:8},
+      { title: 'Other', component: ListingPage , icon : "other-icon" ,id:9},
+      { title: 'Gift Favors', component: ListingPage , icon : "gift-favor-icon" ,id:10}
+
     ];
     
     this.personal = [ 

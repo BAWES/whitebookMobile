@@ -15,15 +15,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content main-menu>
-    <ion-list>
+  <ion-content>
+    <ion-list  main-menu>
       <ion-list-header>Categories</ion-list-header>
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let p of pages" (click)="openPage(p)">
-          <i class="fa fa-{{p.icon}}"></i>
-        {{p.title}} 
+          <i class="fa {{p.icon}}"></i>
+          <span class="label-{{p.icon}}">{{p.title}}</span>
       </button>
     </ion-list>
-    <ion-list>
+    <ion-list secondary-menu>
       <br/>
       <ion-list-header>User Section</ion-list-header>
       <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(prsnl)">

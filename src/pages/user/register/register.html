@@ -1,37 +1,62 @@
-<div title="Signup">
-    <ion-content padding="'true'" scroll="false" class="has-header">
-        <form class="list">
-            <ion-list>
-                <label class="item item-input">
-                    <span class="input-label">Name</span>
-					
-					//Note: data object contains all the detials about the user registering.
-                    <input type="text" placeholder="" ng-model="data.name">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="email" placeholder="" ng-model="data.username">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="password" placeholder="" ng-model="data.password">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Phone</span>
-                    <input type="number" placeholder="" ng-model="data.phone">
-                </label>
-            </ion-list>
-            <label class="item item-input">
-                <span class="input-label">Address</span>
-                <input type="text" placeholder="" ng-model="data.address">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Pincode</span>
-                <input type="number" placeholder="" ng-model="data.pincode">
-            </label>
-			
-			//data object is passed to the signup()
-            <button ng-click="signup(data)" class="button button-stable button-block ">Sign up</button>
-        </form>
-    </ion-content>
-</div>
+<ion-header>
+  <ion-navbar class="top-nav">
+    <ion-title text-center>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding >
+  
+  
+  <ion-list>
+      <ion-item class="item-profile" no-border>
+        <div class="item-avatar" text-center>
+          <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
+        </div>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
+    </ion-item>
+
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select >
+          <ion-option value="male">Male</ion-option>
+          <ion-option value="female">Female</ion-option>
+        </ion-select>
+      </ion-item>
+    
+    <ion-item>
+      <ion-label floating>Mobile Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-item text-center no-border margin-top-25>
+        <button ion-button round width-75 color="dark" (click)="register()">Register</button>
+      </ion-item>
+      <ion-item text-center no-border>
+        <button no-background (click)='dismiss()' font-size-16>Sign In?</button>
+      </ion-item>
+  </ion-list>
+</ion-content>

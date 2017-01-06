@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, ToastController } from 'ionic-angular';
 
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'
+import { RegisterPage } from '../register/register';
 import { Home } from '../../home/home';
 /*
   Generated class for the Login page.
@@ -28,23 +29,18 @@ export class LoginPage {
     console.log('Hello LoginPage Page');
   }
 
-  presentModal() {
-    let modal = this.modalCtnl.create(ForgotPasswordPage);
-    modal.present();
+  forgetPasswordPage() {
+    this.navCtrl.push(ForgotPasswordPage);
+  }
+
+  registerPage() {
+    this.navCtrl.push(RegisterPage);
   }
 
   login() {
     this.navCtrl.push(Home);
     let toast = this.toastCtrl.create({
         message: 'Login Successfully',
-        duration: 1000
-    });
-    toast.present();
-  }
-  register() {
-    this.navCtrl.push(Home);
-    let toast = this.toastCtrl.create({
-        message: 'Register Successfully',
         duration: 1000
     });
     toast.present();
