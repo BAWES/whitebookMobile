@@ -17,8 +17,8 @@
   </ion-item>
 <ion-card *ngFor="let address of addresses">
   <ion-card-header position-relative>
-    <ion-title pull-left>{{address.title}}</ion-title>
-    <ion-buttons pull-right >
+    <ion-title float-left>{{address.title}}</ion-title>
+    <ion-buttons float-right >
       <button no-background (click)="create()"><ion-icon name="create"></ion-icon></button>
       <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
     </ion-buttons>

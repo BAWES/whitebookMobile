@@ -1,9 +1,4 @@
 page-my-wish-list {
-    [left-border]{border-left: 1px solid #dedede;}
-    [border-right]{border-right: 1px solid #dedede;}
-    [border-bottom]{border-bottom: 1px solid #dedede;}
-    [width-50]{width:50%}
-    [max-width-100]{max-width:100%}
     .category-product-listing .name,
     .category-product-listing .vendor,
     .category-product-listing .price{font-size: 13px;color:#000;font-weight: normal;}
@@ -30,8 +25,4 @@ page-my-wish-list {
     .category-product-listing ion-col {position: relative;}
     .item-block{border-bottom:1px solid #d2d2d2;}
     .button-md:hover,.button-md:hover:not(.disable-hover) {background-color:none;}
-}
-
-[float-left] {float:left;}
-[float-right] {float:right;}
-    
+}    

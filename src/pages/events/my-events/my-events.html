@@ -13,7 +13,7 @@
 
 <ion-content padding>
   <ion-item text-center>
-      <button ion-button round color="dark" class="padding-16" (click)="create()">+ Add new Event</button>
+      <button ion-button round color="dark" padding-16 (click)="create()">+ Add new Event</button>
   </ion-item>
   <ion-list>
     <ion-item *ngFor="let event of events">
@@ -23,7 +23,7 @@
           <h3><ion-badge item-right color="{{event.color}}">{{event.event_type}}</ion-badge></h3>
           <p>{{event.date}}</p>
         </ion-col>
-        <ion-col text-right class="padding-top-21">
+        <ion-col text-right padding-top-21>
           <button no-background (click)="update()"><ion-icon name="create"></ion-icon></button>
           <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
         </ion-col>
