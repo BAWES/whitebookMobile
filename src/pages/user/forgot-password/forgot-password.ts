@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController,ToastController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { RegisterPage } from '../register/register';
-
 /*
   Generated class for the ForgotPassword page.
 

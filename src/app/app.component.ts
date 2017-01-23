@@ -13,6 +13,8 @@ import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
+import { Category } from '../providers/category';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,30 +23,22 @@ export class MyApp {
 
   rootPage: any = Home;
 
-  pages: Array<{title: string, component: any, icon: any,id:number}>;
+  pages: any;
   personal: Array<{title: string, component: any,icon: any}>;
   events: any[];
 
   constructor(
     public platform: Platform,
     public menu : MenuController,
-    public modalCtnl : ModalController
+    public modalCtnl : ModalController,
+    public _category : Category
+
   ) {
     this.initializeApp();
-
+    
+    
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Venues', component: ListingPage, icon : "venus-icon",id:2 },
-      { title: 'Invitations', component: ListingPage , icon : "invitation-icon",id:3 },
-      { title: 'Food & Beverage', component: ListingPage , icon : "food-icon" ,id:4},
-      { title: 'Decor', component: ListingPage , icon : "decor-icon",id:5 },
-      { title: 'Supplies', component: ListingPage , icon : "supplies-icon" ,id:6},
-      { title: 'Entertainment', component: ListingPage , icon : "entertainment-icon" ,id:7},
-      { title: 'Services', component: ListingPage , icon : "service-icon" ,id:8},
-      { title: 'Other', component: ListingPage , icon : "other-icon" ,id:9},
-      { title: 'Gift Favors', component: ListingPage , icon : "gift-favor-icon" ,id:10}
-
-    ];
+    this.loadPages();    
     
     this.personal = [ 
       { title : 'Sign In', component:LoginPage,icon:'sign-in' },
@@ -77,7 +71,7 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.menu.close();
-    this.nav.push(page.component,{title:page.title});
+    this.nav.push(ListingPage,{title:page.category_name,id:page.category_id});
   }
 
   openSearchModel() {
@@ -91,4 +85,13 @@ export class MyApp {
       this.nav.push(MyEventsPage);
       this.menu.close();
   }
+
+  // Loading category from api
+  loadPages(){
+    this._category.load()
+    .then(data => {
+      this.pages = data;
+    });
+  }
+
 }
