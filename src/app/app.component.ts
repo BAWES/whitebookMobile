@@ -31,7 +31,7 @@ export class MyApp {
     public platform: Platform,
     public menu : MenuController,
     public modalCtnl : ModalController,
-    public _category : Category
+    public _categoryService : Category
 
   ) {
     this.initializeApp();
@@ -88,7 +88,7 @@ export class MyApp {
 
   // Loading category from api
   loadPages(){
-    this._category.load()
+    this._categoryService.load()
     .then(data => {
       this.pages = data;
     });

@@ -13,8 +13,8 @@ import { Global } from './global';
 export class Category {
   data: any = null;
   url:any;
-  constructor(public http: Http, public global:Global) {
-    this.url = global.categoryApUrl;
+  constructor(public http: Http, public _globalService:Global) {
+    this.url = _globalService.categoryApiUrl;
     this.data = null;
   }
 

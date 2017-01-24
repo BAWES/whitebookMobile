@@ -38,15 +38,15 @@
 
 <ion-grid class="category-product-listing {{productView}}" >
     <ion-list>
-        <button detail-none ion-item *ngFor="let product of products " class="product-items" (click)="productDetail(product.id)">
+        <button detail-none ion-item *ngFor="let product of products " class="product-items" (click)="productDetail(product.item_id)">
           <div class="gallery-section">
             <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             <img src="{{product.image}}" />
           </div>
-          <div class="detail-section">
-            <h4 class="name"><strong>{{product.productTitle}}</strong></h4>
-            <h6 class="price">KD {{product.productPrice}}</h6>
-            <h4 class="vendor"> {{product.productVendor}}</h4>
+          <div class="detail-section text-center">
+            <h4 class="name"><strong>{{product.item_name}}</strong></h4>
+            <h6 class="price">KD {{product.item_price_per_unit}}</h6>
+            <h4 class="vendor"> {{product.vendor_name}}</h4>
           </div>
         </button>
       </ion-list>
