@@ -30,6 +30,7 @@ import { ProductPage } from '../pages/product/product';
 
 import { Global } from '../providers/global';
 import { Category } from '../providers/category';
+import { Product } from '../providers/product';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,6 @@ import { Category } from '../providers/category';
     CreateEventPage,
     SearchFilterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product]
 })
 export class AppModule {}

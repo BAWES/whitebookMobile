@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController, ToastController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
-/*
-  Generated class for the Product page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { Product } from '../../providers/product';
+
 @Component({
   selector: 'page-product',
   templateUrl: 'product.html'
 })
+
 export class ProductPage {
   productSection:string;
+  product_id:number;
+  productDetail : any;
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -25,13 +25,15 @@ export class ProductPage {
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
-    public toastCtrl : ToastController
+    public toastCtrl : ToastController,
+    public _productService : Product
     ) {
     this.productSection = "pdescription";
   }
 
   ionViewDidLoad() {
-    console.log('product detail page for id : '+ this._params.get('productId')); 
+    this.product_id = this._params.get('productId');
+    this.loadProductDetail();
   }
   openModel() {
     let modal = this.modalCtnl.create(CheckoutCartPage);
@@ -52,6 +54,14 @@ export class ProductPage {
       duration : 2000
     });
     toast.present();
+  }
+
+  loadProductDetail() {
+    this._productService.loadProduct(this.product_id)
+    .then(data=>{
+      this.productDetail = data;
+      console.log(this.productDetail);
+    })
   }
 
 }
