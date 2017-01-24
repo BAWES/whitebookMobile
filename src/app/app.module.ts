@@ -12,7 +12,6 @@ import { CheckoutPaymentPage } from '../pages/checkout/checkout-payment/checkout
 import { CheckoutCompletedPage } from '../pages/checkout/checkout-completed/checkout-completed';
 import { CheckoutCartPage } from '../pages/checkout/checkout-cart/checkout-cart';
 
-
 import { MyEventsPage } from  '../pages/events/my-events/my-events';
 import { CreateEventPage } from '../pages/events/create-event/create-event';
 
@@ -28,9 +27,13 @@ import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 
+// services
 import { Global } from '../providers/global';
 import { Category } from '../providers/category';
 import { Product } from '../providers/product';
+
+// custom pipe
+import { StringFilterPipe } from "./../pipes/string.filter.pipe";
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { Product } from '../providers/product';
     MyWishListPage,
     CreateAddressPage,
     CreateEventPage,
-    SearchFilterPage
+    SearchFilterPage,
+    StringFilterPipe,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -83,6 +87,6 @@ import { Product } from '../providers/product';
     CreateEventPage,
     SearchFilterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product],
 })
 export class AppModule {}

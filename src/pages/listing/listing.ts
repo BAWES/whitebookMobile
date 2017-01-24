@@ -30,18 +30,7 @@ export class ListingPage {
     this.productView = 'grid-view';
     this.id = this._params.get('id');
     this.title = this._params.get('title');
-
     this.loadProducts();
-
-    /*this.products = [
-      {'productID':'1','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'productID':'2','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'productID':'3','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'productID':'4','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'productID':'5','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'productID':'6','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-    ]*/
-
   }
 
   productDetail(id) {

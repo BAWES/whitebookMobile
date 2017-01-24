@@ -73,6 +73,13 @@ export class MyApp {
     this.menu.close();
     this.nav.push(ListingPage,{title:page.category_name,id:page.category_id});
   }
+  
+  openUserPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.menu.close();
+    this.nav.push(page.component);
+  }
 
   openSearchModel() {
     this.menu.close();

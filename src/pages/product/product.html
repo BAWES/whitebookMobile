@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar primary>
-    <ion-title>testing product</ion-title>
+    <ion-title>Product Detail</ion-title>
     <ion-buttons end>
       <button ion-button menuToggle="right" >
           <ion-icon name="calendar"></ion-icon>
@@ -15,19 +15,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="product-detail">     
+<ion-content class="product-detail" *ngIf="product">
    <ion-item text-wrap>
+      <h2>{{product.item_name}}</h2>
       <ion-slides [options]="mySlideOptions">
-        <ion-slide><img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" /></ion-slide>
-        <ion-slide><img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/1000949_547025268680139_1700284818_n_367_501.jpg" /></ion-slide>
-        <ion-slide><img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" /></ion-slide>
-        <ion-slide><img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/1000949_547025268680139_1700284818_n_367_501.jpg" /></ion-slide>
+        <ion-slide *ngFor="let image of product.images"><img src="{{imagePath}}/{{image.image_path}}" /></ion-slide>
       </ion-slides>
-       <h2>Testing Product</h2>
-       <h3 text-center>White Book</h3>
-       <h4 text-center>Price : KD 12.22</h4>
-       <!--<p [innerHTML]="product.description"></p>-->
-       
+       <h3 text-center>{{product.vendor.vendor_name}}</h3>
+       <h4 text-center>Price : KD {{product.item_price_per_unit}}</h4>       
        <ion-segment [(ngModel)]="productSection">
           <ion-segment-button round value="pdescription">
             Description
@@ -41,15 +36,15 @@
         </ion-segment>
     </ion-item>
      <div [ngSwitch]="productSection" padding>
-        <p text-justify *ngSwitchCase="'pdescription'">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        <p text-justify *ngSwitchCase="'adescription'">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p text-justify *ngSwitchCase="'pdescription'">{{product.item_description | trimhtml }}</p>
+        <p text-justify *ngSwitchCase="'adescription'">{{product.item_additional_info | trimhtml }}</p>
          <ion-list *ngSwitchCase="'contact'">
-            <ion-item><i class="fa fa-map-marker" aria-hidden="true"></i> #23, Street, Abu Dhabi</ion-item>
-            <ion-item><i class="fa fa-envelope-o" aria-hidden="true"></i> email@gmail.com</ion-item>
-            <ion-item><i class="fa fa-globe" aria-hidden="true"></i> http://www.google.com</ion-item>
-            <ion-item><i class="fa fa-instagram" aria-hidden="true"></i> http://www.instagram.com</ion-item>
-            <ion-item><i class="fa fa-twitter" aria-hidden="true"></i> http://www.twitter.com</ion-item>
-            <ion-item><i class="fa fa-facebook" aria-hidden="true"></i> http://www.facebook.com</ion-item>
+            <ion-item><i class="fa fa-map-marker" aria-hidden="true"></i> {{product.vendor.vendor_contact_address}}</ion-item>
+            <ion-item><i class="fa fa-envelope-o" aria-hidden="true"></i> {{product.vendor.vendor_public_email}}</ion-item>
+            <ion-item><i class="fa fa-globe" aria-hidden="true"></i> {{product.vendor.vendor_website}}</ion-item>
+            <ion-item><i class="fa fa-instagram" aria-hidden="true"></i> {{product.vendor.vendor_instagram}}</ion-item>
+            <ion-item><i class="fa fa-twitter" aria-hidden="true"></i> {{product.vendor.vendor_twitter}}</ion-item>
+            <ion-item><i class="fa fa-facebook" aria-hidden="true"></i> {{product.vendor.vendor_facebook}}</ion-item>
          </ion-list>
       </div>  
    <ion-item>

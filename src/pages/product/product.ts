@@ -3,6 +3,7 @@ import { NavController, NavParams,ModalController, ToastController } from 'ionic
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 
 import { Product } from '../../providers/product';
+import { Global } from '../../providers/global';
 
 @Component({
   selector: 'page-product',
@@ -12,7 +13,8 @@ import { Product } from '../../providers/product';
 export class ProductPage {
   productSection:string;
   product_id:number;
-  productDetail : any;
+  product : any;
+  imagePath : string;
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -20,19 +22,22 @@ export class ProductPage {
       speed :3000,
       pager : true
     };
+
   
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
     public toastCtrl : ToastController,
-    public _productService : Product
-    ) {
+    public _productService : Product,
+    public _globalService : Global
+  ) {
     this.productSection = "pdescription";
+    this.product_id = this._params.get('productId');
+    this.imagePath = _globalService.images_530;
   }
 
   ionViewDidLoad() {
-    this.product_id = this._params.get('productId');
     this.loadProductDetail();
   }
   openModel() {
@@ -59,9 +64,8 @@ export class ProductPage {
   loadProductDetail() {
     this._productService.loadProduct(this.product_id)
     .then(data=>{
-      this.productDetail = data;
-      console.log(this.productDetail);
-    })
+      this.product = data;
+    });
   }
 
 }

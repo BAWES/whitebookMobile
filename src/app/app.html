@@ -26,7 +26,7 @@
     <ion-list secondary-menu>
       <br/>
       <ion-list-header>User Section</ion-list-header>
-      <button ion-item  *ngFor="let prsnl of personal" (click)="openPage(prsnl)">
+      <button ion-item  *ngFor="let prsnl of personal" (click)="openUserPage(prsnl)">
         <i class="fa fa-{{prsnl.icon}}"></i>
         {{prsnl.title}} 
       </button>
