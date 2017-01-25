@@ -3,26 +3,36 @@
     <ion-title text-center>Login</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding >
-  
-  
+<ion-content padding >  
   <ion-list>
       <ion-item class="item-profile" no-border>
         <div class="item-avatar" text-center>
           <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
         </div>
     </ion-item>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" novalidate>
      <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="email"></ion-input>
+        <p *ngIf="loginForm.controls['email'].errors && loginForm.controls['email'].dirty ">
+            <small class="up">
+              <strong> <i> Please Enter email address</i></strong>
+            </small>
+        </p>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" formControlName="password"></ion-input>
+        <p *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty ">
+            <small class="up">
+              <strong> <i> Please Enter Password</i></strong>
+            </small>
+        </p>
       </ion-item>
       <ion-item text-center no-border margin-top-25>
-        <button width-75 ion-button round color="dark" (click)="login()">Login</button>
+        <button width-75 ion-button round color="dark">Login</button>
       </ion-item>
+    </form> 
       <ion-item text-center no-border>
         <button no-background (click)='forgetPasswordPage()' font-size-16>Forget password?</button>
       </ion-item>
