@@ -1,32 +1,34 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ToastController } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
+import { Validators, FormBuilder } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'
 import { RegisterPage } from '../register/register';
 import { Home } from '../../home/home';
-/*
-  Generated class for the Login page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { Authentication } from '../../../providers/authentication';
+import { Base } from '../../../providers/base';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  loginCase : string;
-  constructor(
-    public navCtrl: NavController, 
-    public modalCtnl : ModalController,
-    public toastCtrl : ToastController
-  )
-     {
-    this.loginCase = 'login';
-  }
+  
+  private loginForm : any;
+  private loginData :any;
 
-  ionViewDidLoad() {
-    console.log('Hello LoginPage Page');
+  constructor(
+    private navCtrl: NavController, 
+    private fb: FormBuilder,
+    private _authService:Authentication,
+    private _baseService : Base
+  ){
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   forgetPasswordPage() {
@@ -37,12 +39,23 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
 
-  login() {
-    this.navCtrl.push(Home);
-    let toast = this.toastCtrl.create({
-        message: 'Login Successfully',
-        duration: 1000
-    });
-    toast.present();
+  loginSubmit() {
+    if (this.loginForm.valid) {
+        this._baseService.startLoading();
+        this._authService.login(this.loginForm.value.email,this.loginForm.value.password)
+        .then(data=>{
+            this.loginData = data;
+            if (this.loginData.status == 401 ) {
+              this._baseService.showToast('Invalid Login Credentials.');
+            } else if (this.loginData.operation == 'success' ) {
+              this._baseService.storeKeyValueLocally('token', this.loginData.token);
+              this._baseService.showToast('Login Successfully');
+              setTimeout(() => {
+                this._baseService.endLoading();
+                this.navCtrl.setRoot(Home)
+              });
+            }
+        })
+      }
   }
 }

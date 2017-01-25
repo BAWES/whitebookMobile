@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
+import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../pages/user/login/login';
 import { RegisterPage } from '../pages/user/register/register';
@@ -31,6 +32,8 @@ import { ProductPage } from '../pages/product/product';
 import { Global } from '../providers/global';
 import { Category } from '../providers/category';
 import { Product } from '../providers/product';
+import { Authentication } from '../providers/authentication';
+import { Base } from '../providers/base';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -87,6 +90,6 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product,Authentication,Storage,Base],
 })
 export class AppModule {}

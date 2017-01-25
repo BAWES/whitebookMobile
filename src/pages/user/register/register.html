@@ -12,51 +12,48 @@
           <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
         </div>
     </ion-item>
-
-    <ion-item>
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" novalidate>
+      <ion-item>
         <ion-label floating>First Name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="firstName" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Last Name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="lastName" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label floating>Date</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" ></ion-datetime>
-    </ion-item>
-
+        <ion-datetime formControlName="dob" displayFormat="MM/DD/YYYY" ></ion-datetime>
+      </ion-item>
       <ion-item>
         <ion-label>Gender</ion-label>
-        <ion-select >
+        <ion-select formControlName="gender">
           <ion-option value="male">Male</ion-option>
           <ion-option value="female">Female</ion-option>
         </ion-select>
       </ion-item>
-    
-    <ion-item>
-      <ion-label floating>Mobile Number</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
+      <ion-item>
+        <ion-label floating>Mobile Number</ion-label>
+        <ion-input formControlName="mobileNumber" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label floating>Confirm Password</ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input formControlName="confirmPassword" type="password"></ion-input>
       </ion-item>
       <ion-item text-center no-border margin-top-25>
-        <button ion-button round width-75 color="dark" (click)="register()">Register</button>
+        <button ion-button round width-75 color="dark">Register</button>
       </ion-item>
-      <ion-item text-center no-border>
-        <button no-background (click)='dismiss()' font-size-16>Sign In?</button>
-      </ion-item>
+    </form>
+    <ion-item text-center no-border>
+      <button no-background (click)='dismiss()' font-size-16>Sign In?</button>
+    </ion-item>
   </ion-list>
 </ion-content>
