@@ -28,14 +28,14 @@ export class RegisterPage {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', Validators.compose([Validators.required,ValidFields.isValidEmail])],
-        password: this.fb.group({
-          password: ['', Validators.required],
-          confirmPassword: ['', Validators.required],
-        },ValidFields.passwordMatch),
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
         dob: ['', Validators.required],
         gender: ['', Validators.required],
         mobileNumber: ['', Validators.compose([Validators.required,ValidFields.isValidMobile])],
-      });
+      },
+        {validator: ValidFields.passwordMatch('password', 'confirmPassword')}
+      );
     }
     
   dismiss() {

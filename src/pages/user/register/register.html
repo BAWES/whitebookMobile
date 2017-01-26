@@ -74,6 +74,9 @@
       <div class="error-message" *ngIf="!registerForm.controls.confirmPassword.valid && (registerForm.controls.confirmPassword.touched ||  submitAttempt)">
           <p>Please enter confirm password</p>
       </div>
+      <div class="error-message" *ngIf="registerForm.controls.password.valid && registerForm.controls.confirmPassword.valid && !registerForm.hasError('passwordNotMatch')">
+          <p>Confirm password & Password doesn't Match</p>
+      </div>
       <ion-item text-center no-border margin-top-25>
         <button ion-button round width-75 color="dark">Register</button>
       </ion-item>
