@@ -16,7 +16,8 @@
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.touched || submitAttempt) ">
-        <p>Please enter email address</p>
+        <p *ngIf="loginForm.controls.email.errors.required">Please enter email address</p>
+        <p *ngIf="!loginForm.controls.email.errors.required && loginForm.controls.email.errors.invalidEmail">Please enter valid email address</p>
       </div>
       <ion-item>
         <ion-label floating>Password</ion-label>
@@ -26,7 +27,6 @@
         <p>Please enter password</p>
       </div>
       <ion-item text-center no-border margin-top-25>
-        <!--[disabled]="!loginForm.valid"-->
         <button width-75 ion-button round color="dark" >Login</button>
       </ion-item>
     </form> 

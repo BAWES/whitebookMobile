@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController,ToastController } from 'ionic-angular';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Authentication } from '../../../providers/authentication';
 import { Base } from '../../../providers/base';
+
+import { ValidFields } from '../../../validators/valid.fields';
 
 @Component({
   selector: 'page-forgot-password',
@@ -11,9 +13,9 @@ import { Base } from '../../../providers/base';
 })
 export class ForgotPasswordPage {
 
-  private resetForm : any;
-  private resetFormData : any;
-
+  resetForm : FormGroup;
+  resetFormData : any;
+  submitAttempt :boolean = false;
   constructor(
     private _navCtrl: NavController,
     private _viewCtrl : ViewController,
@@ -22,12 +24,8 @@ export class ForgotPasswordPage {
     private _baseService : Base
   ) {
     this.resetForm = this._fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required,ValidFields.isValidEmail])],
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello ForgotPasswordPage Page');
   }
 
   dismiss() {
@@ -35,6 +33,7 @@ export class ForgotPasswordPage {
   }
 
   sendPassword(){
+    this.submitAttempt = true;
     if(this.resetForm.valid){
       this._baseService.startLoading();
       this._authService.resetPassword(this.resetForm.value.email)

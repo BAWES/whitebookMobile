@@ -37,7 +37,6 @@ import { Base } from '../providers/base';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
-// import { EmailValidator } from "./../validators/email";
 
 @NgModule({
   declarations: [

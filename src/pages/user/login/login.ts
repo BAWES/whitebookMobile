@@ -9,6 +9,8 @@ import { Home } from '../../home/home';
 import { Authentication } from '../../../providers/authentication';
 import { Base } from '../../../providers/base';
 
+import { ValidFields } from '../../../validators/valid.fields';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -26,7 +28,7 @@ export class LoginPage {
     public _baseService: Base
   ){
     this.loginForm = formBuilder.group({
-      'email': ['', Validators.compose([Validators.required])],
+      'email': ['', Validators.compose([Validators.required,ValidFields.isValidEmail])],
       'password': ['', Validators.required],
     });
   }
@@ -40,6 +42,7 @@ export class LoginPage {
             this.loginData = data;
             if (this.loginData.status == 401 ) {
               this._baseService.showToast('Invalid Login Credentials.');
+              this._baseService.endLoading();
             } else if (this.loginData.operation == 'success' ) {
               this._baseService.storeKeyValueLocally('token', this.loginData.token);
               this._baseService.showToast('Login Successfully');

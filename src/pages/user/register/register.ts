@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
 import { Authentication } from '../../../providers/authentication';
 import { Base } from '../../../providers/base';
+
+import { ValidFields } from '../../../validators/valid.fields';
 
 @Component({
   selector: 'page-register',
@@ -12,9 +14,9 @@ import { Base } from '../../../providers/base';
 })
 export class RegisterPage {
 
-  private registerForm : any;
-  private registerData : any;
-
+  registerForm : FormGroup;
+  registerData : any;
+  submitAttempt : boolean = false;
   constructor(
     private navCtrl: NavController,
     private toastCtrl : ToastController,
@@ -25,28 +27,24 @@ export class RegisterPage {
       this.registerForm = this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
+        email: ['', Validators.compose([Validators.required,ValidFields.isValidEmail])],
+        password: this.fb.group({
+          password: ['', Validators.required],
+          confirmPassword: ['', Validators.required],
+        },ValidFields.passwordMatch),
         dob: ['', Validators.required],
         gender: ['', Validators.required],
-        mobileNumber: ['', Validators.required],
+        mobileNumber: ['', Validators.compose([Validators.required,ValidFields.isValidMobile])],
       });
     }
-
-  ionViewDidLoad() {
-    console.log('Hello RegisterPage Page');
-  }
-
+    
   dismiss() {
     this.navCtrl.pop();
   }
 
+
   registerSubmit() {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-    }
-    
+    this.submitAttempt = true;
     if (this.registerForm.valid) {
       this._baseService.startLoading();
       this._authService.createAccount(
