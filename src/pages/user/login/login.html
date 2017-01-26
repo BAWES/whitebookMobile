@@ -10,27 +10,24 @@
           <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
         </div>
     </ion-item>
-    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" novalidate>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
      <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
-        <p *ngIf="loginForm.controls['email'].errors && loginForm.controls['email'].dirty ">
-            <small class="up">
-              <strong> <i> Please Enter email address</i></strong>
-            </small>
-        </p>
       </ion-item>
+      <div class="error-message" *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.touched || submitAttempt) ">
+        <p>Please enter email address</p>
+      </div>
       <ion-item>
         <ion-label floating>Password</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
-        <p *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].dirty ">
-            <small class="up">
-              <strong> <i> Please Enter Password</i></strong>
-            </small>
-        </p>
       </ion-item>
+      <div class="error-message" *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.touched || submitAttempt) ">
+        <p>Please enter password</p>
+      </div>
       <ion-item text-center no-border margin-top-25>
-        <button width-75 ion-button round color="dark">Login</button>
+        <!--[disabled]="!loginForm.valid"-->
+        <button width-75 ion-button round color="dark" >Login</button>
       </ion-item>
     </form> 
       <ion-item text-center no-border>

@@ -37,6 +37,7 @@ import { Base } from '../providers/base';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
+// import { EmailValidator } from "./../validators/email";
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage,
     StringFilterPipe,
+    // EmailValidator
   ],
   imports: [
     IonicModule.forRoot(MyApp)

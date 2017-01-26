@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Storage } from '@ionic/storage';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'
 import { RegisterPage } from '../register/register';
@@ -16,30 +15,24 @@ import { Base } from '../../../providers/base';
 })
 export class LoginPage {
   
-  private loginForm : any;
-  private loginData :any;
+  loginForm: FormGroup;
+  loginData: any;
+  submitAttempt: boolean = false;
 
   constructor(
-    private navCtrl: NavController, 
-    private fb: FormBuilder,
-    private _authService:Authentication,
-    private _baseService : Base
+    public navCtrl: NavController, 
+    public formBuilder: FormBuilder,
+    public _authService: Authentication,
+    public _baseService: Base
   ){
-    this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+    this.loginForm = formBuilder.group({
+      'email': ['', Validators.compose([Validators.required])],
+      'password': ['', Validators.required],
     });
   }
 
-  forgetPasswordPage() {
-    this.navCtrl.push(ForgotPasswordPage);
-  }
-
-  registerPage() {
-    this.navCtrl.push(RegisterPage);
-  }
-
   loginSubmit() {
+    this.submitAttempt = true;
     if (this.loginForm.valid) {
         this._baseService.startLoading();
         this._authService.login(this.loginForm.value.email,this.loginForm.value.password)
@@ -57,5 +50,13 @@ export class LoginPage {
             }
         })
       }
+  }
+
+  forgetPasswordPage() {
+    this.navCtrl.push(ForgotPasswordPage);
+  }
+
+  registerPage() {
+    this.navCtrl.push(RegisterPage);
   }
 }
