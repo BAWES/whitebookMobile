@@ -22,14 +22,18 @@ export class ValidFields {
         return null;
     }
     
-    static passwordMatch(control: FormGroup): any {
-        console.log(control.controls['confirmPassword'].value);
-        // let regExp = /^[0-9]{10}$/;
-        
-        // if (!regExp.test(control.value)) {
-        //     return {"invalidMobile": true};
-        // }
-        return null;
+    static passwordMatch(password: string, confirmPassword: string): any {
+        return (group: FormGroup): {[key: string]: any} => {
+            let pass = group.controls[password];
+            let cpass = group.controls[confirmPassword];
+
+            if (pass.value === cpass.value) {
+                return {
+                    "passwordNotMatch": true
+                };
+            }
+            return null;
+        }
     }
  
 }
