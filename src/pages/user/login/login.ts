@@ -6,7 +6,7 @@ import { ForgotPasswordPage } from '../forgot-password/forgot-password'
 import { RegisterPage } from '../register/register';
 import { Home } from '../../home/home';
 
-import { Authentication } from '../../../providers/authentication';
+import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
 
 import { ValidFields } from '../../../validators/valid.fields';
@@ -44,7 +44,7 @@ export class LoginPage {
               this._baseService.showToast('Invalid Login Credentials.');
               this._baseService.endLoading();
             } else if (this.loginData.operation == 'success' ) {
-              this._baseService.storeKeyValueLocally('token', this.loginData.token);
+              this._authService.setAccessToken(this.loginData.token, this.loginForm.value.email);
               this._baseService.showToast('Login Successfully');
               setTimeout(() => {
                 this._baseService.endLoading();

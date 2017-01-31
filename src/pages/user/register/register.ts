@@ -3,7 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
-import { Authentication } from '../../../providers/authentication';
+import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
 
 import { ValidFields } from '../../../validators/valid.fields';

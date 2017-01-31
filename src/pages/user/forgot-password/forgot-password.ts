@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,ViewController,ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
-import { Authentication } from '../../../providers/authentication';
+import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
 
 import { ValidFields } from '../../../validators/valid.fields';

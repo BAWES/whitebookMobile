@@ -100,5 +100,4 @@ export class MyApp {
       this.pages = data;
     });
   }
-
 }

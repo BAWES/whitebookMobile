@@ -32,8 +32,11 @@ import { ProductPage } from '../pages/product/product';
 import { Global } from '../providers/global';
 import { Category } from '../providers/category';
 import { Product } from '../providers/product';
-import { Authentication } from '../providers/authentication';
+import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
+import { Event } from '../providers/events';
+import { AuthHttpService } from '../providers/authhttp.service';
+import { HttpService } from '../providers/http.service';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -91,6 +94,17 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},Global,Category,Product,Authentication,Storage,Base],
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Global,
+    Category,
+    Product,
+    Authentication,
+    Storage,
+    Base,
+    Event,
+    AuthHttpService,
+    HttpService
+    ],
 })
 export class AppModule {}

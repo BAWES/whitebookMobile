@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class Base {
   private loading: Loading;
-
+  private accessToken : string;
   constructor(
     private toastCtrl : ToastController,
     private loadingCtrl: LoadingController,
@@ -31,10 +31,7 @@ export class Base {
       });
       toast.present();
   }
-  storeKeyValueLocally(key:string,value:string){
-    this._storageService.set(key, value);
-  }
-
+  
   showAlertWithOkBtn(title:string, text:string, BtnText:string = 'OK') {
       setTimeout(() => {
         this.loading.dismiss();
