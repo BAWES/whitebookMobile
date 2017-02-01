@@ -1,0 +1,56 @@
+<!--
+  Generated template for the CheckoutPayment page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Payment Method</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list border>
+    <ion-list-header>
+      Payment  
+    </ion-list-header>
+    <ion-item>
+      <ion-input placeholder="Credit Card Number" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="Credit Holder Name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>MM</ion-label>
+      <ion-select>
+        <ion-option value="1">1</ion-option>
+        <ion-option value="2">2</ion-option>
+        <ion-option value="3">3</ion-option>
+        <ion-option value="4">4</ion-option>
+        <ion-option value="5">5</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>YY</ion-label>
+      <ion-select >
+        <ion-option value="2016">2016</ion-option>
+        <ion-option value="2017">2017</ion-option>
+        <ion-option value="2018">2018</ion-option>
+        <ion-option value="2019">2019</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder ="CVC" type="text"></ion-input>
+    </ion-item>
+    <ion-item text-center no-border>
+      <button full round ion-button color="dark" padding-19 add-to-cart (click)="completeModelPage()">Pay</button>
+    </ion-item>
+    <ion-item text-center checkout-btn no-border>
+      <button ion-button round outline width-99 padding-17 (click)="dismiss()"> Back To Shipping Address</button>
+    </ion-item>
+   </ion-list>
+</ion-content>

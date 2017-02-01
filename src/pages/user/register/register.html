@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar class="top-nav">
+    <ion-title text-center>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding >
+  <ion-list>
+      <ion-item class="item-profile" no-border>
+        <div class="item-avatar" text-center>
+          <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
+        </div>
+    </ion-item>
+    <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" novalidate>
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input formControlName="firstName" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.firstName.valid && (registerForm.controls.firstName.touched ||  submitAttempt)">
+          <p>Please enter first name</p>
+        </div>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input formControlName="lastName" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.lastName.valid && (registerForm.controls.lastName.touched ||  submitAttempt)">
+          <p>Please enter last name</p>
+      </div>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.email.valid && (registerForm.controls.email.touched || submitAttempt) ">
+        <p *ngIf="registerForm.controls.email.errors.required">Please enter email address</p>
+        <p *ngIf="!registerForm.controls.email.errors.required && registerForm.controls.email.errors.invalidEmail">Please enter valid email address</p>
+      </div>
+      <ion-item>
+        <ion-label floating>Date</ion-label>
+        <ion-datetime formControlName="dob" displayFormat="MM/DD/YYYY" ></ion-datetime>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.dob.valid && (registerForm.controls.dob.touched ||  submitAttempt)">
+          <p>Please select date of birth</p>
+      </div>
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select formControlName="gender">
+          <ion-option value="male">Male</ion-option>
+          <ion-option value="female">Female</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.gender.valid && (registerForm.controls.gender.touched ||  submitAttempt)">
+          <p>Please select gender</p>
+      </div>
+      <ion-item>
+        <ion-label floating>Mobile Number</ion-label>
+        <ion-input formControlName="mobileNumber" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.mobileNumber.valid && (registerForm.controls.mobileNumber.touched || submitAttempt) ">
+        <p *ngIf="registerForm.controls.mobileNumber.errors.required">Please enter mobile number</p>
+        <p *ngIf="!registerForm.controls.mobileNumber.errors.required && registerForm.controls.mobileNumber.errors.invalidMobile">Please enter valid 10 digit mobile number</p>
+      </div>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.password.valid && (registerForm.controls.password.touched ||  submitAttempt)">
+          <p>Please enter password</p>
+      </div>
+      <ion-item>
+        <ion-label floating>Confirm Password</ion-label>
+        <ion-input formControlName="confirmPassword" type="password"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!registerForm.controls.confirmPassword.valid && (registerForm.controls.confirmPassword.touched ||  submitAttempt)">
+          <p>Please enter confirm password</p>
+      </div>
+      <div class="error-message" *ngIf="registerForm.controls.password.valid && registerForm.controls.confirmPassword.valid && !registerForm.hasError('passwordNotMatch')">
+          <p>Confirm password & Password doesn't Match</p>
+      </div>
+      <ion-item text-center no-border margin-top-25>
+        <button ion-button round width-75 color="dark">Register</button>
+      </ion-item>
+    </form>
+    <ion-item text-center no-border>
+      <button no-background (click)='dismiss()' font-size-16>Sign In?</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

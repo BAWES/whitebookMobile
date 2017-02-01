@@ -1,0 +1,28 @@
+page-login {
+    [register-btn].item-md.item-block .item-inner,[login-btn].item-md.item-block .item-inner {padding:0px}
+    [register-btn] .label-md, [login-btn] .label-md{margin:0px}
+    [login-btn]{ margin-top: 23px;}
+    [login-btn] button{font-size: 14px! important;}
+    button{padding: 16px!important;}
+
+    .list-md .item-block .item-inner{position: static;}
+    .item-md .item-button {padding:18px;}
+    .segment-activated{color:#fff!important;}
+    .item-select{ min-height: 63px;}
+    .list-ios{    margin-bottom: 8px;}
+    .item-avatar img{width:71%;}
+    .list{margin-top: 30px;}
+    .toolbar-title{margin-right: 71px;font-weight: normal;}
+    hr{position: absolute;top: 15px;z-index: 999999;    width: 97%;}
+    .item-profile{margin-bottom: 28px;}
+    .error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;}
+}
+[width-34]{width: 34%!important;}
+[width-50]{width: 50%!important;}
+[width-75]{width: 75%!important;}
+[width-100]{width: 100%!important;}
+[width-99]{width: 99%!important;}
+[register-btn] button{    width: 50%;font-size: 15px! important;margin-top: 22px;}
+
+.segment-ios .segment-button{border-color: #000;}
+.segment-ios .segment-button.segment-activated{background:#000}

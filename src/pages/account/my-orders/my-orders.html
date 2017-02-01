@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Orders</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list [virtualScroll]="orderList" approxItemHeight="50px">
+    <ion-item>
+      <ion-row>
+        <ion-col text-center><strong>Order ID</strong></ion-col>
+        <ion-col text-center><strong>Amount</strong></ion-col>
+        <ion-col text-center><strong>Date</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *virtualItem="let orderList" (click)="itemSelected(orderList.order_id)">
+      <ion-row>
+        <ion-col text-center>{{ orderList.order_id }}</ion-col>
+        <ion-col text-center>KD{{ orderList.order_total_with_delivery }}</ion-col>
+        <ion-col text-center>{{ orderList.created_datetime }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

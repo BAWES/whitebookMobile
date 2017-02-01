@@ -1,0 +1,12 @@
+page-my-account {
+    .list{border: 1px solid #d2d2d2;margin: 22px 8px;padding: 11px;}
+    .item{margin-left: 0px;padding-left: 0px;}
+    [item-datetime]{ min-height: 64px;}
+    [ion-select]{min-height:62px;}
+    .item-datetime .label-md{margin: 34px 0 10px;}
+    .item-select{height: 64px;}
+    .item-select .label-md{margin: 32px 0 0;}
+    .text-input{text-align: right;}
+    .error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;padding-right: 10px;}
+    .text-input-md{text-align: right;}
+}

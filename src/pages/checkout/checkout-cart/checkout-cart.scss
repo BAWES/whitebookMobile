@@ -1,0 +1,13 @@
+page-checkout-cart {
+    .button-container {align-self: flex-start;text-align: left;padding-top: 16px;padding-left: 38px;}
+    .button-container ion-label{color:grey;margin: 1px 8px 4px 0;}
+    .button-container h3{ font-size: 14px;}
+    .button-container h2{font-size: 17px;font-weight: bold;margin-top: 4px;}
+    .header img {margin-top: 8px;}
+    .header {border-bottom: 1px solid #dedede;}
+    [close-btn] ion-icon {margin-top: 41px;color: #dedede;}
+    [position-relative] img,[position-relative] ion-icon{ position:absolute;left: 0;right: 0;margin:0 auto;top:47%;transform:translateY(-50%);}
+    ion-row.header {margin-bottom: 22px;padding-bottom: 16px;}
+}
+[checkout-btn].item-md.item-block .item-inner {border-bottom: none;}
+[checkout-btn] button{margin-top: 20px;}
