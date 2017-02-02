@@ -16,7 +16,7 @@ export class MyEventsPage {
   public events:any;
   public title:string;
   public resultData :any;
-  private start:number;
+  public start:number = 0;
 
   constructor(
     public navCtrl: NavController,

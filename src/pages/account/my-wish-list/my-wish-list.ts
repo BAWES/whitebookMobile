@@ -2,25 +2,30 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 
 import { ProductPage } from '../../product/product';
-/*
-  Generated class for the MyWishList page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+import { AuthHttpService } from '../../../providers/authhttp.service';
+import { Global } from '../../../providers/global';
+
 @Component({
   selector: 'page-my-wish-list',
   templateUrl: 'my-wish-list.html'
 })
 export class MyWishListPage {
-  whishlist:any[];
+  
+  public whishlist:any;
+  public _urlWishlistUrl: string = "/wishlist";
+  public start:number = 0;
+
   constructor(
     public navCtrl: NavController,
     public alertCtrl:AlertController,
-    public toastCtrl : ToastController
+    public toastCtrl : ToastController,
+    public _authHttpService: AuthHttpService,
+    public _config:Global
   ) {}
 
   ionViewDidLoad() {
+    this.list();
     this.whishlist = [
       {'productID':'1','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
       {'productID':'2','productTitle':'Food Service','productVendor':'Whitebook Vendor','productPrice':'20.111','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
@@ -61,4 +66,30 @@ export class MyWishListPage {
     this.navCtrl.push(ProductPage,{productId:id});
   }
 
+  /*
+  * Method will load list of events
+  * at view load
+  */
+  list(start: number = 0) {
+      this._authHttpService.get(this._urlWishlistUrl +'?offset='+start).then(data=>{
+         this.whishlist = data;
+         console.log(this.whishlist)
+      })
+  }
+
+  /*
+  * Method perform infinite scroll which 
+  * will load more data just like pagination
+  */
+  doInfinite(infiniteScroll) {
+    let items;
+     this.start+=10;
+      this._authHttpService.get(this._urlWishlistUrl +'?offset='+this.start).then(data=>{
+         items = data;
+         for(let item of items) {
+          this.whishlist.push(item);
+        }
+        infiniteScroll.complete();
+      })
+  }
 }

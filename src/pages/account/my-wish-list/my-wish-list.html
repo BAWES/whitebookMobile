@@ -34,16 +34,30 @@
     </ion-col>
   </ion-row>
 
-  <ion-grid class="category-product-listing grid-view" >
-    <ion-list>
-        <button ion-item detail-none no-border text-center width-50 pull-left *ngFor="let product of whishlist " (click)="productDetail(product.id)">
+  <!--<ion-grid class="category-product-listing grid-view" >
+    <ion-list [virtualScroll]="whishlist">
+      <ion-item *virtualItem="let whishlist" (click)="productDetail(whishlist.item_id)">
+        <button ion-item detail-none no-border text-center width-50 pull-left>
           <button ion-button (click)="remove()" class="like-icon">
             <i class="fa fa-heart"></i>
           </button>
-          <img src="{{product.image}}" />
-          <h4 class="name"><strong>{{product.productTitle}}</strong></h4>
-          <h6 class="price">KD {{product.productPrice}}</h6>
+          <img src="{{_config.images_530}}/{{whishlist.image_path}}" />
+          <h4 class="name"><strong>{{whishlist.item_name}}</strong></h4>
+          <h6 class="price">KD {{whishlist.item_price_per_unit}}</h6>
         </button>
-      </ion-list>
-  </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-grid>-->
+  <div class="scroll-content" [virtualScroll]="whishlist">
+  <ion-card *virtualItem="let whishlist" style="margin-bottom: 12px;" (click)="productDetail(whishlist.item_id)">
+  <ion-item>
+    <h2>{{whishlist.vendor_name}}</h2>
+  </ion-item>
+  <img src="{{_config.images_1000}}/{{whishlist.image_path}}">
+  <ion-card-content>
+    <p>{{whishlist.item_name}}</p>
+    <p>KD {{whishlist.item_price_per_unit}}</p>
+  </ion-card-content>
+</ion-card>
+</div>
 </ion-content>
