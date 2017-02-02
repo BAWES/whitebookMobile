@@ -1,14 +1,6 @@
-<!--
-  Generated template for the OrderDetail page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
+<ion-header *ngIf= "orderDetail">
   <ion-navbar>
-    <ion-title>Order Detail : KD1234</ion-title>
-  
+    <ion-title>Order Detail : KD {{orderDetail?.order?.suborder_total_with_delivery}}</ion-title>
   <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close" ></ion-icon>
@@ -16,73 +8,37 @@
     </ion-buttons>
     </ion-navbar>
 </ion-header>
-
-
-<ion-content padding>
+<ion-content padding *ngIf= "orderDetail" style="margin-top:40px;">
     <ion-list>  
         <ion-item>
-          <ion-row>
+          <ion-row *ngFor = "let item of orderDetail?.items ">
               <ion-col>
                 <ion-thumbnail item-left>
-                  <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
+                  <img src="{{_config.images_210}}/{{item.image_path}}" />
                 </ion-thumbnail>
               </ion-col>
               <ion-col>
-                <h2>Product Name 1</h2>
-                <p> QTY :  3</p>
-                <p> Date :  17, Dec 2017</p>
-                <p> Time :  10:00 Am - 12:00 Noon </p>
-                <p> Address :  Abdullah Al Salem,Kuwait City</p>
-                <h2>Price : KD 144</h2>
-              </ion-col>
-          </ion-row>
-        </ion-item>
-        <ion-item>
-          <ion-row>
-              <ion-col>
-                <ion-thumbnail item-left>
-                  <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-                </ion-thumbnail>
-              </ion-col>
-              <ion-col>
-                <h2>Product Name 2 </h2>
-                <p> QTY :  3</p>
-                <p> Date :  17, Dec 2017</p>
-                <p> Time :  10:00 Am - 12:00 Noon </p>
-                <p> Address :  Abdullah Al Salem,Kuwait City</p>
-                <h2>Price : KD 144</h2>
-              </ion-col>
-          </ion-row>
-        </ion-item>
-        <ion-item>
-          <ion-row>
-              <ion-col>
-                <ion-thumbnail item-left>
-                  <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-                </ion-thumbnail>
-              </ion-col>
-              <ion-col>
-                <h2>Product Name 3</h2>
-                <p> QTY :  3</p>
-                <p> Date :  17, Dec 2017</p>
-                <p> Time :  10:00 Am - 12:00 Noon </p>
-                <p> Address :  Abdullah Al Salem,Kuwait City</p>
-                <h2>Price : KD 144</h2>
+                <h2>{{item?.item_name}}</h2>
+                <p> QTY :   {{item?.purchase_quantity}}</p>
+                <p> Date :  {{item?.purchase_delivery_date}}</p>
+                <p> Time :  {{item?.timeslot_start_time}} - {{item?.timeslot_end_time}} </p>
+                <p> Address :  {{item?.purchase_delivery_address}}</p>
+                <h2>Price : KD {{item?.purchase_total_price}}</h2>
               </ion-col>
           </ion-row>
         </ion-item>
     </ion-list>
     <ion-row>
     <ion-col>Subtotal:</ion-col>
-    <ion-col text-right><strong>KD 776.000</strong></ion-col>
+    <ion-col text-right><strong>KD {{orderDetail?.order?.suborder_total_without_delivery}}</strong></ion-col>
   </ion-row>
   <ion-row>
     <ion-col>Delivery Charge:</ion-col>
-    <ion-col text-right><strong>KD 200.000</strong></ion-col>
+    <ion-col text-right><strong>KD {{orderDetail?.order?.suborder_delivery_charge}}</strong></ion-col>
   </ion-row>
   <hr/>
   <ion-row>
     <ion-col><strong>Total:</strong></ion-col>
-    <ion-col text-right><strong>KD 976.000</strong></ion-col>
+    <ion-col text-right><strong>KD {{orderDetail?.order?.suborder_total_with_delivery}}</strong></ion-col>
   </ion-row>
 </ion-content>
