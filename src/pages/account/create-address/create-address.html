@@ -30,18 +30,17 @@
     </ion-item>
     <ion-item>
       <ion-label>Address Type</ion-label>
-        <ion-select >
-          <ion-option value="nes">IT Office</ion-option>
-          <ion-option value="n64">Hospital</ion-option>
-          <ion-option value="ps">School</ion-option>
+        <ion-select #c (ionChange)="loadQuestions(c.value)">
+          <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
         </ion-select>
     </ion-item>
-
     <ion-item>
-      <ion-label floating>Area Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-label>Area Name</ion-label>
+        <ion-select>
+          <ion-option *ngFor= "let location of locationData" value="{{location.location}}">{{location.location}}</ion-option>
+        </ion-select>
     </ion-item>
-
+    
     <ion-item>
       <ion-label floating>Address Data</ion-label>
       <ion-input type="text"></ion-input>
