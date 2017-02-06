@@ -12,11 +12,16 @@ export class CreateAddressPage {
 
   public _urlAddressTypeUrl = '/address/type';
   public _urlLocationUrl = '/address/location';
-  public _urlAddressQuestionUrl = '/questions?address_type_id=';
+  public _urlAddressQuestionUrl = '/address/questions?address_type_id=';
 
   public addressTypeData:any;
   public locationData:any;
   public locationQuestion:any;
+
+  public addressName:string;
+  public addressType:string;
+  public areaName:string;
+  public addressData:string;
 
   constructor(
     public _viewCtrl : ViewController,
@@ -58,7 +63,7 @@ export class CreateAddressPage {
     })
   }
 
-  loadQuestions(address_type_id :number) {
+  loadQuestions(address_type_id : number) {
     this._authHttpService.get(this._urlAddressQuestionUrl+address_type_id).then(data => {
       console.log(data);
       this.locationQuestion = data;
