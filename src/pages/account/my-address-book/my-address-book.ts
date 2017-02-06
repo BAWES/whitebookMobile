@@ -29,11 +29,19 @@ export class MyAddressBookPage {
   create() {
     let modal = this.modalCtrl.create(CreateAddressPage);
     modal.present();
+    modal.onDidDismiss(data => { 
+       this.start = 0;
+       this.list(); // load list again
+    });
   }
 
-  update() {
-    let modal = this.modalCtrl.create(CreateAddressPage);
+  update(addresses : number) {
+    let modal = this.modalCtrl.create(CreateAddressPage,{address_id:addresses});
     modal.present();
+    modal.onDidDismiss(data => { 
+       this.start = 0;
+       this.list(); // load list again
+    });
   }
   delete(){
     let confirm = this.alertCtrl.create({

@@ -72,7 +72,6 @@ export class MyAccountPage {
     this.submitAttempt = true;
     console.log(this.profileForm.valid);
     if (this.profileForm.valid) {
-      console.log(this.profileForm.value);
       let paramas = {
         'customer_name':this.profileForm.value.firstName,
         'customer_last_name':this.profileForm.value.lastName,
@@ -81,7 +80,6 @@ export class MyAccountPage {
         'customer_mobile':this.profileForm.value.mobile,
         'customer_dateofbirth':this.profileForm.value.dob
       }
-      console.log(paramas);
       this._authHttpService.patch(this._urlProfileUrl,paramas).then(data=>{
       result = data;
       let toast = this.toastCtrl.create({

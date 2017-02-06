@@ -12,39 +12,40 @@
 <ion-content padding>
   <ion-item>
     <ion-title text-center>
-      Create New Address
+      {{title}}
     </ion-title>
   </ion-item>
+  <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" novalidate>
   <ion-list>
     <ion-item>
-      <ion-label floating>Address Name</ion-label>
-      <ion-input [(ngModel)]="addressName" type="text"></ion-input>
+      <ion-label fixed>Name</ion-label>
+      <ion-input [(ngModel)]="addressName" formControlName="addressName" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Address Type</ion-label>
-        <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)">
+      <ion-label>Type</ion-label>
+        <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
           <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
         </ion-select>
     </ion-item>
     <div *ngIf="locationQuestion">
       <ion-item *ngFor="let question of locationQuestion">
-        <ion-label floating>{{question?.question}}</ion-label>
+        <ion-label fixed>{{question?.question}}</ion-label>
           <ion-input type="text"></ion-input>
       </ion-item>
     </div>
     <ion-item>
-      <ion-label>Area Name</ion-label>
-        <ion-select  [(ngModel)]="areaName">
-          <ion-option *ngFor= "let location of locationData" value="{{location.location}}">{{location.location}}</ion-option>
+      <ion-label>Area</ion-label>
+        <ion-select  [(ngModel)]="areaName" formControlName="areaName">
+          <ion-option *ngFor= "let location of locationData" value="{{location.id}}">{{location.location}}</ion-option>
         </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label floating>Address Data</ion-label>
-      <ion-input [(ngModel)]="addressData" type="text"></ion-input>
+      <ion-label fixed>Data</ion-label>
+      <ion-input [(ngModel)]="addressData" type="text" formControlName="addressData"></ion-input>
     </ion-item>
   </ion-list>
-
-<div padding>
-  <button ion-button round full color="dark" (click)="saveAddress()">Save Address</button>
-</div>
+  <div padding>
+    <button ion-button round full color="dark">Save Address</button>
+  </div>
+</form>
 </ion-content>

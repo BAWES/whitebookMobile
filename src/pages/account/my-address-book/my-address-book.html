@@ -20,7 +20,7 @@
       <ion-card-header position-relative>
         <ion-title float-left>{{addresses.address_name}}</ion-title>
         <ion-buttons float-right >
-          <button no-background (click)="create()"><ion-icon name="create"></ion-icon></button>
+          <button no-background (click)="update(addresses.address_id)"><ion-icon name="create"></ion-icon></button>
           <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
         </ion-buttons>
         </ion-card-header>
