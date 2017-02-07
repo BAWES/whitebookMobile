@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { Global } from './global';
+import { GlobalService } from './global.service';
 /*
   Generated class for the Product provider.
 
@@ -16,8 +16,8 @@ export class Product {
   dataAreaList:any = null;
   url : string;
   productListUrl : string;
-  constructor(public http: Http, public _globalService:Global) {
-    this.url = _globalService.productApiUrl;
+  constructor(public http: Http, public _config:GlobalService) {
+    this.url = _config.productApiUrl;
   }
 
   // Product Detail Api Request

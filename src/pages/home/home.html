@@ -38,7 +38,8 @@
       </ion-slides>-->
       <ion-list class="clearfix">
           <button detail-none ion-item text-center *ngFor="let category of categories" min-height-93 pull-left width-50 no-line class="item-border"  (click)="loadProducts(category.category_name, category.category_id)" >
-            <i class="{{category.icon}} cat-icon" aria-hidden="true"></i><br/>{{category.category_name}}
+            <i class="{{category.icon}} cat-icon" aria-hidden="true"></i><br/>
+            {{category.category_name}}
           </button>
       </ion-list>
     </div>

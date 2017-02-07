@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
-
 import { ProductPage } from '../../product/product';
-
 import { AuthHttpService } from '../../../providers/authhttp.service';
-import { Global } from '../../../providers/global';
 
 @Component({
   selector: 'page-my-wish-list',
   templateUrl: 'my-wish-list.html'
 })
+
 export class MyWishListPage {
   
   public _wishlistUrl: string = "/wishlist";
@@ -24,8 +22,7 @@ export class MyWishListPage {
     public navCtrl: NavController,
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
-    public _authHttpRequest: AuthHttpService,
-    public _config:Global
+    public _authHttpRequest: AuthHttpService
   ) {
   }
 

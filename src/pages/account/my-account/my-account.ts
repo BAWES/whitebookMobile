@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 import { AuthHttpService } from '../../../providers/authhttp.service';
 
 @Component({
   selector: 'page-my-account',
   templateUrl: 'my-account.html'
 })
+
 export class MyAccountPage {
 
   public _urlProfileUrl:string = '/account'
@@ -22,7 +22,6 @@ export class MyAccountPage {
   public mobile:number;
 
   constructor(
-    public navCtrl: NavController,
     public toastCtrl:ToastController,
     public formBuilder: FormBuilder,
     public _authHttpService: AuthHttpService
@@ -41,14 +40,6 @@ export class MyAccountPage {
     this.getProfile();  
   }
 
-  udpate(){
-    let toast = this.toastCtrl.create({
-      message:'Data Saved Successfully',
-      duration:3000,
-    })
-    toast.present();
-  }
-
   /*
   * Method will load list of events
   * at view load
@@ -57,7 +48,6 @@ export class MyAccountPage {
     let profileDetail:any;
       this._authHttpService.get(this._urlProfileUrl).then(data=>{
          profileDetail = data;
-         console.log(profileDetail);
          this.firstName = profileDetail.customer_name;
          this.lastName = profileDetail.customer_last_name;
          this.email = profileDetail.customer_email;

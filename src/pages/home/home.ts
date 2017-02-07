@@ -1,22 +1,28 @@
 import { Component } from '@angular/core';
-
 import { NavController, ModalController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 import { ProductPage } from '../product/product';
-
-import { Category } from '../../providers/category';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'home',
   templateUrl: 'home.html'
 })
 export class Home {
-  featureProduct:any[]
-  sliderSlides:any[]
-  categories:any[]
-  constructor(public navCtrl: NavController,public modalCtnl: ModalController,public _category : Category  ) {
-    this.loadPages();
+
+  public _urlCategory:string = '/category';
+
+  public featureProduct:any[];
+  public sliderSlides:any[];
+  public categories:any;
+
+  constructor(
+    public navCtrl: NavController,
+    public modalCtnl: ModalController,
+    public _httpService:HttpService
+    ) {
+    this.loadCategoryList();
   }
 
   mySlideOptions = {initialSlide: 1,loop: true,autoplay:true,speed :3000,pager : true};
@@ -55,11 +61,12 @@ export class Home {
     });
   }
 
-  // Loading category from api
-  loadPages(){
-    this._category.load()
-    .then(data => {
-      this.categories = data;
-    });
+  /*
+  * load category list
+  */
+  loadCategoryList(start:number = 0){
+    this._httpService.get(this._urlCategory +'?offset='+start).then(data=>{
+         this.categories = data;
+    })
   }
 }

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 
-import { Global } from './global';
+import { GlobalService } from './global.service';
 
 /*
   Handles all Authorized HTTP functions with Bearer Token
@@ -18,10 +18,10 @@ import { Global } from './global';
 export class HttpService {
 
   constructor(
-    private _http: Http,
-    private _config: Global,
-    private _platform: Platform,
-    private _events: Events
+    public _http: Http,
+    public _config: GlobalService,
+    public _platform: Platform,
+    public _events: Events
     ) {}
 
   /**

@@ -10,19 +10,23 @@ import { Base } from '../../../providers/base';
 })
 export class CreateAddressPage {
 
-  public _urlAddressTypeUrl = '/address/type';
-  public _urlAddressUrl = '/address';
-  public _urlLocationUrl = '/address/location';
-  public _urlAddressQuestionUrl = '/address/questions?address_type_id=';
-  public _urlSingleAddressUrl = '/address/view?address_id=';
+  // api urls
+  public _urlAddressType = '/address/type';
+  public _urlAddress = '/address';
+  public _urlLocation = '/address/location';
+  public _urlAddressQuestion = '/address/questions?address_type_id=';
+  public _urlSingleAddress = '/address/view?address_id=';
   
+  // local variables
   public title: string = 'Create New Address'; 
   public addressTypeData: any;
   public locationData: any;
   public locationQuestion: any;
   
+  // for edit address
   public address_id: number = 0;
   
+  // local form variables and form
   public addressForm: FormGroup;
   public addressName: string = '';
   public addressType: string = '';
@@ -52,16 +56,23 @@ export class CreateAddressPage {
     this._base.endLoading();
     this.address_id = this._navParams.get('address_id');
     if (this.address_id && this.address_id != 0) {
-        console.log("Address ID : "+this.address_id);
         this.title = 'Update Address';
-        this.loadSingleAddress(this.address_id);
+        this.loadAddressDetail(this.address_id);
     }
   }
 
+  /**
+   * function to dismiss modal
+   */
   dismiss() {
     this._viewCtrl.dismiss()
   }
 
+  /**
+   * save address conditionaly
+   * if id exist then update else 
+   * new address
+   */
   saveAddress() {
     if (this.addressForm.valid) {
       let paramas:any;
@@ -82,16 +93,19 @@ export class CreateAddressPage {
             "address_archived": "no",
             "address_id":this.address_id
           }
-          this.updateAddress(paramas);
+          this.saveExistingAddress(paramas);
       } else {
-          this.newAddress(paramas);
+          this.saveNewAddress(paramas);
       }
     }
   }
 
-  newAddress(paramas) {
+  /**
+   * Save new address
+   */
+  saveNewAddress(paramas) {
       let result;
-      this._authHttpService.post(this._urlAddressUrl,paramas).then(data=>{
+      this._authHttpService.post(this._urlAddress,paramas).then(data=>{
       result = data;
       
       let toast = this._toastCtrl.create({
@@ -105,9 +119,12 @@ export class CreateAddressPage {
     })
   }
 
-  updateAddress(paramas) {
+  /**
+   * update request to update address
+   */
+  saveExistingAddress(paramas) {
       let result;
-      this._authHttpService.patch(this._urlAddressUrl,paramas).then(data=>{
+      this._authHttpService.patch(this._urlAddress,paramas).then(data=>{
       result = data;
       
       let toast = this._toastCtrl.create({
@@ -121,39 +138,45 @@ export class CreateAddressPage {
     })
   }
 
+  /**
+   * load address type
+   */
   loadAdressTypes() {
-    this._authHttpService.get(this._urlAddressTypeUrl).then(data => {
+    this._authHttpService.get(this._urlAddressType).then(data => {
       this.addressTypeData = data;
     })
   }
-
+  
+  /**
+   * load all locations
+   */
   loadLocations() {
-    this._authHttpService.get(this._urlLocationUrl).then(data => {
+    this._authHttpService.get(this._urlLocation).then(data => {
       this.locationData = data;
     })
   }
 
+  /*
+  * load questions of address type
+  */
   loadQuestions(address_type_id : number) {
-    this._authHttpService.get(this._urlAddressQuestionUrl+address_type_id).then(data => {
+    this._authHttpService.get(this._urlAddressQuestion+address_type_id).then(data => {
       console.log(data);
       this.locationQuestion = data;
     })
   }
 
-  loadSingleAddress(address_id: number) {
+  /*
+   * load address detail
+  */
+  loadAddressDetail(address_id: number) {
     let addressDetail: any;
-      this._authHttpService.get(this._urlSingleAddressUrl+address_id).then(data => {
+      this._authHttpService.get(this._urlSingleAddress+address_id).then(data => {
       addressDetail = data;
       this.addressName = addressDetail.address.address_name;
       this.addressType = addressDetail.address.address_type_id;
       this.areaName = addressDetail.address.area_id;
       this.addressData = addressDetail.address.address_data;
-      console.log(addressDetail);
-      console.log(this.addressData);
     })
-  }
-
-  generateQuestionObject() {
-    
   }
 }

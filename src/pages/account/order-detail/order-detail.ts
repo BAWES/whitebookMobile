@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {NavParams, ViewController } from 'ionic-angular';
 
 import { AuthHttpService } from '../../../providers/authhttp.service';
-import { Global } from '../../../providers/global';
 
 @Component({
   selector: 'page-order-detail',
@@ -17,7 +16,6 @@ export class OrderDetailPage {
     public _viewCtrl:ViewController,
     public _navParams:NavParams,
     public _authHttpService: AuthHttpService,
-    public _config: Global 
   ) {
     this.detail(this._navParams.get('order_id'));
   }

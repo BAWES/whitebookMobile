@@ -28,9 +28,8 @@ import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 
-// services
-import { Global } from '../providers/global';
-import { Category } from '../providers/category';
+// services/providers
+import { GlobalService } from '../providers/global.service';
 import { Product } from '../providers/product';
 import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
@@ -94,8 +93,7 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Global,
-    Category,
+    GlobalService,
     Product,
     Authentication,
     Storage,

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import { Platform, Events } from 'ionic-angular';
 import { InAppBrowser, NativeStorage } from 'ionic-native';
 
-import { Global } from './global';
+import { GlobalService } from './global.service';
 
 @Injectable()
 export class Authentication {
@@ -27,7 +27,7 @@ export class Authentication {
   private _urlRequestResetPassword: string = "/auth/request-reset-password";
   
   constructor(
-    private _config:Global,
+    private _config:GlobalService,
     private _http: Http,
     private _platform: Platform,
     private _events: Events

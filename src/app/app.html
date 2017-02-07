@@ -19,9 +19,9 @@
   <ion-content>
     <ion-list  main-menu>
       <ion-list-header>Categories</ion-list-header>
-      <button ion-item nav-clear menu-close item-icon-right *ngFor="let p of pages" (click)="openPage(p)">
-          <i class="fa {{p.icon}}"></i>
-          <span class="label-{{p.icon}}">{{p.category_name}}</span>
+      <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
+          <i class="fa {{category.icon}}"></i>
+          <span class="label-{{category.icon}}">{{category.category_name}}</span>
       </button>
     </ion-list>
     <ion-list secondary-menu>

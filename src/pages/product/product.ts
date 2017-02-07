@@ -3,7 +3,7 @@ import { NavController, NavParams,ModalController, ToastController } from 'ionic
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 
 import { Product } from '../../providers/product';
-import { Global } from '../../providers/global';
+import { GlobalService } from '../../providers/global.service';
 
 @Component({
   selector: 'page-product',
@@ -30,11 +30,11 @@ export class ProductPage {
     public modalCtnl: ModalController,
     public toastCtrl : ToastController,
     public _productService : Product,
-    public _globalService : Global
+    public _config : GlobalService
   ) {
     this.productSection = "pdescription";
     this.product_id = this._params.get('productId');
-    this.imagePath = _globalService.images_530;
+    this.imagePath = _config.images_530;
   }
 
   ionViewDidLoad() {

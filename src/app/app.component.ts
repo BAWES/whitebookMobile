@@ -2,19 +2,21 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, MenuController, Platform, ModalController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+// pages
 import { Home } from '../pages/home/home';
 import { ListingPage } from '../pages/listing/listing';
 import { SearchItemPage } from '../pages/search-item/search-item'
 import { LoginPage } from '../pages/user/login/login';
 import { MyEventsPage } from '../pages/events/my-events/my-events';
-
 import { MyOrdersPage } from '../pages/account/my-orders/my-orders';
 import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
+// providers
 import { Category } from '../providers/category';
 import { AuthHttpService } from '../providers/authhttp.service';
+import { HttpService } from '../providers/http.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,26 +25,27 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Home;
-  public _urlEventUrl: string = "/event";
+  
+  // api urls
+  public _urlEvent: string = "/event";
+  public _urlCategory: string = "/category";
 
-  pages: any;
-  personal: Array<{title: string, component: any,icon: any}>;
-  events: any;
+  //local variables
+  public categoryList: any;
+  public personal: Array<{title: string, component: any,icon: any}>;
+  public events: any;
 
   constructor(
     public platform: Platform,
     public menu : MenuController,
     public modalCtnl : ModalController,
-    public _categoryService : Category,
-    public _authHttpService: AuthHttpService
+    public _authHttpService: AuthHttpService,
+    public _httpService: HttpService
 
   ) {
     this.initializeApp();
-    this.eventList();
-    
-    
-    // used for an example of ngFor and navigation
-    this.loadPages();    
+    this.loadEventList(); // load logged in user event list
+    this.loadCategoryList(); // load category listing
     
     this.personal = [
       { title : 'Sign In', component:LoginPage,icon:'sign-in' },
@@ -65,44 +68,55 @@ export class MyApp {
     });
   }
 
+  /*
+  * Open produdct listing page for perticular category
+  */
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.menu.close();
     this.nav.push(ListingPage,{title:page.category_name,id:page.category_id});
   }
   
+  /*
+  * Open user management page
+  */
   openUserPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.menu.close();
     this.nav.push(page.component);
   }
 
+  /*
+  * Open search modal for product search
+  */
   openSearchModel() {
     this.menu.close();
     let modal = this.modalCtnl.create(SearchItemPage);
     modal.present();
   }
 
+  /*
+  * Open event listing page
+  */
   openEvents() {
       this.menu.close();
       this.nav.push(MyEventsPage);
       this.menu.close();
   }
 
-  // Loading category from api
-  loadPages(){
-    this._categoryService.load()
-    .then(data => {
-      this.pages = data;
-    });
+  /*
+  * load category list
+  */
+  loadCategoryList(start:number = 0){
+    this._httpService.get(this._urlCategory +'?offset='+start).then(data=>{
+         this.categoryList = data;
+    })
   }
 
-  eventList(start: number = 0) {
-      this._authHttpService.get(this._urlEventUrl +'?offset='+start).then(data=>{
-         this.events = data;
-      })
+  /*
+  * load event listing
+  */
+  loadEventList(start: number = 0) {
+    this._authHttpService.get(this._urlEvent +'?offset='+start).then(data=>{
+        this.events = data;
+    })
   }
-
 }

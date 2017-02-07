@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 
-import { Global } from './global';
+import { GlobalService } from './global.service';
 import { Authentication } from './auth.service';
 
 /*
@@ -21,7 +21,7 @@ export class AuthHttpService {
   constructor(
     private _http: Http,
     private _auth: Authentication,
-    private _config: Global,
+    private _config: GlobalService,
     private _platform: Platform,
     private _events: Events
     ) {}
@@ -29,9 +29,10 @@ export class AuthHttpService {
   /**
    * Requests via GET verb
    * @param {string} endpointUrl
-   * @returns {Observable}
+   * @returns {Promise}
    */
   get(endpointUrl: string){
+    console.log(this._config._ApiUrl);
     return new Promise(resolve => {  
       const url = this._config._ApiUrl + endpointUrl;
       this._http.get(url, {headers: this._buildAuthHeaders()})
@@ -120,7 +121,7 @@ export class AuthHttpService {
 
   /**
    * Handles Caught Errors from All Authorized Requests Made to Server
-   * @returns {Observable} 
+   * @returns {Promise} 
    */
   private _handleError(error: any): Observable<any> {
       let errMsg = (error.message) ? error.message :
