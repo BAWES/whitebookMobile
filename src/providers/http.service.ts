@@ -29,13 +29,17 @@ export class HttpService {
    * @param {string} endpointUrl
    * @returns {Observable<any>}
    */
-  get(endpointUrl: string): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
-
-    return this._http.get(url)
-              .catch((err) => this._handleError(err))
-              .take(1)
-              .map((res: Response) => res.json());
+  get(endpointUrl: string){
+    return new Promise(resolve => {  
+      const url = this._config._ApiUrl + endpointUrl;
+      this._http.get(url)
+        .catch((err) => this._handleError(err))
+        .take(1)
+        .map(res => res.json())
+        .subscribe(data => {
+            resolve(data)
+        })
+    });
   }
 
   /**

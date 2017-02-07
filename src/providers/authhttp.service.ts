@@ -29,7 +29,7 @@ export class AuthHttpService {
   /**
    * Requests via GET verb
    * @param {string} endpointUrl
-   * @returns {Observable<any>}
+   * @returns {Observable}
    */
   get(endpointUrl: string){
     return new Promise(resolve => {  

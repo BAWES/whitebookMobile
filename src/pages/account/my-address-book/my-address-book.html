@@ -18,7 +18,7 @@
   <ion-list [virtualScroll]="addresses" approxItemHeight="50px">
     <ion-card *virtualItem="let addresses">
       <ion-card-header position-relative>
-        <ion-title float-left>{{addresses.address_name}}</ion-title>
+        <ion-title float-left>{{addresses.address_name | slice:0:10}}</ion-title>
         <ion-buttons float-right >
           <button no-background (click)="update(addresses.address_id)"><ion-icon name="create"></ion-icon></button>
           <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>

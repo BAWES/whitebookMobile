@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AuthHttpService } from '../../../providers/authhttp.service';
 import { Base } from '../../../providers/base';
@@ -24,10 +24,10 @@ export class CreateAddressPage {
   public address_id: number = 0;
   
   public addressForm: FormGroup;
-  public addressName: string;
-  public addressType: string;
-  public areaName: string;
-  public addressData: string;
+  public addressName: string = '';
+  public addressType: string = '';
+  public areaName: string = '';
+  public addressData: string = '';
 
   constructor(
     public _viewCtrl : ViewController,
@@ -38,7 +38,6 @@ export class CreateAddressPage {
     public _navParams: NavParams,
   ) {
     this._base.startLoading();
-    this.address_id = this._navParams.get('address_id');
     this.addressForm = this.formBuilder.group({
         addressName: ['', Validators.required],
         addressType: ['', Validators.required],
@@ -51,7 +50,8 @@ export class CreateAddressPage {
     this.loadAdressTypes();
     this.loadLocations();
     this._base.endLoading();
-    if (this.address_id != 0) {
+    this.address_id = this._navParams.get('address_id');
+    if (this.address_id && this.address_id != 0) {
         console.log("Address ID : "+this.address_id);
         this.title = 'Update Address';
         this.loadSingleAddress(this.address_id);
@@ -64,7 +64,6 @@ export class CreateAddressPage {
 
   saveAddress() {
     if (this.addressForm.valid) {
-      let result;
       let paramas:any;
         paramas = {
         'address_type_id':this.addressForm.value.addressType,
@@ -74,7 +73,7 @@ export class CreateAddressPage {
         "address_archived": "no",
       }
       
-      if (this.address_id != 0) {
+      if (this.address_id && this.address_id != 0) {
           paramas = {
             'address_type_id':this.addressForm.value.addressType,
             'area_id':this.addressForm.value.areaName,
@@ -152,5 +151,9 @@ export class CreateAddressPage {
       console.log(addressDetail);
       console.log(this.addressData);
     })
+  }
+
+  generateQuestionObject() {
+    
   }
 }

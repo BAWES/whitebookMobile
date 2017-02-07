@@ -1,43 +1,43 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController } from 'ionic-angular';
+import { HttpService } from '../../providers/http.service';
+import 'rxjs/add/operator/debounceTime';
 
-/*
-  Generated class for the SearchItem page.
+import { ProductPage } from '../product/product';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-search-item',
   templateUrl: 'search-item.html'
 })
+
 export class SearchItemPage {
+
+  public _searchUrl:string = '/search?q=';
+  public items: any;
+  public searching: any = false;
 
   constructor(
     public navCtrl: NavController,
-    public viewCtrl: ViewController
-  ) {
-    this.initializeItems();
-
-  }
+    public viewCtrl: ViewController,
+    public _httpRequest: HttpService
+  ) {}
 
   ionViewDidLoad() {
-    console.log('Hello SearchItemPage Page');
+    this.initializeItems('All');
   }
 
-  searchQuery: string = '';
-  items: string[];
-
-  initializeItems() {
-    this.items = [
-      'Amsterdam',
-      'Bogota',
-    ];
+  initializeItems(searchText:string = 'All') {
+    this._httpRequest.get(this._searchUrl + searchText + '&offset=0').then(data=>{
+      this.items = data;
+      this.searching = false;
+    })
   }
 
   getItems(ev: any) {
+    this.searching = true;
+    
     // Reset items back to all of the items
-    this.initializeItems();
+    this.initializeItems(ev.target.value);
 
     // set val to the value of the searchbar
     let val = ev.target.value;
@@ -45,7 +45,7 @@ export class SearchItemPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.item_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
@@ -54,4 +54,16 @@ export class SearchItemPage {
     this.viewCtrl.dismiss();
   }
 
+  /*
+  * Method open product detail page 
+  * by sending product id
+  */
+  productDetail(id) {
+    this.navCtrl.push(
+      ProductPage,
+      {
+        productId:id
+      }
+    );
+  }
 }
