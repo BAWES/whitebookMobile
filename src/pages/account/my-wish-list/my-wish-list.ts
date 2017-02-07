@@ -12,35 +12,46 @@ import { Global } from '../../../providers/global';
 })
 export class MyWishListPage {
   
+  public _wishlistUrl: string = "/wishlist";
+  public _categoryListUrl = '/category';
   public whishlist:any;
-  public _urlWishlistUrl: string = "/wishlist";
-  public start:number = 0;
+  public categoryList:any;
+  public waiting:boolean=false;
 
+  public start:number = 0;
+  public category:number= 0;
   constructor(
     public navCtrl: NavController,
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
-    public _authHttpService: AuthHttpService,
+    public _authHttpRequest: AuthHttpService,
     public _config:Global
-  ) {}
+  ) {
+  }
 
   ionViewDidLoad() {
     this.list();
+    this.categoryListing();
   }
 
-  remove() {
-    this.alertCtrl.create({
+  removeProduct(wishlist_id:number) {
+    let alert = this.alertCtrl.create({
       title : 'Remove wishlist product?',
       message : 'Are you sure you want to remove product from wishlist?',
       buttons : [
         {
           text: 'Yes',
           handler:() => {
-            let toast = this.toastCtrl.create({
-              message : 'Product Removed Successfully',
-              duration:300
-            });
-            toast.present();
+            let result:any;
+            this._authHttpRequest.delete(this._wishlistUrl+'?wishlist_id='+wishlist_id).then(data=>{
+              result = data;
+              this.list();
+              let toast = this.toastCtrl.create({
+                message : result.message,
+                duration:300
+              });
+              toast.present();
+            })
           }
         },
         {
@@ -51,6 +62,7 @@ export class MyWishListPage {
         }
       ]
     })
+    alert.present();
   }
 
   productDetail(id) {
@@ -63,9 +75,10 @@ export class MyWishListPage {
   * at view load
   */
   list(start: number = 0) {
-      this._authHttpService.get(this._urlWishlistUrl +'?offset='+start).then(data=>{
+      this.waiting = true;
+      this._authHttpRequest.get(this._wishlistUrl +'?offset='+start+'&category_id='+this.category).then(data=>{
          this.whishlist = data;
-         console.log(this.whishlist)
+         this.waiting = false;
       })
   }
 
@@ -75,13 +88,23 @@ export class MyWishListPage {
   */
   doInfinite(infiniteScroll) {
     let items;
-     this.start+=10;
-      this._authHttpService.get(this._urlWishlistUrl +'?offset='+this.start).then(data=>{
-         items = data;
-         for(let item of items) {
+    this.start+=10;
+    this._authHttpRequest.get(this._wishlistUrl +'?offset='+this.start+'&category_id='+this.category).then(data=>{
+        items = data;
+        for(let item of items) {
           this.whishlist.push(item);
         }
-        infiniteScroll.complete();
-      })
+      infiniteScroll.complete();
+    })
+  }
+
+  categoryListing() {
+    this._authHttpRequest.get(this._categoryListUrl).then(data=>{
+         this.categoryList = data;
+    });
+  }
+
+  filterProduct() {
+    this.list(0);
   }
 }
