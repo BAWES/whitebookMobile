@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { ProductPage } from '../../product/product';
 import { HttpService } from '../../../providers/http.service';
+import { GlobalService } from '../../../providers/global.service';
 
 @Component({
   selector: 'page-my-wish-list',
@@ -22,15 +23,21 @@ export class MyWishListPage {
     public navCtrl: NavController,
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
-    public httpRequest: HttpService
-  ) {
-  }
+    public httpRequest: HttpService,
+    public _config: GlobalService
+  ) {}
 
+  /**
+   * method will load on view load
+   */
   ionViewDidLoad() {
     this.list();
-    this.categoryListing();
+    this.loadCategoryList();
   }
 
+  /**
+   * method to remove whishlist item
+   */
   removeProduct(wishlist_id:number) {
     let alert = this.alertCtrl.create({
       title : 'Remove wishlist product?',
@@ -62,8 +69,10 @@ export class MyWishListPage {
     alert.present();
   }
 
+  /**
+   * method to redirect on product detail page
+   */
   productDetail(id) {
-    console.log('opening product detail page of id : '+id);
     this.navCtrl.push(ProductPage,{productId:id});
   }
 
@@ -95,12 +104,19 @@ export class MyWishListPage {
     })
   }
 
-  categoryListing() {
+/**
+ * method to show category listing
+ */
+  loadCategoryList() {
     this.httpRequest.get(this._categoryListUrl).subscribe(data=>{
          this.categoryList = data;
     });
   }
 
+/**
+ * filter method for product 
+ * filter on category base
+ */
   filterProduct() {
     this.list(0);
   }

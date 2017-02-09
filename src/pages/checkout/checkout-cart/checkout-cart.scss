@@ -8,6 +8,12 @@ page-checkout-cart {
     [close-btn] ion-icon {margin-top: 41px;color: #dedede;}
     [position-relative] img,[position-relative] ion-icon{ position:absolute;left: 0;right: 0;margin:0 auto;top:47%;transform:translateY(-50%);}
     ion-row.header {margin-bottom: 22px;padding-bottom: 16px;}
+    ion-img.img-loaded{
+            width: 100%;
+            text-align: center;
+            height: 100%;
+            background: none;
+     }
 }
 [checkout-btn].item-md.item-block .item-inner {border-bottom: none;}
 [checkout-btn] button{margin-top: 20px;}

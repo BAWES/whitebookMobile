@@ -26,74 +26,30 @@
           <strong>Detail</strong>
       </ion-col>
       <ion-col width-10 text-center close-btn position-relative>
-          
       </ion-col>
   </ion-row>
-
-  <ion-row class="header">
+<div class="scroll-content" [virtualScroll]="cartItems" approxItemHeight="40px">
+  <ion-row class="header" *virtualItem="let cartItems">
       <ion-col width-20 position-relative>
-          <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
+          <ion-img src="{{_config.images_210}}/{{cartItems.image_path}}"></ion-img>
       </ion-col>
       <ion-col width-70 class="button-container">
-          <h3> Product Name Goes Here</h3>
-          <ion-label> QTY :  3</ion-label>
-          <ion-label> Date :  17, Dec 2017</ion-label>
-          <ion-label> Time :  10:00 Am - 12:00 Noon </ion-label>
-          <ion-label> Address :  Abdullah Al Salem,Kuwait City</ion-label>
-          <h2>Price : KD 144</h2>
+          <h3>{{cartItems.item_name}}</h3>
+          <ion-label> QTY :  {{cartItems.cart_quantity}}</ion-label>
+          <ion-label> Date : {{cartItems.cart_delivery_date}}</ion-label>
+          <ion-label> Time :  {{cartItems.timeslot_start_time}} - {{cartItems.timeslot_end_time}} </ion-label>
+          <h2>Price : KD {{cartItems.item_price_per_unit}}</h2>
       </ion-col>
       <ion-col width-10 text-center close-btn position-relative>
-          <ion-icon name="close"></ion-icon>
+          <ion-icon (click)="removeItem(cartItems.cart_id)" name="close"></ion-icon>
       </ion-col>
   </ion-row>
-
-  <ion-row class="header">
-      <ion-col width-20 position-relative>
-          <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-      </ion-col>
-      <ion-col width-70 class="button-container">
-          <h3> Product Name Goes Here</h3>
-          <ion-label> QTY :  3</ion-label>
-          <ion-label> Date :  17, Dec 2017</ion-label>
-          <ion-label> Time :  10:00 Am - 12:00 Noon </ion-label>
-          <ion-label> Address :  Abdullah Al Salem,Kuwait City</ion-label>
-          <h2>Price : KD 144</h2>
-      </ion-col>
-      <ion-col width-10 text-center close-btn position-relative>
-          <ion-icon name="close"></ion-icon>
-      </ion-col>
-  </ion-row>
-  <ion-row class="header">
-      <ion-col width-20 position-relative>
-          <img src="https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg" />
-      </ion-col>
-      <ion-col width-70 class="button-container">
-          <h3> Product Name Goes Here</h3>
-          <ion-label> QTY :  3</ion-label>
-          <ion-label> Date :  17, Dec 2017</ion-label>
-          <ion-label> Time :  10:00 Am - 12:00 Noon </ion-label>
-          <ion-label> Address :  Abdullah Al Salem,Kuwait City</ion-label>
-          <h2>Price : KD 144</h2>
-      </ion-col>
-      <ion-col width-10 text-center close-btn position-relative>
-          <ion-icon name="close"></ion-icon>
-      </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>Subtotal:</ion-col>
-    <ion-col text-right>KD 776.000</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>Delivery Charge:</ion-col>
-    <ion-col text-right>KD 200.000</ion-col>
-  </ion-row>
-  <hr/>
-  <ion-row>
-    <ion-col>Total:</ion-col>
-    <ion-col text-right>KD 976.000</ion-col>
-  </ion-row>
+</div>
   <ion-item text-center checkout-btn>
     <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> Checkout</button>
   </ion-item>
+</ion-content>
+
+<ion-content *ngIf="carItems !== undefined && !carItems.length" class="no-results">
+    <p text-center>No Results</p>
 </ion-content>
