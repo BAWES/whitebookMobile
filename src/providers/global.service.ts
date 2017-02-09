@@ -7,7 +7,6 @@ import { Platform } from 'ionic-angular';
 export class GlobalService {
   
   // Endpoint Urls
-  public productApiUrl:string; // this need to remove
   public _ApiUrl:string;
 
   public s3 = 'https://thewhitebook.s3.amazonaws.com';
@@ -38,7 +37,6 @@ export class GlobalService {
    */
   initDevEnvironment(platform?: string){
     this._ApiUrl = 'http://api.thewhitebook.local/v1';
-    this.productApiUrl = this._ApiUrl+'/product'; // need to remove
     this.setupDeviceSpecificConfigs();
   }
 

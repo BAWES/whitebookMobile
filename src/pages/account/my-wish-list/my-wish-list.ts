@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { ProductPage } from '../../product/product';
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-my-wish-list',
@@ -22,7 +22,7 @@ export class MyWishListPage {
     public navCtrl: NavController,
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
-    public _authHttpRequest: AuthHttpService
+    public httpRequest: HttpService
   ) {
   }
 
@@ -40,7 +40,7 @@ export class MyWishListPage {
           text: 'Yes',
           handler:() => {
             let result:any;
-            this._authHttpRequest.delete(this._wishlistUrl+'?wishlist_id='+wishlist_id).then(data=>{
+            this.httpRequest.delete(this._wishlistUrl+'?wishlist_id='+wishlist_id).subscribe(data=>{
               result = data;
               this.list();
               let toast = this.toastCtrl.create({
@@ -73,7 +73,7 @@ export class MyWishListPage {
   */
   list(start: number = 0) {
       this.waiting = true;
-      this._authHttpRequest.get(this._wishlistUrl +'?offset='+start+'&category_id='+this.category).then(data=>{
+      this.httpRequest.get(this._wishlistUrl +'?offset='+start+'&category_id='+this.category).subscribe(data=>{
          this.whishlist = data;
          this.waiting = false;
       })
@@ -86,7 +86,7 @@ export class MyWishListPage {
   doInfinite(infiniteScroll) {
     let items;
     this.start+=10;
-    this._authHttpRequest.get(this._wishlistUrl +'?offset='+this.start+'&category_id='+this.category).then(data=>{
+    this.httpRequest.get(this._wishlistUrl +'?offset='+this.start+'&category_id='+this.category).subscribe(data=>{
         items = data;
         for(let item of items) {
           this.whishlist.push(item);
@@ -96,7 +96,7 @@ export class MyWishListPage {
   }
 
   categoryListing() {
-    this._authHttpRequest.get(this._categoryListUrl).then(data=>{
+    this.httpRequest.get(this._categoryListUrl).subscribe(data=>{
          this.categoryList = data;
     });
   }

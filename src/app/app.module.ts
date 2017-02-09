@@ -30,10 +30,8 @@ import { ProductPage } from '../pages/product/product';
 
 // services/providers
 import { GlobalService } from '../providers/global.service';
-import { Product } from '../providers/product';
 import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
-import { AuthHttpService } from '../providers/authhttp.service';
 import { HttpService } from '../providers/http.service';
 
 // custom pipe
@@ -94,11 +92,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,
-    Product,
     Authentication,
     Storage,
     Base,
-    AuthHttpService,
     HttpService
     ],
 })

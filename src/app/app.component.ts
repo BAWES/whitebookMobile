@@ -14,8 +14,6 @@ import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
 // providers
-import { Category } from '../providers/category';
-import { AuthHttpService } from '../providers/authhttp.service';
 import { HttpService } from '../providers/http.service';
 
 @Component({
@@ -39,8 +37,7 @@ export class MyApp {
     public platform: Platform,
     public menu : MenuController,
     public modalCtnl : ModalController,
-    public _authHttpService: AuthHttpService,
-    public _httpService: HttpService
+    public httpService: HttpService
 
   ) {
     this.initializeApp();
@@ -56,9 +53,8 @@ export class MyApp {
       { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
       { title : 'Logout', component:Home ,icon:'power-off'},
     ]
-}
+  }
 
-  
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -106,17 +102,13 @@ export class MyApp {
   * load category list
   */
   loadCategoryList(start:number = 0){
-    this._httpService.get(this._urlCategory +'?offset='+start).then(data=>{
-         this.categoryList = data;
-    })
+    this.httpService.get(this._urlCategory +'?offset='+start,false).subscribe(cateries => this.categoryList = cateries);
   }
 
   /*
   * load event listing
   */
   loadEventList(start: number = 0) {
-    this._authHttpService.get(this._urlEvent +'?offset='+start).then(data=>{
-        this.events = data;
-    })
+    this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => this.events = events);  
   }
 }

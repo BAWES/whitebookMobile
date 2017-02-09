@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController, ToastController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 
-import { Product } from '../../providers/product';
 import { GlobalService } from '../../providers/global.service';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'page-product',
@@ -11,10 +11,14 @@ import { GlobalService } from '../../providers/global.service';
 })
 
 export class ProductPage {
-  productSection:string;
-  product_id:number;
-  product : any;
-  imagePath : string;
+  
+  public _urlProductDetail = '/product/detail?product_id=';
+
+  public productSection:string;
+  public product_id:number;
+  public product : any;
+  public imagePath : string;
+  
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -29,8 +33,8 @@ export class ProductPage {
     private _params : NavParams,
     public modalCtnl: ModalController,
     public toastCtrl : ToastController,
-    public _productService : Product,
-    public _config : GlobalService
+    public _config : GlobalService,
+    public httpService:HttpService
   ) {
     this.productSection = "pdescription";
     this.product_id = this._params.get('productId');
@@ -62,10 +66,6 @@ export class ProductPage {
   }
 
   loadProductDetail() {
-    this._productService.loadProduct(this.product_id)
-    .then(data=>{
-      this.product = data;
-    });
+    this.httpService.get(this._urlProductDetail+this.product_id).subscribe(data=>{this.product = data});
   }
-
 }

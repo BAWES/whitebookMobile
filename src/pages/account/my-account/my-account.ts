@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-my-account',
@@ -24,7 +24,7 @@ export class MyAccountPage {
   constructor(
     public toastCtrl:ToastController,
     public formBuilder: FormBuilder,
-    public _authHttpService: AuthHttpService
+    public httpService: HttpService
     ) {
        this.profileForm = this.formBuilder.group({
         firstName: ['', Validators.required],
@@ -46,7 +46,7 @@ export class MyAccountPage {
   */
   getProfile() {
     let profileDetail:any;
-      this._authHttpService.get(this._urlProfileUrl).then(data=>{
+      this.httpService.get(this._urlProfileUrl).subscribe(data=>{
          profileDetail = data;
          this.firstName = profileDetail.customer_name;
          this.lastName = profileDetail.customer_last_name;
@@ -70,7 +70,7 @@ export class MyAccountPage {
         'customer_mobile':this.profileForm.value.mobile,
         'customer_dateofbirth':this.profileForm.value.dob
       }
-      this._authHttpService.patch(this._urlProfileUrl,paramas).then(data=>{
+      this.httpService.patch(this._urlProfileUrl,paramas).subscribe(data=>{
       result = data;
       let toast = this.toastCtrl.create({
         message: result.message,

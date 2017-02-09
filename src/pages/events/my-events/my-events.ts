@@ -3,7 +3,7 @@ import { NavController, AlertController, ModalController, ToastController } from
 
 import { CreateEventPage } from '../create-event/create-event';
 
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-my-events',
@@ -23,7 +23,7 @@ export class MyEventsPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public _authHttpService: AuthHttpService
+    public httpService: HttpService
   ) {
     this.start=0;
     this.list();
@@ -71,7 +71,7 @@ export class MyEventsPage {
         {
           text:'Yes',
           handler:() => {
-            this._authHttpService.delete(this._urlEventUrl+'?event_id='+events.event_id).then(data=>{
+            this.httpService.delete(this._urlEventUrl+'?event_id='+events.event_id).subscribe(data=>{
               response = data;
               this.list();
               let toast = this.toastCtrl.create({
@@ -98,7 +98,7 @@ export class MyEventsPage {
   * at view load
   */
   list(start: number = 0) {
-      this._authHttpService.get(this._urlEventUrl +'?offset='+start).then(data=>{
+      this.httpService.get(this._urlEventUrl +'?offset='+start).subscribe(data=>{
          this.events = data;
       })
   }
@@ -110,7 +110,7 @@ export class MyEventsPage {
   doInfinite(infiniteScroll) {
     let events;
      this.start+=10;
-      this._authHttpService.get(this._urlEventUrl +'?offset='+this.start).then(data=>{
+      this.httpService.get(this._urlEventUrl +'?offset='+this.start).subscribe(data=>{
          events = data;
          for(let person of events) {
           this.events.push(person);

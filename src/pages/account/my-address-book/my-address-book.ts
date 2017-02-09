@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController,ToastController } from 'ionic-angular';
 import { CreateAddressPage } from '../create-address/create-address';
 
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-my-address-book',
@@ -19,7 +19,7 @@ export class MyAddressBookPage {
     public modalCtrl : ModalController,
     public alertCtrl: AlertController,
     public toastCtrl :ToastController,
-    public _authHttpService: AuthHttpService
+    public httpService: HttpService
   ) {}
   
   ionViewDidLoad() {
@@ -74,7 +74,7 @@ export class MyAddressBookPage {
   * at view load
   */
   list(start: number = 0) {
-      this._authHttpService.get(this._urlAddressUrl +'?offset='+start).then(data=>{
+      this.httpService.get(this._urlAddressUrl +'?offset='+start).subscribe(data=>{
          this.addresses = data;
       })
   }
@@ -86,7 +86,7 @@ export class MyAddressBookPage {
   doInfinite(infiniteScroll) {
       let addressList;
       this.start += 10;
-      this._authHttpService.get(this._urlAddressUrl +'?offset='+this.start).then(data=>{
+      this.httpService.get(this._urlAddressUrl +'?offset='+this.start).subscribe(data=>{
          addressList = data;
          for(let address of addressList) {
           this.addresses.push(address);

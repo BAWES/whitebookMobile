@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-create-event',
@@ -30,7 +30,7 @@ export class CreateEventPage {
     public viewCtrl : ViewController,
     public toastCtrl : ToastController,
     private formBuilder: FormBuilder,
-    private _authHttpService: AuthHttpService,
+    private httpService: HttpService,
     private _navParams: NavParams
   ) {
     this.eventForm = this.formBuilder.group({
@@ -91,7 +91,7 @@ export class CreateEventPage {
   */
   loadEventDetail(event_id : number) {
     let eventDetail;
-    this._authHttpService.get(this._urlEventDetailUrl+event_id).then(data=>{
+    this.httpService.get(this._urlEventDetailUrl+event_id).subscribe(data=>{
         eventDetail = data;
         this.eventName=eventDetail.event_name;
         this.eventDate=eventDetail.event_date;
@@ -105,7 +105,7 @@ export class CreateEventPage {
   * Method will load event type list
   */
   loadEventType() {
-    this._authHttpService.get(this._urlEventTypeListUrl).then(data=>{
+    this.httpService.get(this._urlEventTypeListUrl).subscribe(data=>{
         this.eventTypeList = data;
     })
   }
@@ -116,7 +116,7 @@ export class CreateEventPage {
   */
   private createEvent(paramas){
     let result;
-    this._authHttpService.post(this._urlEventUrl,paramas).then(data=>{
+    this.httpService.post(this._urlEventUrl,paramas).subscribe(data=>{
         result = data;
         if (result.operation == 'success' ) {
           let toast = this.toastCtrl.create({
@@ -140,7 +140,7 @@ export class CreateEventPage {
   */
   private updateEvent(paramas) {
     let result;
-    this._authHttpService.patch(this._urlEventUrl,paramas).then(data=>{
+    this.httpService.patch(this._urlEventUrl,paramas).subscribe(data=>{
         result = data;
         if (result.operation == 'success' ) {
           let toast = this.toastCtrl.create({

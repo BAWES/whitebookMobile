@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NavParams, ViewController } from 'ionic-angular';
 
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-order-detail',
@@ -15,7 +15,7 @@ export class OrderDetailPage {
   constructor(
     public _viewCtrl:ViewController,
     public _navParams:NavParams,
-    public _authHttpService: AuthHttpService,
+    public httpRequest: HttpService,
   ) {
     this.detail(this._navParams.get('order_id'));
   }
@@ -29,7 +29,7 @@ export class OrderDetailPage {
   }
 
   detail(order_id) {
-      this._authHttpService.get(this._urlOrderDetailUrl +order_id).then(data=>{
+      this.httpRequest.get(this._urlOrderDetailUrl +order_id).subscribe(data=>{
          this.orderDetail = data;
          console.log(this.orderDetail);
       })

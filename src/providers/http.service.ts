@@ -10,7 +10,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 
 import { GlobalService } from './global.service';
-
+import { Authentication } from './auth.service';
 /*
   Handles all Authorized HTTP functions with Bearer Token
 */
@@ -19,6 +19,7 @@ export class HttpService {
 
   constructor(
     public _http: Http,
+    private _auth: Authentication,
     public _config: GlobalService,
     public _platform: Platform,
     public _events: Events
@@ -29,17 +30,12 @@ export class HttpService {
    * @param {string} endpointUrl
    * @returns {Observable<any>}
    */
-  get(endpointUrl: string){
-    return new Promise(resolve => {  
-      const url = this._config._ApiUrl + endpointUrl;
-      this._http.get(url)
-        .catch((err) => this._handleError(err))
-        .take(1)
-        .map(res => res.json())
-        .subscribe(data => {
-            resolve(data)
-        })
-    });
+  get(endpointUrl: string,addBearer:boolean = true): Observable<any>{
+    const url = this._config._ApiUrl + endpointUrl;
+    return this._http.get(url, {headers: this._buildAuthHeaders(addBearer)})
+              .catch((err) => this._handleError(err))
+              .take(1)
+              .map((res: Response) => res.json());
   }
 
   /**
@@ -48,10 +44,10 @@ export class HttpService {
    * @param {*} params
    * @returns {Observable<any>}
    */
-  post(endpointUrl: string, params: any): Observable<any>{
+  post(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
     const url = this._config._ApiUrl + endpointUrl;
 
-    return this._http.post(url, JSON.stringify(params))
+    return this._http.post(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
               .take(1)
               .map((res: Response) => res.json());
@@ -63,10 +59,10 @@ export class HttpService {
    * @param {*} params
    * @returns {Observable<any>}
    */
-  patch(endpointUrl: string, params: any): Observable<any>{
+  patch(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
     const url = this._config._ApiUrl + endpointUrl;
 
-    return this._http.patch(url, JSON.stringify(params))
+    return this._http.patch(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
               .take(1)
               .map((res: Response) => res.json());
@@ -78,10 +74,10 @@ export class HttpService {
    * @param {string} endpointUrl
    * @returns {Observable<any>}
    */
-  delete(endpointUrl: string): Observable<any>{
+  delete(endpointUrl: string,addBearer:boolean = true): Observable<any>{
     const url = this._config._ApiUrl + endpointUrl;
 
-    return this._http.delete(url)
+    return this._http.delete(url, {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
               .take(1)
               .map((res: Response) => res.json());
@@ -113,5 +109,25 @@ export class HttpService {
       alert("Error: "+errMsg);
 
       return Observable.throw(errMsg);
+  }
+
+  /**
+   * Build the Auth Headers for All Verb Requests
+   * @returns {Headers}
+   */
+  private _buildAuthHeaders(addBearer:boolean){
+    
+    // Build Headers with Bearer Token
+    const headers = new Headers();
+    
+    // check if this need to add due to without logged in access to service
+    if (addBearer) {
+      // Get Bearer Token from Auth Service
+      const bearerToken = this._auth.getAccessToken();
+      headers.append("Authorization", "Bearer "+ bearerToken); 
+    }
+    headers.append("Content-Type", "application/json");
+
+    return headers;
   }
 }

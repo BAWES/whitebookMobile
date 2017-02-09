@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 import { Base } from '../../../providers/base';
 
 @Component({
@@ -36,7 +36,7 @@ export class CreateAddressPage {
   constructor(
     public _viewCtrl : ViewController,
     public _toastCtrl:ToastController,
-    public _authHttpService: AuthHttpService,
+    public httpService: HttpService,
     public _base:Base,
     public formBuilder: FormBuilder,
     public _navParams: NavParams,
@@ -105,7 +105,7 @@ export class CreateAddressPage {
    */
   saveNewAddress(paramas) {
       let result;
-      this._authHttpService.post(this._urlAddress,paramas).then(data=>{
+      this.httpService.post(this._urlAddress,paramas).subscribe(data=>{
       result = data;
       
       let toast = this._toastCtrl.create({
@@ -124,7 +124,7 @@ export class CreateAddressPage {
    */
   saveExistingAddress(paramas) {
       let result;
-      this._authHttpService.patch(this._urlAddress,paramas).then(data=>{
+      this.httpService.patch(this._urlAddress,paramas).subscribe(data=>{
       result = data;
       
       let toast = this._toastCtrl.create({
@@ -142,7 +142,7 @@ export class CreateAddressPage {
    * load address type
    */
   loadAdressTypes() {
-    this._authHttpService.get(this._urlAddressType).then(data => {
+    this.httpService.get(this._urlAddressType).subscribe(data => {
       this.addressTypeData = data;
     })
   }
@@ -151,7 +151,7 @@ export class CreateAddressPage {
    * load all locations
    */
   loadLocations() {
-    this._authHttpService.get(this._urlLocation).then(data => {
+    this.httpService.get(this._urlLocation).subscribe(data => {
       this.locationData = data;
     })
   }
@@ -160,7 +160,7 @@ export class CreateAddressPage {
   * load questions of address type
   */
   loadQuestions(address_type_id : number) {
-    this._authHttpService.get(this._urlAddressQuestion+address_type_id).then(data => {
+    this.httpService.get(this._urlAddressQuestion+address_type_id).subscribe(data => {
       console.log(data);
       this.locationQuestion = data;
     })
@@ -171,7 +171,7 @@ export class CreateAddressPage {
   */
   loadAddressDetail(address_id: number) {
     let addressDetail: any;
-      this._authHttpService.get(this._urlSingleAddress+address_id).then(data => {
+      this.httpService.get(this._urlSingleAddress+address_id).subscribe(data => {
       addressDetail = data;
       this.addressName = addressDetail.address.address_name;
       this.addressType = addressDetail.address.address_type_id;

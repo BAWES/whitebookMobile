@@ -20,7 +20,7 @@ export class Home {
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
-    public _httpService:HttpService
+    public httpService:HttpService
     ) {
     this.loadCategoryList();
   }
@@ -65,8 +65,6 @@ export class Home {
   * load category list
   */
   loadCategoryList(start:number = 0){
-    this._httpService.get(this._urlCategory +'?offset='+start).then(data=>{
-         this.categories = data;
-    })
+    this.httpService.get(this._urlCategory +'?offset='+start,false).subscribe(cateries => this.categories = cateries);
   }
 }

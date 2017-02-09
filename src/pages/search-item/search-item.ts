@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController } from 'ionic-angular';
-import { HttpService } from '../../providers/http.service';
 import 'rxjs/add/operator/debounceTime';
 
+import { HttpService } from '../../providers/http.service';
 import { ProductPage } from '../product/product';
 
 @Component({
@@ -19,7 +19,7 @@ export class SearchItemPage {
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
-    public _httpRequest: HttpService
+    public httpRequest: HttpService
   ) {}
 
   ionViewDidLoad() {
@@ -27,10 +27,10 @@ export class SearchItemPage {
   }
 
   initializeItems(searchText:string = 'All') {
-    this._httpRequest.get(this._searchUrl + searchText + '&offset=0').then(data=>{
-      this.items = data;
-      this.searching = false;
-    })
+    this.httpRequest.get(this._searchUrl + searchText + '&offset=0').subscribe(data=>
+      this.items = data
+    )
+    this.searching = false;
   }
 
   getItems(ev: any) {
@@ -59,11 +59,6 @@ export class SearchItemPage {
   * by sending product id
   */
   productDetail(id) {
-    this.navCtrl.push(
-      ProductPage,
-      {
-        productId:id
-      }
-    );
+    this.navCtrl.push(ProductPage,{productId:id})
   }
 }

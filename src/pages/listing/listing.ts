@@ -5,24 +5,27 @@ import { ProductPage } from '../product/product';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
-
-import { Product } from '../../providers/product';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'page-listing',
   templateUrl: 'listing.html'
 })
 export class ListingPage {
-  title : string;
-  id : number;
-  productView :string;
-  category:any;
-  products : any;
+  
+  public _urlProductListing = '/product/list?category_id=';
+  
+  public title : string;
+  public id : number;
+  public productView :string;
+  public category:any;
+  public products : any;
+
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
-    public _productService : Product
+    public httpService : HttpService
   ) {
   }
 
@@ -34,7 +37,6 @@ export class ListingPage {
   }
 
   productDetail(id) {
-    console.log('opening product detail page of id : '+id);
     this.navCtrl.push(ProductPage,{productId:id});
   }
   
@@ -58,10 +60,7 @@ export class ListingPage {
   }
 
   loadProducts() {
-    this._productService.loadProductList(this.id)
-    .then(data => {
-      this.products = data;
-    });
+    this.httpService.get(this._urlProductListing+this.id).subscribe(data => {this.products = data});
   }
 
 }

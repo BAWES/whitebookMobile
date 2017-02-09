@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
-/*
-  Generated class for the CheckoutCart page.
+import { HttpService } from '../../../providers/http.service';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-checkout-cart',
   templateUrl: 'checkout-cart.html'
 })
+
 export class CheckoutCartPage {
 
-  constructor(public navCtrl: NavController, public viewCtrl : ViewController) {}
+  public _urlCart = '/cart';
+  constructor(public navCtrl: NavController, public viewCtrl : ViewController,public httpRequest : HttpService) {}
 
   ionViewDidLoad() {
     console.log('Hello CheckoutCartPage Page');
@@ -25,5 +23,11 @@ export class CheckoutCartPage {
 
   shippingModelPage() {
       this.navCtrl.push(CheckoutShippingPage);
+  }
+
+  loadCartList(){
+    this.httpRequest.get(this._urlCart).subscribe(data => {
+      console.log(data);
+    })
   }
 }

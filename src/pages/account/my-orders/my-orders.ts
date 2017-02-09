@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { OrderDetailPage } from '../order-detail/order-detail';
 
-import { AuthHttpService } from '../../../providers/authhttp.service';
+import { HttpService } from '../../../providers/http.service';
 
 @Component({
   selector: 'page-my-orders',
@@ -17,7 +17,7 @@ export class MyOrdersPage {
   constructor(
     public navCtrl: NavController,
     public modalCtrl:ModalController,
-    public _authHttpService: AuthHttpService
+    public httpService: HttpService
   ) {
     this.list();  
   }
@@ -32,7 +32,7 @@ export class MyOrdersPage {
   }
 
   list(start: number = 0) {
-      this._authHttpService.get(this._urlOrderUrl +'?offset='+start).then(data=>{
+      this.httpService.get(this._urlOrderUrl +'?offset='+start).subscribe(data=>{
          this.orderList = data;
          console.log(this.orderList);
       })
@@ -45,7 +45,7 @@ export class MyOrdersPage {
   doInfinite(infiniteScroll) {
     let orders;
      this.start+=10;
-      this._authHttpService.get(this._urlOrderUrl +'?offset='+this.start).then(data=>{
+      this.httpService.get(this._urlOrderUrl +'?offset='+this.start).subscribe(data=>{
          orders = data;
          for(let order of orders) {
           this.orderList.push(order);
