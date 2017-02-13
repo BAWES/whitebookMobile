@@ -1,4 +1,10 @@
-page-product {}
+page-product {
+    .red:before {color: red;}
+    .green:before {color: green;}
+    .flex_row {display: -webkit-flex;display: flex;-webkit-flex-direction: row; flex-direction: row;}
+    .quantity{width: 100%;font-size: 25px;text-align: center;margin-top: 4px;}
+    .error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;padding-right: 10px;}
+}
 .product-detail-like-icon button{background: #fff;}
 .product-detail-like-icon button ion-icon{font-size: 21px;}
 .product-detail h2{    margin-top: 66px;font-size: 24px;text-align: center;font-weight: bold;}
@@ -12,3 +18,4 @@ page-product {}
 [add-to-wishlist]{background: #fff;border: 1px solid #000;color: #000;box-shadow: none;}
 [no-border] .item-inner{border:none!important;}
 [no-border] .label-md {margin: 13px 8px 0px 0;}
+[no-background] {background: none;}

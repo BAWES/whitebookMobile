@@ -4,7 +4,7 @@ page-listing {
     .category-product-listing .price{margin: 0px;font-weight: normal;margin-bottom: 6px;}
     .category-product-listing .name{margin-top: 9px;margin-bottom:3px;}
     .category-product-listing .price{margin-bottom:17px;}
-    .category-product-listing img{margin-top:17px;height: 180px;width: 180px;}
+    .category-product-listing img{height: 180px;width: 180px;}
     .bar-buttons-md[end][text-center] {text-align: center;}
     .top-filter-tool-bar.item-ios.item-block .item-inner{border: none;}
     .top-filter-tool-bar.item-ios.item-block .select{color: #c8c7cc;}
@@ -31,10 +31,9 @@ page-listing {
     .list-view .label-md {margin:0px;}
     .vendor{font-weight: bold;}
     .top-filter-tool-bar button{background: none;}
-    .gallery-section{position:relative;}
-    
-    @media screen and (orientation:landscape) {
-        .gallery-section{width: 183px! important;margin: 0 auto;}
+    ion-img, ion-img img {
+        min-width: 250px;
+        min-height: 250px;
     }
     
 }
