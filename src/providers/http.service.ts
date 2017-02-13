@@ -127,7 +127,6 @@ export class HttpService {
       headers.append("Authorization", "Bearer "+ bearerToken); 
     }
     headers.append("Content-Type", "application/json");
-
     return headers;
   }
 }

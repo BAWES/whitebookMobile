@@ -33,6 +33,7 @@ import { GlobalService } from '../providers/global.service';
 import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
+import { CartCountService } from '../providers/cart.count.service';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -95,7 +96,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     Authentication,
     Storage,
     Base,
-    HttpService
+    HttpService,
+    CartCountService
     ],
 })
 export class AppModule {}

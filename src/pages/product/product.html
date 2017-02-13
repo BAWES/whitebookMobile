@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <ion-badge class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <ion-badge *ngIf="_cartCount.count > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
         <ion-icon name="cart"></ion-icon>
       </button>
@@ -16,7 +16,7 @@
 </ion-header>
 
 <ion-content class="product-detail" *ngIf="product">
-  <ion-item text-wrap>
+  <ion-item text-wrap no-border>
     <h2>{{product.item_name}}</h2>
     <ion-slides [options]="mySlideOptions">
       <ion-slide *ngFor="let image of product.images">

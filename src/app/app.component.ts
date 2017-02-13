@@ -19,6 +19,7 @@ import { HttpService } from '../providers/http.service';
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
