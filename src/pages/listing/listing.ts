@@ -7,6 +7,8 @@ import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
 import { HttpService } from '../../providers/http.service';
 import { GlobalService } from '../../providers/global.service';
+import { CartCountService } from '../../providers/cart.count.service';
+
 @Component({
   selector: 'page-listing',
   templateUrl: 'listing.html'
@@ -27,7 +29,8 @@ export class ListingPage {
     private _params : NavParams,
     public modalCtnl: ModalController,
     public httpService: HttpService,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public _cartCount:CartCountService
   ) {}
 
   ionViewDidLoad() {
@@ -44,6 +47,9 @@ export class ListingPage {
   openModel() {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
+    modal.onDidDismiss(data => { 
+      this._cartCount.loadCartCount();
+    });
   }
 
   changeView(view) {

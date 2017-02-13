@@ -4,6 +4,7 @@ import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 import { ProductPage } from '../product/product';
 import { HttpService } from '../../providers/http.service';
+import { CartCountService } from '../../providers/cart.count.service';
 
 @Component({
   selector: 'home',
@@ -12,7 +13,6 @@ import { HttpService } from '../../providers/http.service';
 export class Home {
 
   public _urlCategory:string = '/category';
-
   public featureProduct:any[];
   public sliderSlides:any[];
   public categories:any;
@@ -20,7 +20,8 @@ export class Home {
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
-    public httpService:HttpService
+    public httpService:HttpService,
+    public _cartCount:CartCountService
     ) {
     this.loadCategoryList();
   }
@@ -31,6 +32,9 @@ export class Home {
   openModel() {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
+    modal.onDidDismiss(data => { 
+      this._cartCount.loadCartCount();
+    });
   }
 
   ionViewDidLoad() {

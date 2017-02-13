@@ -5,6 +5,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { GlobalService } from '../../providers/global.service';
 import { HttpService } from '../../providers/http.service';
+import { CartCountService } from '../../providers/cart.count.service';
 
 @Component({
   selector: 'page-product',
@@ -54,7 +55,8 @@ export class ProductPage {
     public toastCtrl: ToastController,
     public _config: GlobalService,
     public httpService: HttpService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public _cartCount:CartCountService
   ) {
     this.product_id = this._params.get('productId');
     
@@ -83,6 +85,9 @@ export class ProductPage {
   openModel() {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
+    modal.onDidDismiss(data => { 
+      this._cartCount.loadCartCount();
+    });
   }
 
   addToCart() {
