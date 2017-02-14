@@ -19,6 +19,7 @@ export class ProductPage {
   public _urlProductCapacity = '/product/capacity';
   public _urlProductDeliveryTimeSlot = '/product/time-slot';
   public _urlAddToCart = '/cart';
+  public _urlWishlist = '/wishlist';
 
   public productSection:string = "pdescription";
   public product_id:number;
@@ -33,6 +34,8 @@ export class ProductPage {
   public maxQuantity:number = 0;
   public minQuantity:number;
   public dateChange:boolean=false;
+  public wishlistID:number=0;
+  public wishlistLbl:string = 'Add To Wishlist';
   //form variables
   public productForm:FormGroup;
   public area:number;
@@ -76,7 +79,10 @@ export class ProductPage {
   }
 
   ionViewDidLoad() {
-    this.loadProductDetail();
+    if (this.product_id) {
+      this.loadProductDetail();
+      this.loadProductWishlistStatus()
+    }
   }
   
   /**
@@ -113,12 +119,47 @@ export class ProductPage {
     }
   }
 
+  manageWishlist() {
+      if (this.wishlistID > 0) {
+        this.removeFromWishList();
+      } else {
+        this.addToWishList();
+      }
+  }
+
   addToWishList() {
-    let toast = this.toastCtrl.create({
-      message : 'Item Added To Wishlist Successfully',
-      duration : 2000
-    });
-    toast.present();
+    let result;
+    let param = {
+      'product_id' : this.product_id
+    }
+    this.httpService.post(this._urlWishlist,param).subscribe(wishlist=>{
+      result = wishlist;
+      if (result.operation == 'success'){
+          this.wishlistLbl = 'Remove From Wishlist';
+          this.wishlistID = result.id;
+      }
+      let toast = this.toastCtrl.create({
+        message : result.message,
+        duration : 3000
+      });
+      toast.present();
+    })
+  }
+  
+  removeFromWishList() {
+    let result;
+    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(wishlist=>{
+      result = wishlist;
+      if (result.operation == 'success') {
+          this.wishlistLbl = 'Add From Wishlist';
+          this.wishlistID = 0;
+      }
+      let toast = this.toastCtrl.create({
+        message : result.message,
+        duration : 3000
+      });
+      toast.present();
+    })
   }
 
 /**
@@ -211,5 +252,20 @@ export class ProductPage {
       this.httpService.get(url).subscribe(capacity=>{
         this.maxQuantity = capacity;
       });
+  }
+
+  
+  /**
+   * load is product is in Wishlist
+   * of user
+   */
+  loadProductWishlistStatus() {
+    let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
+    this.httpService.get(url).subscribe(wishtlist=>{
+      this.wishlistID = wishtlist;
+      if (this.wishlistID > 0) {
+        this.wishlistLbl = 'Remove From Wishlist';
+      }
+    });
   }
 }
