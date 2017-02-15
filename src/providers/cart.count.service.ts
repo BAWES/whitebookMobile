@@ -12,7 +12,6 @@ export class CartCountService {
   } 
 
   loadCartCount() {
-    console.log('checkout cart count');
     this.httpService.get(this._urlCartUrl).subscribe(total=>{
       this.count = total;
     });

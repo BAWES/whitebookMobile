@@ -9,48 +9,56 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-item>
       <ion-label>Delivery Date</ion-label>
-      <ion-datetime displayFormat="YYYY-MM-DD" min="{{todayStr}}" max="2100-12-31"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MM-DD" min="{{todayStr}}" [(ngModel)]="filterDeliveryDate" max="2100-12-31"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Delivery Area</ion-label>
-      <ion-select [(ngModel)]="area">
+      <ion-select [(ngModel)]="filterDeliveryArea">
         <ion-option *ngFor="let area of areaList" value="{{area.area_id}}">{{area.location}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Available For Sale</ion-label>
-      <ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="filterAvailableForSale"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Select Category</ion-label>
-      <ion-select [(ngModel)]="gaming">
+      <ion-select [(ngModel)]="filterCategory">
         <ion-option value="all">All</ion-option>
         <ion-option *ngFor="let category of categoryList" value="{{category.category_id}}">{{category.category_name}}</ion-option>
       </ion-select>
     </ion-item>
+    <ion-list-header no-lines>
+        <ion-label class="label label-ios">
+          Price Range 
+        </ion-label>
+        <ion-badge color="dark" item-right>{{filterPrice.lower}}</ion-badge>
+        <ion-badge color="dark" item-right>{{filterPrice.upper}}</ion-badge>
+    </ion-list-header>
     <ion-item>
-      <ion-label>Price Range </ion-label>
-      <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="21" max="72" step="3" snaps="true"></ion-range>
+      <ion-range min="1" max="1000" snaps="true" dualKnobs="true" pin="true" [(ngModel)]="filterPrice" color="dark">
+        <ion-label range-left>1</ion-label>
+        <ion-label range-right>1000</ion-label>
+      </ion-range>
     </ion-item>
     <ion-item>
       <ion-label>Select Themes</ion-label>
-      <ion-select [(ngModel)]="theme" multiple="true">
+      <ion-select [(ngModel)]="filterTheme" multiple="true">
         <ion-option *ngFor="let theme of themeList" value="{{theme.theme_id}}">{{theme.theme_name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="vendorList">
       <ion-label>Select Vendors</ion-label>
-      <ion-select [(ngModel)]="vendors" multiple="true">
+      <ion-select [(ngModel)]="filterVendors" multiple="true">
         <ion-option *ngFor="let vendors of vendorList" value="{{vendors.vendor_id}}">{{vendors.vendor_name}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-item text-center no-border margin-top-25>
-      <button width-75 ion-button round color="dark" >Filter</button>
+      <button width-99 ion-button round color="dark" (click)="loadFilterProducts()">Filter</button>
   </ion-item>
 </ion-content>
