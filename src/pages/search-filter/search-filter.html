@@ -1,11 +1,4 @@
-<!--
-  Generated template for the SearchFilter page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Filters</ion-title>
     <ion-buttons end>
@@ -14,68 +7,50 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <ion-list>
-
     <ion-item>
       <ion-label>Delivery Date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MM-DD" min="{{todayStr}}" max="2100-12-31"></ion-datetime>
     </ion-item>
-
     <ion-item>
       <ion-label>Delivery Area</ion-label>
-      <ion-select [(ngModel)]="gaming">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
+      <ion-select [(ngModel)]="area">
+        <ion-option *ngFor="let area of areaList" value="{{area.area_id}}">{{area.location}}</ion-option>
       </ion-select>
     </ion-item>
-
-  <ion-item>
-    <ion-label>Available For Sale</ion-label>
-    <ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>
-  </ion-item>
-  </ion-list>
-  <hr/>
-
-  <ion-list>
     <ion-item>
-      <ion-label>Category</ion-label>
+      <ion-label>Available For Sale</ion-label>
+      <ion-checkbox [(ngModel)]="pepperoni"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select Category</ion-label>
       <ion-select [(ngModel)]="gaming">
-        <ion-option value="nes">NES</ion-option>
-        <ion-option value="n64">Nintendo64</ion-option>
-        <ion-option value="ps">PlayStation</ion-option>
-        <ion-option value="genesis">Sega Genesis</ion-option>
-        <ion-option value="saturn">Sega Saturn</ion-option>
-        <ion-option value="snes">SNES</ion-option>
+        <ion-option value="all">All</ion-option>
+        <ion-option *ngFor="let category of categoryList" value="{{category.category_id}}">{{category.category_name}}</ion-option>
       </ion-select>
     </ion-item>
-  
-  <ion-item>
-    <ion-label>Price Range </ion-label>
-    <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="21" max="72" step="3" snaps="true"></ion-range>
+    <ion-item>
+      <ion-label>Price Range </ion-label>
+      <ion-range dualKnobs="true" [(ngModel)]="dualValue2" min="21" max="72" step="3" snaps="true"></ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select Themes</ion-label>
+      <ion-select [(ngModel)]="theme" multiple="true">
+        <ion-option *ngFor="let theme of themeList" value="{{theme.theme_id}}">{{theme.theme_name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="vendorList">
+      <ion-label>Select Vendors</ion-label>
+      <ion-select [(ngModel)]="vendors" multiple="true">
+        <ion-option *ngFor="let vendors of vendorList" value="{{vendors.vendor_id}}">{{vendors.vendor_name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-item text-center no-border margin-top-25>
+      <button width-75 ion-button round color="dark" >Filter</button>
   </ion-item>
-
-  <ion-item>
-    <ion-label>Vendors</ion-label>
-    <ion-select [(ngModel)]="toppings" multiple="true">
-      <ion-option>Bacon</ion-option>
-      <ion-option>Black Olives</ion-option>
-      <ion-option>Extra Cheese</ion-option>
-      <ion-option>Mushrooms</ion-option>
-      <ion-option>Pepperoni</ion-option>
-      <ion-option>Sausage</ion-option>
-    </ion-select>
-  </ion-item>
-</ion-list>
-<ion-item text-center no-border margin-top-25>
-    <button width-75 ion-button round color="dark" >Filter</button>
-</ion-item>
- </ion-content>
+</ion-content>
