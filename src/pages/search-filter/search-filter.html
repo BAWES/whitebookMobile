@@ -48,17 +48,17 @@
     <ion-item>
       <ion-label>Select Themes</ion-label>
       <ion-select [(ngModel)]="filterTheme" multiple="true">
-        <ion-option *ngFor="let theme of themeList" value="{{theme.theme_id}}">{{theme.theme_name}}</ion-option>
+        <ion-option *ngFor="let theme of themeList" value="{{theme.slug}}">{{theme.theme_name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="vendorList">
       <ion-label>Select Vendors</ion-label>
       <ion-select [(ngModel)]="filterVendors" multiple="true">
-        <ion-option *ngFor="let vendors of vendorList" value="{{vendors.vendor_id}}">{{vendors.vendor_name}}</ion-option>
+        <ion-option *ngFor="let vendors of vendorList" value="{{vendors.slug}}">{{vendors.vendor_name}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-item text-center no-border margin-top-25>
-      <button width-99 ion-button round color="dark" (click)="loadFilterProducts()">Filter</button>
+      <button width-99 ion-button round color="dark" (click)="dismiss()">Filter</button>
   </ion-item>
 </ion-content>

@@ -24,11 +24,11 @@ export class SearchFilterPage {
   // filter variables
   public filterDeliveryDate:any;
   public filterDeliveryArea:number = 0;
-  public filterAvailableForSale:any = false;
+  public filterAvailableForSale:boolean = false;
   public filterCategory:number = 0;
   public filterPrice:any = {lower: 0, upper: 0};
-  public filterTheme:any = false;
-  public filterVendors:any = false;
+  public filterTheme:any = '';
+  public filterVendors:any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -41,6 +41,7 @@ export class SearchFilterPage {
       this.today = new Date();
       this.today.setHours(0,0,0);
       this.todayStr  = this.today.toISOString().substring(0,10);
+      console.log(this.todayStr);
       this.filterPrice = {lower: 1, upper: 121};
       this.filterDeliveryDate= this.todayStr;
 
@@ -51,7 +52,17 @@ export class SearchFilterPage {
   }
 
   dismiss() {
-      this.viewCtrl.dismiss()
+    let params = {
+      'filterDeliveryDate':this.filterDeliveryDate,
+      'filterDeliveryArea':this.filterDeliveryArea,
+      'filterAvailableForSale':this.filterAvailableForSale,
+      'filterCategory': this.filterCategory,
+      'filterMinPrice':this.filterPrice.lower,
+      'filterMaxPrice':this.filterPrice.upper,
+      'filterTheme':this.filterTheme,
+      'filterVendors':this.filterVendors
+    }
+      this.viewCtrl.dismiss(params);
   }
   
   /**
@@ -80,18 +91,5 @@ export class SearchFilterPage {
   */
   loadVendorList(){
     this.httpService.get(this._urlVendors,false).subscribe(vendor => this.vendorList = vendor);
-  }
-
-  /**
-   * load filter products
-   */
-  loadFilterProducts() {
-    console.log("filterDeliveryDate : "+this.filterDeliveryDate);
-    console.log("filterDeliveryArea : "+this.filterDeliveryArea);
-    console.log("filterAvailableForSale : "+this.filterAvailableForSale);
-    console.log("filterCategory : "+this.filterCategory);
-    console.log("filterPrice : "+this.filterPrice.lower);
-    console.log("filterTheme : "+this.filterTheme);
-    console.log("filterVendors : "+this.filterVendors);
   }
 }

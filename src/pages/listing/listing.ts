@@ -15,8 +15,8 @@ import { CartCountService } from '../../providers/cart.count.service';
 })
 export class ListingPage {
   
-  public _urlProductListing = '/product/list?category_id=';
-  
+  public _urlProductListing = '/product/list';
+  public _urlParamas:string = '';
   public title : string;
   public id : number;
   public productView :string;
@@ -31,12 +31,15 @@ export class ListingPage {
     public httpService: HttpService,
     public _config: GlobalService,
     public _cartCount:CartCountService
-  ) {}
+  ) {
+    this._urlParamas = '';
+  }
 
   ionViewDidLoad() {
     this.productView = 'grid-view';
     this.id = this._params.get('id');
     this.title = this._params.get('title');
+    this._urlParamas = '&category_id='+this.id;
     this.loadProducts();
   }
 
@@ -64,13 +67,25 @@ export class ListingPage {
   searchFilter() {
     let modal = this.modalCtnl.create(SearchFilterPage);
     modal.present();
+    modal.onDidDismiss(data => {
+      this._urlParamas = '&category_id='+this.id;
+      this._urlParamas += '&forSale='+data.filterAvailableForSale;
+      this._urlParamas += '&requestedLocation='+data.filterDeliveryArea;
+      this._urlParamas += '&requestedDeliverDate='+data.filterDeliveryDate;
+      this._urlParamas += '&requestedMinPrice='+data.filterMinPrice;
+      this._urlParamas += '&requestedMaxPrice='+data.filterMaxPrice;
+      this._urlParamas += '&requestedCategories='+data.filterCategory;
+      this._urlParamas += '&requestedVendor='+data.filterVendors;
+      this._urlParamas += '&requestedTheme='+data.filterTheme;
+      this.loadProducts();
+    });
   }
 
   /**
    * Load product listing
    */
   loadProducts() {
-    this.httpService.get(this._urlProductListing+this.id+'&offset=0').subscribe(data => {this.products = data});
+    this.httpService.get(this._urlProductListing+'?offset=0'+this._urlParamas).subscribe(data => {this.products = data});
   }
 
   /*
@@ -80,7 +95,7 @@ export class ListingPage {
   doInfinite(infiniteScroll) {
     let items;
     this.start+=10;
-    this.httpService.get(this._urlProductListing +'?category_id='+this.category+'&offset='+this.start).subscribe(data=>{
+    this.httpService.get(this._urlProductListing +'&offset='+this.start+this._urlParamas).subscribe(data=>{
         items = data;
         for(let item of items) {
           this.products.push(item);
