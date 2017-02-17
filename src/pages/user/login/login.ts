@@ -38,7 +38,7 @@ export class LoginPage {
     if (this.loginForm.valid) {
         this._baseService.startLoading();
         this._authService.login(this.loginForm.value.email,this.loginForm.value.password)
-        .then(data=>{
+        .subscribe(data=>{
             this.loginData = data;
             if (this.loginData.status == 401 ) {
               this._baseService.showToast('Invalid Login Credentials.');

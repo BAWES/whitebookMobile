@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
-
 import { Platform, Events } from 'ionic-angular';
 import { InAppBrowser, NativeStorage } from 'ionic-native';
 
@@ -42,9 +42,9 @@ export class Authentication {
    * Sets this.isLoggedIn based on availability of BEARER Access Token
    */
   private _updateLoginStatus(){
-    if(this.getAccessToken()){
+    if (this.getAccessToken()) {
       this.isLoggedIn = true;
-    }else{
+    } else {
       this.isLoggedIn = false;
       this._events.publish("user:logout");
     }
@@ -142,51 +142,24 @@ export class Authentication {
   }
 
   login(email: string,password: string) {
-    return new Promise(resolve => {
-      let header = new Headers();
-      header.append('Content-Type', 'application/json');    
-      header.append("Authorization", "Basic "+ btoa(`${email}:${password}`));
-
-      return this._http.get(
-        this.url+this._urlBasicAuth, 
-          {headers: header}
-        )
-      .map(res => res.json())
-      .subscribe(
-        data => {
-          this.data = data;
-          resolve(this.data);
-        },
-      (error => { 
-        this.data = JSON.parse(error._body);
-        resolve(this.data) 
+    const authHeader = new Headers();
+    authHeader.append('Content-Type', 'application/json');    
+    authHeader.append("Authorization", "Basic "+ btoa(`${email}:${password}`));
+    const url = this.url + this._urlBasicAuth;
+    return this._http.get(url, {
+        headers: authHeader
       })
-      );
-    });
+      .first()
+      .map((res: Response) => res.json());
   }
 
 
   resetPassword(emailInput: string){
-    return new Promise(resolve => {
-      let headers = new Headers({'Content-Type': 'application/json'});
-      
-      return this._http.post(
-        this.url+this._urlRequestResetPassword, 
-        JSON.stringify({'email': emailInput}), 
-        {headers: headers}
-      )
-      .map(res => res.json())
-      .subscribe(
-          data => {
-            this.data = data;
-            resolve(this.data);
-          },
-        (error => { 
-          this.data = JSON.parse(error._body);
-          resolve(this.data) 
-        })
-      );
-    });
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const url = this.url+this._urlRequestResetPassword;
+    return this._http.post(url, JSON.stringify({'email': emailInput}), {headers: headers})
+            .first()
+            .map((res: Response) => res.json());
   }
 
 createAccount(
@@ -198,31 +171,18 @@ createAccount(
   gender: string,
   mobileNumber: number,
   ){
-    return new Promise(resolve => {
-      let headers = new Headers({'Content-Type': 'application/json'});
-      
-      return this._http.post(
-        this.url+this._urlCreateAccount, 
-        JSON.stringify({
-          'first_name': firstName,
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const url = this.url+this._urlCreateAccount;
+    return this._http.post(url, JSON.stringify({
+        'first_name': firstName,
           'last_name': lastName,
           'email': email,
           'password': password,
           'date_of_birth': dob,
           'gender': gender,
           'mobile_number': mobileNumber,
-        }), {headers: headers})
-        .map(res => res.json())
-        .subscribe(
-            data => {
-              this.data = data;
-              resolve(this.data);
-            },
-          (error => { 
-            this.data = JSON.parse(error._body);
-            resolve(this.data) 
-          })
-        );
-    });
+      }), {headers: headers})
+      .first()
+      .map((res: Response) => res.json());
   }
 }

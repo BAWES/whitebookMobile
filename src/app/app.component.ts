@@ -15,6 +15,7 @@ import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
 // providers
 import { HttpService } from '../providers/http.service';
+import { Authentication } from '../providers/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +25,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Home;
-  
+  public isUserLoggedIn:boolean;
   // api urls
   public _urlEvent: string = "/event";
   public _urlCategory: string = "/category";
@@ -38,22 +39,29 @@ export class MyApp {
     public platform: Platform,
     public menu : MenuController,
     public modalCtnl : ModalController,
-    public httpService: HttpService
+    public httpService: HttpService,
+    public authService: Authentication
 
   ) {
     this.initializeApp();
     this.loadEventList(); // load logged in user event list
     this.loadCategoryList(); // load category listing
     
-    this.personal = [
-      { title : 'Sign In', component:LoginPage,icon:'sign-in' },
-      { title : 'My Orders', component:MyOrdersPage,icon:'archive' },
-      { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
-      { title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
-      { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
-      { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
-      { title : 'Logout', component:Home ,icon:'power-off'},
-    ]
+    if (this.authService.getAccessToken()) {
+      this.personal = [
+        { title : 'My Orders', component:MyOrdersPage,icon:'archive' },
+        { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
+        { title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
+        { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
+        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
+        { title : 'Logout', component:Home ,icon:'power-off'},
+      ]
+    } else {
+      this.personal = [
+        { title : 'Sign In', component:LoginPage,icon:'sign-in' },
+      ]
+    }
+    this.isUserLoggedIn = this.authService.getAccessToken();
   }
 
   initializeApp() {
@@ -110,6 +118,8 @@ export class MyApp {
   * load event listing
   */
   loadEventList(start: number = 0) {
-    this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => this.events = events);  
+    if (this.authService.getAccessToken()) {
+      this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => this.events = events);  
+    }
   }
 }

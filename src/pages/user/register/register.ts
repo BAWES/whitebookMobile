@@ -56,7 +56,7 @@ export class RegisterPage {
         this.registerForm.value.gender,
         this.registerForm.value.mobileNumber,
       )
-      .then(data=>{
+      .subscribe(data=>{
         this.registerData = data;
         if (this.registerData.operation == 'error' ) {
           this._baseService.showToast(this.registerData.message,4000);

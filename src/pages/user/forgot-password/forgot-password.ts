@@ -37,7 +37,7 @@ export class ForgotPasswordPage {
     if(this.resetForm.valid){
       this._baseService.startLoading();
       this._authService.resetPassword(this.resetForm.value.email)
-      .then(data=>{
+      .subscribe(data=>{
         this.resetFormData = data;
         if (this.resetFormData.operation == 'error') {
           this._baseService.showToast(this.resetFormData.message);
