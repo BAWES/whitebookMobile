@@ -54,7 +54,10 @@
       </button>
     </ion-list>
     <ion-list>
-        <button ion-item nav-clear menu-close item-icon-right (click)="openEvents()">View All...</button>
+        <button *ngIf="isUserLoggedIn" ion-item nav-clear menu-close item-icon-right (click)="openEvents()">View All...</button>
+        <p ion-item class="authentication-failed" *ngIf="!sUserLoggedIn">
+          Please login to view event list
+        </p>
     </ion-list>
   </ion-content>
 </ion-menu>

@@ -18,7 +18,7 @@
 </ion-header>
 <ion-content padding>
 
-  <ion-row class="header">
+  <ion-row class="header" *ngIf="isUserLoggedIn">
       <ion-col width-20>
           <strong>Image</strong>
       </ion-col>
@@ -28,7 +28,7 @@
       <ion-col width-10 text-center close-btn position-relative>
       </ion-col>
   </ion-row>
-<div class="scroll-content" [virtualScroll]="cartItems" approxItemHeight="40px">
+<div class="scroll-content" [virtualScroll]="cartItems" approxItemHeight="40px" *ngIf="isUserLoggedIn && carItems">
   <ion-row class="header" *virtualItem="let cartItems">
       <ion-col width-20 position-relative>
           <ion-img src="{{_config.images_210}}/{{cartItems.image_path}}"></ion-img>
@@ -45,11 +45,16 @@
       </ion-col>
   </ion-row>
 </div>
-  <ion-item text-center checkout-btn>
+<div class="" *ngIf="!isUserLoggedIn"></div>
+  <ion-item text-center checkout-btn *ngIf="isUserLoggedIn">
     <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> Checkout</button>
   </ion-item>
 </ion-content>
 
-<ion-content *ngIf="carItems !== undefined && !carItems.length" class="no-results">
+<ion-content *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">
     <p text-center>No Results</p>
+</ion-content>
+
+<ion-content *ngIf="!isUserLoggedIn" class="no-results">
+    <p text-center>Please Login to add to cart item</p>
 </ion-content>

@@ -3,6 +3,7 @@ import { NavController, AlertController, ViewController, ToastController } from 
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
+import { Authentication } from '../../../providers/auth.service';
 
 @Component({
   selector: 'page-checkout-cart',
@@ -16,18 +17,23 @@ export class CheckoutCartPage {
 
   public cartItems:any;
   public start:number=0;
-
+  public isUserLoggedIn:boolean = false;
   constructor(
     public navCtrl: NavController, 
     public viewCtrl : ViewController,
     public httpRequest : HttpService,
     public _config:GlobalService,
     public alertCtrl : AlertController,
-    public toastCtrl : ToastController
-    ) {}
+    public toastCtrl : ToastController,
+    public authService: Authentication
+    ) {
+      this.isUserLoggedIn = this.authService.getAccessToken();
+    }
 
   ionViewDidLoad() {
-    this.loadCartList();
+    if (this.authService.getAccessToken()) {
+      this.loadCartList();
+    }
   }
 
   dismiss() {
@@ -44,7 +50,6 @@ export class CheckoutCartPage {
   loadCartList(){
     this.httpRequest.get(this._urlCart).subscribe(list => {
       this.cartItems = list;
-      console.log(this.cartItems);
     })
   }
 
