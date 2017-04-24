@@ -35,8 +35,10 @@ export class GlobalService {
    * Initialize the Dev Environment
    * @param {string} [platform]
    */
-  initDevEnvironment(platform?: string){
-    this._ApiUrl = 'http://api.thewhitebook.local/v1';
+  initDevEnvironment(platform?: string) {
+    this._ApiUrl = 'http://localhost/whitebook/api/web/v1';
+    //this._ApiUrl = 'http://api.thewhitebook.local/v1';
+
     this.setupDeviceSpecificConfigs();
   }
 
