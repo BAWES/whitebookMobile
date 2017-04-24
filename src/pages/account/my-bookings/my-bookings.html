@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>My Bookings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col text-center><strong>Booking ID</strong></ion-col>
+        <ion-col text-center><strong>Total Count</strong></ion-col>
+        <ion-col text-center><strong>Amount</strong></ion-col>
+      </ion-row>
+    </ion-item>
+    </ion-list>
+    <ion-list [virtualScroll]="bookingList" approxItemHeight="50px">
+    <ion-item *virtualItem="let bookingList" (click)="itemSelected(bookingList.booking_token)">
+      <ion-row>
+        <ion-col text-center>{{ bookingList.booking_id }}</ion-col>
+        
+        <ion-col text-center *ngIf="bookingList.status == 1 && bookingList.transaction_id == ''">
+          <button>Pay Now</button>
+        </ion-col>
+        <ion-col text-center *ngIf="bookingList.status == 1 && bookingList.transaction_id != ''">
+          Paid
+        </ion-col>
+        <ion-col text-center *ngIf="bookingList.status != 1">
+          -
+        </ion-col>
+
+        <ion-col text-center>KD {{ bookingList.total_with_delivery }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -8,14 +8,14 @@ import { ListingPage } from '../pages/listing/listing';
 import { SearchItemPage } from '../pages/search-item/search-item'
 import { LoginPage } from '../pages/user/login/login';
 import { MyEventsPage } from '../pages/events/my-events/my-events';
-import { MyOrdersPage } from '../pages/account/my-orders/my-orders';
+import { MyBookingsPage } from '../pages/account/my-bookings/my-bookings';
 import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
 // providers
 import { HttpService } from '../providers/http.service';
-import { Authentication } from '../providers/auth.service';
+import { Authentication } from '../providers/auth.service'; 
 
 @Component({
   templateUrl: 'app.html'
@@ -49,7 +49,7 @@ export class MyApp {
     
     if (this.authService.getAccessToken()) {
       this.personal = [
-        { title : 'My Orders', component:MyOrdersPage,icon:'archive' },
+        { title : 'My Bookings', component:MyBookingsPage,icon:'archive' },
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
         { title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
         { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },

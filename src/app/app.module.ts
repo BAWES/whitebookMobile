@@ -18,8 +18,8 @@ import { CreateEventPage } from '../pages/events/create-event/create-event';
 
 import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
-import { MyOrdersPage } from  '../pages/account/my-orders/my-orders';
-import { OrderDetailPage } from '../pages/account/order-detail/order-detail';
+import { MyBookingsPage } from  '../pages/account/my-bookings/my-bookings';
+import { BookingDetailPage } from '../pages/account/booking-detail/booking-detail';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 import { CreateAddressPage } from '../pages/account/create-address/create-address';
 
@@ -52,11 +52,11 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CheckoutShippingPage,
     CheckoutPaymentPage,
     CheckoutCompletedPage,
-    MyOrdersPage,
+    MyBookingsPage,
     MyEventsPage,
     MyAddressBookPage,
     MyAccountPage,
-    OrderDetailPage,
+    BookingDetailPage,
     MyWishListPage,
     CreateAddressPage,
     CreateEventPage,
@@ -80,11 +80,11 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CheckoutShippingPage,
     CheckoutPaymentPage,
     CheckoutCompletedPage,
-    MyOrdersPage,
+    MyBookingsPage,
     MyEventsPage,
     MyAddressBookPage,
     MyAccountPage,
-    OrderDetailPage,
+    BookingDetailPage,
     MyWishListPage,
     CreateAddressPage,
     CreateEventPage,
@@ -101,3 +101,4 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     ],
 })
 export class AppModule {}
+
