@@ -51,7 +51,7 @@ export class MyApp {
       this.personal = [
         { title : 'My Bookings', component:MyBookingsPage,icon:'archive' },
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
-        { title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
+        //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
         { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
         { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
         { title : 'Logout', component:Home ,icon:'power-off'},
