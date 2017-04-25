@@ -17,16 +17,16 @@
 
 <ion-content class="product-detail" *ngIf="product">
   <ion-item text-wrap no-border>
-    <h2>{{product.item_name}}</h2>
+    <h2>{{product.item.item_name}}</h2>
     <ion-slides>
       <ion-slide *ngFor="let image of product.images">
         <ion-thumbnail class="avatarImage">
-          <img src="{{_config.images_1000}}/{{image.image_path}}" >
+          <img src="{{_config.images_530}}/{{image.image_path}}" >
         </ion-thumbnail>
       </ion-slide>
     </ion-slides>
       <h3 text-center>{{product.vendor.vendor_name}}</h3>
-      <h4 text-center>Price : KD {{product.item_price_per_unit}}</h4>       
+      <h4 text-center>Price : KD {{product.item.item_price_per_unit}}</h4>       
       <ion-segment [(ngModel)]="productSection">
         <ion-segment-button round value="pdescription">
           Description
@@ -34,22 +34,11 @@
         <ion-segment-button round value="adescription">
           Addition
         </ion-segment-button>
-        <ion-segment-button round value="contact">
-          Contact
-        </ion-segment-button>
       </ion-segment>
   </ion-item>
   <div [ngSwitch]="productSection" padding>
-    <p text-justify *ngSwitchCase="'pdescription'">{{product.item_description | trimhtml }}</p>
-    <p text-justify *ngSwitchCase="'adescription'">{{product.item_additional_info | trimhtml }}</p>
-      <ion-list *ngSwitchCase="'contact'">
-        <ion-item><i class="fa fa-map-marker" aria-hidden="true"></i> {{product.vendor.vendor_contact_address}}</ion-item>
-        <ion-item><i class="fa fa-envelope-o" aria-hidden="true"></i> {{product.vendor.vendor_public_email}}</ion-item>
-        <ion-item><i class="fa fa-globe" aria-hidden="true"></i> {{product.vendor.vendor_website}}</ion-item>
-        <ion-item><i class="fa fa-instagram" aria-hidden="true"></i> {{product.vendor.vendor_instagram}}</ion-item>
-        <ion-item><i class="fa fa-twitter" aria-hidden="true"></i> {{product.vendor.vendor_twitter}}</ion-item>
-        <ion-item><i class="fa fa-facebook" aria-hidden="true"></i> {{product.vendor.vendor_facebook}}</ion-item>
-      </ion-list>
+    <p text-justify *ngSwitchCase="'pdescription'">{{product.item.item_description | trimhtml }}</p>
+    <p text-justify *ngSwitchCase="'adescription'">{{product.item.item_additional_info | trimhtml }}</p>
   </div>
   <form [formGroup]="productForm" (ngSubmit)="addToCart()" novalidate>
     <ion-item>

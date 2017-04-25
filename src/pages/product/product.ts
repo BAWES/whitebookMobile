@@ -166,12 +166,14 @@ export class ProductPage {
  * method to load product detail
  */
   loadProductDetail() {
-    this.httpService.get(this._urlProductDetail+this.product_id).subscribe(data=>{
-      this.product = data;
-      this.quantity = this.product.item_minimum_quantity_to_order;
-      this.minQuantity = this.product.item_minimum_quantity_to_order;
-      this.loadProductArea(this.product)
-    });
+    this.httpService.get(this._urlProductDetail+this.product_id).subscribe(
+      data => {
+        this.product = data;
+        this.quantity = this.product.item_minimum_quantity_to_order;
+        this.minQuantity = this.product.item_minimum_quantity_to_order;
+        this.loadProductArea(this.product.vendor)
+      }
+    );
   }
 
   /**
