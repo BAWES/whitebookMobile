@@ -48,8 +48,9 @@ export class CheckoutCartPage {
    * method load cart items
    */
   loadCartList(){
-    this.httpRequest.get(this._urlCart).subscribe(list => {
+    this.httpRequest.get(this._urlCart+'?offset=0').subscribe(list => {
       this.cartItems = list;
+      console.log(this.cartItems);
     })
   }
 
@@ -83,4 +84,23 @@ export class CheckoutCartPage {
     })
     alert.present();
   }
+
+  /*
+  * Method perform infinite scroll which 
+  * will load more data just like pagination
+  */
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+    let items;
+    this.start+=10;
+    this.httpRequest.get(this._urlCart +'?offset='+this.start).subscribe(data=>{
+        items = data;
+        for(let item of items) {
+          this.cartItems.push(item);
+        }
+      console.log('Begin async operation');
+      infiniteScroll.complete();
+    })
+  }
+
 }

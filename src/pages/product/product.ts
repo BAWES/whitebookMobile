@@ -177,8 +177,7 @@ export class ProductPage {
         this.quantity = this.product.item_minimum_quantity_to_order;
         this.minQuantity = this.product.item_minimum_quantity_to_order;
 
-        this.productAddons = data.addons;
-
+        this.productAddons = this.product.addons;
         console.log(this.productAddons);
 
         this.loadProductArea(this.product.vendor)
