@@ -31,27 +31,28 @@
 </ion-header>
 
 <ion-content>
-  {{products|json}}
 <ion-grid class="category-product-listing {{productView}}">
-    <!--<ion-list class="scroll-content" [virtualScroll]="products">-->
-    <ion-list class="scroll-content">
-        <button detail-none ion-item *virtualItem="let products " class="product-items" (click)="productDetail(products.item_id)">
+    <ion-list class="scroll-content" *ngFor="let product of products" class="product-items" (click)="productDetail(product.item_id)">
+        <button detail-none ion-item>
           <div class="gallery-section">
             <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             <ion-thumbnail class="avatarImage">
-              <ion-img src="{{_config.images_530}}/{{products.image}}" ></ion-img>
+              <img src="{{_config.images_530}}/{{product.image}}" >
             </ion-thumbnail>
           </div>
           <div class="detail-section text-center">
-            <h4 class="name"><strong>{{products.item_name}}</strong></h4>
-            <h6 class="price">KD {{products.item_price_per_unit}}</h6>
-            <h4 class="vendor"> {{products.vendor_name}}</h4>
+            <h4 class="name"><strong>{{product.item_name}}</strong></h4>
+            <h6 class="price">KD {{product.item_price_per_unit}}</h6>
+            <h4 class="vendor"> {{product.vendor_name}}</h4>
           </div>
         </button>
       </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
   </ion-grid>
 
-  <!--<div *ngIf="products !== undefined && !products.length" class="no-results">
+  <div *ngIf="products !== undefined && !products.length" class="no-results">
     <h3 text-center>No Product Found</h3>
-  </div>-->
+  </div>
 </ion-content>
