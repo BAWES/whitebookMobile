@@ -36,7 +36,7 @@ export class GlobalService {
    * @param {string} [platform]
    */
   initDevEnvironment(platform?: string) {
-    this.initAnil();
+    this.initKrushn();
 
     this.setupDeviceSpecificConfigs();
   }
