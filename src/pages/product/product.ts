@@ -7,6 +7,8 @@ import { GlobalService } from '../../providers/global.service';
 import { HttpService } from '../../providers/http.service';
 import { CartCountService } from '../../providers/cart.count.service';
 
+import { Addon }  from '../../models/addon';
+
 @Component({
   selector: 'page-product',
   templateUrl: 'product.html'
@@ -43,7 +45,8 @@ export class ProductPage {
   public slots:any;
   public submitAttempt:boolean = false;
 
-  public menuItem: any;
+  public menuItem: any = [];
+  public productAddons: Addon;
 
   mySlideOptions = {
       initialSlide: 1,
@@ -173,6 +176,11 @@ export class ProductPage {
         this.product = data;
         this.quantity = this.product.item_minimum_quantity_to_order;
         this.minQuantity = this.product.item_minimum_quantity_to_order;
+
+        this.productAddons = data.addons;
+
+        console.log(this.productAddons);
+
         this.loadProductArea(this.product.vendor)
       }
     );
@@ -181,14 +189,14 @@ export class ProductPage {
   /**
    * method to load product area
    */
-  loadProductArea(product) {
-    if (product) {
-        this.httpService.get(this._urlProductArea+product.vendor.vendor_id).subscribe(areaList=>{
+  loadProductArea(vendor) {
+    if (vendor) {
+        this.httpService.get(this._urlProductArea + vendor.vendor_id).subscribe(areaList=>{
         this.vendorAreaList = areaList;
       });
     }
   }
-
+ 
   /**
    * method to load time slot 
    * for perticular vendor product
