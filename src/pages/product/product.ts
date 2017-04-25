@@ -43,6 +43,8 @@ export class ProductPage {
   public slots:any;
   public submitAttempt:boolean = false;
 
+  public menuItem: any;
+
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -179,7 +181,7 @@ export class ProductPage {
    */
   loadProductArea(product) {
     if (product) {
-        this.httpService.get(this._urlProductArea+product.vendor_id).subscribe(areaList=>{
+        this.httpService.get(this._urlProductArea+product.vendor.vendor_id).subscribe(areaList=>{
         this.vendorAreaList = areaList;
       });
     }

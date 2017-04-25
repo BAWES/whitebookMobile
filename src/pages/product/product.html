@@ -88,6 +88,42 @@
       </div>
     </ion-item>
     
+    <!-- addons -->
+
+    <!-- menues -->
+
+    <h2 *ngIf="product.menu.length > 0">Options</h2>
+
+    <ion-item *ngFor="let menu of product.menu">
+      {{ menu.menu_name }}
+      <i *ngIf="menu.min_quantity > 0">atleast {{ menu.min_quantity }}</i>
+      <i *ngIf="menu.max_quantity > 0">upto {{ menu.max_quantity }}</i>
+
+      <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
+          
+          <div class="flex_row" *ngIf="menu.quantity_type == 'selection'">
+          
+            {{ menu_item.menu_item_name }}
+
+            <ion-icon (click)="subMenuItem()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+            <ion-input [(ngModel)]="menuItem[{{menu_item.menu_item_id}}]" value="0" readonly />
+            <ion-icon (click)="addMenuItem()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+          </div>
+
+          <div class="flex_row" *ngIf="menu.quantity_type != 'selection'">
+              <ion-input type="checkbox" [(ngModel)]="menuItem[{{menu_item.menu_item_id}}]" value="1" />
+              {{ menu_item.menu_item_name }}
+          </div>
+
+      </ion-item>
+
+    </ion-item>
+
+    <!-- female service -->
+
+    <!-- special request -->
+
+
     <ion-item no-border>
       <button full round ion-button color="dark" padding-17 add-to-cart> <ion-icon name="cart"></ion-icon>&nbsp;&nbsp;Add To Cart</button>
     </ion-item>
