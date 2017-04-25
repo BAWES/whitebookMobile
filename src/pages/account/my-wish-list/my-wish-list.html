@@ -21,23 +21,26 @@
   <div *ngIf="waiting" class="spinner-container">
         <ion-spinner></ion-spinner>
     </div>
-  <div class="scroll-content" [virtualScroll]="whishlist">
-    <ion-card *virtualItem="let whishlist" style="margin-bottom: 12px;">
-    <div (click)="productDetail(whishlist.item_id)">
+  <ion-list class="scroll-content" *ngFor="let product of whishlist" class="product-items">
+    <ion-card style="margin-bottom: 12px;">
+    <div (click)="productDetail(product.item_id)">
       <ion-item>
-        <h2>{{whishlist.vendor_name}}</h2>
+        <h2>{{product.vendor_name}}</h2>
       </ion-item>
-      <ion-img src="{{_config.images_1000}}/{{whishlist.image_path}}"></ion-img>
+      <ion-img src="{{_config.images_1000}}/{{product.image_path}}"></ion-img>
     </div>
     <ion-card-content>
-      <p>{{whishlist.item_name}}</p>
-      <p>KD {{whishlist.item_price_per_unit}}</p>
-      <button (click)="removeProduct(whishlist.wishlist_id)">
+      <p>{{product.item_name}}</p>
+      <p>KD {{product.item_price_per_unit}}</p>
+      <button (click)="removeProduct(product.wishlist_id)">
         Remove From wishlist
       </button>
     </ion-card-content>
   </ion-card>
-</div>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 <div *ngIf="whishlist !== undefined && !whishlist.length" class="no-results">
     <p text-center>No Results</p>
 </div>
