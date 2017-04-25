@@ -18,33 +18,41 @@
 </ion-header>
 <ion-content padding>
 
-  <ion-row class="header" *ngIf="isUserLoggedIn">
-      <ion-col width-20>
+  <ion-list class="header" *ngIf="isUserLoggedIn">
+      <ion-col width-36-inline-block>
           <strong>Image</strong>
       </ion-col>
-      <ion-col width-70 text-center>
+      <ion-col width-57-inline-block>
           <strong>Detail</strong>
       </ion-col>
       <ion-col width-10 text-center close-btn position-relative>
       </ion-col>
-  </ion-row>
-<div class="scroll-content" [virtualScroll]="cartItems" approxItemHeight="40px" *ngIf="isUserLoggedIn && carItems">
-  <ion-row class="header" *virtualItem="let cartItems">
-      <ion-col width-20 position-relative>
-          <ion-img src="{{_config.images_210}}/{{cartItems.image_path}}"></ion-img>
-      </ion-col>
-      <ion-col width-70 class="button-container">
-          <h3>{{cartItems.item_name}}</h3>
-          <ion-label> QTY :  {{cartItems.cart_quantity}}</ion-label>
-          <ion-label> Date : {{cartItems.cart_delivery_date}}</ion-label>
-          <ion-label> Time :  {{cartItems.timeslot_start_time}} - {{cartItems.timeslot_end_time}} </ion-label>
-          <h2>Price : KD {{cartItems.item_price_per_unit}}</h2>
-      </ion-col>
-      <ion-col width-10 text-center close-btn position-relative>
-          <ion-icon (click)="removeItem(cartItems.cart_id)" name="close"></ion-icon>
-      </ion-col>
-  </ion-row>
+  </ion-list>
+  <div class="" approxItemHeight="40px" *ngIf="isUserLoggedIn && cartItems">
+  
+  <ion-list *ngFor="let item of cartItems" >
+    <ion-row class="header">
+        <ion-col width-20 position-relative>
+            <img src="{{_config.images_210}}/{{item.image_path}}">
+        </ion-col>
+        <ion-col width-70 class="button-container">
+            <h3>{{item.item_name}}</h3>
+            <ion-label> QTY :  {{item.cart_quantity}}</ion-label>
+            <ion-label> Date : {{item.cart_delivery_date}}</ion-label>
+            <ion-label> Time :  {{item.time_slot}}</ion-label>
+            <ion-label> Vendor :  {{item.vendor}}</ion-label>
+            <h2>Price : KD {{item.item_price_per_unit}}</h2>
+        </ion-col>
+        <ion-col width-10 text-center close-btn position-relative>
+            <ion-icon (click)="removeItem(item.cart_id)" name="close"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </div>
+
 <div class="" *ngIf="!isUserLoggedIn"></div>
   <ion-item text-center checkout-btn *ngIf="isUserLoggedIn">
     <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> Checkout</button>
