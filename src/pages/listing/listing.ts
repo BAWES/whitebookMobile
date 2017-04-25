@@ -98,13 +98,15 @@ export class ListingPage {
   * will load more data just like pagination
   */
   doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
     let items;
     this.start+=10;
-    this.httpService.get(this._urlProductListing +'&offset='+this.start+this._urlParamas).subscribe(data=>{
+    this.httpService.get(this._urlProductListing +'?offset='+this.start+this._urlParamas).subscribe(data=>{
         items = data;
         for(let item of items) {
           this.products.push(item);
         }
+      console.log('Begin async operation');
       infiniteScroll.complete();
     })
   }
