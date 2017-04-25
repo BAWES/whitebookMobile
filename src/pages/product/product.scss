@@ -20,3 +20,26 @@ page-product {
 [no-border] .item-inner{border:none!important;}
 [no-border] .label-md {margin: 13px 8px 0px 0;}
 [no-background] {background: none;}
+
+.addon_menu_list .lbl_menu_item,
+.addon_menu_list .qty_box_menu_item,
+.addon_menu_list ion-icon,
+.addon_menu_list ion-input {
+	float: left;
+}
+
+.lbl_menu_item {
+	width: 70%;
+}
+
+.addon_menu_list ion-input {
+	width: 50px;
+}
+
+.addon_menu_list .item-inner {
+	border: none;
+}
+
+.addon_menu_list ion-item {
+	border-bottom: 1px solid #dedede;
+}
