@@ -31,8 +31,10 @@
 </ion-header>
 
 <ion-content>
+  {{products|json}}
 <ion-grid class="category-product-listing {{productView}}">
-    <ion-list class="scroll-content" [virtualScroll]="products">
+    <!--<ion-list class="scroll-content" [virtualScroll]="products">-->
+    <ion-list class="scroll-content">
         <button detail-none ion-item *virtualItem="let products " class="product-items" (click)="productDetail(products.item_id)">
           <div class="gallery-section">
             <ion-icon class="like-icon" name="heart-outline"></ion-icon>
@@ -49,7 +51,7 @@
       </ion-list>
   </ion-grid>
 
-  <div *ngIf="products !== undefined && !products.length" class="no-results">
-      <h3 text-center>No Product Found</h3>
-    </div>
+  <!--<div *ngIf="products !== undefined && !products.length" class="no-results">
+    <h3 text-center>No Product Found</h3>
+  </div>-->
 </ion-content>

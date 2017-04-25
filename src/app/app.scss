@@ -15,15 +15,15 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-i.venus_icon{background: url(../../images/sprit.png) no-repeat -3px -8px  ; height: 40px;}
-i.invit_icon{background:  url(../../images/sprit.png) no-repeat -84px -12px;height: 39px;}
-i.supplies{background: url(../../images/sprit.png) no-repeat  -292px -11px;height: 39px;}
-i.food_map{background: url(../../images/sprit.png) no-repeat -157px -11px ;height: 39px;}
-i.decor{background: url(../../images/sprit.png) no-repeat  -226px -12px;height: 37px;}
-i.entert{background: url(../../images/sprit.png) no-repeat  -363px -10px;height: 37px;}
-i.serv{background: url(../../images/sprit.png) no-repeat  -442px -3px;height: 44px;}
-i.other{background:url(../../images/sprit.png) no-repeat  -521px -13px;height: 34px;}
-i.say_thank{background:url(../../images/sprit.png) -595px -14px  no-repeat;height: 40px;}
+i.venues-category{background: url(../../images/sprit.png) no-repeat -3px -8px  ; height: 40px;}
+i.invitation-category{background:  url(../../images/sprit.png) no-repeat -84px -12px;height: 39px;}
+i.supply-category{background: url(../../images/sprit.png) no-repeat  -292px -11px;height: 39px;}
+i.food-category{background: url(../../images/sprit.png) no-repeat -157px -11px ;height: 39px;}
+i.decor-category{background: url(../../images/sprit.png) no-repeat  -226px -12px;height: 37px;}
+i.enter-category{background: url(../../images/sprit.png) no-repeat  -363px -10px;height: 37px;}
+i.service-category{background: url(../../images/sprit.png) no-repeat  -442px -3px;height: 44px;}
+i.others-category{background:url(../../images/sprit.png) no-repeat  -521px -13px;height: 34px;}
+i.saythankyou-category{background:url(../../images/sprit.png) -595px -14px  no-repeat;height: 40px;}
 .top-nav .bar-buttons-md[start] {order: 1;}
 .logo{width: 20px;}
 .toolbar-background-md {background: #fff;border-color: #000;}
@@ -73,3 +73,8 @@ span.label-gift-favour-icon{top: 33px;}
 [font-size-16]{font-size: 16px;}
 [no-background] {background: none;}
 [position-relative] {position: relative;}
+.home-feature-category button i{display: inline-block;width: 35px;}
+.home-feature-category button i.saythankyou-category{display: inline-block;width: 33px;}
+
+
+[text-center]{text-align: center;}

@@ -18,7 +18,7 @@
 <ion-content class="product-detail" *ngIf="product">
   <ion-item text-wrap no-border>
     <h2>{{product.item_name}}</h2>
-    <ion-slides [options]="mySlideOptions">
+    <ion-slides>
       <ion-slide *ngFor="let image of product.images">
         <ion-thumbnail class="avatarImage">
           <img src="{{_config.images_1000}}/{{image.image_path}}" >

@@ -1,8 +1,17 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
+import { NativeStorage } from '@ionic-native/native-storage';
+
+import { IonicStorageModule } from '@ionic/storage';
+
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
-import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../pages/user/login/login';
 import { RegisterPage } from '../pages/user/register/register';
@@ -64,7 +73,10 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     StringFilterPipe,
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    BrowserModule,  // New in ionic 3
+    HttpModule,  // New in ionic 3
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -94,8 +106,11 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GlobalService,
     Authentication,
-    Storage,
+    IonicStorageModule,
     Base,
+    SplashScreen, // Newly add for ionic 3
+    StatusBar,
+    NativeStorage,
     HttpService,
     CartCountService
     ],

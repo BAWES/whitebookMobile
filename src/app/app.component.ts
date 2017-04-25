@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, MenuController, Platform, ModalController } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
 
 // pages
 import { Home } from '../pages/home/home';
@@ -37,6 +38,8 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
     public menu : MenuController,
     public modalCtnl : ModalController,
     public httpService: HttpService,
@@ -68,8 +71,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
+      this.statusBar.styleDefault(); // Note ionic2 used StatusBar ionic 3 --> statusBar
+      this.splashScreen.hide();
     });
   }
 

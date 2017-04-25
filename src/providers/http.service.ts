@@ -105,8 +105,13 @@ export class HttpService {
           //this._auth.logout("Unable to connect to Plugn servers. Please check your internet connection.");
           return Observable.empty<Response>();
       }
-      
+
       alert("Error: "+errMsg);
+      if (error.status == 401) {
+         this._events.publish("internet:authentication error");
+         this._auth.logout('401 authention error');
+        return Observable.empty<Response>()
+      }
 
       return Observable.throw(errMsg);
   }

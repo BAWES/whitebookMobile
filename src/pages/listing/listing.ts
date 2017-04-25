@@ -85,7 +85,12 @@ export class ListingPage {
    * Load product listing
    */
   loadProducts() {
-    this.httpService.get(this._urlProductListing+'?offset=0'+this._urlParamas).subscribe(data => {this.products = data});
+    this.httpService.get(this._urlProductListing+'?offset=0'+this._urlParamas)
+      .subscribe(
+        data => {
+          this.products = data;
+        }
+      );
   }
 
   /*

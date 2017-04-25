@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
+
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/map';
 import { Platform, Events } from 'ionic-angular';
-import { InAppBrowser, NativeStorage } from 'ionic-native';
+//import { InAppBrowser, NativeStorage } from 'ionic-native';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { GlobalService } from './global.service';
 
@@ -15,12 +24,11 @@ export class Authentication {
   private _accessToken;
   public email: string;
 
-  private _browser: InAppBrowser;
-  private _browserLoadEvents;
-  private _browserCloseEvents;
+  //private _browserLoadEvents;
+  //private _browserCloseEvents;
 
   private url : string;
-  private data : any;
+  //private data : any;
   
   private _urlBasicAuth: string = "/auth/login";
   private _urlCreateAccount: string = "/auth/create-account";
@@ -30,7 +38,8 @@ export class Authentication {
     private _config:GlobalService,
     private _http: Http,
     private _platform: Platform,
-    private _events: Events
+    private _events: Events,
+    private nativeStorage: NativeStorage
     ) {
     this.url = _config._ApiUrl;
     _platform.ready().then(() => {
@@ -47,6 +56,7 @@ export class Authentication {
     } else {
       this.isLoggedIn = false;
       this._events.publish("user:logout");
+      console.log('logout');
     }
   }
 
@@ -61,7 +71,7 @@ export class Authentication {
 
     // Remove from NativeStorage if this is iOS or Android
     if(this._platform.is("cordova") && (this._platform.is("ios") || this._platform.is("android"))){
-      NativeStorage.remove("loggedInUser").then(() => {
+      this.nativeStorage.remove("loggedInUser").then(() => {
         // alert("deleted from nativestorage");
       });
     }
@@ -92,7 +102,7 @@ export class Authentication {
 
     // Save in NativeStorage if iOS and Android
     if(this._platform.is("cordova") && (this._platform.is("ios") || this._platform.is("android"))){
-      NativeStorage.setItem('loggedInUser', {
+      this.nativeStorage.setItem('loggedInUser', {
         'bearer': token,
         'email': email
       }).then(
@@ -128,7 +138,7 @@ export class Authentication {
     // Check Native Storage and Try Again
     // Native storage is implemented because some devices clear LocalStorage regularly to save memory
     if(this._platform.is("cordova") && (this._platform.is("ios") || this._platform.is("android"))){
-      NativeStorage.getItem('loggedInUser')
+      this.nativeStorage.getItem('loggedInUser')
       .then(
         data => {
           this.setAccessToken(data.bearer, data.email);
@@ -184,5 +194,33 @@ createAccount(
       }), {headers: headers})
       .first()
       .map((res: Response) => res.json());
+  }
+
+  /**
+   * Handles Caught Errors from All Authorized Requests Made to Server
+   * @returns {Observable} 
+   */
+  private _handleError(error: any): Observable<any> {
+      let errMsg = (error.message) ? error.message :
+          error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+
+      // Handle Bad Requests
+      // This error usually appears when agent attempts to handle an 
+      // account that he's been removed from assigning
+      if (error.status === 400) {
+          this._events.publish("accountAssignment:removed");
+          return Observable.empty<Response>();
+      }
+
+      // Handle No Internet Connection Error
+      if (error.status == 0) {
+          this._events.publish("internet:offline");
+          //this._auth.logout("Unable to connect to Plugn servers. Please check your internet connection.");
+          return Observable.empty<Response>();
+      }
+      
+      alert("Error: "+errMsg);
+
+      return Observable.throw(errMsg);
   }
 }

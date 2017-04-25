@@ -6,11 +6,11 @@
       </button>
     </ion-buttons>
     <ion-title text-left>White Book</ion-title>
-    <ion-buttons end>
+    <!--<ion-buttons end>
       <button ion-button menuToggle="right">
           <ion-icon name="calendar"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
     <ion-buttons end>
       <ion-badge *ngIf="_cartCount.count > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
@@ -22,7 +22,7 @@
 
 <ion-content padding>
   <div class="top-slider">
-    <ion-slides [options]="mySlideOptions">
+    <ion-slides>
       <ion-slide *ngFor="let slides of sliderSlides">
         <img src="{{slides.image}}" />
       </ion-slide>
@@ -37,7 +37,7 @@
         </button>
       </ion-slides>-->
       <ion-list class="clearfix">
-          <button detail-none ion-item text-center *ngFor="let category of categories" min-height-93 pull-left width-50 no-line class="item-border"  (click)="loadProducts(category.category_name, category.category_id)" >
+          <button detail-none ion-item text-center *ngFor="let category of categories" min-height-93 pull-left width-50 no-line class="text-center item-border"  (click)="loadProducts(category.category_name, category.category_id)" >
             <i class="{{category.icon}} cat-icon" aria-hidden="true"></i><br/>
             {{category.category_name}}
           </button>

@@ -36,8 +36,7 @@ export class GlobalService {
    * @param {string} [platform]
    */
   initDevEnvironment(platform?: string) {
-    this._ApiUrl = 'http://localhost/whitebook/api/web/v1';
-    //this._ApiUrl = 'http://api.thewhitebook.local/v1';
+    this.initAnil();
 
     this.setupDeviceSpecificConfigs();
   }
@@ -96,5 +95,12 @@ export class GlobalService {
   */
   initKhalid() {
     this._ApiUrl = "http://localhost/~BAWES/plugn/api/web/v1";
+  }
+
+  /*
+  * Api url for krushn system environment   
+  */
+  initKrushn() {
+    this._ApiUrl = 'http://localhost/whitebook/api/web/v1';
   }
 }
