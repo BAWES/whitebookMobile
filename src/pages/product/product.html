@@ -82,7 +82,7 @@
     <h2 *ngIf="product.addons.length > 0">Addons</h2>
 
     <ion-item *ngFor="let addon_menu of productAddons">
-      {{ addon_menu.menu_name }}
+      {{addon_menu.menu_name}}
       <i *ngIf="addon_menu.min_quantity > 0">atleast {{ addon_menu.min_quantity }}</i>
       <i *ngIf="addon_menu.max_quantity > 0">upto {{ addon_menu.max_quantity }}</i>
 
