@@ -46,7 +46,7 @@ export class ProductPage {
   public submitAttempt:boolean = false;
 
   public menuItem: any = [];
-  public productAddons: Addon;
+  public productAddons: Addon[];
 
   mySlideOptions = {
       initialSlide: 1,
@@ -245,6 +245,15 @@ export class ProductPage {
       }
     }
   }
+
+  subMenuItem() {
+
+  }
+
+  addMenuItem() {
+
+  }
+  
   /**
    * method to reset all values on 
    * area changes
