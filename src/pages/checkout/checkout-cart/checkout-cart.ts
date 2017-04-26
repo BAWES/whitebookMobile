@@ -16,6 +16,8 @@ export class CheckoutCartPage {
   public _urlCart = '/cart';
 
   public cartItems:any;
+  public summary:any;
+  public delivery_vendors:any;
   public start:number=0;
   public isUserLoggedIn:boolean = false;
   constructor(
@@ -49,7 +51,10 @@ export class CheckoutCartPage {
    */
   loadCartList(){
     this.httpRequest.get(this._urlCart+'?offset=0').subscribe(list => {
-      this.cartItems = list;
+      this.cartItems = list.items;
+      this.summary = list.summary;
+      this.delivery_vendors = list.summary.delivery_vendors;
+      console.log(this.delivery_vendors);
       console.log(this.cartItems);
     })
   }
@@ -91,13 +96,18 @@ export class CheckoutCartPage {
   */
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
-    let items;
+    let CartItems;
     this.start+=10;
     this.httpRequest.get(this._urlCart +'?offset='+this.start).subscribe(data=>{
-        items = data;
-        for(let item of items) {
-          this.cartItems.push(item);
+        if (data.items.length) {
+          CartItems = data.items;
+          this.summary = data.summary;
+          this.delivery_vendors = data.summary.delivery_vendors;
+          for(let item of CartItems) {
+            this.cartItems.push(item);
+          }
         }
+        
       console.log('Begin async operation');
       infiniteScroll.complete();
     })
