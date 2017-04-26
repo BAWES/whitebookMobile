@@ -21,10 +21,10 @@ page-product {
 [no-border] .label-md {margin: 13px 8px 0px 0;}
 [no-background] {background: none;}
 
-.addon_menu_list .lbl_menu_item,
-.addon_menu_list .qty_box_menu_item,
-.addon_menu_list ion-icon,
-.addon_menu_list ion-input {
+.menu_list .lbl_menu_item,
+.menu_list .qty_box_menu_item,
+.menu_list ion-icon,
+.menu_list ion-input {
 	float: left;
 }
 
@@ -32,14 +32,19 @@ page-product {
 	width: 70%;
 }
 
-.addon_menu_list ion-input {
+.menu_list ion-input {
 	width: 50px;
 }
 
-.addon_menu_list .item-inner {
+.menu_list .item-inner {
 	border: none;
 }
 
-.addon_menu_list ion-item {
+.menu_list ion-item {
 	border-bottom: 1px solid #dedede;
+}
+
+.menu_list ion-icon {
+    position: relative;
+    z-index: 999;
 }

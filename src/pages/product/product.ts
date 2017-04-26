@@ -7,8 +7,6 @@ import { GlobalService } from '../../providers/global.service';
 import { HttpService } from '../../providers/http.service';
 import { CartCountService } from '../../providers/cart.count.service';
 
-import { Addon }  from '../../models/addon';
-
 @Component({
   selector: 'page-product',
   templateUrl: 'product.html'
@@ -32,7 +30,7 @@ export class ProductPage {
   public todayStr:any;
   public currentTime:any;
   public timeslots:any = [];
-  public quantity:number;
+  public quantity:number = 1;
   public maxQuantity:number = 0;
   public minQuantity:number;
   public dateChange:boolean=false;
@@ -46,7 +44,8 @@ export class ProductPage {
   public submitAttempt:boolean = false;
 
   public menuItem: any = [];
-  public productAddons: Addon[];
+  public female_service: number;
+  public special_request: string;
 
   mySlideOptions = {
       initialSlide: 1,
@@ -102,16 +101,20 @@ export class ProductPage {
   }
 
   addToCart() {
+
     this.submitAttempt = true;
     
     if (this.productForm.valid) {
       let result;
       let params = {
         'item_id': this.product_id,
-        'timeslot_id': this.slots,
+        'time_slot': this.slots,
         'delivery_date': this.myDate,
         'quantity': this.quantity,
-        'area_id': this.area
+        'area_id': this.area,
+        'menu_item': this.menuItem,
+        'female_service': this.female_service,
+        'special_request': this.special_request
       };
       this.httpService.post(this._urlAddToCart,params).subscribe(data=>{
         result = data;
@@ -121,6 +124,15 @@ export class ProductPage {
         });
         toast.present();
       });
+    } else {
+
+      console.log(this.productForm);
+
+      let toast = this.toastCtrl.create({
+        message : 'Please check form carefully',
+        duration : 4000
+      });
+      toast.present();
     }
   }
 
@@ -173,12 +185,28 @@ export class ProductPage {
   loadProductDetail() {
     this.httpService.get(this._urlProductDetail+this.product_id).subscribe(
       data => {
-        this.product = data;
-        this.quantity = this.product.item_minimum_quantity_to_order;
-        this.minQuantity = this.product.item_minimum_quantity_to_order;
+        this.product = data; 
+        this.minQuantity = this.product.item.item_minimum_quantity_to_order;
 
-        this.productAddons = this.product.addons;
-        console.log(this.productAddons);
+        if(this.product.item.item_minimum_quantity_to_order > 0) {
+          this.quantity = this.product.item.item_minimum_quantity_to_order;  
+        } else {
+          this.quantity = 1;
+        }
+        
+        //create menu item array to save menu item qty 
+
+        this.product.menu.forEach((value, index) => {
+          value.vendorItemMenuItems.forEach((menu_item, index) => {
+             this.menuItem[menu_item.menu_item_id] = 0;  
+          });
+        });
+
+        this.product.addons.forEach((value, index) => {
+          value.vendorItemMenuItems.forEach((menu_item, index) => {
+             this.menuItem[menu_item.menu_item_id] = 0;  
+          });
+        });
 
         this.loadProductArea(this.product.vendor)
       }
@@ -203,7 +231,7 @@ export class ProductPage {
   loadTimeSlot(vendor_id) {
     this.dateChange = true;
     let url = this._urlProductDeliveryTimeSlot 
-      + '?vendor_id='+vendor_id+'&date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
+      + '?vendor_id='+vendor_id+'&event_date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
       this.httpService.get(url).subscribe(timeslots=>{
         this.timeslots = timeslots;  
       });
@@ -215,16 +243,28 @@ export class ProductPage {
    *  method to increase quantity
    */
   add() {
+    
     if (this.maxQuantity == 0) {
+    
       let toast = this.toastCtrl.create({
         message : 'Please select delivery date firstly',
         duration : 2000
       });
       toast.present();
-    } else {
-      if (this.quantity < this.maxQuantity ) {
-        this.quantity++;
-      }
+
+      return false;
+    } 
+
+    if (this.quantity < this.maxQuantity ) {
+      this.quantity++;
+    }else{
+      let toast = this.toastCtrl.create({
+        message : 'Max Quantity Available is ' + this.maxQuantity,
+        duration : 2000
+      });
+      toast.present();
+
+      return false;
     }
   }
 
@@ -245,12 +285,24 @@ export class ProductPage {
     }
   }
 
-  subMenuItem() {
+  /**
+   *  method to decrease menu item quantity
+   */
+  subMenuItemQty(menu_item_id) {    
+    var qty = parseInt(this.menuItem[menu_item_id]);
 
+    if(qty > 0)
+       this.menuItem[menu_item_id] = qty - 1; 
   }
 
-  addMenuItem() {
+  /**
+   *  method to increase menu item quantity
+   */
+  addMenuItemQty(menu_item_id) {    
 
+    var qty = parseInt(this.menuItem[menu_item_id]);
+
+    this.menuItem[menu_item_id] = qty + 1;
   }
   
   /**
@@ -270,7 +322,7 @@ export class ProductPage {
   loadProductCapacity(){
     let url = this._urlProductCapacity+'?product_id='+this.product_id+'&deliver_date='+this.myDate;
       this.httpService.get(url).subscribe(capacity=>{
-        this.maxQuantity = capacity;
+        this.maxQuantity = parseInt(capacity);
       });
   }
 
