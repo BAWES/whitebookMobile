@@ -22,6 +22,8 @@ export class CreateAddressPage {
   public addressTypeData: any;
   public locationData: any;
   public locationQuestion: any;
+  public questionsAnswers: any = [];
+  public questionsAnswersResponse: any = [];
   
   // for edit address
   public address_id: number = 0;
@@ -41,7 +43,7 @@ export class CreateAddressPage {
     public formBuilder: FormBuilder,
     public _navParams: NavParams,
   ) {
-    this._base.startLoading();
+    // this._base.startLoading();
     this.addressForm = this.formBuilder.group({
         addressName: ['', Validators.required],
         addressType: ['', Validators.required],
@@ -51,14 +53,16 @@ export class CreateAddressPage {
   }
 
   ionViewDidLoad() {
+    
     this.loadAdressTypes();
     this.loadLocations();
-    this._base.endLoading();
+    
     this.address_id = this._navParams.get('address_id');
     if (this.address_id && this.address_id != 0) {
         this.title = 'Update Address';
         this.loadAddressDetail(this.address_id);
     }
+    // this._base.endLoading();
   }
 
   /**
@@ -74,6 +78,7 @@ export class CreateAddressPage {
    * new address
    */
   saveAddress() {
+    
     if (this.addressForm.valid) {
       let paramas:any;
         paramas = {
@@ -81,6 +86,7 @@ export class CreateAddressPage {
         'area_id':this.addressForm.value.areaName,
         'address_name':this.addressForm.value.addressName,
         'address_data':this.addressForm.value.addressData,
+        'questions_answers':this.questionsAnswers,
         "address_archived": "no",
       }
       
@@ -90,6 +96,7 @@ export class CreateAddressPage {
             'area_id':this.addressForm.value.areaName,
             'address_name':this.addressForm.value.addressName,
             'address_data':this.addressForm.value.addressData,
+            'questions_answers':this.questionsAnswers,
             "address_archived": "no",
             "address_id":this.address_id
           }
@@ -97,6 +104,13 @@ export class CreateAddressPage {
       } else {
           this.saveNewAddress(paramas);
       }
+    } else {
+
+      let toast = this._toastCtrl.create({
+        message : 'Please check form carefully',
+        duration : 4000
+      });
+      toast.present();
     }
   }
 
@@ -143,6 +157,7 @@ export class CreateAddressPage {
    */
   loadAdressTypes() {
     this.httpService.get(this._urlAddressType).subscribe(data => {
+      this.questionsAnswers = [];
       this.addressTypeData = data;
     })
   }
@@ -161,8 +176,19 @@ export class CreateAddressPage {
   */
   loadQuestions(address_type_id : number) {
     this.httpService.get(this._urlAddressQuestion+address_type_id).subscribe(data => {
-      console.log(data);
       this.locationQuestion = data;
+      this.questionsAnswers[0]= null;
+      this.locationQuestion.forEach((question,index) => {
+        this.questionsAnswers[question.ques_id] = '';
+        
+        this.questionsAnswersResponse.forEach((answers,index) => {
+          if (answers.address_type_question_id == question.ques_id) {
+              this.questionsAnswers[question.ques_id] = answers.response_text;
+          }
+        })
+      });
+      console.log(this.questionsAnswersResponse);
+      console.log(this.questionsAnswers);
     })
   }
 
@@ -177,6 +203,8 @@ export class CreateAddressPage {
       this.addressType = addressDetail.address.address_type_id;
       this.areaName = addressDetail.address.area_id;
       this.addressData = addressDetail.address.address_data;
+      this.questionsAnswersResponse = addressDetail.question;
+      this.loadQuestions(addressDetail.address.address_type_id);
     })
   }
 }
