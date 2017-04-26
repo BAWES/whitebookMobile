@@ -60,7 +60,7 @@
     <ion-item *ngIf="timeslots && timeslots.length">
       <ion-label>Select Delivary Time Slot</ion-label>
       <ion-select [(ngModel)]="slots" formControlName="slots">
-          <ion-option *ngFor="let slots of timeslots" value="{{slots.id}}">{{slots.value}}</ion-option>
+          <ion-option *ngFor="let timeslot of timeslots" value="{{ timeslot }}">{{ timeslot }}</ion-option>
       </ion-select>
     </ion-item>
     <div class="error-message" *ngIf="timeslots && timeslots.length && productForm.controls.area.valid && productForm.controls.myDate.valid && !productForm.controls.slots.valid && (productForm.controls.slots.touched ||  submitAttempt)">
@@ -72,8 +72,8 @@
     <ion-item>
       <div class="flex_row">
         <ion-icon (click)="sub()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-        <p class="quantity"> {{quantity}} </p>
-        <ion-icon (click)="add()"ios="ios-add-circle" md="md-add-circle"></ion-icon>
+        <p class="quantity"> {{ quantity }} </p>
+        <ion-icon (click)="add()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
       </div>
     </ion-item>
     
@@ -81,7 +81,7 @@
 
     <h2 *ngIf="product.addons.length > 0">Addons</h2>
 
-    <div *ngFor="let addon_menu of productAddons" class="addon_menu_list">
+    <div *ngFor="let addon_menu of product.addons" class="menu_list">
 
       <ion-list *ngIf="addon_menu.quantity_type == 'selection'">
 
@@ -96,9 +96,9 @@
               {{ addon_item.menu_item_name }}
             </div>
             <div class="qty_box_menu_item" item-right>
-              <ion-icon (click)="subMenuItem()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              <ion-input ttype="number" value="0" [(ngModel)]="menuItem[addon_item.menu_item_id]" [ngModelOptions]="{standalone: true}"></ion-input>
-              <ion-icon (click)="addMenuItem()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              <ion-icon (click)="subMenuItemQty(addon_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+              <ion-input type="number" value="0" [(ngModel)]="menuItem[addon_item.menu_item_id]" [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-icon (click)="addMenuItemQty(addon_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
             </div>
         </ion-item>
       </ion-list>
@@ -111,9 +111,9 @@
           <i *ngIf="addon_menu.max_quantity > 0">upto {{ addon_menu.max_quantity }}</i>
         </ion-list-header>
 
-        <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">
-          <ion-checkbox [(ngModel)]="menuItem[addon_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
-          <ion-label>{{ addon_item.menu_item_name }}</ion-label>          
+        <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">        
+          <ion-label>{{ addon_item.menu_item_name }}</ion-label>    
+          <ion-checkbox [(ngModel)]="menuItem[addon_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>      
         </ion-item>
       </ion-list>
 
@@ -123,7 +123,7 @@
 
     <h2 *ngIf="product.menu.length > 0">Options</h2>
 
-    <div *ngFor="let menu of product.menu">
+    <div *ngFor="let menu of product.menu" class="menu_list">
            
       <ion-list *ngIf="menu.quantity_type == 'selection'">
 
@@ -134,10 +134,14 @@
         </ion-list-header>
 
         <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
-            <ion-label>{{ menu_item.menu_item_name }}</ion-label>
-            <ion-icon (click)="subMenuItem()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-            <ion-input type="number" value="0" [(ngModel)]="menuItem[menu_item.menu_item_id]" [ngModelOptions]="{standalone: true}"></ion-input>
-            <ion-icon (click)="addMenuItem()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            <div class="lbl_menu_item" item-left>
+              {{ menu_item.menu_item_name }}
+            </div>
+            <div class="qty_box_menu_item" item-right>
+              <ion-icon (click)="subMenuItemQty(menu_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+              <ion-input type="number" value="0" [(ngModel)]="menuItem[menu_item.menu_item_id]" [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-icon (click)="addMenuItemQty(menu_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            </div>
         </ion-item>
       </ion-list>
 
@@ -158,8 +162,17 @@
 
     <!-- female service -->
 
+    <ion-item *ngIf="product.have_female_service">
+      <ion-label>Include Female Service</ion-label>
+      <ion-checkbox type="checkbox" [(ngModel)]="female_service" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+    </ion-item>
+
     <!-- special request -->
 
+    <ion-item *ngIf="product.allow_special_request">
+      <ion-label>Special Request</ion-label>
+      <ion-checkbox type="checkbox" [(ngModel)]="special_request" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+    </ion-item>
 
     <ion-item no-border>
       <button full round ion-button color="dark" padding-17 add-to-cart> <ion-icon name="cart"></ion-icon>&nbsp;&nbsp;Add To Cart</button>
