@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Package Listing</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+<div class="scroll-content" *ngIf="package" >
+
+  <ion-card *ngFor="let pack of package" (click)="detail(pack.package_id)">
+  <img src="{{_config.s3}}/{{pack.package_background_image}}" >
+    <ion-card-content>
+      <ion-card-title>
+        {{pack.package_name}}
+      </ion-card-title>
+      <p>
+        {{pack.package_description | slice:0:200}}...
+      </p>
+    </ion-card-content>
+
+    <!--<ion-row class="row" no-padding="">
+      <ion-col class="col">
+        <button clear="" color="danger" icon-left="" ion-button="" small="" class="disable-hover button button-ios button-clear button-clear-ios button-small button-small-ios button-clear-ios-danger" ng-reflect-color="danger" ng-reflect-small="" ng-reflect-clear=""><span class="button-inner">
+          <ion-icon name="star" role="img" class="icon icon-ios ion-ios-star" aria-label="star" ng-reflect-name="star"></ion-icon>
+          Favorite
+        </span><div class="button-effect"></div></button>
+      </ion-col>
+      <ion-col class="col" text-center="">
+        <button clear="" color="danger" icon-left="" ion-button="" small="" class="disable-hover button button-ios button-clear button-clear-ios button-small button-small-ios button-clear-ios-danger" ng-reflect-color="danger" ng-reflect-small="" ng-reflect-clear=""><span class="button-inner">
+          <ion-icon name="musical-notes" role="img" class="icon icon-ios ion-ios-musical-notes" aria-label="musical notes" ng-reflect-name="musical-notes"></ion-icon>
+          Listen
+        </span><div class="button-effect"></div></button>
+      </ion-col>
+      <ion-col class="col" text-right="">
+        <button clear="" color="danger" icon-left="" ion-button="" small="" class="disable-hover button button-ios button-clear button-clear-ios button-small button-small-ios button-clear-ios-danger" ng-reflect-color="danger" ng-reflect-small="" ng-reflect-clear=""><span class="button-inner">
+          <ion-icon name="share-alt" role="img" class="icon icon-ios ion-ios-share-alt" aria-label="share alt" ng-reflect-name="share-alt"></ion-icon>
+          Share
+        </span><div class="button-effect"></div></button>
+      </ion-col>
+    </ion-row>-->
+
+  </ion-card>
+</div>
+
+<div *ngIf="package !== undefined && !package.length" class="no-results">
+    <h3 text-center>No Package Found</h3>
+  </div>
+</ion-content>

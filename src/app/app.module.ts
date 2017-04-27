@@ -44,6 +44,10 @@ import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
 import { CartCountService } from '../providers/cart.count.service';
 
+// packages Page
+import { PackageListPage } from '../pages/packages/package-list/package-list';
+import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
+
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
 
@@ -71,6 +75,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage,
     StringFilterPipe,
+    PackageListPage,
+    PackageDetailPage
   ],
   imports: [
     BrowserModule,  // New in ionic 3
@@ -100,7 +106,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     MyWishListPage,
     CreateAddressPage,
     CreateEventPage,
-    SearchFilterPage
+    SearchFilterPage,
+    PackageListPage,
+    PackageDetailPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
