@@ -20,7 +20,8 @@ export class ProductPage {
   public _urlProductDeliveryTimeSlot = '/product/time-slot';
   public _urlAddToCart = '/cart';
   public _urlWishlist = '/wishlist';
-
+  public _urlFinalPrice = '/product/final-price';
+  
   public productSection:string = "pdescription";
   public product_id:number;
   public product : any;
@@ -32,7 +33,7 @@ export class ProductPage {
   public timeslots:any = [];
   public quantity:number = 1;
   public maxQuantity:number = 0;
-  public minQuantity:number;
+  public minQuantity:number = 1;
   public dateChange:boolean=false;
   public wishlistID:number=0;
   public wishlistLbl:string = 'Add To Wishlist';
@@ -42,7 +43,7 @@ export class ProductPage {
   public myDate:any;
   public slots:any;
   public submitAttempt:boolean = false;
-
+  public total: number;
   public menuItem: any = [];
   public female_service: number;
   public special_request: string;
@@ -186,14 +187,17 @@ export class ProductPage {
     this.httpService.get(this._urlProductDetail+this.product_id).subscribe(
       data => {
         this.product = data; 
-        this.minQuantity = this.product.item.item_minimum_quantity_to_order;
 
         if(this.product.item.item_minimum_quantity_to_order > 0) {
-          this.quantity = this.product.item.item_minimum_quantity_to_order;  
-        } else {
-          this.quantity = 1;
-        }
-        
+          this.minQuantity = this.product.item.item_minimum_quantity_to_order;  
+        } 
+
+        if(this.product.item.included_quantity > this.minQuantity) {
+          this.minQuantity = this.product.item.included_quantity;  
+        } 
+  
+        this.quantity = this.minQuantity;        
+
         //create menu item array to save menu item qty 
 
         this.product.menu.forEach((value, index) => {
@@ -208,9 +212,22 @@ export class ProductPage {
           });
         });
 
-        this.loadProductArea(this.product.vendor)
+        this.loadFinalPrice();
+        this.loadProductArea(this.product.vendor);
       }
     );
+  }
+
+  loadFinalPrice() {
+    let result;
+    let param = {
+      'item_id' : this.product_id,
+      'quantity' : this.quantity,
+      'menu_item' : this.menuItem
+    }
+    this.httpService.post(this._urlFinalPrice, param).subscribe(response => {
+      this.total = response.total;
+    });
   }
 
   /**
@@ -291,18 +308,19 @@ export class ProductPage {
   subMenuItemQty(menu_item_id) {    
     var qty = parseInt(this.menuItem[menu_item_id]);
 
-    if(qty > 0)
-       this.menuItem[menu_item_id] = qty - 1; 
+    if(qty > 0) {
+      this.menuItem[menu_item_id] = qty - 1; 
+      this.loadFinalPrice();
+    }       
   }
 
   /**
    *  method to increase menu item quantity
    */
   addMenuItemQty(menu_item_id) {    
-
     var qty = parseInt(this.menuItem[menu_item_id]);
-
     this.menuItem[menu_item_id] = qty + 1;
+    this.loadFinalPrice();
   }
   
   /**
