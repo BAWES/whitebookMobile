@@ -26,7 +26,8 @@
       </ion-slide>
     </ion-slides>
       <h3 text-center>{{product.vendor.vendor_name}}</h3>
-      <h4 text-center>Price : KD {{product.item.item_price_per_unit}}</h4>       
+      <h4 text-center *ngIf="total">Price : {{ total }}</h4>       
+      <h4 text-center *ngIf="!total">Price : Loading...</h4>       
       <ion-segment [(ngModel)]="productSection">
         <ion-segment-button round value="pdescription">
           Description
