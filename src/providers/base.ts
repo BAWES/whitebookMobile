@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ToastController ,AlertController,LoadingController, Loading} from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class Base {
@@ -9,7 +8,6 @@ export class Base {
     private toastCtrl : ToastController,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private _storageService: Storage
   ){}
 
   startLoading() {

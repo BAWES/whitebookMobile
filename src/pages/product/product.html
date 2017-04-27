@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>Product Detail</ion-title>
-    <ion-buttons end>
+    <!--<ion-buttons end>
       <button ion-button menuToggle="right" >
           <ion-icon name="calendar"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
     <ion-buttons end>
       <ion-badge *ngIf="_cartCount.count > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
@@ -25,9 +25,12 @@
         </ion-thumbnail>
       </ion-slide>
     </ion-slides>
+
       <h3 text-center>{{product.vendor.vendor_name}}</h3>
+      <h5 text-center *ngIf="product.notice != ''">Notice: {{product.notice}}</h5>
       <h4 text-center *ngIf="total">Price : {{ total }}</h4>       
       <h4 text-center *ngIf="!total">Price : Loading...</h4>       
+
       <ion-segment [(ngModel)]="productSection">
         <ion-segment-button round value="pdescription">
           Description
@@ -81,7 +84,6 @@
     <!-- addons -->
 
     <h2 *ngIf="product.addons.length > 0">Addons</h2>
-
     <div *ngFor="let addon_menu of product.addons" class="menu_list">
 
       <ion-list *ngIf="addon_menu.quantity_type == 'selection'">

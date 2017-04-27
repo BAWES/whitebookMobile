@@ -68,6 +68,23 @@ export class HttpService {
               .map((res: Response) => res.json());
   }
 
+
+  /**
+   * Requests via PUT verb
+   * @param {string} endpointUrl
+   * @param {*} params
+   * @returns {Observable<any>}
+   */
+  put(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
+    const url = this._config._ApiUrl + endpointUrl;
+
+    return this._http.put(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
+              .catch((err) => this._handleError(err))
+              .take(1)
+              .map((res: Response) => res.json());
+  }
+
+
   /**
    * Requests via DELETE verb. Params should be a part of the url string 
    * similar to get requests.

@@ -5,6 +5,7 @@ page-product {
     .quantity{width: 100%;font-size: 25px;text-align: center;margin-top: 4px;}
     .error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;padding-right: 10px;}
     .button-md:hover:not(.disable-hover){background-color: #000;color:#fff;}
+    .callout-container {    width: 100px;position: absolute;left: 15px;font-size: 11px;top: 152px;background: #fff;padding: 2px;}
 }
 .product-detail-like-icon button{background: #fff;}
 .product-detail-like-icon button ion-icon{font-size: 21px;}
@@ -24,27 +25,9 @@ page-product {
 .menu_list .lbl_menu_item,
 .menu_list .qty_box_menu_item,
 .menu_list ion-icon,
-.menu_list ion-input {
-	float: left;
-}
-
-.lbl_menu_item {
-	width: 70%;
-}
-
-.menu_list ion-input {
-	width: 50px;
-}
-
-.menu_list .item-inner {
-	border: none;
-}
-
-.menu_list ion-item {
-	border-bottom: 1px solid #dedede;
-}
-
-.menu_list ion-icon {
-    position: relative;
-    z-index: 999;
-}
+.menu_list ion-input {float: left;}
+.lbl_menu_item {width: 70%;}
+.menu_list ion-input {width: 50px;}
+.menu_list .item-inner {border: none;}
+.menu_list ion-item {border-bottom: 1px solid #dedede;}
+.menu_list ion-icon {position: relative;z-index: 999;}

@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar persistent="true" >
     <ion-title>{{title}}</ion-title>
-    <ion-buttons end>
+    <!--<ion-buttons end>
       <button ion-button menuToggle="right" >
           <ion-icon name="calendar"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
     <ion-buttons end>
       <ion-badge *ngIf="_cartCount.count > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
@@ -39,6 +39,11 @@
             <ion-thumbnail class="avatarImage">
               <img src="{{_config.images_530}}/{{product.image}}" >
             </ion-thumbnail>
+            <div *ngIf="product.notice != ''" class="callout-container">
+                <span class="callout light">
+                    Notice: {{product.notice}}
+                </span>
+            </div>
           </div>
           <div class="detail-section text-center">
             <h4 class="name"><strong>{{product.item_name}}</strong></h4>
