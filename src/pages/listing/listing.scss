@@ -31,10 +31,7 @@ page-listing {
     .list-view .label-md {margin:0px;}
     .vendor{font-weight: bold;}
     .top-filter-tool-bar button{background: none;}
-    ion-img, ion-img img {
-        min-width: 250px;
-        min-height: 250px;
-    }
-    
+    ion-img, ion-img img {min-width: 250px;min-height: 250px;}
+    .callout-container {    width: 100px;position: absolute;left: 15px;font-size: 11px;top: 152px;background: #fff;padding: 2px;}
 }
     
