@@ -47,7 +47,19 @@
           </div>
           <div class="detail-section text-center">
             <h4 class="name"><strong>{{product.item_name}}</strong></h4>
-            <h6 class="price">KD {{product.item_price_per_unit}}</h6>
+            
+            <h6 class="price">
+              <span *ngIf="product.item_base_price > 0">
+                 KD {{ product.item_base_price }}
+              </span>
+              <span *ngIf="!product.item_base_price && product.min_order_amount > 0">
+                 KD {{ product.min_order_amount }}
+              </span>
+              <span *ngIf="!product.item_base_price && !product.min_order_amount">
+                 Price based on selection 
+              </span>
+            </h6>
+
             <h4 class="vendor"> {{product.vendor_name}}</h4>
           </div>
         </button>
