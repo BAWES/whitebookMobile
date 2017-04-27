@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar primary>
+    <ion-title>Package Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="package-detail" >
+  <div class="scroll-content" *ngIf="detail" >
+    <ion-item text-wrap no-border>
+      <h1 text-center>{{detail.package_name}}</h1>
+        <img src="{{_config.s3}}/{{detail.package_background_image}}" >
+        <h3 text-center>Average price: {{detail.package_avg_price}}</h3>
+        <h3 text-center>No of guests: {{detail.package_number_of_guests}}</h3>
+    </ion-item>
+    <div padding text-justify>
+      {{detail.package_description}}
+    </div>
+  </div>
+</ion-content>

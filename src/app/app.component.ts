@@ -14,6 +14,10 @@ import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 
+// packages Page
+import { PackageListPage } from '../pages/packages/package-list/package-list';
+
+
 // providers
 import { HttpService } from '../providers/http.service';
 import { Authentication } from '../providers/auth.service'; 
@@ -52,6 +56,7 @@ export class MyApp {
     
     if (this.authService.getAccessToken()) {
       this.personal = [
+        { title : 'Packages', component:PackageListPage,icon:'archive' },
         { title : 'My Bookings', component:MyBookingsPage,icon:'archive' },
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
         //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
