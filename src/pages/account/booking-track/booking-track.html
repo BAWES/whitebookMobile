@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Track Booking Detail</ion-title>
+   </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+	<ion-item>
+		<ion-label>Enter Token</ion-label>
+		<ion-input [(ngModel)]="bookingToken"></ion-input>
+	</ion-item>
+	
+	<div padding>
+    	<button ion-button round full color="dark" (click)="loadBooking()">Submit</button>
+  	</div>
+
+</ion-content>

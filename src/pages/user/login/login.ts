@@ -27,6 +27,9 @@ export class LoginPage {
     public _authService: Authentication,
     public _baseService: Base
   ){
+
+    this._authService.logout();
+
     this.loginForm = formBuilder.group({
       'email': ['', Validators.compose([Validators.required,ValidFields.isValidEmail])],
       'password': ['', Validators.required],
