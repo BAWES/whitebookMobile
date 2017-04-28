@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ModalController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
@@ -48,6 +48,8 @@ export class ProductPage {
   public female_service: number;
   public special_request: string;
 
+  public cartErrors: any = [];
+
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -61,6 +63,7 @@ export class ProductPage {
     private _params: NavParams,
     public modalCtnl: ModalController,
     public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
     public _config: GlobalService,
     public httpService: HttpService,
     public formBuilder: FormBuilder,
@@ -106,7 +109,7 @@ export class ProductPage {
     this.submitAttempt = true;
     
     if (this.productForm.valid) {
-      let result;
+      
       let params = {
         'item_id': this.product_id,
         'time_slot': this.slots,
@@ -117,17 +120,26 @@ export class ProductPage {
         'female_service': this.female_service,
         'special_request': this.special_request
       };
-      this.httpService.post(this._urlAddToCart,params).subscribe(data=>{
-        result = data;
-        let toast = this.toastCtrl.create({
-          message : result.message,
-          duration : 4000
+      this.httpService.post(this._urlAddToCart,params).subscribe(data => {
+        
+        let msg = '';
+ 
+        for (var i in data.message) {
+          var value = data.message[i];
+          for (var j in value) {
+            msg += value[j] + "<br />";
+          }
+        }
+        
+        let alert = this.alertCtrl.create({
+          title: 'Add to cart',
+          subTitle: msg,
+          buttons: ['OK']
         });
-        toast.present();
+        alert.present();
+
       });
     } else {
-
-      console.log(this.productForm);
 
       let toast = this.toastCtrl.create({
         message : 'Please check form carefully',
