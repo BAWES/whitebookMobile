@@ -6,6 +6,9 @@ page-product {
     .error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;padding-right: 10px;}
     .button-md:hover:not(.disable-hover){background-color: #000;color:#fff;}
     .callout-container {    width: 100px;position: absolute;left: 15px;font-size: 11px;top: 152px;background: #fff;padding: 2px;}
+    .price-table-col{border: 1px solid;text-align: center;}
+    .price-table-col-header{background: #000;color: #fff;border: none;text-align: center;}
+    .white-border-right{border-right: 1px solid #fff;}
 }
 .product-detail-like-icon button{background: #fff;}
 .product-detail-like-icon button ion-icon{font-size: 21px;}
