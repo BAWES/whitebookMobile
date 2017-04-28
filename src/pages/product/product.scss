@@ -27,7 +27,19 @@ page-product {
 .menu_list ion-icon,
 .menu_list ion-input {float: left;}
 .lbl_menu_item {width: 70%;}
-.menu_list ion-input {width: 50px;}
+.menu_list ion-input {
+    width: 35px;
+    position: relative;
+    top: -5px;
+}
+
 .menu_list .item-inner {border: none;}
 .menu_list ion-item {border-bottom: 1px solid #dedede;}
 .menu_list ion-icon {position: relative;z-index: 999;}
+
+.menu_list .lbl_menu_item i {
+    font-size: 14px;
+    clear: both;
+    display: block;
+}
+
