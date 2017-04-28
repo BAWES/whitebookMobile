@@ -81,6 +81,18 @@
       </div>
     </ion-item>
     
+    <!-- price -->
+    <ion-item *ngIf="product.hide_price_chart != 1 && product.price.length > 0">
+      <h1 text-center>Price Chart</h1>
+        <div class = "row border" border>
+          <div class = "price-table-col-header white-border-right col">Quantity</div>
+          <div class = "price-table-col-header col">Price</div>
+        </div>
+        <div class = "row border" border *ngFor="let priceList of product.price">
+          <div class = "price-table-col col">{{priceList.range_from}}+</div>
+          <div class = "price-table-col col">KD {{priceList.pricing_price_per_unit}}</div>
+        </div>
+    </ion-item>
     <!-- addons -->
 
     <h2 *ngIf="product.addons.length > 0">Addons</h2>
