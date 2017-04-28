@@ -13,6 +13,7 @@ import { MyBookingsPage } from '../pages/account/my-bookings/my-bookings';
 import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address-book';
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
+import { BookingTrackPage } from '../pages/account/booking-track/booking-track';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -57,16 +58,18 @@ export class MyApp {
     if (this.authService.getAccessToken()) {
       this.personal = [
         { title : 'Packages', component:PackageListPage,icon:'archive' },
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive' },
         { title : 'My Bookings', component:MyBookingsPage,icon:'archive' },
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
         //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
         { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
         { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
-        { title : 'Logout', component:Home ,icon:'power-off'},
+        { title : 'Logout', component:LoginPage, icon:'power-off'},
       ]
     } else {
       this.personal = [
         { title : 'Sign In', component:LoginPage,icon:'sign-in' },
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive' }
       ]
     }
     this.isUserLoggedIn = this.authService.getAccessToken();
