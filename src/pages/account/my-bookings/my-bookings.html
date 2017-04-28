@@ -13,22 +13,20 @@
       </ion-row>
     </ion-item>
     </ion-list>
-    <ion-list [virtualScroll]="bookingList" approxItemHeight="50px">
-    <ion-item *virtualItem="let bookingList" (click)="itemSelected(bookingList.booking_token)">
+    <ion-list>
+    <ion-item *ngFor="let booking of bookingList" (click)="itemSelected(booking.booking_token)">
       <ion-row>
-        <ion-col text-center>{{ bookingList.booking_id }}</ion-col>
-        
-        <ion-col text-center *ngIf="bookingList.status == 1 && bookingList.transaction_id == ''">
+        <ion-col text-center>{{ booking.booking_id }}</ion-col>
+        <ion-col text-center *ngIf="booking.status == 1 && booking.transaction_id == ''">
           <button>Pay Now</button>
         </ion-col>
-        <ion-col text-center *ngIf="bookingList.status == 1 && bookingList.transaction_id != ''">
+        <ion-col text-center *ngIf="booking.status == 1 && booking.transaction_id != ''">
           Paid
         </ion-col>
-        <ion-col text-center *ngIf="bookingList.status != 1">
+        <ion-col text-center *ngIf="booking.status != 1">
           -
         </ion-col>
-
-        <ion-col text-center>KD {{ bookingList.total_with_delivery }}</ion-col>
+        <ion-col text-center>KD {{ booking.total_with_delivery }}</ion-col>
       </ion-row>
     </ion-item>
   </ion-list>

@@ -1,6 +1,6 @@
 <ion-header *ngIf= "bookingDetail">
   <ion-navbar>
-    <ion-title>Booking Detail : KD {{bookingDetail.total_with_delivery}}</ion-title>
+    <ion-title>Booking Detail : #{{bookingDetail.booking_id}}</ion-title>
   <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close" ></ion-icon>
@@ -8,35 +8,35 @@
     </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content padding *ngIf= "bookingDetail" style="margin-top:40px;">
-    <ion-list>  
-        <ion-item>
-          <ion-row *ngFor = "let item of bookingDetail?.items ">
-              <ion-col>
-                <h2>{{item?.item_name}}</h2>
-                <p> QTY :      {{ item?.quantity }}</p>
-                <p> Date :     {{ item?.delivery_date }}</p>
-                <p> Time :     {{ item?.timeslot }} </p>
-                <h2>Price : KD {{ item?.total }}</h2>
-              </ion-col>
-              <ion-col>
-                <h2> Address </h2>  
-                <p innerHTML = "{{ item?.delivery_address }}"></p>                
-              </ion-col>
-          </ion-row>
-        </ion-item>
+<ion-content padding *ngIf= "bookingDetail" style="margin-top:40px;margin-bottom:80px;">
+  <ion-row>
+    <ion-label>Booking Details</ion-label>
+  </ion-row>
+    <ion-list>
+        <ion-item><strong>Booking ID:</strong> #{{bookingDetail?.booking_id}}</ion-item>
+        <ion-item><strong>Date Added:</strong> {{bookingDetail?.created_datetime}}</ion-item>
+        <ion-item><strong>Vendor:</strong> {{bookingDetail?.vendor}}</ion-item>
+        <ion-item><strong>Payment Method:</strong> {{bookingDetail?.payment_method}}</ion-item>
+        <ion-item><strong>Order Status:</strong> {{bookingDetail?.booking_status}}</ion-item>
     </ion-list>
-    <ion-row>
-    <ion-col>Subtotal:</ion-col>
-    <ion-col text-right><strong>KD {{bookingDetail?.total_without_delivery}}</strong></ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>Delivery Charge:</ion-col>
-    <ion-col text-right><strong>KD {{bookingDetail?.total_delivery_charge}}</strong></ion-col>
-  </ion-row>
-  <hr/>
-  <ion-row>
-    <ion-col><strong>Total:</strong></ion-col>
-    <ion-col text-right><strong>KD {{bookingDetail?.total_with_delivery}}</strong></ion-col>
-  </ion-row>
+    <ion-row><ion-label>Item Details</ion-label></ion-row>
+    <ion-list *ngFor = "let item of bookingDetail?.items ">
+        <ion-item><strong>Item Name:</strong> {{item?.item_name}}</ion-item>
+        <ion-item><strong>QTY:</strong> {{item?.quantity }}</ion-item>
+        <ion-item><strong>Delivery Datetime	:</strong> <br/>{{item?.delivery_date}}<br/>{{item?.timeslot}}</ion-item>
+        <ion-item><strong>Price: KD</strong> {{ item?.total }}</ion-item>
+        <ion-item><strong>Delivery Address</strong><br/><ion-col><p innerHTML = "{{ item?.delivery_address }}"></p></ion-col></ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-col>Subtotal:</ion-col>
+      <ion-col text-right><strong>KD {{bookingDetail?.total_without_delivery}}</strong></ion-col>
+    </ion-list>
+    <ion-list>
+      <ion-col>Delivery Charge:</ion-col>
+      <ion-col text-right><strong>KD {{bookingDetail?.total_delivery_charge}}</strong></ion-col>
+    </ion-list>
+    <ion-list>
+      <ion-col><strong>Total:</strong></ion-col>
+      <ion-col text-right><strong>KD {{bookingDetail?.total_with_delivery}}</strong></ion-col>
+    </ion-list>
 </ion-content>
