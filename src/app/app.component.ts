@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, MenuController, Platform, ModalController } from 'ionic-angular';
+import { Nav, MenuController, Platform, ModalController,Events } from 'ionic-angular';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 
@@ -31,14 +31,13 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Home;
-  public isUserLoggedIn:boolean;
+  public isUserLoggedIn:boolean = false;
   // api urls
   public _urlEvent: string = "/event";
   public _urlCategory: string = "/category";
-
   //local variables
   public categoryList: any;
-  public personal: Array<{title: string, component: any,icon: any}>;
+  public personal: Array<{title: string, component: any,icon: any,login:any}>;
   public events: any;
 
   constructor(
@@ -48,31 +47,25 @@ export class MyApp {
     public menu : MenuController,
     public modalCtnl : ModalController,
     public httpService: HttpService,
-    public authService: Authentication
+    public authService: Authentication,
+    private _events: Events,
 
   ) {
     this.initializeApp();
     this.loadEventList(); // load logged in user event list
     this.loadCategoryList(); // load category listing
-    
-    if (this.authService.getAccessToken()) {
-      this.personal = [
-        { title : 'Packages', component:PackageListPage,icon:'archive' },
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive' },
-        { title : 'My Bookings', component:MyBookingsPage,icon:'archive' },
-        { title : 'My Account', component:MyAccountPage,icon: 'user-circle'},
-        //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o' },
-        { title : 'My Wistlist', component:MyWishListPage,icon:'heart' },
-        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book' },
-        { title : 'Logout', component:LoginPage, icon:'power-off'},
-      ]
-    } else {
-      this.personal = [
-        { title : 'Sign In', component:LoginPage,icon:'sign-in' },
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive' }
-      ]
-    }
-    this.isUserLoggedIn = this.authService.getAccessToken();
+    this.isUserLoggedIn  = (this.authService.getAccessToken()) ? true : false;
+    this.updateMenu();
+
+    this._events.subscribe('user:login', TokenSet => {
+      this.isUserLoggedIn = true;
+      this.updateMenu();
+   })
+
+    this._events.subscribe('user:logout', reason => {
+      this.isUserLoggedIn = false;
+      this.updateMenu();
+   })
   }
 
   initializeApp() {
@@ -96,6 +89,11 @@ export class MyApp {
   * Open user management page
   */
   openUserPage(page) {
+    
+    if (page.login == 0) {
+        this.authService.logout('Logout Account');
+    }
+    
     this.menu.close();
     this.nav.push(page.component);
   }
@@ -131,6 +129,26 @@ export class MyApp {
   loadEventList(start: number = 0) {
     if (this.authService.getAccessToken()) {
       this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => this.events = events);  
+    }
+  }
+
+  updateMenu() {
+     if (this.isUserLoggedIn) {
+      this.personal = [
+        { title : 'Packages', component:PackageListPage,icon:'archive', login:1},
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1},
+        { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1},
+        { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1},
+        //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o', login:1},
+        { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1},
+        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1},
+        { title : 'Logout', component:LoginPage, icon:'power-off', login:0},
+      ]
+    } else {
+      this.personal = [
+        { title : 'Sign In', component:LoginPage,icon:'sign-in', login:1},
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1},
+      ]
     }
   }
 }

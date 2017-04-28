@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import {AlertController,LoadingController, Loading} from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
@@ -19,7 +20,7 @@ import { GlobalService } from './global.service';
 @Injectable()
 export class Authentication {
   public isLoggedIn = false;
-
+  private loading: Loading;
   // Logged in user details
   private _accessToken;
   public email: string;
@@ -39,7 +40,9 @@ export class Authentication {
     private _http: Http,
     private _platform: Platform,
     private _events: Events,
-    private nativeStorage: NativeStorage
+    private nativeStorage: NativeStorage,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     ) {
     this.url = _config._ApiUrl;
     _platform.ready().then(() => {
@@ -156,13 +159,11 @@ export class Authentication {
     authHeader.append('Content-Type', 'application/json');    
     authHeader.append("Authorization", "Basic "+ btoa(`${email}:${password}`));
     const url = this.url + this._urlBasicAuth;
-    return this._http.get(url, {
-        headers: authHeader
-      })
+    return this._http.get(url, {headers: authHeader})
+      .catch((err) => this._handleError(err))
       .first()
       .map((res: Response) => res.json());
   }
-
 
   resetPassword(emailInput: string){
     const headers = new Headers({'Content-Type': 'application/json'});
@@ -218,9 +219,13 @@ createAccount(
           //this._auth.logout("Unable to connect to Plugn servers. Please check your internet connection.");
           return Observable.empty<Response>();
       }
-      
-      alert("Error: "+errMsg);
-
+    
+      let alert = this.alertCtrl.create({
+        title: 'Error:',
+        subTitle: errMsg,
+        buttons: ['OK']
+      });
+      alert.present(prompt);
       return Observable.throw(errMsg);
   }
 }
