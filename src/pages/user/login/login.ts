@@ -39,18 +39,18 @@ export class LoginPage {
   loginSubmit() {
     this.submitAttempt = true;
     if (this.loginForm.valid) {
-        this._baseService.startLoading();
+        // this._baseService.startLoading();
         this._authService.login(this.loginForm.value.email,this.loginForm.value.password)
         .subscribe(data=>{
             this.loginData = data;
             if (this.loginData.status == 401 ) {
               this._baseService.showToast('Invalid Login Credentials.');
-              this._baseService.endLoading();
+              // this._baseService.endLoading();
             } else if (this.loginData.operation == 'success' ) {
               this._authService.setAccessToken(this.loginData.token, this.loginForm.value.email);
               this._baseService.showToast('Login Successfully');
               setTimeout(() => {
-                this._baseService.endLoading();
+                // this._baseService.endLoading();
                 this.navCtrl.setRoot(Home)
               });
             }
