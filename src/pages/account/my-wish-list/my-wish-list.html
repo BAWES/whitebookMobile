@@ -31,7 +31,17 @@
     </div>
     <ion-card-content>
       <p>{{product.item_name}}</p>
-      <p>KD {{product.item_price_per_unit}}</p>
+      <p>
+        <span *ngIf="product.item_base_price > 0">
+            KD {{ product.item_base_price }}
+        </span>
+        <span *ngIf="!product.item_base_price && product.min_order_amount > 0">
+            KD {{ product.min_order_amount }}
+        </span>
+        <span *ngIf="!product.item_base_price && !product.min_order_amount">
+            Price based on selection 
+        </span>
+      </p>
       <button (click)="removeProduct(product.wishlist_id)">
         Remove From wishlist
       </button>
