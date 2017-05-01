@@ -122,6 +122,17 @@ export class ProductPage {
       };
       this.httpService.post(this._urlAddToCart,params).subscribe(data => {
         
+        if(data.operation == 'success') 
+        {
+          let toast = this.toastCtrl.create({
+            message : 'Item added to cart',
+            duration : 4000
+          });
+          toast.present();
+
+          return true;
+        }
+
         let msg = '';
  
         for (var i in data.message) {
@@ -160,7 +171,7 @@ export class ProductPage {
   addToWishList() {
     let result;
     let param = {
-      'product_id' : this.product_id
+      'item_id' : this.product_id
     }
     this.httpService.post(this._urlWishlist,param).subscribe(wishlist=>{
       result = wishlist;
