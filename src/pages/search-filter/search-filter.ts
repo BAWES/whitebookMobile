@@ -24,8 +24,8 @@ export class SearchFilterPage {
   // filter variables
   public filterDeliveryDate:any;
   public filterDeliveryArea:number = 0;
-  public filterAvailableForSale:boolean = false;
-  public filterCategory:number = 0;
+  // public filterAvailableForSale:boolean = false;
+  // public filterCategory:number = 0;
   public filterPrice:any = {lower: 0, upper: 0};
   public filterTheme:any = '';
   public filterVendors:any = '';
@@ -56,7 +56,7 @@ export class SearchFilterPage {
       'filterDeliveryDate':this.filterDeliveryDate,
       'filterDeliveryArea':this.filterDeliveryArea,
       // 'filterAvailableForSale':this.filterAvailableForSale,
-      'filterCategory': this.filterCategory,
+      // 'filterCategory': this.filterCategory,
       'filterMinPrice':this.filterPrice.lower,
       'filterMaxPrice':this.filterPrice.upper,
       'filterTheme':this.filterTheme,

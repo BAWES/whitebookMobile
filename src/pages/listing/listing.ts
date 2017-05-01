@@ -69,12 +69,12 @@ export class ListingPage {
     modal.present();
     modal.onDidDismiss(data => {
       this._urlParamas = '&category_id='+this.id;
-      this._urlParamas += '&forSale='+data.filterAvailableForSale;
+      // this._urlParamas += '&forSale='+data.filterAvailableForSale;
       this._urlParamas += '&requestedLocation='+data.filterDeliveryArea;
       this._urlParamas += '&requestedDeliverDate='+data.filterDeliveryDate;
       this._urlParamas += '&requestedMinPrice='+data.filterMinPrice;
       this._urlParamas += '&requestedMaxPrice='+data.filterMaxPrice;
-      this._urlParamas += '&requestedCategories='+data.filterCategory;
+      // this._urlParamas += '&requestedCategories='+data.filterCategory;
       this._urlParamas += '&requestedVendor='+data.filterVendors;
       this._urlParamas += '&requestedTheme='+data.filterTheme;
       this.loadProducts();
