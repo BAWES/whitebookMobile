@@ -55,7 +55,7 @@ export class SearchFilterPage {
     let params = {
       'filterDeliveryDate':this.filterDeliveryDate,
       'filterDeliveryArea':this.filterDeliveryArea,
-      'filterAvailableForSale':this.filterAvailableForSale,
+      // 'filterAvailableForSale':this.filterAvailableForSale,
       'filterCategory': this.filterCategory,
       'filterMinPrice':this.filterPrice.lower,
       'filterMaxPrice':this.filterPrice.upper,
