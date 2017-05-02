@@ -14,10 +14,10 @@ import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 import { BookingTrackPage } from '../pages/account/booking-track/booking-track';
+import { Cms } from '../pages/cms/cms';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
-
 
 // providers
 import { HttpService } from '../providers/http.service';
@@ -37,7 +37,7 @@ export class MyApp {
   public _urlCategory: string = "/category";
   //local variables
   public categoryList: any;
-  public personal: Array<{title: string, component: any,icon: any,login:any}>;
+  public personal: Array<{title: string, component: any,icon: any,login:any,pageID:number}>;
   public events: any;
 
   constructor(
@@ -93,9 +93,14 @@ export class MyApp {
     if (page.login == 0) {
         this.authService.logout('Logout Account');
     }
-    
+
     this.menu.close();
-    this.nav.push(page.component);
+    
+    if (page.component == Cms) {
+      this.nav.push(page.component,{id:page.pageID});
+    } else {
+      this.nav.push(page.component,{id:page.pageID});
+    }
   }
 
   /*
@@ -135,19 +140,24 @@ export class MyApp {
   updateMenu() {
      if (this.isUserLoggedIn) {
       this.personal = [
-        { title : 'Packages', component:PackageListPage,icon:'archive', login:1},
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1},
-        { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1},
-        { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1},
+        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
+        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},
+        { title : 'Packages', component:PackageListPage,icon:'archive', login:1,pageID:0},
+        { title : 'Track Booking', component:BookingTrackPage, icon:'map-pin', login:1,pageID:0},
+        { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1,pageID:0},
+        { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1,pageID:0},
         //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o', login:1},
-        { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1},
-        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1},
-        { title : 'Logout', component:LoginPage, icon:'power-off', login:0},
+        { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1,pageID:0},
+        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1,pageID:0},
+        { title : 'Logout', component:LoginPage, icon:'power-off', login:0,pageID:0},
       ]
     } else {
       this.personal = [
-        { title : 'Sign In', component:LoginPage,icon:'sign-in', login:1},
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1},
+        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
+        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},
+        { title : 'Packages', component:PackageListPage,icon:'archive', login:1,pageID:0},
+        { title : 'Sign In', component:LoginPage,icon:'sign-in', login:1,pageID:0},
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1,pageID:0},
       ]
     }
   }

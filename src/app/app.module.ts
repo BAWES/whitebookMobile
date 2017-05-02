@@ -48,6 +48,7 @@ import { CartCountService } from '../providers/cart.count.service';
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
 import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
+import { Cms } from '../pages/cms/cms';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -78,7 +79,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     SearchFilterPage,
     StringFilterPipe,
     PackageListPage,
-    PackageDetailPage
+    PackageDetailPage,
+    Cms
   ],
   imports: [
     BrowserModule,  // New in ionic 3
@@ -111,7 +113,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage,
     PackageListPage,
-    PackageDetailPage
+    PackageDetailPage,
+    Cms
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
