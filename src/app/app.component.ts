@@ -15,6 +15,7 @@ import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 import { BookingTrackPage } from '../pages/account/booking-track/booking-track';
 import { Cms } from '../pages/cms/cms';
+import { Contact } from '../pages/contact/contact';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -143,6 +144,7 @@ export class MyApp {
         { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
         { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},
         { title : 'Packages', component:PackageListPage,icon:'archive', login:1,pageID:0},
+        { title : 'Contact', component:Contact,icon:'wpforms', login:1,pageID:0},
         { title : 'Track Booking', component:BookingTrackPage, icon:'map-pin', login:1,pageID:0},
         { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1,pageID:0},
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1,pageID:0},
