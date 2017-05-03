@@ -18,7 +18,7 @@ export class ListingPage {
   public _urlProductListing = '/product/list';
   public _urlParamas:string = '';
   public title : string;
-  public id : number;
+  public id : any;
   public productView :string;
   public category:any;
   public products : any;
@@ -37,9 +37,10 @@ export class ListingPage {
 
   ionViewDidLoad() {
     this.productView = 'grid-view';
-    this.id = this._params.get('id');
+    this.id = 'all';
     this.title = this._params.get('title');
     this._urlParamas = '&category_id='+this.id;
+    this._urlParamas = '&requestedTheme='+this._params.get('themeID')
     this.loadProducts();
   }
 
