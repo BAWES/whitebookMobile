@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar class="top-nav">
+    <ion-title text-center>Become Vendor</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <form [formGroup]="becomeVendorForm" (ngSubmit)="submit()" novalidate>
+      <ion-item>
+        <ion-label floating>Business</ion-label>
+        <ion-input formControlName="business" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.business.valid && (becomeVendorForm.controls.business.touched ||  submitAttempt)">
+          <p>Please enter business name</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.name.valid && (becomeVendorForm.controls.name.touched ||  submitAttempt)">
+          <p>Please name</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Mobile</ion-label>
+        <ion-input formControlName="mobile" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.mobile.valid && (becomeVendorForm.controls.mobile.touched ||  submitAttempt)">
+          <p>Please enter mobile</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.email.valid && (becomeVendorForm.controls.email.touched ||  submitAttempt)">
+          <p>Please enter email detail</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>licence</ion-label>
+        <ion-input formControlName="licence" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.licence.valid && (becomeVendorForm.controls.licence.touched ||  submitAttempt)">
+          <p>Please enter licence detail</p>
+      </div>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input formControlName="description" type="text"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="!becomeVendorForm.controls.description.valid && (becomeVendorForm.controls.description.touched ||  submitAttempt)">
+          <p>Please enter description</p>
+      </div>
+ 
+    </form>
+    <ion-item text-center no-border>
+      <button no-background (click)='submit()' font-size-16>Submit</button>
+    </ion-item>
+  </ion-list>
+</ion-content>
