@@ -37,6 +37,7 @@ import { SearchFilterPage } from '../pages/search-filter/search-filter';
 import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
+import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
 // services/providers
 import { GlobalService } from '../providers/global.service';
@@ -44,6 +45,7 @@ import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
 import { CartCountService } from '../providers/cart.count.service';
+import { VendorService } from '../providers/vendor.service';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -78,7 +80,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     SearchFilterPage,
     StringFilterPipe,
     PackageListPage,
-    PackageDetailPage
+    PackageDetailPage,
+    BecomeVendorPage
   ],
   imports: [
     BrowserModule,  // New in ionic 3
@@ -111,7 +114,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CreateEventPage,
     SearchFilterPage,
     PackageListPage,
-    PackageDetailPage
+    PackageDetailPage,
+    BecomeVendorPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -123,7 +127,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     StatusBar,
     NativeStorage,
     HttpService,
-    CartCountService
+    CartCountService,
+    VendorService
     ],
 })
 export class AppModule {}

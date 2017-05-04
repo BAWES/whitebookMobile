@@ -14,10 +14,10 @@ import { MyAddressBookPage }  from  '../pages/account/my-address-book/my-address
 import { MyAccountPage }  from  '../pages/account/my-account/my-account';
 import { MyWishListPage } from '../pages/account/my-wish-list/my-wish-list';
 import { BookingTrackPage } from '../pages/account/booking-track/booking-track';
+import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
-
 
 // providers
 import { HttpService } from '../providers/http.service';
@@ -142,12 +142,14 @@ export class MyApp {
         //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o', login:1},
         { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1},
         { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1},
+        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', login:0},
         { title : 'Logout', component:LoginPage, icon:'power-off', login:0},
       ]
     } else {
       this.personal = [
         { title : 'Sign In', component:LoginPage,icon:'sign-in', login:1},
         { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1},
+        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail', login:0}
       ]
     }
   }
