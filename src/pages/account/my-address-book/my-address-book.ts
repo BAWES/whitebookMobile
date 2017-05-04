@@ -43,7 +43,7 @@ export class MyAddressBookPage {
        this.list(); // load list again
     });
   }
-  delete(){
+  delete(id){
     let confirm = this.alertCtrl.create({
       title: 'Address Delete?',
       message: 'Are you sure you want to delete this Address permanently from our system?',
@@ -51,11 +51,16 @@ export class MyAddressBookPage {
         {
           text:'Yes',
           handler:() => {
-            let toast = this.toastCtrl.create({
-              message: 'Address Deleted successfully',
-              duration: 3000
-            });
-            toast.present();
+            let result:any;
+            this.httpService.delete(this._urlAddressUrl+'?address_id='+id).subscribe(data=>{
+              result = data;
+              this.list();
+              let toast = this.toastCtrl.create({
+                message : result.message,
+                duration:3000
+              });
+              toast.present();
+            })
           }
         },
         {

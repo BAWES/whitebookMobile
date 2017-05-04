@@ -3,18 +3,20 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
+import { ProductPage } from '../../product/product';
 
 
 @Component({
   selector: 'page-package-detail',
   templateUrl: 'package-detail.html'
 })
+
 export class PackageDetailPage {
   
   public _urlPackage = '/package/';
   public id:any
   public detail:any;
-
+  public items:any;
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,
@@ -31,8 +33,14 @@ export class PackageDetailPage {
   loadDetail(id) {
     this.httpService.get(this._urlPackage+id).subscribe(
       data => {
-        this.detail = data; 
+        this.detail = data.package; 
+        this.items = data.products; 
+        //console.log(this.items);
       }
     )
+  }
+
+  detailItem(id) {
+    this.navCtrl.push(ProductPage,{productId:id});
   }
 }

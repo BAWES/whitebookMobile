@@ -50,6 +50,8 @@ import { VendorService } from '../providers/vendor.service';
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
 import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
+import { Cms } from '../pages/cms/cms';
+import { Contact } from '../pages/contact/contact';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -81,7 +83,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     StringFilterPipe,
     PackageListPage,
     PackageDetailPage,
-    BecomeVendorPage
+    BecomeVendorPage,
+    Cms,
+    Contact
   ],
   imports: [
     BrowserModule,  // New in ionic 3
@@ -115,7 +119,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     SearchFilterPage,
     PackageListPage,
     PackageDetailPage,
-    BecomeVendorPage
+    BecomeVendorPage,
+    Cms,
+    Contact
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

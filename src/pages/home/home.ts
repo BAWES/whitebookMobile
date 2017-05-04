@@ -12,10 +12,12 @@ import { CartCountService } from '../../providers/cart.count.service';
 })
 export class Home {
 
-  public _urlCategory:string = '/category';
+  // public _urlCategory:string = '/category';
+  public _urlThemeUrl:string = '/themes';
   public featureProduct:any[];
   public sliderSlides:any[];
   public categories:any;
+  public themes:any;
 
   constructor(
     public navCtrl: NavController,
@@ -23,7 +25,7 @@ export class Home {
     public httpService:HttpService,
     public _cartCount:CartCountService
     ) {
-    this.loadCategoryList();
+    this.loadThemeList();
   }
 
   mySlideOptions = {initialSlide: 1,loop: true,autoplay:true,speed :3000,pager : true};
@@ -37,38 +39,49 @@ export class Home {
     });
   }
 
-  ionViewDidLoad() {
-    this.featureProduct = [
-      {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-    ];
-
-    this.sliderSlides = [
-      {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
-      {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'}
-    ];
-  }
-
-  loadProducts(title,id) {
-    this.navCtrl.push(ListingPage,{
-      title : title,
-      id:id
+  showData(themeid:any) {
+      this.navCtrl.push(ListingPage,{
+      title : 'Product Listing',
+      themeID:themeid
     });
   }
 
-  loadProduct(title) {
-    this.navCtrl.push(ProductPage,{
-        title : title,
-    });
-  }
+  // ionViewDidLoad() {
+  //   this.featureProduct = [
+  //     {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //     {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //     {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //     {'title':'Food','category':'food','image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //   ];
+
+  //   this.sliderSlides = [
+  //     {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //     {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'},
+  //     {'image':'https://thewhitebook.s3.amazonaws.com/vendor_item_images_210/bread_846.jpg'}
+  //   ];
+  // }
+
+  // loadProducts(title,id) {
+  //   this.navCtrl.push(ListingPage,{
+  //     title : title,
+  //     id:id
+  //   });
+  // }
+
+  // loadProduct(title) {
+  //   this.navCtrl.push(ProductPage,{
+  //       title : title,
+  //   });
+  // }
 
   /*
   * load category list
   */
-  loadCategoryList(start:number = 0){
-    this.httpService.get(this._urlCategory +'?offset='+start,false).subscribe(cateries => this.categories = cateries);
+  // loadCategoryList(start:number = 0){
+  //   this.httpService.get(this._urlCategory +'?offset='+start,false).subscribe(cateries => this.categories = cateries);
+  // }
+
+  loadThemeList(start:number = 0){
+    this.httpService.get(this._urlThemeUrl,false).subscribe(themes => this.themes = themes);
   }
 }

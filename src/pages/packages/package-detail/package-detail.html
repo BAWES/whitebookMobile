@@ -16,4 +16,55 @@
       {{detail.package_description}}
     </div>
   </div>
+
+<div class="" *ngIf="detail" >
+    <ion-item text-wrap no-border>
+      <h1 text-center>Items</h1>
+        <img src="{{_config.s3}}/{{detail.package_background_image}}" >
+        <h3 text-center>Average price: {{detail.package_avg_price}}</h3>
+        <h3 text-center>No of guests: {{detail.package_number_of_guests}}</h3>
+    </ion-item>
+    <div padding text-justify>
+      {{detail.package_description}}
+    </div>
+
+    <hr/>
+    <h1 text-center>Package Items</h1>
+    <hr/>
+    <div class="content" *ngIf="items" >
+      <ion-card *ngFor="let item of items" (click)="detailItem(item.item_id)">
+        <div class="image-div">
+          <img src="{{_config.images_530}}/{{item.image}}" >
+          <div *ngIf="item.notice != ''" class="callout-container">
+                <span class="callout light">
+                    Notice: {{item.notice}}
+                </span>
+            </div>
+        </div>
+        <ion-card-content>
+          <ion-card-title>
+            {{item.item_name}}
+          </ion-card-title>
+          <ion-row class="row" no-padding="">
+            <ion-col class="col">
+              {{item.vendor_name}}
+            </ion-col>
+            <ion-col class="col">
+              <span *ngIf="item.item_base_price > 0">
+                 KD {{ product.item_base_price }}
+              </span>
+              <span *ngIf="!item.item_base_price && item.min_order_amount > 0">
+                 KD {{ product.min_order_amount }}
+              </span>
+              <span *ngIf="!item.item_base_price && !item.min_order_amount">
+                 Price based on selection 
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  
 </ion-content>

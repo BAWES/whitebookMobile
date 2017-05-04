@@ -21,7 +21,7 @@
         <ion-title float-left>{{address.address_name | slice:0:10}}</ion-title>
         <ion-buttons float-right >
           <button no-background (click)="update(address.address_id)"><ion-icon name="create"></ion-icon></button>
-          <button no-background (click)="delete()"><ion-icon name="trash" ></ion-icon></button>
+          <button no-background (click)="delete(address.address_id)"><ion-icon name="trash" ></ion-icon></button>
         </ion-buttons>
         </ion-card-header>
         <ion-card-content>
