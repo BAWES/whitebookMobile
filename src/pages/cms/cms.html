@@ -1,0 +1,8 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="detail">{{detail.page_name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="detail" innerHTML = "{{ detail.page_content }}" class="scroll-content"></div>
+</ion-content>

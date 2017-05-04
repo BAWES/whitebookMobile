@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Contact</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="contactForm" (ngSubmit)="sendMail()">
+    <ion-item>
+      <ion-label>Name*</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email*</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description*</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!contactForm.valid">Send</button>
+  </form>
+</ion-content>
