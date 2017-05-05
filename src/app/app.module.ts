@@ -39,6 +39,16 @@ import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
+// Directory 
+import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
+import { DirectoryViewPage } from '../pages/directory/directory-view/directory-view';
+
+// packages Page
+import { PackageListPage } from '../pages/packages/package-list/package-list';
+import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
+import { Cms } from '../pages/cms/cms';
+import { Contact } from '../pages/contact/contact';
+
 // services/providers
 import { GlobalService } from '../providers/global.service';
 import { Authentication } from '../providers/auth.service';
@@ -46,12 +56,6 @@ import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
 import { CartCountService } from '../providers/cart.count.service';
 import { VendorService } from '../providers/vendor.service';
-
-// packages Page
-import { PackageListPage } from '../pages/packages/package-list/package-list';
-import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
-import { Cms } from '../pages/cms/cms';
-import { Contact } from '../pages/contact/contact';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -85,7 +89,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     PackageDetailPage,
     BecomeVendorPage,
     Cms,
-    Contact
+    Contact,
+    DirectoryListPage,
+    DirectoryViewPage
   ],
   imports: [
     BrowserModule,  // New in ionic 3
@@ -121,7 +127,9 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     PackageDetailPage,
     BecomeVendorPage,
     Cms,
-    Contact
+    Contact,
+    DirectoryListPage,
+    DirectoryViewPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

@@ -21,6 +21,8 @@ import { Contact } from '../pages/contact/contact';
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
 
+import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
+
 // providers
 import { HttpService } from '../providers/http.service';
 import { Authentication } from '../providers/auth.service'; 
@@ -150,6 +152,7 @@ export class MyApp {
         { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1,pageID:0},
         { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1,pageID:0},
         //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o', login:1},
+        { title : 'Directory', component: DirectoryListPage, icon:'list', login:0, pageID:0},
         { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1,pageID:0},
         { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1,pageID:0},
         { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', login:0,pageID:0},
@@ -157,6 +160,7 @@ export class MyApp {
       ]
     } else {
       this.personal = [
+        { title : 'Directory', component: DirectoryListPage, icon:'list', login:0, pageID:0},
         { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', login:0,pageID:0},
         { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
         { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},

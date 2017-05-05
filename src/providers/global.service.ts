@@ -13,6 +13,7 @@ export class GlobalService {
   public images_210 = this.s3 + '/vendor_item_images_210';
   public images_530 = this.s3 + '/vendor_item_images_530';
   public images_1000 = this.s3 + '/vendor_item_images_1000';
+  public vendor_logo = this.s3 + '/vendor_logo';
 
   // InAppBrowser Settings
   public browserTarget: string;
@@ -36,7 +37,7 @@ export class GlobalService {
    * @param {string} [platform]
    */
   initDevEnvironment(platform?: string) {
-    this.initAnil();
+    this.initKrushn();
 
     this.setupDeviceSpecificConfigs();
   }
