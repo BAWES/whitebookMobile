@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{ vendor.vendor_name }}</ion-title>    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-thumbnail>
+		<img src="{{ _config.vendor_logo }}/{{ vendor.vendor_logo_path }}" />
+	</ion-thumbnail>
+
+	<h2>Description</h2>
+
+	<div innerHTML="{{	vendor.short_description }}"></div>
+
+	<h2>Return policy</h2>
+
+	<div innerHTML="{{ vendor.vendor_return_policy }}"></div>
+
+</ion-content>
