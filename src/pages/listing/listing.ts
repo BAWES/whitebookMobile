@@ -40,7 +40,12 @@ export class ListingPage {
     this.id = 'all';
     this.title = this._params.get('title');
     this._urlParamas = '&category_id='+this.id;
-    this._urlParamas = '&requestedTheme='+this._params.get('themeID')
+    
+    if(this._params.get('themeID') != undefined)
+    {
+      this._urlParamas = '&requestedTheme='+this._params.get('themeID');  
+    }    
+
     this.loadProducts();
   }
 

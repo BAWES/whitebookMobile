@@ -18,4 +18,45 @@
 
 	<div innerHTML="{{ vendor.vendor_return_policy }}"></div>
 
+	<h2 *ngIf="products.length > 0">Products</h2>
+
+	<ion-grid class="category-product-listing {{productView}}">
+		<ion-list class="scroll-content" *ngFor="let product of products" class="product-items" (click)="productDetail(product.item_id)">
+	        <button detail-none ion-item>
+	          <div class="gallery-section">
+	            <ion-icon class="like-icon" name="heart-outline"></ion-icon>
+	            <ion-thumbnail class="avatarImage">
+	              <img src="{{_config.images_530}}/{{product.image}}" >
+	            </ion-thumbnail>
+	            <div *ngIf="product.notice != ''" class="callout-container">
+	                <span class="callout light">
+	                    Notice: {{product.notice}}
+	                </span>
+	            </div>
+	          </div>
+	          <div class="detail-section text-center">
+	            <h4 class="name"><strong>{{product.item_name}}</strong></h4>
+	            
+	            <h6 class="price">
+	              <span *ngIf="product.item_base_price > 0">
+	                 KD {{ product.item_base_price }}
+	              </span>
+	              <span *ngIf="!product.item_base_price && product.min_order_amount > 0">
+	                 KD {{ product.min_order_amount }}
+	              </span>
+	              <span *ngIf="!product.item_base_price && !product.min_order_amount">
+	                 Price based on selection 
+	              </span>
+	            </h6>
+
+	            <h4 class="vendor"> {{product.vendor_name}}</h4>
+	          </div>
+	        </button>
+	    </ion-list>
+	</ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+ 
 </ion-content>
