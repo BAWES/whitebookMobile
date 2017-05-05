@@ -36,9 +36,11 @@ export class MyApp {
 
   rootPage: any = Home;
   public isUserLoggedIn:boolean = false;
+  public isUserLoggedOut:any;
   // api urls
   public _urlEvent: string = "/event";
   public _urlCategory: string = "/category";
+  public _urllogout: string = "/account/logout";
   //local variables
   public categoryList: any;
   public personal: Array<{title: string, component: any,icon: any,login:any,pageID:number}>;
@@ -95,7 +97,15 @@ export class MyApp {
   openUserPage(page) {
     
     if (page.login == 0) {
-        this.authService.logout('Logout Account');
+        this.httpService.get(this._urllogout).
+        subscribe(
+          logout => {
+            this.isUserLoggedOut = logout;
+            if (this.isUserLoggedOut.code == 1) {
+              this.authService.logout('Logout Account');
+            }
+          }
+        );  
     }
 
     this.menu.close();
