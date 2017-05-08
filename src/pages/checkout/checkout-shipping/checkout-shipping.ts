@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CheckoutPaymentPage } from '../checkout-payment/checkout-payment';
+import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
+
 /*
   Generated class for the CheckoutShipping page.
 
@@ -23,7 +24,7 @@ export class CheckoutShippingPage {
     this.navCtrl.pop();
   }
 
-  PaymentModelPage () {
-    this.navCtrl.push(CheckoutPaymentPage);
+  confirmPage() {
+    this.navCtrl.push(CheckoutConfirmPage);
   }
 }
