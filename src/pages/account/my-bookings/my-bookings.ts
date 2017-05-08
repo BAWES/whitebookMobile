@@ -16,8 +16,8 @@ export class MyBookingsPage {
 
   constructor(
     public navCtrl: NavController,
-    public modalCtrl:ModalController,
-    public httpService: HttpService
+    public modalCtrl: ModalController,
+    public httpService: HttpService,
   ) {
     this.list();  
   }

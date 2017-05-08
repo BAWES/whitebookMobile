@@ -18,9 +18,9 @@ import { RegisterPage } from '../pages/user/register/register';
 import { ForgotPasswordPage } from '../pages/user/forgot-password/forgot-password';
 
 import { CheckoutShippingPage } from '../pages/checkout/checkout-shipping/checkout-shipping';
-import { CheckoutPaymentPage } from '../pages/checkout/checkout-payment/checkout-payment';
 import { CheckoutCompletedPage } from '../pages/checkout/checkout-completed/checkout-completed';
 import { CheckoutCartPage } from '../pages/checkout/checkout-cart/checkout-cart';
+import { CheckoutConfirmPage } from '../pages/checkout/checkout-confirm/checkout-confirm';
 
 import { MyEventsPage } from  '../pages/events/my-events/my-events';
 import { CreateEventPage } from '../pages/events/create-event/create-event';
@@ -56,9 +56,12 @@ import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
 import { CartCountService } from '../providers/cart.count.service';
 import { VendorService } from '../providers/vendor.service';
+import { CheckoutService } from '../providers/checkout.service';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -72,8 +75,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
-    CheckoutPaymentPage,
     CheckoutCompletedPage,
+    CheckoutConfirmPage,
     MyBookingsPage,
     BookingTrackPage,
     MyEventsPage,
@@ -111,8 +114,8 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
-    CheckoutPaymentPage,
     CheckoutCompletedPage,
+    CheckoutConfirmPage,
     MyBookingsPage,
     BookingTrackPage,
     MyEventsPage,
@@ -136,13 +139,15 @@ import { StringFilterPipe } from "./../pipes/string.filter.pipe";
     GlobalService,
     Authentication,
     IonicStorageModule,
+    InAppBrowser,
     Base,
     SplashScreen, // Newly add for ionic 3
     StatusBar,
     NativeStorage,
     HttpService,
     CartCountService,
-    VendorService
+    VendorService,
+    CheckoutService
     ],
 })
 export class AppModule {}
