@@ -6,6 +6,7 @@ import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { GlobalService } from '../../providers/global.service';
 import { HttpService } from '../../providers/http.service';
 import { CartCountService } from '../../providers/cart.count.service';
+import { CartService } from '../../providers/cart.service';
 
 @Component({
   selector: 'page-product',
@@ -67,7 +68,8 @@ export class ProductPage {
     public _config: GlobalService,
     public httpService: HttpService,
     public formBuilder: FormBuilder,
-    public _cartCount:CartCountService
+    public _cartCount:CartCountService,
+    public cartService: CartService
   ) {
     this.product_id = this._params.get('productId');
     
@@ -120,8 +122,9 @@ export class ProductPage {
         'female_service': this.female_service,
         'special_request': this.special_request
       };
-      this.httpService.post(this._urlAddToCart,params).subscribe(data => {
-        
+
+      this.cartService.add(params).subscribe(data => {
+  
         if(data.operation == 'success') 
         {
           let toast = this.toastCtrl.create({
@@ -150,6 +153,7 @@ export class ProductPage {
         alert.present();
 
       });
+
     } else {
 
       let toast = this.toastCtrl.create({

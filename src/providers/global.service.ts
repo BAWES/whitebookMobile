@@ -47,7 +47,8 @@ export class GlobalService {
    * @param {string} [platform]
    */
   initProdEnvironment(platform?: string){
-    this._ApiUrl = "https://api.plugn.io/v1";
+    
+    this._ApiUrl = "http://devapi.thewhitebook.com.kw/v1";
 
     this.setupDeviceSpecificConfigs();
   }
@@ -102,6 +103,7 @@ export class GlobalService {
   * Api url for krushn system environment   
   */
   initKrushn() {
+    //this._ApiUrl = 'http://devapi.thewhitebook.com.kw/v1';
     this._ApiUrl = 'http://localhost/whitebook/api/web/v1';
   }
 }
