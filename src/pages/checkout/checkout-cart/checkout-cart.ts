@@ -4,6 +4,7 @@ import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
 import { Authentication } from '../../../providers/auth.service';
+import { CartService } from '../../../providers/cart.service';
 
 @Component({
   selector: 'page-checkout-cart',
@@ -27,7 +28,8 @@ export class CheckoutCartPage {
     public _config:GlobalService,
     public alertCtrl : AlertController,
     public toastCtrl : ToastController,
-    public authService: Authentication
+    public authService: Authentication,
+    public cartService: CartService
     ) {
       this.isUserLoggedIn = this.authService.getAccessToken();
     }
@@ -49,13 +51,11 @@ export class CheckoutCartPage {
   /**
    * method load cart items
    */
-  loadCartList(){
-    this.httpRequest.get(this._urlCart+'?offset=0').subscribe(list => {
+  loadCartList() {
+    this.cartService.list().subscribe(list => {
       this.cartItems = list.items;
       this.summary = list.summary;
       this.delivery_vendors = list.summary.delivery_vendors;
-      console.log(this.delivery_vendors);
-      console.log(this.cartItems);
     })
   }
 
@@ -68,7 +68,7 @@ export class CheckoutCartPage {
           text: 'Yes',
           handler:() => {
             let result:any;
-            this.httpRequest.delete(this._urlCart+'?cart_id='+cart_id).subscribe(data=>{
+            this.cartService.delete(cart_id).subscribe(data => {
               result = data;
               this.loadCartList();
               let toast = this.toastCtrl.create({
@@ -89,28 +89,4 @@ export class CheckoutCartPage {
     })
     alert.present();
   }
-
-  /*
-  * Method perform infinite scroll which 
-  * will load more data just like pagination
-  */
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-    let CartItems;
-    this.start+=10;
-    this.httpRequest.get(this._urlCart +'?offset='+this.start).subscribe(data=>{
-        if (data.items.length) {
-          CartItems = data.items;
-          this.summary = data.summary;
-          this.delivery_vendors = data.summary.delivery_vendors;
-          for(let item of CartItems) {
-            this.cartItems.push(item);
-          }
-        }
-        
-      console.log('Begin async operation');
-      infiniteScroll.complete();
-    })
-  }
-
 }
