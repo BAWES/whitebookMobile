@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, ViewController,  } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
-import { HttpService } from '../../../providers/http.service';
-import { Authentication } from '../../../providers/auth.service';
 import { CheckoutService } from '../../../providers/checkout.service';
 import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
+import { CartService } from '../../../providers/cart.service';
 
 @Component({
   selector: 'page-checkout-confirm',
@@ -13,31 +12,24 @@ import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed'
 
 export class CheckoutConfirmPage {
 
-  //api request urls
-  public _urlCart = '/cart';
-
   public cartItems:any;
   public summary:any;
   public delivery_vendors:any;
-  public start:number=0;
-  public isUserLoggedIn:boolean = false;
+  public start:number = 0;
 
   constructor(
     public navCtrl: NavController, 
     public viewCtrl : ViewController,
-    public httpRequest : HttpService,
     public _alertCtrl : AlertController,
     public _loadingCtrl: LoadingController,
-    public authService: Authentication,
-    public checkoutService: CheckoutService
+    public checkoutService: CheckoutService,
+    public cartService: CartService
     ) {
-      this.isUserLoggedIn = this.authService.getAccessToken();
+      
     }
 
   ionViewDidLoad() {
-    if (this.authService.getAccessToken()) {
-      this.loadCartList();
-    }
+    this.loadCartList();
   }
 
   dismiss() {
@@ -78,8 +70,8 @@ export class CheckoutConfirmPage {
   /**
    * method load cart items
    */
-  loadCartList(){
-    this.httpRequest.get(this._urlCart+'?offset=0').subscribe(list => {
+  loadCartList() {
+    this.cartService.list().subscribe(list => {
       this.cartItems = list.items;
       this.summary = list.summary;
       this.delivery_vendors = list.summary.delivery_vendors;

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { HttpService } from '../../providers/http.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
@@ -20,7 +19,6 @@ export class BecomeVendorPage {
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
-    public httpService:HttpService,
     private fb: FormBuilder,
     private vendorService: VendorService,
     private _baseService : Base
@@ -51,8 +49,10 @@ export class BecomeVendorPage {
         this.becomeVendorForm.value.licence,
         this.becomeVendorForm.value.description
       )
-      .subscribe(response => {
+      .subscribe(jsonResponse => {
 
+        let response = jsonResponse.json();
+        
         if (response.operation == 'error' ) {
           this._baseService.showToast(response.message, 4000);
           this._baseService.endLoading();

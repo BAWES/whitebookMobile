@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { HttpService } from '../../providers/http.service';
 import { Base } from '../../providers/base';
+import { Http } from '@angular/http';
+import { GlobalService } from '../../providers/global.service';
 
 @Component({
   selector: 'page-contact',
@@ -11,7 +12,7 @@ import { Base } from '../../providers/base';
 export class Contact {
   
   private contactForm : FormGroup;
-  public _urlContactUrl: string = "/account/contact";
+  public _urlContactUrl: string;
   public submitAttempt: boolean = false;
 
   constructor(
@@ -19,10 +20,14 @@ export class Contact {
     public navParams: NavParams,
     public toastCtrl : ToastController,
     private formBuilder: FormBuilder,
-    private httpService: HttpService,
+    private httpService: Http,
     public viewCtrl : ViewController,
     public _base : Base,
+    public _config: GlobalService
   ) {
+
+    this._urlContactUrl = this._config._ApiUrl + "/account/contact";
+
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -31,7 +36,7 @@ export class Contact {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Contact');
+    
   }
 
   sendMail() 
@@ -47,7 +52,7 @@ export class Contact {
         'msg':this.contactForm.value.description,
         }
         this.httpService.post(this._urlContactUrl,paramas).subscribe(data=>{
-          result = data;
+          result = data.json();
           if (result.operation == 'success' ) {
             let toast = this.toastCtrl.create({
               message: 'Mail Sent Successfully',

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController,ViewController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
 
-import { HttpService } from '../../providers/http.service';
+import { GlobalService } from '../../providers/global.service';
+
 import { ProductPage } from '../product/product';
 
 @Component({
@@ -12,15 +14,18 @@ import { ProductPage } from '../product/product';
 
 export class SearchItemPage {
 
-  public _searchUrl:string = '/search?q=';
+  public _searchUrl:string = '';
   public items: any;
   public searching: any = false;
 
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
-    public httpRequest: HttpService
-  ) {}
+    public httpRequest: Http,
+    public _config: GlobalService
+  ) {
+    this._searchUrl = this._config._ApiUrl + '/search?q=';
+  }
 
   ionViewDidLoad() {
     this.initializeItems('All');
@@ -28,7 +33,7 @@ export class SearchItemPage {
 
   initializeItems(searchText:string = 'All') {
     this.httpRequest.get(this._searchUrl + searchText + '&offset=0').subscribe(data=>
-      this.items = data
+      this.items = data.json()
     )
     this.searching = false;
   }

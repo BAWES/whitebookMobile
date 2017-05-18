@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { HttpService } from '../../providers/http.service';
+import { GlobalService } from '../../providers/global.service';
 
 @Component({
   selector: 'page-search-filter',
@@ -9,10 +10,10 @@ import { HttpService } from '../../providers/http.service';
 export class SearchFilterPage {
 
   //Api urls
-  public _urlProductArea = '/product/area';
-  public _urlCategory: string = "/category";
-  public _urlThemes: string = "/product/theme";
-  public _urlVendors: string = "/product/vendors";
+  public _urlProductArea = '';
+  public _urlCategory: string = "";
+  public _urlThemes: string = "";
+  public _urlVendors: string = "";
 
   public today:any;
   public todayStr:any;
@@ -31,11 +32,15 @@ export class SearchFilterPage {
   public filterVendors:any = '';
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
     public viewCtrl:ViewController,
-    public httpService: HttpService,
-    ) {}
+    public httpService: Http,
+    public _config: GlobalService
+    ) {
+    this._urlProductArea = this._config._ApiUrl + '/product/area';
+    this._urlCategory = this._config._ApiUrl + "/category";
+    this._urlThemes = this._config._ApiUrl + "/product/theme";
+    this._urlVendors = this._config._ApiUrl + "/product/vendors";
+  }
 
   ionViewDidLoad() {
       this.today = new Date();
@@ -69,27 +74,35 @@ export class SearchFilterPage {
    * method to load product area
    */
   loadProductArea() {
-      this.httpService.get(this._urlProductArea).subscribe(areaList=>{this.areaList = areaList});
+      this.httpService.get(this._urlProductArea).subscribe(areaList=>{
+        this.areaList = areaList.json()
+      });
   }
   
   /*
   * load category list
   */
   loadCategoryList(){
-    this.httpService.get(this._urlCategory,false).subscribe(cateries => this.categoryList = cateries);
+    this.httpService.get(this._urlCategory,false).subscribe(cateries => {
+      this.categoryList = cateries.json()
+    });
   }
   
   /*
   * load theme list
   */
   loadThemeList(){
-    this.httpService.get(this._urlThemes,false).subscribe(theme => this.themeList = theme);
+    this.httpService.get(this._urlThemes,false).subscribe(theme => {
+      this.themeList = theme.json()
+    });
   }
   
   /*
   * load vendor list
   */
   loadVendorList(){
-    this.httpService.get(this._urlVendors,false).subscribe(vendor => this.vendorList = vendor);
+    this.httpService.get(this._urlVendors,false).subscribe(vendor => {
+      this.vendorList = vendor.json()
+    });
   }
 }

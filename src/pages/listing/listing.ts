@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { ProductPage } from '../product/product';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
-import { HttpService } from '../../providers/http.service';
 import { GlobalService } from '../../providers/global.service';
 import { CartCountService } from '../../providers/cart.count.service';
 
@@ -15,7 +15,7 @@ import { CartCountService } from '../../providers/cart.count.service';
 })
 export class ListingPage {
   
-  public _urlProductListing = '/product/list';
+  public _urlProductListing = '';
   public _urlParamas:string = '';
   public title : string;
   public id : any;
@@ -28,11 +28,12 @@ export class ListingPage {
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
-    public httpService: HttpService,
-    public _config: GlobalService,
-    public _cartCount:CartCountService
+    public httpService: Http,
+    public _cartCount:CartCountService,
+    public _config: GlobalService
   ) {
     this._urlParamas = '';
+    this._urlProductListing = this._config._ApiUrl + '/product/list';
   }
 
   ionViewDidLoad() {
@@ -94,7 +95,7 @@ export class ListingPage {
     this.httpService.get(this._urlProductListing+'?offset=0'+this._urlParamas)
       .subscribe(
         data => {
-          this.products = data;
+          this.products = data.json();
         }
       );
   }
@@ -108,7 +109,7 @@ export class ListingPage {
     let items;
     this.start+=10;
     this.httpService.get(this._urlProductListing +'?offset='+this.start+this._urlParamas).subscribe(data=>{
-        items = data;
+        items = data.json();
         for(let item of items) {
           this.products.push(item);
         }

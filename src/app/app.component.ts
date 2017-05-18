@@ -43,7 +43,7 @@ export class MyApp {
   public _urllogout: string = "/account/logout";
   //local variables
   public categoryList: any;
-  public personal: Array<{title: string, component: any,icon: any,login:any,pageID:number}>;
+  public personal: Array<{title: string, component: any, icon: any, pageID: number}>;
   public events: any;
 
   constructor(
@@ -96,7 +96,7 @@ export class MyApp {
   */
   openUserPage(page) {
     
-    if (page.login == 0) {
+    if (page.pageID == -1) {
         this.httpService.get(this._urllogout).
         subscribe(
           logout => {
@@ -152,32 +152,28 @@ export class MyApp {
   }
 
   updateMenu() {
-     if (this.isUserLoggedIn) {
-      this.personal = [
-        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
-        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},
-        { title : 'Packages', component:PackageListPage,icon:'archive', login:1,pageID:0},
-        { title : 'Contact', component:Contact,icon:'wpforms', login:1,pageID:0},
-        { title : 'Track Booking', component:BookingTrackPage, icon:'map-pin', login:1,pageID:0},
-        { title : 'My Bookings', component:MyBookingsPage,icon:'archive', login:1,pageID:0},
-        { title : 'My Account', component:MyAccountPage,icon: 'user-circle', login:1,pageID:0},
-        //{ title : 'My Events', component:MyEventsPage,icon:'calendar-check-o', login:1},
-        { title : 'Directory', component: DirectoryListPage, icon:'list', login:0, pageID:0},
-        { title : 'My Wistlist', component:MyWishListPage,icon:'heart', login:1,pageID:0},
-        { title : 'Address Book', component:MyAddressBookPage,icon:'address-book', login:1,pageID:0},
-        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', login:0,pageID:0},
-        { title : 'Logout', component:LoginPage, icon:'power-off', login:0,pageID:0}
-      ]
-    } else {
-      this.personal = [
-        { title : 'Directory', component: DirectoryListPage, icon:'list', login:0, pageID:0},
-        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', login:0,pageID:0},
-        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', login:1,pageID:7},
-        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', login:1,pageID:9},
-        { title : 'Packages', component:PackageListPage,icon:'archive', login:1,pageID:0},
-        { title : 'Sign In', component:LoginPage,icon:'sign-in', login:1,pageID:0},
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', login:1,pageID:0},
-      ]
+    
+    this.personal = [
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', pageID:0},
+        { title : 'Directory', component: DirectoryListPage, icon:'list', pageID:0},
+        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', pageID:0},
+        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', pageID:7},
+        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', pageID:9},
+        { title : 'Packages', component:PackageListPage,icon:'archive', pageID:0},
+        { title : 'Contact', component:Contact,icon:'wpforms', pageID:0},
+    ];
+
+    if (this.isUserLoggedIn) 
+    {
+      this.personal.push({ title : 'My Bookings', component:MyBookingsPage,icon:'archive', pageID:0});
+      this.personal.push({ title : 'My Account', component:MyAccountPage,icon: 'user-circle', pageID:0});
+      this.personal.push({ title : 'My Wistlist', component:MyWishListPage,icon:'heart', pageID:0});
+      this.personal.push({ title : 'Address Book', component:MyAddressBookPage,icon:'address-book', pageID:0});
+      this.personal.push({ title : 'Logout', component:LoginPage, icon:'power-off', pageID: -1});
+    } 
+    else 
+    {      
+      this.personal.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', pageID:0});
     }
   }
 }

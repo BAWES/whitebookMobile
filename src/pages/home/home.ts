@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, ModalController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 import { ProductPage } from '../product/product';
-import { HttpService } from '../../providers/http.service';
 import { CartCountService } from '../../providers/cart.count.service';
+import { GlobalService } from '../../providers/global.service';
 
 @Component({
   selector: 'home',
@@ -12,8 +13,7 @@ import { CartCountService } from '../../providers/cart.count.service';
 })
 export class Home {
 
-  // public _urlCategory:string = '/category';
-  public _urlThemeUrl:string = '/themes';
+  public _urlThemeUrl:string = '';
   public featureProduct:any[];
   public sliderSlides:any[];
   public categories:any;
@@ -22,9 +22,11 @@ export class Home {
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
-    public httpService:HttpService,
-    public _cartCount:CartCountService
+    public httpService: Http,
+    public _cartCount: CartCountService,
+    public _config: GlobalService
     ) {
+    this._urlThemeUrl = this._config._ApiUrl + '/themes';
     this.loadThemeList();
   }
 
@@ -82,6 +84,8 @@ export class Home {
   // }
 
   loadThemeList(start:number = 0){
-    this.httpService.get(this._urlThemeUrl,false).subscribe(themes => this.themes = themes);
+    this.httpService.get(this._urlThemeUrl,false).subscribe(jsonResponse => {
+      this.themes = jsonResponse.json();
+    });
   }
 }

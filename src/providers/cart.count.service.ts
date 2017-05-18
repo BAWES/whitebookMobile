@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 
 import { Authentication } from '../providers/auth.service';
+
 @Injectable()
 export class CartCountService {
   public _urlCartUrl:string = '/cart/count';

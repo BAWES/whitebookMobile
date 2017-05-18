@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class VendorService {
 
   constructor(
-    private httpService : HttpService,
+    private httpService : Http,
   ){
      
   } 
