@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { GlobalService } from '../../providers/global.service';
-import { HttpService } from '../../providers/http.service';
 import { CartCountService } from '../../providers/cart.count.service';
 import { CartService } from '../../providers/cart.service';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'page-product',
@@ -15,13 +16,13 @@ import { CartService } from '../../providers/cart.service';
 
 export class ProductPage {
   
-  public _urlProductDetail = '/product/detail?product_id=';
-  public _urlProductArea = '/product/area?vendor_id=';
-  public _urlProductCapacity = '/product/capacity';
-  public _urlProductDeliveryTimeSlot = '/product/time-slot';
-  public _urlAddToCart = '/cart';
-  public _urlWishlist = '/wishlist';
-  public _urlFinalPrice = '/product/final-price';
+  public _urlProductDetail = '';
+  public _urlProductArea = '';
+  public _urlProductCapacity = '';
+  public _urlProductDeliveryTimeSlot = '';
+  public _urlAddToCart = '';
+  public _urlWishlist = '';
+  public _urlFinalPrice = '';
   
   public productSection:string = "pdescription";
   public product_id:number;
@@ -66,6 +67,7 @@ export class ProductPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public _config: GlobalService,
+    public http: Http,
     public httpService: HttpService,
     public formBuilder: FormBuilder,
     public _cartCount:CartCountService,
@@ -73,6 +75,14 @@ export class ProductPage {
   ) {
     this.product_id = this._params.get('productId');
     
+    this._urlProductDetail = this._config._ApiUrl + '/product/detail?product_id=';
+    this._urlProductArea = this._config._ApiUrl + '/product/area?vendor_id=';
+    this._urlProductCapacity = this._config._ApiUrl + '/product/capacity';
+    this._urlProductDeliveryTimeSlot = this._config._ApiUrl + '/product/time-slot';
+    this._urlAddToCart = this._config._ApiUrl + '/cart';
+    this._urlWishlist = this._config._ApiUrl + '/wishlist';
+    this._urlFinalPrice = this._config._ApiUrl + '/product/final-price';
+
     // to set min and max value for datepicker
     this.today = new Date();
     this.today.setHours(0,0,0);
@@ -164,56 +174,13 @@ export class ProductPage {
     }
   }
 
-  manageWishlist() {
-      if (this.wishlistID > 0) {
-        this.removeFromWishList();
-      } else {
-        this.addToWishList();
-      }
-  }
-
-  addToWishList() {
-    let result;
-    let param = {
-      'item_id' : this.product_id
-    }
-    this.httpService.post(this._urlWishlist,param).subscribe(wishlist=>{
-      result = wishlist;
-      if (result.operation == 'success'){
-          this.wishlistLbl = 'Remove From Wishlist';
-          this.wishlistID = result.id;
-      }
-      let toast = this.toastCtrl.create({
-        message : result.message,
-        duration : 3000
-      });
-      toast.present();
-    })
-  }
-  
-  removeFromWishList() {
-    let result;
-    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(wishlist=>{
-      result = wishlist;
-      if (result.operation == 'success') {
-          this.wishlistLbl = 'Add From Wishlist';
-          this.wishlistID = 0;
-      }
-      let toast = this.toastCtrl.create({
-        message : result.message,
-        duration : 3000
-      });
-      toast.present();
-    })
-  }
-
 /**
  * method to load product detail
  */
   loadProductDetail() {
-    this.httpService.get(this._urlProductDetail+this.product_id).subscribe(
-      data => {
-        this.product = data; 
+    this.http.get(this._urlProductDetail+this.product_id).subscribe(
+      response => {
+        this.product = response.json(); 
 
         if(this.product.item.item_minimum_quantity_to_order > 0) {
           this.minQuantity = this.product.item.item_minimum_quantity_to_order;  
@@ -252,8 +219,8 @@ export class ProductPage {
       'quantity' : this.quantity,
       'menu_item' : this.menuItem
     }
-    this.httpService.post(this._urlFinalPrice, param).subscribe(response => {
-      this.total = response.total;
+    this.http.post(this._urlFinalPrice, param).subscribe(jsonResponse => {
+      this.total = jsonResponse.json().total;
     });
   }
 
@@ -262,8 +229,8 @@ export class ProductPage {
    */
   loadProductArea(vendor) {
     if (vendor) {
-        this.httpService.get(this._urlProductArea + vendor.vendor_id).subscribe(areaList=>{
-        this.vendorAreaList = areaList;
+        this.http.get(this._urlProductArea + vendor.vendor_id).subscribe(areaList => {
+        this.vendorAreaList = areaList.json();
       });
     }
   }
@@ -276,11 +243,12 @@ export class ProductPage {
     this.dateChange = true;
     let url = this._urlProductDeliveryTimeSlot 
       + '?vendor_id='+vendor_id+'&event_date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
-      this.httpService.get(url).subscribe(timeslots=>{
-        this.timeslots = timeslots;  
-      });
-      
-      this.loadProductCapacity(); // loading product capacity
+    
+    this.http.get(url).subscribe(timeslots=>{
+      this.timeslots = timeslots.json();  
+    });
+    
+    this.loadProductCapacity(); // loading product capacity
   }
 
   /**
@@ -366,9 +334,9 @@ export class ProductPage {
    */
   loadProductCapacity(){
     let url = this._urlProductCapacity+'?product_id='+this.product_id+'&deliver_date='+this.myDate;
-      this.httpService.get(url).subscribe(capacity=>{
-        this.maxQuantity = parseInt(capacity);
-      });
+    this.http.get(url).subscribe(jsonResponse => {
+      this.maxQuantity = parseInt(jsonResponse.json().capacity);
+    });
   }
 
   
@@ -378,11 +346,57 @@ export class ProductPage {
    */
   loadProductWishlistStatus() {
     let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
-    this.httpService.get(url).subscribe(wishtlist=>{
-      this.wishlistID = wishtlist;
+    this.httpService.get(url).subscribe(jsonResponse => {
+      this.wishlistID = jsonResponse.json();
       if (this.wishlistID > 0) {
         this.wishlistLbl = 'Remove From Wishlist';
       }
     });
+  }
+
+
+  manageWishlist() {
+      if (this.wishlistID > 0) {
+        this.removeFromWishList();
+      } else {
+        this.addToWishList();
+      }
+  }
+
+  addToWishList() {
+    let result;
+    let param = {
+      'item_id' : this.product_id
+    }
+    this.httpService.post(this._urlWishlist,param).subscribe(jsonResponse => {
+      result = jsonResponse.json();
+
+      if (result.operation == 'success'){
+          this.wishlistLbl = 'Remove From Wishlist';
+          this.wishlistID = result.id;
+      }
+
+      let toast = this.toastCtrl.create({
+        message : result.message,
+        duration : 3000
+      });
+      toast.present();
+    })
+  }
+  
+  removeFromWishList() {
+    let result;
+    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(jsonResponse => {
+      result = jsonResponse.json();
+      if (result.operation == 'success') {
+          this.wishlistLbl = 'Add From Wishlist';
+          this.wishlistID = 0;
+      }
+      let toast = this.toastCtrl.create({
+        message : result.message,
+        duration : 3000
+      });
+      toast.present();
+    })
   }
 }

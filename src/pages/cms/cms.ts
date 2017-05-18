@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HttpService } from '../../providers/http.service';
+import { Http } from '@angular/http';
 import { GlobalService } from '../../providers/global.service';
-import { Authentication } from '../../providers/auth.service';
 
 @Component({
   selector: 'page-cms',
@@ -11,16 +10,13 @@ import { Authentication } from '../../providers/auth.service';
 export class Cms {
 
   public pageID : number = 0;
-  public _urlCart = '/cms';
   public detail : any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    
-    public _http : HttpService,
-    public _config:GlobalService,
-    public _auth: Authentication
+    public navParams: NavParams,    
+    public _http : Http,
+    public _config: GlobalService
     ) {
     this.pageID =  this.navParams.get('id');
   }
@@ -32,9 +28,8 @@ export class Cms {
   }
 
   pageDetail(id){
-    this._http.get(this._urlCart+'/'+id).subscribe(data => {
-      this.detail = data;
-      console.log(this.detail);
+    this._http.get(this._config._ApiUrl + '/cms/' + id).subscribe(data => {
+      this.detail = data.json();
     })
   }
 }

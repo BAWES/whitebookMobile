@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ViewController, ToastController } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
-import { HttpService } from '../../../providers/http.service';
-import { GlobalService } from '../../../providers/global.service';
-import { Authentication } from '../../../providers/auth.service';
 import { CartService } from '../../../providers/cart.service';
 
 @Component({
@@ -20,24 +17,19 @@ export class CheckoutCartPage {
   public summary:any;
   public delivery_vendors:any;
   public start:number=0;
-  public isUserLoggedIn:boolean = false;
+  
   constructor(
     public navCtrl: NavController, 
     public viewCtrl : ViewController,
-    public httpRequest : HttpService,
-    public _config:GlobalService,
     public alertCtrl : AlertController,
     public toastCtrl : ToastController,
-    public authService: Authentication,
     public cartService: CartService
     ) {
-      this.isUserLoggedIn = this.authService.getAccessToken();
+      
     }
 
   ionViewDidLoad() {
-    if (this.authService.getAccessToken()) {
-      this.loadCartList();
-    }
+    this.loadCartList();
   }
 
   dismiss() {

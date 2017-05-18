@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 
-import { HttpService } from '../../../providers/http.service';
+import { GlobalService } from '../../../providers/global.service';
 
 import { DirectoryViewPage } from '../directory-view/directory-view';
 
@@ -12,15 +13,17 @@ import { DirectoryViewPage } from '../directory-view/directory-view';
 
 export class DirectoryListPage {
   
-  public _urlDirectory = '/directory';
+  public _urlDirectory: string;
   public directory : any = [];
   public keys: any = [];
 
   constructor(
     public navCtrl: NavController,
     private _params: NavParams,
-    public httpService: HttpService,
+    public httpService: Http,
+    public _config: GlobalService
   ) {
+    this._urlDirectory = this._config._ApiUrl + '/directory';
   }
 
   ionViewDidLoad() {
@@ -31,7 +34,8 @@ export class DirectoryListPage {
    * method to load direcoty
    */
   loadDirectory() {
-    this.httpService.get(this._urlDirectory).subscribe(result => {
+    this.httpService.get(this._urlDirectory).subscribe(jsonResponse => {
+      let result = jsonResponse.json();
       this.directory = this.generateArray(result.directory);
       this.keys = result.keys;
     });

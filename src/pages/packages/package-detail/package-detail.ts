@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
-import { ProductPage } from '../../product/product';
 
+import { ProductPage } from '../../product/product';
 
 @Component({
   selector: 'page-package-detail',
@@ -13,16 +13,18 @@ import { ProductPage } from '../../product/product';
 
 export class PackageDetailPage {
   
-  public _urlPackage = '/package/';
+  public _urlPackage = '';
+
   public id:any
   public detail:any;
   public items:any;
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,
-    public httpService: HttpService,
-    public _config: GlobalService,
+    public httpService: Http,
+    public _config: GlobalService
   ) {
+    this._urlPackage = this._config._ApiUrl + '/package/';
     this.id = this._params.get('id');
   }
 
@@ -32,7 +34,8 @@ export class PackageDetailPage {
 
   loadDetail(id) {
     this.httpService.get(this._urlPackage+id).subscribe(
-      data => {
+      jsonResponse => {
+        let data = jsonResponse.json();
         this.detail = data.package; 
         this.items = data.products; 
         //console.log(this.items);

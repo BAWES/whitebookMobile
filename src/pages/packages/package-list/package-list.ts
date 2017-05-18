@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
-import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
 
 import { PackageDetailPage } from '../../../pages/packages/package-detail/package-detail';
@@ -12,17 +12,17 @@ import { PackageDetailPage } from '../../../pages/packages/package-detail/packag
 })
 export class PackageListPage {
   
-  public _urlPackage = '/package';
+  public _urlPackage = '';
   public package:any;
   public start:number = 0;
 
   constructor(
     public navCtrl: NavController,
-    private _params : NavParams,
-    public modalCtnl: ModalController,
-    public httpService: HttpService,
-    public _config: GlobalService,
-  ) {}
+    public httpService: Http,
+    public _config: GlobalService
+  ) {
+    this._urlPackage = this._config._ApiUrl + '/package';
+  }
 
   ionViewDidLoad() {
     this.loadPackages();
@@ -35,7 +35,7 @@ export class PackageListPage {
     this.httpService.get(this._urlPackage+'?offset=0')
       .subscribe(
         data => {
-          this.package = data;
+          this.package = data.json();
         }
       );
   }
@@ -49,7 +49,7 @@ export class PackageListPage {
     let items;
     this.start+=10;
     this.httpService.get(this._urlPackage +'?offset='+this.start).subscribe(data=>{
-        items = data;
+        items = data.json();
         for(let item of items) {
           this.package.push(item);
         }
