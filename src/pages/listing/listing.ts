@@ -38,7 +38,7 @@ export class ListingPage {
 
   ionViewDidLoad() {
     this.productView = 'grid-view';
-    this.id = 'all';
+    this.id = this._params.get('id');
     this.title = this._params.get('title');
     this._urlParamas = '&category_id='+this.id;
     

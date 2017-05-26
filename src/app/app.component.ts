@@ -88,7 +88,7 @@ export class MyApp {
   */
   openPage(page) {
     this.menu.close();
-    this.nav.push(ListingPage,{title:page.category_name,id:page.category_id});
+    this.nav.push(ListingPage,{title:page.category_name, id:page.category_id});
   }
   
   /*
@@ -156,7 +156,7 @@ export class MyApp {
     this.personal = [
         { title : 'Track Booking', component:BookingTrackPage, icon:'archive', pageID:0},
         { title : 'Directory', component: DirectoryListPage, icon:'list', pageID:0},
-        { title : 'Become Vendor', component:BecomeVendorPage, icon:'mail-open', pageID:0},
+        { title : 'Become Vendor', component:BecomeVendorPage, icon:'envelope-o', pageID:0},
         { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', pageID:7},
         { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', pageID:9},
         { title : 'Packages', component:PackageListPage,icon:'archive', pageID:0},

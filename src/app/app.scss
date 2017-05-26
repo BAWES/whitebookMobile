@@ -15,17 +15,23 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-i.venues-category{background: url(../../images/sprit.png) no-repeat -3px -8px  ; height: 40px;}
-i.invitation-category{background:  url(../../images/sprit.png) no-repeat -84px -12px;height: 39px;}
-i.supply-category{background: url(../../images/sprit.png) no-repeat  -292px -11px;height: 39px;}
-i.food-category{background: url(../../images/sprit.png) no-repeat -157px -11px ;height: 39px;}
-i.decor-category{background: url(../../images/sprit.png) no-repeat  -226px -12px;height: 37px;}
-i.enter-category{background: url(../../images/sprit.png) no-repeat  -363px -10px;height: 37px;}
-i.service-category{background: url(../../images/sprit.png) no-repeat  -442px -3px;height: 44px;}
-i.others-category{background:url(../../images/sprit.png) no-repeat  -521px -13px;height: 34px;}
-i.saythankyou-category{background:url(../../images/sprit.png) -595px -14px  no-repeat;height: 40px;}
+i.venues-category{background: url(../assets/images/sprit.png) no-repeat -3px -8px;}
+i.invitation-category{background:  url(../assets/images/sprit.png) no-repeat -80px -12px;}
+i.supply-category{background: url(../assets/images/sprit.png) no-repeat  -292px -11px;}
+i.food-category{background: url(../assets/images/sprit.png) no-repeat -157px -11px;}
+i.decor-category{background: url(../assets/images/sprit.png) no-repeat  -226px -12px;}
+i.enter-category{background: url(../assets/images/sprit.png) no-repeat  -363px -10px;}
+i.service-category{background: url(../assets/images/sprit.png) no-repeat  -442px -12px;}
+i.others-category{background:url(../assets/images/sprit.png) no-repeat  -521px -13px;}
+i.saythankyou-category{background:url(../assets/images/sprit.png) -595px -19px no-repeat;}
+
 .top-nav .bar-buttons-md[start] {order: 1;}
-.logo{width: 20px;}
+.logo {
+    width: 180px;
+    top: 2px;
+    position: relative;
+}
+
 .toolbar-background-md {background: #fff;border-color: #000;}
 .close-menu.item-md.item-block .item-inner{border: none;padding: 0px;}
 .ios .menu-inner{width: 263px;}
@@ -39,7 +45,7 @@ div.menu-inner .list-ios .item-block .item-inner {border-bottom: 0.55px solid #c
 .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default{color:#000;}
 [main-menu] .list-ios > .item-block:last-child{border:none;}
 [main-menu] span{position: absolute;top: 26px;}
-[main-menu] i{display: inline-block;width: 20%;}
+[main-menu] i{display: inline-block;width: 20%;height:40px;}
 span.label-service-icon{top: 34px;}
 span.label-gift-favour-icon{top: 33px;}
 
