@@ -40,9 +40,9 @@
         <ion-badge color="dark" item-right>{{filterPrice.upper}}</ion-badge>
     </ion-list-header>
     <ion-item>
-      <ion-range min="1" max="1000" snaps="true" dualKnobs="true" pin="true" [(ngModel)]="filterPrice" color="dark">
-        <ion-label range-left>1</ion-label>
-        <ion-label range-right>1000</ion-label>
+      <ion-range min="{{ minRange }}" max="{{ maxRange }}" snaps="true" dualKnobs="true" pin="true" [(ngModel)]="filterPrice" color="dark">
+        <ion-label range-left>{{ minRange }}</ion-label>
+        <ion-label range-right>{{ maxRange }}</ion-label>
       </ion-range>
     </ion-item>
     <ion-item>
