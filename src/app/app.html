@@ -7,7 +7,7 @@
           <ion-icon name="search"></ion-icon>
         </button>
       </ion-buttons>
-      <ion-title text-center><img class="logo" src="http://dev.thewhitebook.com.kw/images/mobile_logo.svg"></ion-title>
+      <ion-title text-center><img class="logo" src="assets/images/logo.svg"></ion-title>
       <ion-buttons end main-menu-close-icon>
         <button detail-none border-none ion-item menuClose="menu1" class="close-menu">
             <ion-icon name="close"></ion-icon>
@@ -17,8 +17,8 @@
   </ion-header>
 
   <ion-content>
-    <ion-list  main-menu>
-      <ion-list-header>Categories</ion-list-header>
+    <ion-list  main-menu class="main-menu">
+      <ion-list-header>Categories</ion-list-header>      
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
           <i class="fa {{category.icon}}"></i>
           <span class="label-{{category.icon}}">{{category.category_name}}</span>
