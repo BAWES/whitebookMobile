@@ -8,7 +8,8 @@
     </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content padding *ngIf= "bookingDetail" style="margin-top:40px;margin-bottom:80px;">
+<ion-content padding style="margin-top:40px;margin-bottom:80px;">
+  <div *ngIf="bookingDetail">
   <ion-row>
     <ion-label>Booking Details</ion-label>
   </ion-row>
@@ -39,6 +40,10 @@
       <ion-col><strong>Total:</strong></ion-col>
       <ion-col text-right><strong>KD {{bookingDetail?.total_with_delivery}}</strong></ion-col>
     </ion-list>
+    </div>
+    <div *ngIf="!bookingDetail">
+      Booking detail not found.
+    </div>
 </ion-content>
 <ion-footer>
   <button ion-button full *ngIf="bookingDetail?.booking_status == 'Accepted' && !bookingDetail?.transaction_id" (click)="payNow(bookingDetail?.booking_token)">Pay Now</button>
