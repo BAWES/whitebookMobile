@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ViewController, ToastController } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { CartService } from '../../../providers/cart.service';
+import { GlobalService } from '../../../providers/global.service';
+import { Authentication } from '../../../providers/auth.service';
 
 @Component({
   selector: 'page-checkout-cart',
@@ -13,6 +15,7 @@ export class CheckoutCartPage {
   //api request urls
   public _urlCart = '/cart';
 
+  public isUserLoggedIn = false;
   public cartItems:any;
   public summary:any;
   public delivery_vendors:any;
@@ -23,9 +26,11 @@ export class CheckoutCartPage {
     public viewCtrl : ViewController,
     public alertCtrl : AlertController,
     public toastCtrl : ToastController,
-    public cartService: CartService
+    public cartService: CartService,
+    public authService: Authentication,
+    public _config: GlobalService
     ) {
-      
+      this.isUserLoggedIn = (this.authService.getAccessToken()) ? true : false;
     }
 
   ionViewDidLoad() {

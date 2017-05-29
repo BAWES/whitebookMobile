@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController, ModalController, LoadingController } from 'ionic-angular';
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
+import { CreateAddressPage } from '../../account/create-address/create-address';
+
+import { AddressService } from '../../../providers/address.service';
 
 /*
   Generated class for the CheckoutShipping page.
@@ -14,10 +17,25 @@ import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
 })
 export class CheckoutShippingPage {
 
-  constructor(public navCtrl: NavController) {}
+  public addresses: any;
+  public address_id: number;
+
+  constructor(
+    public navCtrl: NavController,
+    public addressService: AddressService,
+    public _alertCtrl : AlertController,
+    public _modalCtrl: ModalController,
+    public _loadingCtrl: LoadingController,
+  ) {}
 
   ionViewDidLoad() {
-    console.log('Hello CheckoutShippingPage Page');
+    this.loadData();
+  }
+
+  loadData () {
+    this.addressService.listAll().subscribe(data=>{
+         this.addresses = data;
+      })
   }
 
   cartModelPage () {
@@ -25,6 +43,25 @@ export class CheckoutShippingPage {
   }
 
   confirmPage() {
-    this.navCtrl.push(CheckoutConfirmPage);
+    
+    if(!this.address_id) {
+      let alert = this._alertCtrl.create({
+        subTitle: 'Please select address.',
+        buttons: ['Okay!']
+      });
+      alert.present();
+    }
+    else
+    {
+      this.navCtrl.push(CheckoutConfirmPage, { address_id: this.address_id });
+    }    
+  }
+
+  newAddressModal() {
+    let modal = this._modalCtrl.create(CreateAddressPage);
+    modal.present();
+    modal.onDidDismiss(data => { 
+       this.loadData(); // load list again
+    });
   }
 }
