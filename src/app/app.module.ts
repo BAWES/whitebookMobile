@@ -58,6 +58,7 @@ import { CartCountService } from '../providers/cart.count.service';
 import { VendorService } from '../providers/vendor.service';
 import { CheckoutService } from '../providers/checkout.service';
 import { CartService } from '../providers/cart.service';
+import { AddressService } from '../providers/address.service';
 
 // custom pipe
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
@@ -149,7 +150,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CartCountService,
     VendorService,
     CheckoutService,
-    CartService
+    CartService,
+    AddressService
     ],
 })
 export class AppModule {}

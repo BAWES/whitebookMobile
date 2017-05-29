@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, ViewController,  } from 'ionic-angular';
+import { NavParams, NavController, AlertController, LoadingController, ViewController,  } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { CheckoutService } from '../../../providers/checkout.service';
 import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
@@ -16,8 +16,10 @@ export class CheckoutConfirmPage {
   public summary:any;
   public delivery_vendors:any;
   public start:number = 0;
+  public address_id: number;
 
   constructor(
+    public navParams: NavParams,
     public navCtrl: NavController, 
     public viewCtrl : ViewController,
     public _alertCtrl : AlertController,
@@ -25,7 +27,7 @@ export class CheckoutConfirmPage {
     public checkoutService: CheckoutService,
     public cartService: CartService
     ) {
-      
+      this.address_id = this.navParams.get('address_id');
     }
 
   ionViewDidLoad() {
@@ -40,6 +42,9 @@ export class CheckoutConfirmPage {
     let loader = this._loadingCtrl.create();
     loader.present();
 
+    let params = {
+
+    };
     this.checkoutService.confirm().subscribe(response => {
 
       if(response.operation == 'success') 
