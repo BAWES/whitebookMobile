@@ -15,6 +15,10 @@ export class CheckoutCartPage {
   //api request urls
   public _urlCart = '/cart';
 
+  public area_id: any;
+  public event_time: string;
+  public delivery_date: string;
+
   public isUserLoggedIn = false;
   public cartItems:any;
   public summary:any;
@@ -31,6 +35,10 @@ export class CheckoutCartPage {
     public _config: GlobalService
     ) {
       this.isUserLoggedIn = (this.authService.getAccessToken()) ? true : false;
+
+      this.area_id = window.localStorage.getItem('delivery-location');
+      this.delivery_date = window.localStorage.getItem('delivery-date');
+      this.event_time = window.localStorage.getItem('event_time');
     }
 
   ionViewDidLoad() {
