@@ -3,7 +3,9 @@ import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
-import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
+import { ProductImagePage } from '../product-image/product-image';
+import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
+
 import { GlobalService } from '../../providers/global.service';
 import { CartCountService } from '../../providers/cart.count.service';
 import { CartService } from '../../providers/cart.service';
@@ -114,6 +116,15 @@ export class ProductPage {
     modal.onDidDismiss(data => { 
       this._cartCount.loadCartCount();
     });
+  }
+
+  showImage(title: string, image: string) {    
+    let params = {
+      image: this._config.menu_item + '/' + image,
+      title: title
+    };
+    let modal = this.modalCtnl.create(ProductImagePage, params);
+    modal.present();
   }
 
   addToCart() {

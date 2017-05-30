@@ -107,15 +107,18 @@
         </ion-list-header>
         
         <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">
-            <div class="lbl_menu_item" item-left>
-              {{ addon_item.menu_item_name }}
-              <i>{{ addon_item.hint }}</i>
-            </div>
-            <div class="qty_box_menu_item" item-right>
-              <ion-icon (click)="subMenuItemQty(addon_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              <ion-input value="0" [(ngModel)]="menuItem[addon_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
-              <ion-icon (click)="addMenuItemQty(addon_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
-            </div>
+            <img src="{{_config.menu_item_thumbnail }}/{{ addon_item.image }}" item-right *ngIf="addon_item.image" (click)="showImage(addon_item.menu_item_name, addon_item.image)" />
+            <div item-left>            
+              <div class="lbl_menu_item">
+                {{ addon_item.menu_item_name }}
+                <i>{{ addon_item.hint }}</i>
+              </div>
+              <div class="qty_box_menu_item">
+                <ion-icon (click)="subMenuItemQty(addon_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+                <ion-input value="0" [(ngModel)]="menuItem[addon_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+                <ion-icon (click)="addMenuItemQty(addon_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              </div>
+            </div>            
         </ion-item>
       </ion-list>
 
@@ -127,9 +130,12 @@
           <i *ngIf="addon_menu.max_quantity > 0">upto {{ addon_menu.max_quantity }}</i>
         </ion-list-header>
 
-        <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">        
-          <ion-label>{{ addon_item.menu_item_name }} <i>{{ addon_item.hint }}</i></ion-label>    
-          <ion-checkbox [(ngModel)]="menuItem[addon_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>      
+        <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">     
+          <img src="{{_config.menu_item_thumbnail }}/{{ addon_item.image }}" item-right *ngIf="addon_item.image" (click)="showImage(addon_item.menu_item_name, addon_item.image)" />
+          <div item-left>               
+            <ion-checkbox [(ngModel)]="menuItem[addon_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>      
+            <ion-label>{{ addon_item.menu_item_name }} <i>{{ addon_item.hint }}</i></ion-label>    
+          </div>  
         </ion-item>
       </ion-list>
 
@@ -150,14 +156,17 @@
         </ion-list-header>
 
         <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
-            <div class="lbl_menu_item" item-left>
-              {{ menu_item.menu_item_name }}
-              <i>{{ menu_item.hint }}</i>
-            </div>
-            <div class="qty_box_menu_item" item-right>
-              <ion-icon (click)="subMenuItemQty(menu_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-              <ion-input value="0" [(ngModel)]="menuItem[menu_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
-              <ion-icon (click)="addMenuItemQty(menu_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            <img src="{{_config.menu_item_thumbnail }}/{{ menu_item.image }}" item-right *ngIf="menu_item.image" (click)="showImage(menu_item.menu_item_name, menu_item.image)" />
+            <div item-left>               
+              <div class="lbl_menu_item">
+                {{ menu_item.menu_item_name }}
+                <i>{{ menu_item.hint }}</i>
+              </div>
+              <div class="qty_box_menu_item">
+                <ion-icon (click)="subMenuItemQty(menu_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+                <ion-input value="0" [(ngModel)]="menuItem[menu_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+                <ion-icon (click)="addMenuItemQty(menu_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              </div>
             </div>
         </ion-item>
       </ion-list>
@@ -171,8 +180,11 @@
         </ion-list-header>
 
         <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
-          <ion-label>{{ menu_item.menu_item_name }} <i>{{ menu_item.hint }}</i></ion-label>
-          <ion-checkbox type="checkbox" [(ngModel)]="menuItem[menu_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+          <img src="{{_config.menu_item_thumbnail }}/{{ menu_item.image }}" item-right *ngIf="menu_item.image" (click)="showImage(menu_item.menu_item_name, menu_item.image)" />
+          <div item-left>               
+            <ion-checkbox type="checkbox" [(ngModel)]="menuItem[menu_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            <ion-label>{{ menu_item.menu_item_name }} <i>{{ menu_item.hint }}</i></ion-label>            
+          </div>  
         </ion-item>
       </ion-list>
     </div>
