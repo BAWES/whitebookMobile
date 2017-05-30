@@ -16,3 +16,7 @@ page-checkout-cart {
 }
 [checkout-btn].item-md.item-block .item-inner {border-bottom: none;}
 [checkout-btn] button{margin-top: 20px;}
+
+.cart-error-wrapper p {
+    color: red;
+}
