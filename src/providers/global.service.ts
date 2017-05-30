@@ -14,6 +14,8 @@ export class GlobalService {
   public images_530 = this.s3 + '/vendor_item_images_530';
   public images_1000 = this.s3 + '/vendor_item_images_1000';
   public vendor_logo = this.s3 + '/vendor_logo';
+  public menu_item = this.s3 + "/vendor_menu_item";
+  public menu_item_thumbnail = this.s3 + "/vendor_menu_item/thumbnail";
 
   // InAppBrowser Settings
   public browserTarget: string;

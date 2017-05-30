@@ -37,8 +37,9 @@ import { SearchFilterPage } from '../pages/search-filter/search-filter';
 import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
+import { ProductImagePage } from '../pages/product-image/product-image';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
-
+ 
 // Directory 
 import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
 import { DirectoryViewPage } from '../pages/directory/directory-view/directory-view';
@@ -71,6 +72,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Home,
     ListingPage,
     ProductPage,
+    ProductImagePage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,
@@ -110,6 +112,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Home,
     ListingPage,
     ProductPage,
+    ProductImagePage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,
