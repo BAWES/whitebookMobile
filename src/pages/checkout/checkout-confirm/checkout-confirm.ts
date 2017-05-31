@@ -50,7 +50,7 @@ export class CheckoutConfirmPage {
       if(response.operation == 'success') 
       {
         this.navCtrl
-          .push(CheckoutCompletedPage)
+          .push(CheckoutCompletedPage, { arr_booking_id : response.arr_booking_id })
           .then(() => {
             // first we find the index of the current view controller:
             const index = this.viewCtrl.index;

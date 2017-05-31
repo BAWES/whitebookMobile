@@ -18,6 +18,25 @@
 </ion-header>
 <ion-content padding>
 
+  <ion-list *ngIf="isUserLoggedIn">
+    <ion-item class="border-top border-lighter">
+      <ion-label floating>Delivery area</ion-label>
+      <ion-select [(ngModel)]="area_id" (ionChange)="deliveryDataChanged()" >
+          <ion-option *ngFor="let area of areas" value="{{ area.id }}">{{ area.location }}</ion-option>
+      </ion-select> 
+    </ion-item>
+    <ion-item class="border-top border-lighter">
+      <ion-label floating>Delivery Date</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" [min]="minDate" [max]="maxDate" [(ngModel)]="delivery_date" (ionChange)="deliveryDataChanged()"></ion-datetime>
+    </ion-item>
+    <ion-item class="border-top border-lighter">
+      <ion-label floating>Timeslot</ion-label>
+      <ion-select [(ngModel)]="event_time" (ionChange)="deliveryDataChanged()" >
+          <ion-option *ngFor="let timeslot of timeslots" value="{{ timeslot }}">{{ timeslot }}</ion-option>
+      </ion-select> 
+    </ion-item>
+  </ion-list>
+
   <ion-list class="header" *ngIf="isUserLoggedIn">
       <ion-col width-36-inline-block>
           <strong>Image</strong>

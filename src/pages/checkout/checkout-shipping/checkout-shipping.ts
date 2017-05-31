@@ -33,7 +33,10 @@ export class CheckoutShippingPage {
   }
 
   loadData () {
-    this.addressService.listAll().subscribe(data=>{
+
+    let area_id = window.localStorage.getItem('delivery-location');
+
+    this.addressService.listAll(area_id).subscribe(data=>{
          this.addresses = data;
       })
   }
