@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-
+import { Http } from '@angular/http';
+import { GlobalService } from '../providers/global.service';
 import { Authentication } from '../providers/auth.service';
 
 @Injectable()
@@ -11,9 +12,17 @@ export class CartService {
   
   constructor(
     private httpService : HttpService,
-    public authService: Authentication
+    public http: Http,
+    public authService: Authentication,
+    public globalService: GlobalService
   ){
+
   } 
+
+  loadAreas() {
+    return this.httpService.get('/address/location');
+   // return this.http.get(this.globalService._ApiUrl + '/address/location');
+  }    
 
   /**
    * List cart items 

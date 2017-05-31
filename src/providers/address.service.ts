@@ -21,8 +21,8 @@ export class AddressService {
     return this.httpService.get(this._urlAddrress);
   }
 
-  listAll() {
-    return this.httpService.get(this._urlAddrress + '/all');  
+  listAll(area_id: any) {
+    return this.httpService.get(this._urlAddrress + '/all?area_id=' + area_id);  
   }
 
   /**
@@ -31,4 +31,4 @@ export class AddressService {
   add(params: any) {
     return this.httpService.post(this._urlAddrress, params);
   }
-}
+} 
