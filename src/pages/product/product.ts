@@ -10,6 +10,7 @@ import { GlobalService } from '../../providers/global.service';
 import { CartCountService } from '../../providers/cart.count.service';
 import { CartService } from '../../providers/cart.service';
 import { HttpService } from '../../providers/http.service';
+import { Authentication } from '../../providers/auth.service';
 
 @Component({
   selector: 'page-product',
@@ -54,6 +55,8 @@ export class ProductPage {
 
   public cartErrors: any = [];
 
+  public isUserLogged: boolean = false;
+
   mySlideOptions = {
       initialSlide: 1,
       loop: true,
@@ -73,7 +76,8 @@ export class ProductPage {
     public httpService: HttpService,
     public formBuilder: FormBuilder,
     public _cartCount:CartCountService,
-    public cartService: CartService
+    public cartService: CartService,
+    public auth: Authentication
   ) {
     this.product_id = this._params.get('productId');
     
@@ -82,9 +86,9 @@ export class ProductPage {
     this._urlProductCapacity = this._config._ApiUrl + '/product/capacity';
     this._urlProductDeliveryTimeSlot = this._config._ApiUrl + '/product/time-slot';
     this._urlAddToCart = this._config._ApiUrl + '/cart';
-    this._urlWishlist = this._config._ApiUrl + '/wishlist';
     this._urlFinalPrice = this._config._ApiUrl + '/product/final-price';
-
+    this._urlWishlist = '/wishlist';
+    
     // to set min and max value for datepicker
     this.today = new Date();
     this.today.setHours(0,0,0);
@@ -98,6 +102,8 @@ export class ProductPage {
         myDate: ['', Validators.required],
         slots: ['', Validators.required],
       });
+
+    this.isUserLogged = this.auth.getAccessToken();
   }
 
   ionViewDidLoad() {
@@ -224,7 +230,6 @@ export class ProductPage {
   }
 
   loadFinalPrice() {
-    let result;
     let param = {
       'item_id' : this.product_id,
       'quantity' : this.quantity,
@@ -349,13 +354,18 @@ export class ProductPage {
       this.maxQuantity = parseInt(jsonResponse.json().capacity);
     });
   }
-
   
   /**
    * load is product is in Wishlist
    * of user
    */
-  loadProductWishlistStatus() {
+  loadProductWishlistStatus() 
+  {
+    if(!this.isUserLogged)
+    {
+      return false;
+    }
+
     let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
     this.httpService.get(url).subscribe(jsonResponse => {
       this.wishlistID = jsonResponse.json();
@@ -365,8 +375,18 @@ export class ProductPage {
     });
   }
 
-
   manageWishlist() {
+      
+      if(!this.isUserLogged)
+      {
+        let alert = this.alertCtrl.create({
+          message: 'Please login to manage wishlist',
+          buttons: ['OK']
+        });
+        alert.present();
+        return false;
+      }
+
       if (this.wishlistID > 0) {
         this.removeFromWishList();
       } else {
@@ -375,6 +395,7 @@ export class ProductPage {
   }
 
   addToWishList() {
+    
     let result;
     let param = {
       'item_id' : this.product_id
