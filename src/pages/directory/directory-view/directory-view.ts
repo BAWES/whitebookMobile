@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { GlobalService } from '../../../providers/global.service';
+import { ProductPage } from '../../product/product';
 
 @Component({
   selector: 'page-directory-view',
@@ -33,6 +34,10 @@ export class DirectoryViewPage {
     this.loadProducts();
   }
   
+  productDetail(id) {
+    this.navCtrl.push(ProductPage, { productId:id });
+  }
+
   /**
    * Load product listing
    */
