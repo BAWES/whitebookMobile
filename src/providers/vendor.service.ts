@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { GlobalService } from '../providers/global.service';
 
 @Injectable()
 export class VendorService {
 
   constructor(
     private httpService : Http,
+    public _config: GlobalService
   ){
      
   } 
@@ -19,7 +21,7 @@ export class VendorService {
     description: string
     ){
     
-    const url = '/account/vendor-request';
+    const url = this._config._ApiUrl + '/account/vendor-request';
 
     return this.httpService.post(url, {
           'business': business,

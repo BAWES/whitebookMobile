@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Cart
+      Confirm Your Booking
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
 
-  <ion-list class="header" *ngIf="isUserLoggedIn">
+  <ion-list class="header" *ngIf="errors.length == 0">
       <ion-col width-36-inline-block>
           <strong>Image</strong>
       </ion-col>
@@ -15,7 +15,7 @@
           <strong>Detail</strong>
       </ion-col>
   </ion-list>
-  <div class="" approxItemHeight="40px" *ngIf="isUserLoggedIn && cartItems">
+  <div class="" approxItemHeight="40px" *ngIf="!(errors.length > 0) && cartItems">
   
     <ion-list *ngFor="let item of cartItems" >
       <ion-row class="header">
@@ -25,28 +25,31 @@
           <ion-col width-70 class="button-container">
               <h3>{{item.item_name}}</h3>
               <ion-label> QTY :  {{item.cart_quantity}}</ion-label>
-              <ion-label> Date : {{item.cart_delivery_date}}</ion-label>
-              <ion-label> Time :  {{item.time_slot}}</ion-label>
               <ion-label> Vendor :  {{item.vendor}}</ion-label>
-              <h2>Price : KD {{item.item_price_per_unit}}</h2>
-          </ion-col>
-          <br/>
-          <br/>
-        <ion-col width-70 class="button-container" *ngIf="item.options.length">
-            <small>Options</small>
-            <ion-label *ngFor="let option of item.options" > <small>{{option.menu_item_name}} X {{option.quantity}}</small></ion-label>
-        </ion-col>
-        <ion-col width-70 class="button-container" *ngIf="item.addons.length">
-            <small>addons</small>
-            <ion-label *ngFor="let addon of item.addons" > <small>{{addon.menu_item_name}} X {{addon.quantity}}</small></ion-label>
-        </ion-col>
-        <ion-col width-70 class="button-container" *ngIf="item.addons.length">
-            <small>customs</small>
-            <ion-label *ngFor="let custom of item.customs" > 
-              <small>{{custom.question}}</small>
-              <small>{{custom.answer}}</small>
-            </ion-label>
-        </ion-col>
+              <h2>Price : KD {{item.item_price_per_unit}}</h2>  
+
+              <div *ngIf="item.options.length">
+                  <small>Options</small>
+                  <ion-label *ngFor="let option of item.options" > <small>{{option.menu_item_name}} X {{option.quantity}}</small></ion-label>
+              </div>
+
+              <div *ngIf="item.addons.length">
+                  <small>addons</small>
+                  <ion-label *ngFor="let addon of item.addons" > <small>{{addon.menu_item_name}} X {{addon.quantity}}</small></ion-label>
+              </div>
+
+              <div *ngIf="item.addons.length">
+                  <small>customs</small>
+                  <ion-label *ngFor="let custom of item.customs" > 
+                    <small>{{custom.question}}</small>
+                    <small>{{custom.answer}}</small>
+                  </ion-label>
+              </div>
+              
+              <div *ngFor="let error of item.errors" class="cart-error-wrapper">
+                <p>{{ error }}</p>
+              </div>                      
+          </ion-col>        
       </ion-row>
     </ion-list>
     
@@ -72,9 +75,7 @@
     </ion-list>
   </div>
 
-  <div class="" *ngIf="!isUserLoggedIn"></div>
-
-  <ion-item text-center checkout-btn *ngIf="isUserLoggedIn">
+  <ion-item text-center checkout-btn *ngIf="errors.length == 0">
     <button ion-button round width-99 padding color="dark" (click)="confirm()"> Confirm</button>
   </ion-item>
 </ion-content>
@@ -83,6 +84,6 @@
     <p text-center>No Results</p>
 </ion-content>
 
-<ion-content *ngIf="!isUserLoggedIn" class="no-results">
-    <p text-center>Please Login </p>
+<ion-content *ngIf="errors.length > 0" class="no-results">
+    <p text-center>Please check your cart</p>
 </ion-content>

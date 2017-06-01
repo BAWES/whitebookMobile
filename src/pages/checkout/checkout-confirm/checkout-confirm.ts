@@ -4,6 +4,7 @@ import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { CheckoutService } from '../../../providers/checkout.service';
 import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
 import { CartService } from '../../../providers/cart.service';
+import { GlobalService } from '../../../providers/global.service';
 
 @Component({
   selector: 'page-checkout-confirm',
@@ -18,6 +19,8 @@ export class CheckoutConfirmPage {
   public start:number = 0;
   public address_id: number;
 
+  public errors: any[] = [];
+
   constructor(
     public navParams: NavParams,
     public navCtrl: NavController, 
@@ -25,9 +28,10 @@ export class CheckoutConfirmPage {
     public _alertCtrl : AlertController,
     public _loadingCtrl: LoadingController,
     public checkoutService: CheckoutService,
-    public cartService: CartService
+    public cartService: CartService,
+    public _config: GlobalService
     ) {
-      this.address_id = this.navParams.get('address_id');
+      this.address_id = this.navParams.get('address_id'); 
     }
 
   ionViewDidLoad() {
@@ -43,9 +47,17 @@ export class CheckoutConfirmPage {
     loader.present();
 
     let params = {
-
+      'delivery-location': window.localStorage.getItem('delivery-location'),
+      'delivery-date': window.localStorage.getItem('delivery-date'),
+      'event_time': window.localStorage.getItem('event_time'),
+      'customer_name': window.localStorage.getItem('customer_name'),
+      'customer_lastname': window.localStorage.getItem('customer_lastname'),
+      'customer_email': window.localStorage.getItem('customer_email'),
+      'customer_mobile': window.localStorage.getItem('customer_mobile'),
+      'address_id': this.address_id,
     };
-    this.checkoutService.confirm().subscribe(response => {
+
+    this.checkoutService.confirm(params).subscribe(response => {
 
       if(response.operation == 'success') 
       {
@@ -80,6 +92,7 @@ export class CheckoutConfirmPage {
       this.cartItems = list.items;
       this.summary = list.summary;
       this.delivery_vendors = list.summary.delivery_vendors;
+      this.errors = list.errors;
     })
   }
 }

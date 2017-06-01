@@ -33,9 +33,15 @@ export class CartService {
     let delivery_date = window.localStorage.getItem('delivery-date');
     let time_slot = window.localStorage.getItem('event_time');
 
-    return this.httpService.get(
-      this._urlCart + '?area_id=' + area_id + '&delivery_date=' + delivery_date + '&time_slot=' + time_slot
-    );
+    let url = this._urlCart + '?';    
+    if(area_id)
+      url += 'area_id=' + area_id;
+    if(delivery_date)  
+      url += '&delivery_date=' + delivery_date;
+    if(time_slot) 
+      url += '&time_slot=' + time_slot;
+
+    return this.httpService.get(url);
   }
 
   /**

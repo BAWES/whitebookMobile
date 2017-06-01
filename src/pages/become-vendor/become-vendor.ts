@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
@@ -21,7 +21,8 @@ export class BecomeVendorPage {
     public modalCtnl: ModalController,
     private fb: FormBuilder,
     private vendorService: VendorService,
-    private _baseService : Base
+    private _baseService : Base,
+    private loadingCtrl: LoadingController,
     ) { 
     
     this.becomeVendorForm = this.fb.group({
@@ -39,7 +40,10 @@ export class BecomeVendorPage {
     this.submitAttempt = true;
 
     if (this.becomeVendorForm.valid) {
-      this._baseService.startLoading();
+      
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
 
       this.vendorService.vendorRequest(
         this.becomeVendorForm.value.business,
@@ -51,17 +55,15 @@ export class BecomeVendorPage {
       )
       .subscribe(jsonResponse => {
 
+        loading.dismiss();
+
         let response = jsonResponse.json();
         
         if (response.operation == 'error' ) {
-          this._baseService.showToast(response.message, 4000);
-          this._baseService.endLoading();
+          this._baseService.showToast(response.message, 4000);          
         } else if (response.operation == 'success' ) {
           this._baseService.showToast(response.message, 4000);
-          setTimeout(() => {
-            this._baseService.endLoading();
-            this.navCtrl.pop();
-          });
+          this.navCtrl.pop();
         }
       })
     }
