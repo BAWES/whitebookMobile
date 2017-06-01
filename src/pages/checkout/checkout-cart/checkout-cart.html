@@ -37,7 +37,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-list class="header" *ngIf="isUserLoggedIn">
+  <ion-list class="header" *ngIf="isUserLoggedIn && cartItems">
       <ion-col width-36-inline-block>
           <strong>Image</strong>
       </ion-col>
@@ -117,7 +117,7 @@
 </ion-content>
 
 <ion-content *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">
-    <p text-center>No Results</p>
+    <p text-center>No item(s) in cart</p>
 </ion-content>
 
 <ion-content *ngIf="!isUserLoggedIn" class="no-results">
