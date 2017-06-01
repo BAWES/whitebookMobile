@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <form [formGroup]="becomeVendorForm" (ngSubmit)="submit()" novalidate>
+    <form [formGroup]="becomeVendorForm" (ngSubmit)="submit()">
       <ion-item>
         <ion-label floating>Business</ion-label>
         <ion-input formControlName="business" type="text"></ion-input>
@@ -16,12 +16,12 @@
 
       <ion-item>
         <ion-label floating>Name</ion-label>
-        <ion-input formControlName="name" type="text"></ion-input>
+        <ion-input formControlName="name" type="text"></ion-input>        
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.name.valid && (becomeVendorForm.controls.name.touched ||  submitAttempt)">
-          <p>Please name</p>
+          <p>Please enter name</p>
       </div>
-
+      
       <ion-item>
         <ion-label floating>Mobile</ion-label>
         <ion-input formControlName="mobile" type="text"></ion-input>
@@ -53,10 +53,10 @@
       <div class="error-message" *ngIf="!becomeVendorForm.controls.description.valid && (becomeVendorForm.controls.description.touched ||  submitAttempt)">
           <p>Please enter description</p>
       </div>
- 
-    </form>
-    <ion-item text-center no-border>
-      <button no-background (click)='submit()' font-size-16>Submit</button>
-    </ion-item>
+      
+      <ion-item text-center no-border>
+        <button ion-button>Submit</button>
+      </ion-item>
+    </form>    
   </ion-list>
 </ion-content>

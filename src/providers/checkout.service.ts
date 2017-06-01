@@ -13,7 +13,7 @@ export class CheckoutService {
   /**
    * Confirm booking 
    */
-  confirm() {
-    return this.httpService.get('/checkout/confirm');
+  confirm(params) {
+    return this.httpService.post('/checkout/confirm', params);
   }
 }

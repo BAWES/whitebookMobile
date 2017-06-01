@@ -33,11 +33,13 @@
   </ion-list>
 
   <ion-item text-center no-border>
-    <button width-99 round ion-button color="dark" padding-17 (click)="newAddressModal()"> Add New Address</button>
-  </ion-item>
-  <ion-item text-center no-border>
     <button width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> Next</button>
   </ion-item>
+  
+  <ion-item text-center no-border>
+    <button width-99 round ion-button color="dark" padding-17 (click)="newAddressModal()"> Add New Address</button>
+  </ion-item>
+  
   <ion-item text-center checkout-btn >
     <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> Back To Cart</button>
   </ion-item>
