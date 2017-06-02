@@ -31,10 +31,7 @@ export class ProductPage {
   public product_id:number;
   public product : any;
   public vendorAreaList: any;
-  public minDate:any;
-  public today:any;
-  public todayStr:any;
-  public currentTime:any;
+  
   public timeslots:any = [];
   public quantity:number = 1;
   public maxQuantity:number = 0;
@@ -56,6 +53,11 @@ export class ProductPage {
   public cartErrors: any = [];
 
   public isUserLogged: boolean = false;
+
+  public currentTime;
+  public todayStr;
+  public todayDate;
+  public maxDate;
 
   mySlideOptions = {
       initialSlide: 1,
@@ -79,6 +81,8 @@ export class ProductPage {
     public cartService: CartService,
     public auth: Authentication
   ) {
+    this.setDates();
+
     this.product_id = this._params.get('productId');
     
     this._urlProductDetail = this._config._ApiUrl + '/product/detail?product_id=';
@@ -89,11 +93,6 @@ export class ProductPage {
     this._urlFinalPrice = this._config._ApiUrl + '/product/final-price';
     this._urlWishlist = '/wishlist';
     
-    // to set min and max value for datepicker
-    this.today = new Date();
-    this.today.setHours(0,0,0);
-    this.todayStr  = this.today.toISOString().substring(0,10);
-    // this.myDate = this.todayStr;
     this.currentTime = new Date().getTime();
 
     //form validation
@@ -105,6 +104,24 @@ export class ProductPage {
 
     this.isUserLogged = this.auth.getAccessToken();
   }
+
+  /**
+	 * Sets the default dates for min/max validation
+	 */
+	setDates(){
+    
+		let today = new Date();
+		
+    today.setHours(0,0,0);
+    this.todayStr  = today.toISOString().substring(0,10);
+    
+    var dd = today.getDate();
+		var mm = today.getMonth(); // 0 is January, so we must add 1
+		var yyyy = today.getFullYear();
+
+		this.todayDate = new Date((yyyy), mm, dd).toISOString();
+		this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
+	}
 
   ionViewDidLoad() {
     if (this.product_id) {
@@ -368,7 +385,7 @@ export class ProductPage {
 
     let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
     this.httpService.get(url).subscribe(jsonResponse => {
-      this.wishlistID = jsonResponse.json();
+      this.wishlistID = jsonResponse;
       if (this.wishlistID > 0) {
         this.wishlistLbl = 'Remove From Wishlist';
       }
@@ -400,9 +417,8 @@ export class ProductPage {
     let param = {
       'item_id' : this.product_id
     }
-    this.httpService.post(this._urlWishlist,param).subscribe(jsonResponse => {
-      result = jsonResponse.json();
-
+    this.httpService.post(this._urlWishlist,param).subscribe(result => {
+      
       if (result.operation == 'success'){
           this.wishlistLbl = 'Remove From Wishlist';
           this.wishlistID = result.id;
@@ -417,9 +433,7 @@ export class ProductPage {
   }
   
   removeFromWishList() {
-    let result;
-    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(jsonResponse => {
-      result = jsonResponse.json();
+    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(result => {
       if (result.operation == 'success') {
           this.wishlistLbl = 'Add From Wishlist';
           this.wishlistID = 0;

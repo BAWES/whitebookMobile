@@ -37,6 +37,9 @@ export class CheckoutCartPage {
   
   public errors: any[] = [];
 
+  public minDate;
+	public maxDate;
+
   constructor(
     public navCtrl: NavController, 
     public viewCtrl : ViewController,
@@ -51,6 +54,8 @@ export class CheckoutCartPage {
       this.area_id = window.localStorage.getItem('delivery-location');
       this.delivery_date = window.localStorage.getItem('delivery-date');
       this.event_time = window.localStorage.getItem('event_time');
+
+      this.setDates();
     }
 
   ionViewDidLoad() {
@@ -108,6 +113,24 @@ export class CheckoutCartPage {
       this.errors = list.errors;
     })
   }
+  
+  /**
+	 * Sets the default dates for min/max validation
+	 */
+	setDates(){
+    
+		let today = new Date();
+		
+    today.setHours(0,0,0);
+    //this.todayStr  = today.toISOString().substring(0,10);
+    
+    var dd = today.getDate();
+		var mm = today.getMonth(); // 0 is January, so we must add 1
+		var yyyy = today.getFullYear();
+
+		this.minDate = new Date((yyyy), mm, dd).toISOString();
+		this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
+	}
 
   removeItem(cart_id) {
     let alert = this.alertCtrl.create({
