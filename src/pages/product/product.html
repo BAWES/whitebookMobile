@@ -56,7 +56,7 @@
     </div>
     <ion-item>
       <ion-label>Select Delivery Date</ion-label>
-      <ion-datetime formControlName="myDate" displayFormat="YYYY-MM-DD" min="{{todayStr}}" max="2100-12-31" [(ngModel)]="myDate" (ionChange) = "loadTimeSlot(product.vendor.vendor_id)"></ion-datetime>
+      <ion-datetime formControlName="myDate" displayFormat="YYYY-MM-DD" min="{{ todayDate }}" max="{{ maxDate }}" [(ngModel)]="myDate" (ionChange) = "loadTimeSlot(product.vendor.vendor_id)"></ion-datetime>
     </ion-item>
     <div class="error-message" *ngIf="productForm.controls.area.valid && !productForm.controls.myDate.valid && (productForm.controls.myDate.touched ||  submitAttempt)">
       <p>Please Select date</p>
