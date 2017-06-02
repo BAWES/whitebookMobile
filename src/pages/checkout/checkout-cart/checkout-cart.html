@@ -55,10 +55,10 @@
               <img src="{{_config.images_210}}/{{item.image_path}}">
           </ion-col>
           <ion-col width-70 class="button-container">
-              <h3>{{item.item_name}}</h3>
-              <ion-label> QTY :  {{item.cart_quantity}}</ion-label>
-              <ion-label> Vendor :  {{item.vendor}}</ion-label>
-              <h2>Price : KD {{item.item_price_per_unit}}</h2>  
+              <h3>{{ item.item_name }}</h3>
+              <ion-label> QTY :  {{ item.cart_quantity}}</ion-label>
+              <ion-label> Vendor :  {{ item.vendor}}</ion-label>
+              <h2>Item Total : KD {{ item.total }}</h2>  
 
               <div *ngIf="item.options.length">
                   <small>Options</small>
