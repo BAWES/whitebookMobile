@@ -26,8 +26,8 @@
               <h3>{{item.item_name}}</h3>
               <ion-label> QTY :  {{item.cart_quantity}}</ion-label>
               <ion-label> Vendor :  {{item.vendor}}</ion-label>
-              <h2>Price : KD {{item.item_price_per_unit}}</h2>  
-
+              <h2>Item Total : KD {{ item.total }}</h2>  
+              
               <div *ngIf="item.options.length">
                   <small>Options</small>
                   <ion-label *ngFor="let option of item.options" > <small>{{option.menu_item_name}} X {{option.quantity}}</small></ion-label>
