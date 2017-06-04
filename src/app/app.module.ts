@@ -1,18 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
 
+// Ionic Native
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { NativeStorage } from '@ionic-native/native-storage';
 
-import { IonicStorageModule } from '@ionic/storage';
-
+// App Imports
 import { MyApp } from './app.component';
-import { Home } from '../pages/home/home';
 
+/**
+ * Modules
+ */
+import { EnvironmentsModule } from './environments/environments.module';
+
+// Start Pages
+import { Home } from '../pages/home/home';
 import { LoginPage } from '../pages/user/login/login';
 import { RegisterPage } from '../pages/user/register/register';
 import { ForgotPasswordPage } from '../pages/user/forgot-password/forgot-password';
@@ -39,8 +45,8 @@ import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 import { ProductImagePage } from '../pages/product-image/product-image';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
- 
-// Directory 
+
+// Directory
 import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
 import { DirectoryViewPage } from '../pages/directory/directory-view/directory-view';
 
@@ -101,10 +107,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     DirectoryViewPage
   ],
   imports: [
-    BrowserModule,  // New in ionic 3
-    HttpModule,  // New in ionic 3
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    // Custom Modules
+    EnvironmentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -146,7 +154,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     IonicStorageModule,
     InAppBrowser,
     Base,
-    SplashScreen, // Newly add for ionic 3
+    SplashScreen,
     StatusBar,
     NativeStorage,
     HttpService,
@@ -158,4 +166,3 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ],
 })
 export class AppModule {}
-
