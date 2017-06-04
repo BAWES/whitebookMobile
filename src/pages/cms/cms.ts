@@ -28,7 +28,7 @@ export class Cms {
   }
 
   pageDetail(id){
-    this._http.get(this._config._ApiUrl + '/cms/' + id).subscribe(data => {
+    this._http.get(this._config.apiBaseUrl + '/cms/' + id).subscribe(data => {
       this.detail = data.json();
     })
   }

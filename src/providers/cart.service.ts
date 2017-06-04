@@ -21,7 +21,7 @@ export class CartService {
 
   loadAreas() {
     return this.httpService.get('/address/location');
-   // return this.http.get(this.globalService._ApiUrl + '/address/location');
+   // return this.http.get(this.globalService.apiBaseUrl + '/address/location');
   }    
 
   /**

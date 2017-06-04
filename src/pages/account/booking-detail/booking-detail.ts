@@ -49,7 +49,7 @@ export class BookingDetailPage {
 
   payNow(bookingToken) {
     // Load in app browser to billing portal with Authkey
-    let billingUrl = this._config._ApiUrl + `/tap?booking_token=` + bookingToken;
+    let billingUrl = this._config.apiBaseUrl + `/tap?booking_token=` + bookingToken;
     this.loadUrl(billingUrl, true);
   }
 

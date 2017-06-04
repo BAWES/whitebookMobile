@@ -21,7 +21,7 @@ export class VendorService {
     description: string
     ){
     
-    const url = this._config._ApiUrl + '/account/vendor-request';
+    const url = this._config.apiBaseUrl + '/account/vendor-request';
 
     return this.httpService.post(url, {
           'business': business,

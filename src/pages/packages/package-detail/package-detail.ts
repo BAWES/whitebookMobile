@@ -24,7 +24,7 @@ export class PackageDetailPage {
     public httpService: Http,
     public _config: GlobalService
   ) {
-    this._urlPackage = this._config._ApiUrl + '/package/';
+    this._urlPackage = this._config.apiBaseUrl + '/package/';
     this.id = this._params.get('id');
   }
 

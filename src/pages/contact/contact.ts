@@ -26,7 +26,7 @@ export class Contact {
     public _config: GlobalService
   ) {
 
-    this._urlContactUrl = this._config._ApiUrl + "/account/contact";
+    this._urlContactUrl = this._config.apiBaseUrl + "/account/contact";
 
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
