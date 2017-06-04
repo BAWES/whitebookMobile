@@ -12,12 +12,12 @@ export const environmentList = [
   },
   {
     envName: 'krushn',
-    apiEndpoint: 'http://localhost/whitebook/candidate/web/v1',
+    apiEndpoint: 'http://localhost/whitebook/api/web/v1',
     environmentName: 'Krushn Local Machine'
   },
   {
     envName: 'anil',
-    apiEndpoint: 'http://candidate.whitebook.local/v1',
+    apiEndpoint: 'http://api.thewhitebook.local/v1',
     environmentName: 'Anil Local Machine'
   },
   {

@@ -23,7 +23,7 @@ export class DirectoryListPage {
     public httpService: Http,
     public _config: GlobalService
   ) {
-    this._urlDirectory = this._config._ApiUrl + '/directory';
+    this._urlDirectory = this._config.apiBaseUrl + '/directory';
   }
 
   ionViewDidLoad() {

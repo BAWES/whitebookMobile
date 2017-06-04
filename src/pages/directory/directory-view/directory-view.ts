@@ -26,7 +26,7 @@ export class DirectoryViewPage {
     public _config: GlobalService
   ) {
 
-    this._urlDirectory = this._config._ApiUrl + '/directory/view';
+    this._urlDirectory = this._config.apiBaseUrl + '/directory/view';
   
     this.vendor = params.get('model');
     this.productView = 'grid-view';

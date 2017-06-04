@@ -21,7 +21,7 @@ export class PackageListPage {
     public httpService: Http,
     public _config: GlobalService
   ) {
-    this._urlPackage = this._config._ApiUrl + '/package';
+    this._urlPackage = this._config.apiBaseUrl + '/package';
   }
 
   ionViewDidLoad() {
