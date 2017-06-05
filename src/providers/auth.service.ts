@@ -44,7 +44,7 @@ export class Authentication {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     ) {
-    this.url = _config._ApiUrl;
+    this.url = _config.apiBaseUrl;
     _platform.ready().then(() => {
         this._updateLoginStatus();
       });

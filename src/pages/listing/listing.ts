@@ -33,7 +33,7 @@ export class ListingPage {
     public _config: GlobalService
   ) {
     this._urlParamas = '';
-    this._urlProductListing = this._config._ApiUrl + '/product/list';
+    this._urlProductListing = this._config.apiBaseUrl + '/product/list';
   }
 
   ionViewDidLoad() {

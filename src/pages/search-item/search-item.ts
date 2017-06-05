@@ -24,7 +24,7 @@ export class SearchItemPage {
     public httpRequest: Http,
     public _config: GlobalService
   ) {
-    this._searchUrl = this._config._ApiUrl + '/search?q=';
+    this._searchUrl = this._config.apiBaseUrl + '/search?q=';
   }
 
   ionViewDidLoad() {

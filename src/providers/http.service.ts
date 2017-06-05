@@ -31,7 +31,7 @@ export class HttpService {
    * @returns {Observable<any>}
    */
   get(endpointUrl: string,addBearer:boolean = true): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
+    const url = this._config.apiBaseUrl + endpointUrl;
     return this._http.get(url, {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
               .take(1)
@@ -45,7 +45,7 @@ export class HttpService {
    * @returns {Observable<any>}
    */
   post(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
+    const url = this._config.apiBaseUrl + endpointUrl;
 
     return this._http.post(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
@@ -60,7 +60,7 @@ export class HttpService {
    * @returns {Observable<any>}
    */
   patch(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
+    const url = this._config.apiBaseUrl + endpointUrl;
 
     return this._http.patch(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
@@ -76,7 +76,7 @@ export class HttpService {
    * @returns {Observable<any>}
    */
   put(endpointUrl: string, params: any,addBearer:boolean = true): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
+    const url = this._config.apiBaseUrl + endpointUrl;
 
     return this._http.put(url, JSON.stringify(params), {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))
@@ -92,7 +92,7 @@ export class HttpService {
    * @returns {Observable<any>}
    */
   delete(endpointUrl: string,addBearer:boolean = true): Observable<any>{
-    const url = this._config._ApiUrl + endpointUrl;
+    const url = this._config.apiBaseUrl + endpointUrl;
 
     return this._http.delete(url, {headers: this._buildAuthHeaders(addBearer)})
               .catch((err) => this._handleError(err))

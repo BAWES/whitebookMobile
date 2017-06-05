@@ -26,7 +26,7 @@ export class Home {
     public _cartCount: CartCountService,
     public _config: GlobalService
     ) {
-    this._urlThemeUrl = this._config._ApiUrl + '/themes';
+    this._urlThemeUrl = this._config.apiBaseUrl + '/themes';
     this.loadThemeList();
   }
 

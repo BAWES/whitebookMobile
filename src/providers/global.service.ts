@@ -1,13 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Platform } from 'ionic-angular';
+
+// Custom
+import { EnvConfig } from '../app/environments/environments.token';
+
 /*
  * Handles all Environment-based config
  */
 @Injectable()
 export class GlobalService {
-  
+
   // Endpoint Urls
-  public _ApiUrl:string;
+  public apiBaseUrl:string;
 
   public s3 = 'https://thewhitebook.s3.amazonaws.com';
   public images_210 = this.s3 + '/vendor_item_images_210';
@@ -22,37 +26,13 @@ export class GlobalService {
   public browserOptions: string;
   public browserOptionsWithCache: string;
 
-  constructor(public platform: Platform) {
-    // Initiate dev environment on computer while
-    // running the production on mobile
-    //platform.ready().then(() => {
-      if (platform.is('cordova')) {
-        this.initProdEnvironment();
-      } else {
-        this.initDevEnvironment();
-      }
-    //});
-  }
+  constructor(public platform: Platform, @Inject(EnvConfig) public envConfig) {
+      console.log("Loaded Environment: " + this.envConfig.environmentName);
 
-  /**
-   * Initialize the Dev Environment
-   * @param {string} [platform]
-   */
-  initDevEnvironment(platform?: string) {
-    this.initKrushn();
+      // Set base API endpoint based on env config
+      this.apiBaseUrl = this.envConfig.apiEndpoint;
 
-    this.setupDeviceSpecificConfigs();
-  }
-
-  /**
-   * Initialize the Production Environment
-   * @param {string} [platform]
-   */
-  initProdEnvironment(platform?: string){
-    
-    this._ApiUrl = "http://devapi.thewhitebook.com.kw/v1";
-
-    this.setupDeviceSpecificConfigs();
+      this.setupDeviceSpecificConfigs();
   }
 
   /**
@@ -86,26 +66,4 @@ export class GlobalService {
     }
   }
 
-  /*
-  * Api url for anil system environment   
-  */
-  initAnil() {
-    this._ApiUrl = 'http://api.thewhitebook.local/v1';
-    console.log('Anil Environment Settings');
-  }
-
-  /*
-  * Api url for Khalid system environment   
-  */
-  initKhalid() {
-    this._ApiUrl = "http://localhost/~BAWES/plugn/api/web/v1";
-  }
-
-  /*
-  * Api url for krushn system environment   
-  */
-  initKrushn() {
-    //this._ApiUrl = 'http://devapi.thewhitebook.com.kw/v1';
-    this._ApiUrl = 'http://localhost/whitebook/api/web/v1';
-  }
 }

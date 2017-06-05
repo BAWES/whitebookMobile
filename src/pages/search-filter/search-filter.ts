@@ -40,11 +40,11 @@ export class SearchFilterPage {
     public _config: GlobalService,
     private _params : NavParams,
     ) {
-    this._urlProductArea = this._config._ApiUrl + '/product/area';
-    this._urlCategory = this._config._ApiUrl + "/category";
-    this._urlThemes = this._config._ApiUrl + "/product/theme";
-    this._urlVendors = this._config._ApiUrl + "/product/vendors";
-    this._urlPriceRange = this._config._ApiUrl + "/product/price-range";
+    this._urlProductArea = this._config.apiBaseUrl + '/product/area';
+    this._urlCategory = this._config.apiBaseUrl + "/category";
+    this._urlThemes = this._config.apiBaseUrl + "/product/theme";
+    this._urlVendors = this._config.apiBaseUrl + "/product/vendors";
+    this._urlPriceRange = this._config.apiBaseUrl + "/product/price-range";
 
     this.filterDeliveryArea = this._params.get('requestedLocation');
     this.filterDeliveryDate = this._params.get('requestedDeliverDate');

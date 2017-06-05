@@ -85,12 +85,12 @@ export class ProductPage {
 
     this.product_id = this._params.get('productId');
     
-    this._urlProductDetail = this._config._ApiUrl + '/product/detail?product_id=';
-    this._urlProductArea = this._config._ApiUrl + '/product/area?vendor_id=';
-    this._urlProductCapacity = this._config._ApiUrl + '/product/capacity';
-    this._urlProductDeliveryTimeSlot = this._config._ApiUrl + '/product/time-slot';
-    this._urlAddToCart = this._config._ApiUrl + '/cart';
-    this._urlFinalPrice = this._config._ApiUrl + '/product/final-price';
+    this._urlProductDetail = this._config.apiBaseUrl + '/product/detail?product_id=';
+    this._urlProductArea = this._config.apiBaseUrl + '/product/area?vendor_id=';
+    this._urlProductCapacity = this._config.apiBaseUrl + '/product/capacity';
+    this._urlProductDeliveryTimeSlot = this._config.apiBaseUrl + '/product/time-slot';
+    this._urlAddToCart = this._config.apiBaseUrl + '/cart';
+    this._urlFinalPrice = this._config.apiBaseUrl + '/product/final-price';
     this._urlWishlist = '/wishlist';
     
     this.currentTime = new Date().getTime();
