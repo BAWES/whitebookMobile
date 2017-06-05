@@ -49,7 +49,7 @@ export class CheckoutCartPage {
     public authService: Authentication,
     public _config: GlobalService
     ) {
-      this.isUserLoggedIn = (this.authService.getAccessToken()) ? true : false;
+      this.isUserLoggedIn = this.authService.getAccessToken();
 
       this.area_id = window.localStorage.getItem('delivery-location');
       this.delivery_date = window.localStorage.getItem('delivery-date');
@@ -108,6 +108,7 @@ export class CheckoutCartPage {
   loadCartList() {
     this.cartService.list().subscribe(list => {
       this.cartItems = list.items;
+      console.log(this.cartItems);
       this.summary = list.summary;
       this.delivery_vendors = list.summary.delivery_vendors;
       this.errors = list.errors;

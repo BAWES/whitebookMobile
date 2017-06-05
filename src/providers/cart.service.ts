@@ -10,18 +10,42 @@ export class CartService {
   public _urlCart:string = '/cart';
   public count:number = 0;
   
+  public cartSessionId: string;
+  public isUserLogged;
+
   constructor(
     private httpService : HttpService,
     public http: Http,
     public authService: Authentication,
     public globalService: GlobalService
   ){
+    this.isUserLogged = this.authService.getAccessToken();
 
+    if(!this.isUserLogged) 
+      this.getCartSessionId();
   } 
+
+  /**
+   * Get cart session id to use cart 
+   * without login 
+   */
+  getCartSessionId() {
+
+    this.cartSessionId = window.localStorage.getItem('cart-session-id');
+
+    if(this.cartSessionId && this.cartSessionId != 'undefined') {
+      return true;
+    }      
+
+    let url = this.globalService._ApiUrl + this._urlCart + '/cart-session-id';
+    this.http.get(url).subscribe(response => {
+      this.cartSessionId = response.json().cart_session_id;
+      window.localStorage.setItem('cart-session-id', this.cartSessionId);
+    });
+  }
 
   loadAreas() {
     return this.httpService.get('/address/location');
-   // return this.http.get(this.globalService._ApiUrl + '/address/location');
   }    
 
   /**
@@ -41,7 +65,7 @@ export class CartService {
     if(time_slot) 
       url += '&time_slot=' + time_slot;
 
-    return this.httpService.get(url);
+    return this.httpService.get(url + '&cart-session-id=' + this.cartSessionId);
   }
 
   /**
@@ -53,13 +77,17 @@ export class CartService {
     window.localStorage.setItem('delivery-date', params.delivery_date);
     window.localStorage.setItem('event_time', params.time_slot);
 
-    return this.httpService.post(this._urlCart, params);
+    return this.httpService.post(
+      this._urlCart  + '?cart-session-id=' + this.cartSessionId, 
+      params
+    );
   }
 
   /**
    * Remove item from cart 
    */
   delete(cart_id: number) {
-    return this.httpService.delete(this._urlCart+'?cart_id='+cart_id);
+    let url = this._urlCart+'?cart_id='+cart_id + '&cart-session-id=' + this.cartSessionId;
+    return this.httpService.delete(url);
   }
 }
