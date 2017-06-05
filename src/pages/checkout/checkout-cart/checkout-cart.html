@@ -18,7 +18,7 @@
 </ion-header>
 <ion-content padding>
 
-  <ion-list *ngIf="isUserLoggedIn">
+  <ion-list *ngIf="cartItems && cartItems.length > 0">
     <ion-item class="border-top border-lighter">
       <ion-label floating>Delivery area</ion-label>
       <ion-select [(ngModel)]="area_id" (ionChange)="deliveryDataChanged()" >
@@ -37,7 +37,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-list class="header" *ngIf="isUserLoggedIn && cartItems">
+  <ion-list class="header" *ngIf="cartItems && cartItems.length > 0">
       <ion-col width-36-inline-block>
           <strong>Image</strong>
       </ion-col>
@@ -47,7 +47,7 @@
       <ion-col width-10 text-center close-btn position-relative>
       </ion-col>
   </ion-list>
-  <div class="" approxItemHeight="40px" *ngIf="isUserLoggedIn && cartItems">
+  <div class="" approxItemHeight="40px" *ngIf="cartItems && cartItems.length > 0">
   
     <ion-list *ngFor="let item of cartItems" >
       <ion-row class="header">
@@ -110,16 +110,12 @@
     </ion-list>
   </div>
 
-<div class="" *ngIf="!isUserLoggedIn"></div>
-  <ion-item text-center checkout-btn *ngIf="isUserLoggedIn">
+  <ion-item text-center checkout-btn *ngIf="cartItems && cartItems.length > 0">
     <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> Checkout</button>
   </ion-item>
+
+   <p text-center *ngIf="!cartItems || cartItems.length == 0">No item(s) in cart</p>
 </ion-content>
 
-<ion-content *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">
-    <p text-center>No item(s) in cart</p>
-</ion-content>
 
-<ion-content *ngIf="!isUserLoggedIn" class="no-results">
-    <p text-center>Please Login to add to cart item</p>
-</ion-content>
+
