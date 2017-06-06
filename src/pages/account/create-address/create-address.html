@@ -18,11 +18,11 @@
   <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" novalidate>
   <ion-list>
     <ion-item>
-      <ion-label fixed>Name*</ion-label>
+      <ion-label stacked>Name*</ion-label>
       <ion-input [(ngModel)]="addressName" formControlName="addressName" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Type*</ion-label>
+      <ion-label stacked>Type*</ion-label>
         <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
           <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
         </ion-select>
@@ -35,18 +35,21 @@
     </div>-->
     <div *ngIf="locationQuestion">
       <ion-item *ngFor="let question of locationQuestion">
-          <ion-label fixed>{{question?.question}}</ion-label><ion-label *ngIf="question.required == 1">*</ion-label>
+          <ion-label stacked>
+            {{question?.question}}
+            <span *ngIf="question.required == 1">*</span>
+          </ion-label>
           <ion-input [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
       </ion-item>
     </div>
     <ion-item *ngIf="locationData" >
-      <ion-label>Area*</ion-label>
-        <ion-select  [(ngModel)]="areaName" formControlName="areaName">
-          <ion-option *ngFor= "let location of locationData" value="{{location.id}}">{{location.location}}</ion-option>
-        </ion-select>
+      <ion-label stacked>Area*</ion-label>
+      <ion-select  [(ngModel)]="areaName" formControlName="areaName">
+        <ion-option *ngFor= "let location of locationData" value="{{location.id}}">{{location.location}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Other direction or note*</ion-label>
+      <ion-label stacked>Other direction or note*</ion-label>
       <ion-input [(ngModel)]="addressData" type="text" formControlName="addressData"></ion-input>
     </ion-item>
   </ion-list>
