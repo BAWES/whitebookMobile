@@ -26,6 +26,7 @@ import { DirectoryListPage } from '../pages/directory/directory-list/directory-l
 // providers
 import { HttpService } from '../providers/http.service';
 import { Authentication } from '../providers/auth.service'; 
+import { CartService } from '../providers/cart.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -54,6 +55,7 @@ export class MyApp {
     public modalCtnl : ModalController,
     public httpService: HttpService,
     public authService: Authentication,
+    public cartService: CartService,
     private _events: Events,
 
   ) {
@@ -62,6 +64,13 @@ export class MyApp {
     this.loadCategoryList(); // load category listing
     this.isUserLoggedIn  = (this.authService.getAccessToken()) ? true : false;
     this.updateMenu();
+
+    //check cart session id 
+    let cartSessionId = window.localStorage.getItem('cart-session-id');
+    
+    if(this.isUserLoggedIn && (!cartSessionId || cartSessionId == 'undefined')) {
+      this.cartService.getCartSessionId();
+    }
 
     this._events.subscribe('user:login', TokenSet => {
       this.isUserLoggedIn = true;

@@ -11,7 +11,7 @@ import { EnvConfig } from '../app/environments/environments.token';
 export class GlobalService {
 
   // Endpoint Urls
-  public apiBaseUrl:string;
+  public apiBaseUrl :string;
 
   public s3 = 'https://thewhitebook.s3.amazonaws.com';
   public images_210 = this.s3 + '/vendor_item_images_210';

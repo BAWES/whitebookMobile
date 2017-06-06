@@ -6,8 +6,9 @@ import { Authentication } from '../providers/auth.service';
 @Injectable()
 export class AddressService {
   
-  public _urlAddrress:string = '/address';
-  
+  public _urlAddrress: string = '/address';
+  public _urlcheckout: string = '/checkout';
+
   constructor(
     private httpService : HttpService,
     public authService: Authentication
@@ -30,5 +31,9 @@ export class AddressService {
    */
   add(params: any) {
     return this.httpService.post(this._urlAddrress, params);
+  }
+
+  addGuestAddress(params: any) {
+    return this.httpService.post(this._urlcheckout + '/save-guest-address', params);
   }
 } 

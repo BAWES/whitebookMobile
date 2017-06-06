@@ -5,7 +5,7 @@ import { HttpService } from './http.service';
 export class CheckoutService {
 
   constructor(
-    private httpService : HttpService,
+    private httpService : HttpService
   ){
      
   } 
@@ -13,7 +13,11 @@ export class CheckoutService {
   /**
    * Confirm booking 
    */
-  confirm(params) {
-    return this.httpService.post('/checkout/confirm', params);
+  confirm(params) {    
+    console.log(params);
+    let cartSessionId = window.localStorage.getItem('cart-session-id');
+    let url = '/checkout/confirm?cart-session-id=' + cartSessionId;
+    return this.httpService.post(url, params);
   }
 }
+ 

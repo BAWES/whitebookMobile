@@ -24,6 +24,7 @@ import { RegisterPage } from '../pages/user/register/register';
 import { ForgotPasswordPage } from '../pages/user/forgot-password/forgot-password';
 
 import { CheckoutShippingPage } from '../pages/checkout/checkout-shipping/checkout-shipping';
+import { CheckoutShippingGuestPage } from '../pages/checkout/checkout-shipping-guest/checkout-shipping-guest';
 import { CheckoutCompletedPage } from '../pages/checkout/checkout-completed/checkout-completed';
 import { CheckoutCartPage } from '../pages/checkout/checkout-cart/checkout-cart';
 import { CheckoutConfirmPage } from '../pages/checkout/checkout-confirm/checkout-confirm';
@@ -85,6 +86,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
+    CheckoutShippingGuestPage,
     CheckoutCompletedPage,
     CheckoutConfirmPage,
     MyBookingsPage,
@@ -127,6 +129,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CheckoutCartPage,
     SearchItemPage,
     CheckoutShippingPage,
+    CheckoutShippingGuestPage,
     CheckoutCompletedPage,
     CheckoutConfirmPage,
     MyBookingsPage,

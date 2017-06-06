@@ -128,7 +128,7 @@ export class CreateAddressPage {
       });
       toast.present();
       if (result.operation == "success") {
-          this._viewCtrl.dismiss();
+          this._viewCtrl.dismiss({ address_id: result.address_id });
       }
     })
   }

@@ -37,7 +37,7 @@ export class CartService {
       return true;
     }      
 
-    let url = this.globalService._ApiUrl + this._urlCart + '/cart-session-id';
+    let url = this.globalService.apiBaseUrl + this._urlCart + '/cart-session-id';
     this.http.get(url).subscribe(response => {
       this.cartSessionId = response.json().cart_session_id;
       window.localStorage.setItem('cart-session-id', this.cartSessionId);
