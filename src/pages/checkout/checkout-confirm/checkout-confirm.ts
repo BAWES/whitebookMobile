@@ -17,7 +17,13 @@ export class CheckoutConfirmPage {
   public summary:any;
   public delivery_vendors:any;
   public start:number = 0;
-  public address_id: number;
+  public address_id: any;
+  
+  //customer info 
+  public firstname: any;
+  public lastname: any;
+  public email: any;
+  public mobile: any;
 
   public errors: any[] = [];
 
@@ -32,6 +38,10 @@ export class CheckoutConfirmPage {
     public _config: GlobalService
     ) {
       this.address_id = this.navParams.get('address_id'); 
+      this.firstname = this.navParams.get('firstname');  
+      this.lastname = this.navParams.get('lastname');  
+      this.email = this.navParams.get('email');  
+      this.mobile = this.navParams.get('mobile');  
     }
 
   ionViewDidLoad() {
@@ -50,10 +60,10 @@ export class CheckoutConfirmPage {
       'delivery-location': window.localStorage.getItem('delivery-location'),
       'delivery-date': window.localStorage.getItem('delivery-date'),
       'event_time': window.localStorage.getItem('event_time'),
-      'customer_name': window.localStorage.getItem('customer_name'),
-      'customer_lastname': window.localStorage.getItem('customer_lastname'),
-      'customer_email': window.localStorage.getItem('customer_email'),
-      'customer_mobile': window.localStorage.getItem('customer_mobile'),
+      'firstname': this.firstname,
+      'lastname': this.lastname,
+      'email': this.email,
+      'mobile': this.mobile,
       'address_id': this.address_id,
     };
 

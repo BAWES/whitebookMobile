@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ViewController, ToastController } from 'ionic-angular';
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
+import { CheckoutShippingGuestPage } from '../checkout-shipping-guest/checkout-shipping-guest';
 import { CartService } from '../../../providers/cart.service';
 import { GlobalService } from '../../../providers/global.service';
 import { Authentication } from '../../../providers/auth.service';
@@ -80,7 +81,15 @@ export class CheckoutCartPage {
     }
     else
     {
+      this.goToShippingPage();
+    }    
+  }
+
+  goToShippingPage() {
+    if(this.isUserLoggedIn) {
       this.navCtrl.push(CheckoutShippingPage);
+    } else {
+      this.navCtrl.push(CheckoutShippingGuestPage);
     }    
   }
 
@@ -108,7 +117,6 @@ export class CheckoutCartPage {
   loadCartList() {
     this.cartService.list().subscribe(list => {
       this.cartItems = list.items;
-      console.log(this.cartItems);
       this.summary = list.summary;
       this.delivery_vendors = list.summary.delivery_vendors;
       this.errors = list.errors;
