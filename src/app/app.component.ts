@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, MenuController, Platform, ModalController,Events } from 'ionic-angular';
+import { Nav, MenuController, Platform, AlertController, PopoverController, ModalController,Events } from 'ionic-angular';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 
@@ -17,6 +17,7 @@ import { BookingTrackPage } from '../pages/account/booking-track/booking-track';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 import { Cms } from '../pages/cms/cms';
 import { Contact } from '../pages/contact/contact';
+import { NoInternet } from '../pages/no-internet/no-internet';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -57,7 +58,8 @@ export class MyApp {
     public authService: Authentication,
     public cartService: CartService,
     private _events: Events,
-
+    private alertCtrl: AlertController,
+    public popoverCtrl: PopoverController
   ) {
     this.initializeApp();
     this.loadEventList(); // load logged in user event list
@@ -68,9 +70,15 @@ export class MyApp {
     //check cart session id 
     let cartSessionId = window.localStorage.getItem('cart-session-id');
     
-    if(this.isUserLoggedIn && (!cartSessionId || cartSessionId == 'undefined')) {
+    if(!this.isUserLoggedIn && (!cartSessionId || cartSessionId == 'undefined')) {
       this.cartService.getCartSessionId();
     }
+
+    this._events.subscribe('internet:offline', TokenSet => {
+        this.nav.push(NoInternet);
+        ///let popover = this.popoverCtrl.create(NoInternet);
+        //popover.present();
+    });
 
     this._events.subscribe('user:login', TokenSet => {
       this.isUserLoggedIn = true;
