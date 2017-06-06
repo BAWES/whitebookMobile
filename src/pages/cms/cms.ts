@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
 import { GlobalService } from '../../providers/global.service';
+import { HttpService } from '../../providers/http.service';
 
 @Component({
   selector: 'page-cms',
@@ -15,7 +15,7 @@ export class Cms {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,    
-    public _http : Http,
+    public httpService : HttpService,
     public _config: GlobalService
     ) {
     this.pageID =  this.navParams.get('id');
@@ -28,7 +28,7 @@ export class Cms {
   }
 
   pageDetail(id){
-    this._http.get(this._config.apiBaseUrl + '/cms/' + id).subscribe(data => {
+    this.httpService.get('/cms/' + id).subscribe(data => {
       this.detail = data.json();
     })
   }

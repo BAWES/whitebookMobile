@@ -56,6 +56,7 @@ import { PackageListPage } from '../pages/packages/package-list/package-list';
 import { PackageDetailPage } from '../pages/packages/package-detail/package-detail';
 import { Cms } from '../pages/cms/cms';
 import { Contact } from '../pages/contact/contact';
+import { NoInternet } from '../pages/no-internet/no-internet';
 
 // services/providers
 import { GlobalService } from '../providers/global.service';
@@ -103,6 +104,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     PackageListPage,
     PackageDetailPage,
     BecomeVendorPage,
+    NoInternet,
     Cms,
     Contact,
     DirectoryListPage,
@@ -145,6 +147,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     PackageListPage,
     PackageDetailPage,
     BecomeVendorPage,
+    NoInternet,
     Cms,
     Contact,
     DirectoryListPage,
