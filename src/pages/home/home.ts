@@ -18,6 +18,7 @@ export class Home {
   public sliderSlides:any[];
   public categories:any;
   public themes:any;
+  public themeID: any;
 
   constructor(
     public navCtrl: NavController,
@@ -41,11 +42,11 @@ export class Home {
     });
   }
 
-  showData(themeid:any) {
+  showData() {
       this.navCtrl.push(ListingPage,{
-      title : 'Product Listing',
-      themeID:themeid
-    });
+        title : 'Product Listing',
+        themeID: this.themeID
+      });
   }
 
   // ionViewDidLoad() {

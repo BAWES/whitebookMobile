@@ -45,7 +45,7 @@ export class CheckoutShippingGuestPage {
       this.addressForm = this.formBuilder.group({
         addressName: ['', Validators.required],
         addressType: ['', Validators.required],
-        areaName: ['', Validators.required],
+        //areaName: ['', Validators.required],
         addressData: ['', Validators.required],
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
@@ -56,7 +56,7 @@ export class CheckoutShippingGuestPage {
 
   ionViewDidLoad() {    
     this.loadAdressTypes();
-    this.loadLocations();    
+    //this.loadLocations();    
   }
 
   cartModelPage () {
@@ -65,12 +65,16 @@ export class CheckoutShippingGuestPage {
 
   confirmPage() {
     
+    let area_id = window.localStorage.getItem('delivery-location');
+
     if (!this.addressForm.valid) {
+      console.log(this.addressForm);
       let alert = this._alertCtrl.create({
           subTitle: 'Please check form carefully',
           buttons: ['Okay!']
       });
       alert.present();
+      return false;
     }
 
     let paramas:any;
@@ -80,7 +84,7 @@ export class CheckoutShippingGuestPage {
         'email' : this.addressForm.value.email, 
         'mobile' : this.addressForm.value.mobile, 
         'address_type_id': this.addressForm.value.addressType,
-        'area_id': this.addressForm.value.areaName,
+        'area_id': area_id,
         'address_name': this.addressForm.value.addressName,
         'address_data': this.addressForm.value.addressData,
         'questions': this.questionsAnswers,
@@ -141,8 +145,6 @@ export class CheckoutShippingGuestPage {
           }
         })
       });
-      console.log(this.questionsAnswersResponse);
-      console.log(this.questionsAnswers);
     })
   }
 }
