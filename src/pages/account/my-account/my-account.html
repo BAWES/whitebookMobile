@@ -18,7 +18,7 @@
   <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label fixed>First Name</ion-label>
+        <ion-label stacked>First Name</ion-label>
         <ion-input formControlName="firstName" type="text" [(ngModel)]="firstName"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.firstName.valid && (!profileForm.controls.firstName.touched ||  submitAttempt)">
@@ -26,7 +26,7 @@
       </div>
 
       <ion-item>
-        <ion-label fixed> Last Name</ion-label>
+        <ion-label stacked> Last Name</ion-label>
         <ion-input formControlName="lastName" type="text" [(ngModel)]="lastName"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.lastName.valid && (!profileForm.controls.lastName.touched ||  submitAttempt)">
@@ -34,7 +34,7 @@
       </div>
 
       <ion-item>
-        <ion-label fixed>Email</ion-label>
+        <ion-label stacked>Email</ion-label>
         <ion-input formControlName="email" type="text" [(ngModel)]="email"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.email.valid && (!profileForm.controls.email.touched ||  submitAttempt)">
@@ -42,7 +42,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Date of Birth</ion-label>
+        <ion-label stacked>Date of Birth</ion-label>
         <ion-datetime formControlName="dob" displayFormat="MM/DD/YYYY" [(ngModel)]="dob"></ion-datetime>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.dob.valid && (!profileForm.controls.dob.touched ||  submitAttempt)">
@@ -50,7 +50,7 @@
       </div>
 
       <ion-item>
-        <ion-label>Gender</ion-label>
+        <ion-label stacked>Gender</ion-label>
           <ion-select formControlName="gender" [(ngModel)]="gender">
             <ion-option selected='{{gender}} == "Male"' value="Male">Male</ion-option>
             <ion-option selected='{{gender}} == "Female"' value="Female">Female</ion-option>
@@ -61,7 +61,7 @@
       </div>
 
       <ion-item>
-        <ion-label fixed>Mobile</ion-label>
+        <ion-label stacked>Mobile</ion-label>
         <ion-input formControlName="mobile" type="text" [(ngModel)]="mobile"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.mobile.valid && (!profileForm.controls.mobile.touched ||  submitAttempt)">
