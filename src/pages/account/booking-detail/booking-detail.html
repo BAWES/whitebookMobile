@@ -44,7 +44,11 @@
     <div *ngIf="!bookingDetail">
       Booking detail not found.
     </div>
+
+    <br />
+    <br />
+
 </ion-content>
-<ion-footer>
-  <button ion-button full *ngIf="bookingDetail?.booking_status == 'Accepted' && !bookingDetail?.transaction_id" (click)="payNow(bookingDetail?.booking_token)">Pay Now</button>
+<ion-footer *ngIf="bookingDetail?.booking_status == 'Accepted' && !bookingDetail?.transaction_id">
+  <button ion-button full (click)="payNow(bookingDetail?.booking_token)">Pay Now</button>
 </ion-footer>
