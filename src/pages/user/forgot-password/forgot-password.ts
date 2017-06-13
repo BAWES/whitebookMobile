@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ViewController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Authentication } from '../../../providers/auth.service';
@@ -17,7 +17,6 @@ export class ForgotPasswordPage {
   resetFormData : any;
   submitAttempt :boolean = false;
   constructor(
-    private _navCtrl: NavController,
     private _viewCtrl : ViewController,
     private _fb: FormBuilder,
     private _authService:Authentication,

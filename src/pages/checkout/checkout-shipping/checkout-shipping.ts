@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
 import { CreateAddressPage } from '../../account/create-address/create-address';
 
@@ -24,8 +24,7 @@ export class CheckoutShippingPage {
     public navCtrl: NavController,
     public addressService: AddressService,
     public _alertCtrl : AlertController,
-    public _modalCtrl: ModalController,
-    public _loadingCtrl: LoadingController,
+    public _modalCtrl: ModalController
   ) {}
 
   ionViewDidLoad() {

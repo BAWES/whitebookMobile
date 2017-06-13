@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { BookingDetailPage } from '../booking-detail/booking-detail';
 
 import { HttpService } from '../../../providers/http.service';
@@ -15,7 +15,6 @@ export class MyBookingsPage {
   public start:number = 0;
 
   constructor(
-    public navCtrl: NavController,
     public modalCtrl: ModalController,
     public httpService: HttpService,
   ) {

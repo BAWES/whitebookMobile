@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { HttpService } from '../../../providers/http.service';
@@ -26,7 +26,6 @@ export class CreateEventPage {
   public eventGuest:number;
 
   constructor(
-    public navCtrl: NavController,
     public viewCtrl : ViewController,
     public toastCtrl : ToastController,
     private formBuilder: FormBuilder,

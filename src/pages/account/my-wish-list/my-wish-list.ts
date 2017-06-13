@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { ProductPage } from '../../product/product';
 import { HttpService } from '../../../providers/http.service';
-import { GlobalService } from '../../../providers/global.service';
 
 @Component({
   selector: 'page-my-wish-list',
@@ -24,7 +23,6 @@ export class MyWishListPage {
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
     public httpRequest: HttpService,
-    public _config: GlobalService
   ) {}
 
   /**

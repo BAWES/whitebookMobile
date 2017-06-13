@@ -11,10 +11,6 @@ export class CheckoutCompletedPage {
 
   constructor(public navCtrl: NavController) {}
 
-  ionViewDidLoad() {
-    console.log('Hello CheckoutCompletedPage Page');
-  }
-
   dismiss() {
     this.navCtrl.setRoot(Home).then(()=>{
       this.navCtrl.popToRoot();

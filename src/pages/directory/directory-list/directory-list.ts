@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { GlobalService } from '../../../providers/global.service';
 
@@ -19,7 +19,6 @@ export class DirectoryListPage {
 
   constructor(
     public navCtrl: NavController,
-    private _params: NavParams,
     public httpService: Http,
     public _config: GlobalService
   ) {

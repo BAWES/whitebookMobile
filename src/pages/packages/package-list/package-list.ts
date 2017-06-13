@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { GlobalService } from '../../../providers/global.service';
 

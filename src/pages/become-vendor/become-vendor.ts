@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
@@ -18,7 +18,6 @@ export class BecomeVendorPage {
 
   constructor(
     public navCtrl: NavController,
-    public modalCtnl: ModalController,
     private fb: FormBuilder,
     private vendorService: VendorService,
     private _baseService : Base,

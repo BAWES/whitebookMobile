@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController,ToastController } from 'ionic-angular';
+import { ModalController, AlertController,ToastController } from 'ionic-angular';
 import { CreateAddressPage } from '../create-address/create-address';
 
 import { HttpService } from '../../../providers/http.service';
@@ -15,7 +15,6 @@ export class MyAddressBookPage {
     public start:number = 0;
   
   constructor(
-    public navCtrl: NavController,
     public modalCtrl : ModalController,
     public alertCtrl: AlertController,
     public toastCtrl :ToastController,

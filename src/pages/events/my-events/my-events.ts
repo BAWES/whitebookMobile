@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ModalController, ToastController } from 'ionic-angular';
+import { AlertController, ModalController, ToastController } from 'ionic-angular';
 
 import { CreateEventPage } from '../create-event/create-event';
 
@@ -19,7 +19,6 @@ export class MyEventsPage {
   public start:number = 0;
 
   constructor(
-    public navCtrl: NavController,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
