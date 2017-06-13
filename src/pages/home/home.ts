@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, ModalController } from 'ionic-angular';
+
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
-import { ProductPage } from '../product/product';
+
 import { CartCountService } from '../../providers/cart.count.service';
 import { GlobalService } from '../../providers/global.service';
 

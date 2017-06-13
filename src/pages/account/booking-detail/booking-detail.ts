@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ViewController, Events, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ViewController, AlertController } from 'ionic-angular';
 import { GlobalService } from '../../../providers/global.service';
 import { HttpService } from '../../../providers/http.service';
 
@@ -13,8 +13,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 export class BookingDetailPage {
 
   private _browser;
-  private _browserLoadEvents;
-  private _browserCloseEvents;
+  //private _browserLoadEvents;
+  //private _browserCloseEvents;
 
   public bookingDetail:any;
 
@@ -26,7 +26,6 @@ export class BookingDetailPage {
     public _navParams:NavParams,
     public navCtrl: NavController,
     public httpRequest: HttpService,    
-    private _events: Events,
     public _config:GlobalService,
     public _alertCtrl : AlertController,
   ) {

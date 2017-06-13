@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, AlertController, LoadingController, ViewController,  } from 'ionic-angular';
-import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
-import { CheckoutService } from '../../../providers/checkout.service';
+
 import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
+
+import { CheckoutService } from '../../../providers/checkout.service';
 import { CartService } from '../../../providers/cart.service';
-import { GlobalService } from '../../../providers/global.service';
 
 @Component({
   selector: 'page-checkout-confirm',
@@ -34,8 +34,7 @@ export class CheckoutConfirmPage {
     public _alertCtrl : AlertController,
     public _loadingCtrl: LoadingController,
     public checkoutService: CheckoutService,
-    public cartService: CartService,
-    public _config: GlobalService
+    public cartService: CartService
     ) {
       this.address_id = this.navParams.get('address_id'); 
       this.firstname = this.navParams.get('firstname');  

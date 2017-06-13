@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { ProductImagePage } from '../product-image/product-image';
@@ -68,7 +68,6 @@ export class ProductPage {
     };
 
   constructor(
-    public navCtrl: NavController,
     private _params: NavParams,
     public modalCtnl: ModalController,
     public toastCtrl: ToastController,
@@ -413,7 +412,6 @@ export class ProductPage {
 
   addToWishList() {
     
-    let result;
     let param = {
       'item_id' : this.product_id
     }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 //Services
@@ -19,9 +19,8 @@ export class RegisterPage {
   submitAttempt : boolean = false;
   constructor(
     private navCtrl: NavController,
-    private toastCtrl : ToastController,
     private fb: FormBuilder,
-    private _authService:Authentication,
+    private _authService: Authentication,
     private _baseService : Base
     ) {
       this.registerForm = this.fb.group({
@@ -41,7 +40,6 @@ export class RegisterPage {
   dismiss() {
     this.navCtrl.pop();
   }
-
 
   registerSubmit() {
     this.submitAttempt = true;

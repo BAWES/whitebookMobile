@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import {AlertController,LoadingController, Loading} from 'ionic-angular';
+import { AlertController,LoadingController} from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
@@ -20,7 +20,7 @@ import { GlobalService } from './global.service';
 @Injectable()
 export class Authentication {
   public isLoggedIn = false;
-  private loading: Loading;
+
   // Logged in user details
   private _accessToken;
   public email: string;

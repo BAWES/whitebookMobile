@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { GlobalService } from '../../providers/global.service';
+import { NavParams } from 'ionic-angular';
 import { HttpService } from '../../providers/http.service';
 
 @Component({
@@ -13,10 +12,8 @@ export class Cms {
   public detail : any;
 
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,    
-    public httpService : HttpService,
-    public _config: GlobalService
+    public httpService : HttpService
     ) {
     this.pageID =  this.navParams.get('id');
   }

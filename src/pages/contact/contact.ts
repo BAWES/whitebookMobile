@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ViewController, ToastController } from 'ionic-angular';
+import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Base } from '../../providers/base';
 import { Http } from '@angular/http';
@@ -16,7 +16,6 @@ export class Contact {
   public submitAttempt: boolean = false;
 
   constructor(
-    public navCtrl: NavController, 
     public navParams: NavParams,
     public toastCtrl : ToastController,
     private formBuilder: FormBuilder,

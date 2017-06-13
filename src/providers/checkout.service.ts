@@ -14,7 +14,6 @@ export class CheckoutService {
    * Confirm booking 
    */
   confirm(params) {    
-    console.log(params);
     let cartSessionId = window.localStorage.getItem('cart-session-id');
     let url = '/checkout/confirm?cart-session-id=' + cartSessionId;
     return this.httpService.post(url, params);
