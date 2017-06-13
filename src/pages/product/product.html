@@ -18,6 +18,7 @@
 <ion-content class="product-detail" *ngIf="product">
   <ion-item text-wrap no-border>
     <h2>{{product.item.item_name}}</h2>
+    
     <ion-slides>
       <ion-slide *ngFor="let image of product.images">
         <ion-thumbnail class="avatarImage">
@@ -25,7 +26,7 @@
         </ion-thumbnail>
       </ion-slide>
     </ion-slides>
-
+    
       <h3 text-center>{{product.vendor.vendor_name}}</h3>
       <h5 text-center *ngIf="product.notice != ''">Notice: {{product.notice}}</h5>
       <h4 text-center *ngIf="total">Price : {{ total }}</h4>       
