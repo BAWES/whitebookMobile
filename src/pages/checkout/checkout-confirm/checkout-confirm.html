@@ -20,7 +20,7 @@
     <ion-list *ngFor="let item of cartItems" >
       <ion-row class="header">
           <ion-col width-20 position-relative>
-              <img src="{{_config.images_210}}/{{item.image_path}}">
+              <img src="{{ _config.images_210 }}/{{item.image_path}}">
           </ion-col>
           <ion-col width-70 class="button-container">
               <h3>{{item.item_name}}</h3>
@@ -84,6 +84,11 @@
   <ion-item text-center checkout-btn *ngIf="errors.length == 0">
     <button ion-button round width-99 padding color="dark" (click)="confirm()"> Confirm</button>
   </ion-item>
+
+  <ion-item text-center checkout-btn>
+    <button ion-button round width-99 padding (click)="back()"> Back</button>
+  </ion-item>
+
 </ion-content>
 
 <ion-content *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">

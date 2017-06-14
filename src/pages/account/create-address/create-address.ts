@@ -106,6 +106,8 @@ export class CreateAddressPage {
       }
     } else {
 
+      console.log(this.addressForm);
+
       let toast = this._toastCtrl.create({
         message : 'Please check form carefully',
         duration : 4000
@@ -187,8 +189,6 @@ export class CreateAddressPage {
           }
         })
       });
-      console.log(this.questionsAnswersResponse);
-      console.log(this.questionsAnswers);
     })
   }
 
