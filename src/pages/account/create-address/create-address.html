@@ -15,17 +15,23 @@
       {{title}}
     </ion-title>
   </ion-item>
-  <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" novalidate>
+  <form [formGroup]="addressForm" (ngSubmit)="saveAddress()">
   <ion-list>
     <ion-item>
       <ion-label stacked>Name*</ion-label>
       <ion-input [(ngModel)]="addressName" formControlName="addressName" type="text"></ion-input>
+      <p *ngIf="addressForm.controls['addressName'].errors && addressForm.controls['addressName'].dirty">
+         Name field required 
+      </p>
     </ion-item>
     <ion-item>
       <ion-label stacked>Type*</ion-label>
-        <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
-          <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
-        </ion-select>
+      <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
+        <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
+      </ion-select>
+      <p *ngIf="addressForm.controls['addressType'].errors && addressForm.controls['addressType'].dirty">
+         Type field required 
+      </p>
     </ion-item>
     <!--<div *ngIf="questionsAnswersResponse">
       <ion-item *ngFor="let answerResponse of questionsAnswersResponse">
@@ -39,7 +45,12 @@
             {{question?.question}}
             <span *ngIf="question.required == 1">*</span>
           </ion-label>
-          <ion-input [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
+          <span *ngIf="question.required == 1">
+            <ion-input required [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
+          </span>
+          <span *ngIf="question.required != 1">
+            <ion-input [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
+          </span>  
       </ion-item>
     </div>
     <ion-item *ngIf="locationData" >
@@ -47,10 +58,16 @@
       <ion-select  [(ngModel)]="areaName" formControlName="areaName">
         <ion-option *ngFor= "let location of locationData" value="{{location.id}}">{{location.location}}</ion-option>
       </ion-select>
+      <p *ngIf="addressForm.controls['areaName'].errors && addressForm.controls['areaName'].dirty">
+         Area field required 
+      </p>
     </ion-item>
     <ion-item>
       <ion-label stacked>Other direction or note*</ion-label>
       <ion-input [(ngModel)]="addressData" type="text" formControlName="addressData"></ion-input>
+      <p *ngIf="addressForm.controls['addressData'].errors && addressForm.controls['addressData'].dirty">
+         Other direction or note field required 
+      </p>
     </ion-item>
   </ion-list>
   <div padding>
