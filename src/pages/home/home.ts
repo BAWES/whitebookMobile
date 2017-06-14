@@ -5,7 +5,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 
-import { CartCountService } from '../../providers/cart.count.service';
+import { CartService } from '../../providers/cart.service';
 import { GlobalService } from '../../providers/global.service';
 
 @Component({
@@ -20,17 +20,22 @@ export class Home {
   public categories:any;
   public themes:any;
   public themeID: any;
+  public cartCount:number = 0;
 
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
     public httpService: Http,
-    public _cartCount: CartCountService,
+    public cartService: CartService,
     public _config: GlobalService
     ) {
     this._urlThemeUrl = this._config.apiBaseUrl + '/themes';
     this.loadThemeList();
   }
+  
+  ionViewWillEnter() {    
+    this.getCartCount();
+  } 
 
   mySlideOptions = {initialSlide: 1,loop: true,autoplay:true,speed :3000,pager : true};
   categorySlideOptions = {initialSlide: 1,loop: true,autoplay:false,speed :3000,slidesPerView: 2};
@@ -39,7 +44,13 @@ export class Home {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
     modal.onDidDismiss(data => { 
-      this._cartCount.loadCartCount();
+      this.getCartCount();
+    });
+  }
+  
+  getCartCount() {
+    this.cartService.count().subscribe(data => {
+      this.cartCount = data;
     });
   }
 

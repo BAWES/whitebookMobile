@@ -63,7 +63,6 @@ import { GlobalService } from '../providers/global.service';
 import { Authentication } from '../providers/auth.service';
 import { Base } from '../providers/base';
 import { HttpService } from '../providers/http.service';
-import { CartCountService } from '../providers/cart.count.service';
 import { VendorService } from '../providers/vendor.service';
 import { CheckoutService } from '../providers/checkout.service';
 import { CartService } from '../providers/cart.service';
@@ -164,7 +163,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     StatusBar,
     NativeStorage,
     HttpService,
-    CartCountService,
     VendorService,
     CheckoutService,
     CartService,

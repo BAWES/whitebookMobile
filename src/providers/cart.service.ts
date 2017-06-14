@@ -8,7 +8,6 @@ import { Authentication } from '../providers/auth.service';
 export class CartService {
   
   public _urlCart:string = '/cart';
-  public count:number = 0;
   
   public cartSessionId: string;
   public isUserLogged;
@@ -89,5 +88,13 @@ export class CartService {
   delete(cart_id: number) {
     let url = this._urlCart+'?cart_id='+cart_id + '&cart-session-id=' + this.cartSessionId;
     return this.httpService.delete(url);
+  }
+
+  /**
+   * Return no of total items in cart 
+   */
+  count() {
+    let url = this._urlCart + '/count?cart-session-id=' + this.cartSessionId;
+    return this.httpService.get(url);
   }
 }

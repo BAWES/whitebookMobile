@@ -7,7 +7,6 @@ import { ProductImagePage } from '../product-image/product-image';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 
 import { GlobalService } from '../../providers/global.service';
-import { CartCountService } from '../../providers/cart.count.service';
 import { CartService } from '../../providers/cart.service';
 import { HttpService } from '../../providers/http.service';
 import { Authentication } from '../../providers/auth.service';
@@ -26,7 +25,8 @@ export class ProductPage {
   public _urlAddToCart = '';
   public _urlWishlist = '';
   public _urlFinalPrice = '';
-  
+ 
+  public cartCount:number = 0;
   public productSection:string = "pdescription";
   public product_id:number;
   public product : any;
@@ -76,7 +76,6 @@ export class ProductPage {
     public http: Http,
     public httpService: HttpService,
     public formBuilder: FormBuilder,
-    public _cartCount:CartCountService,
     public cartService: CartService,
     public auth: Authentication
   ) {
@@ -103,6 +102,10 @@ export class ProductPage {
 
     this.isUserLogged = this.auth.getAccessToken();
   }
+
+  ionViewWillEnter() {    
+    this.getCartCount();
+  } 
 
   /**
 	 * Sets the default dates for min/max validation
@@ -136,10 +139,16 @@ export class ProductPage {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
     modal.onDidDismiss(data => { 
-      this._cartCount.loadCartCount();
+      this.getCartCount();
     });
   }
 
+  getCartCount() {
+    this.cartService.count().subscribe(data => {
+      this.cartCount = data;
+    });
+  }
+  
   showImage(title: string, image: string) {    
     let params = {
       image: this._config.menu_item + '/' + image,
@@ -175,6 +184,9 @@ export class ProductPage {
             duration : 4000
           });
           toast.present();
+
+          //update cart count
+          this.getCartCount();
 
           return true;
         }

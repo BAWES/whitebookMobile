@@ -7,7 +7,7 @@ import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
 import { GlobalService } from '../../providers/global.service';
-import { CartCountService } from '../../providers/cart.count.service';
+import { CartService } from '../../providers/cart.service';
 
 @Component({
   selector: 'page-listing',
@@ -23,13 +23,14 @@ export class ListingPage {
   public category:any;
   public products : any;
   public start:number = 0;
+  public cartCount:number = 0;
 
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
     public httpService: Http,
-    public _cartCount:CartCountService,
+    public cartService: CartService,
     public _config: GlobalService
   ) {
     this._urlParamas = '';
@@ -50,6 +51,10 @@ export class ListingPage {
     this.loadProducts();
   }
 
+  ionViewWillEnter() {    
+    this.getCartCount();
+  } 
+
   productDetail(id) {
     this.navCtrl.push(ProductPage,{productId:id});
   }
@@ -58,7 +63,13 @@ export class ListingPage {
     let modal = this.modalCtnl.create(CheckoutCartPage);
     modal.present();
     modal.onDidDismiss(data => { 
-      this._cartCount.loadCartCount();
+      this.getCartCount();
+    });
+  }
+
+  getCartCount() {
+    this.cartService.count().subscribe(data => {
+      this.cartCount = data;
     });
   }
 
