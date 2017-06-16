@@ -18,11 +18,11 @@ export class MyBookingsPage {
     public modalCtrl: ModalController,
     public httpService: HttpService,
   ) {
-    this.list();  
+    
   }
 
-  ionViewDidLoad() {
-    console.log('MyBookings Page');
+  ionViewWillEnter() {
+    this.list();  
   }
 
   itemSelected(booking_token) {
@@ -33,7 +33,6 @@ export class MyBookingsPage {
   list(start: number = 0) {
       this.httpService.get(this._urlBookingUrl +'?offset='+start).subscribe(data=>{
          this.bookingList = data;
-         console.log(this.bookingList);
       })
   }
 
