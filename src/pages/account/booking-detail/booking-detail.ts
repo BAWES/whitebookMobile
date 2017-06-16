@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ViewController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, ViewController, AlertController, Platform } from 'ionic-angular';
 import { GlobalService } from '../../../providers/global.service';
 import { HttpService } from '../../../providers/http.service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+// Declaring cordova so we can use it for the plugin
+declare var cordova: any;
 
 @Component({
   selector: 'page-booking-detail',
@@ -13,8 +16,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 export class BookingDetailPage {
 
   private _browser;
-  //private _browserLoadEvents;
-  //private _browserCloseEvents;
+  private _browserLoadEvents;
+  private _browserCloseEvents;
 
   public bookingDetail:any;
 
@@ -28,12 +31,9 @@ export class BookingDetailPage {
     public httpRequest: HttpService,    
     public _config:GlobalService,
     public _alertCtrl : AlertController,
+    private platform: Platform
   ) {
     this.detail(this._navParams.get('booking_token'));
-  }
-
-  ionViewDidLoad() {
-    console.log('Booking Detail Page');
   }
 
   dismiss () {
@@ -49,43 +49,32 @@ export class BookingDetailPage {
   payNow(bookingToken) {
     // Load in app browser to billing portal with Authkey
     let billingUrl = this._config.apiBaseUrl + `/tap?booking_token=` + bookingToken;
-    this.loadUrl(billingUrl, true);
+    this.loadUrl(billingUrl);
   }
-
+    
   /**
    * Load Specified Url
    */
-  loadUrl(url: string, trackActionsOnUrl:boolean = false){
-    this._browser = this.inAppBrowser.create(url, this._config.browserTarget, this._config.browserOptions);
+  loadUrl(url: string) {
 
-    // Close browser on Instagram account successfully added.
-    if(trackActionsOnUrl){
+    this._browser = this.inAppBrowser.create(
+      url, 
+      this._config.browserTarget,
+      this._config.browserOptions
+    );
 
-      this._browser.on("loadstop", this._doActionBasedOnUrl);
+    //browser.show();
 
-      this._browser.on("loadstart", this._doActionBasedOnUrl);
+    this._browserLoadEvents = this._browser.on("loadstop").subscribe((event) => {
+      this._doActionBasedOnUrl(event);
+    });
 
-      /*this._browser.on("loadstop").subscribe((event) => {
-        this._doActionBasedOnUrl(event.url);
-      });
-
-      this._browser.addEventListener('exit', function(event){
-        this._browser.removeEventListener('loadstop');
-      });*/
-
-      /*// Keep track of urls loaded
-      this._browserLoadEvents = this._browser.on("loadstop");
-      this._browserLoadEvents = this._browserLoadEvents.map(res => res.url).subscribe(url => {
-        this._doActionBasedOnUrl(url);
-      });
-
-      // Keep track of browser if closed
-      this._browserCloseEvents = this._browser.on("exit").subscribe(resp => {
-        // Browser closed, unsubscribe from previous observables
-        this._browserLoadEvents.unsubscribe();
-        this._browserCloseEvents.unsubscribe();
-      });*/
-    }
+    // Keep track of browser if closed
+    this._browserCloseEvents = this._browser.on("exit").subscribe(event => {
+      // Browser closed, unsubscribe from previous observables
+      this._browserLoadEvents.unsubscribe();
+      this._browserCloseEvents.unsubscribe();
+    });
   }
  
   /**
@@ -96,10 +85,8 @@ export class BookingDetailPage {
    */
   private _doActionBasedOnUrl(event: any){
 
-    var url = event.url;
-
-    console.log('browser action based on url');
-
+    let url = event.url;
+    
     if(url.indexOf("success") !== -1){
       this._browser.close();
       // Show Alert with success message
