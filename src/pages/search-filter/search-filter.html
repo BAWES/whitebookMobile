@@ -15,6 +15,12 @@
       <ion-label>Delivery Date</ion-label>
       <ion-datetime displayFormat="YYYY-MM-DD" min="{{todayStr}}" [(ngModel)]="filterDeliveryDate" max="2100-12-31"></ion-datetime>
     </ion-item>
+    <ion-item *ngIf="timeslots && timeslots.length">
+      <ion-label>Select Delivary Time Slot</ion-label>
+      <ion-select [(ngModel)]="filterDeliveryTime">
+          <ion-option *ngFor="let timeslot of timeslots" value="{{ timeslot }}">{{ timeslot }}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label>Delivery Area</ion-label>
       <ion-select [(ngModel)]="filterDeliveryArea">

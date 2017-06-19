@@ -122,6 +122,9 @@ export class ListingPage {
       if(data.filterDeliveryDate)
         this._urlParamas += '&requestedDeliverDate='+data.filterDeliveryDate;
       
+      if(data.filterDeliveryTime)
+        this._urlParamas += '&requestedDeliverTime='+data.filterDeliveryTime;
+
       if(data.filterMinPrice)
         this._urlParamas += '&requestedMinPrice='+data.filterMinPrice;
 
