@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { BookingDetailPage } from '../booking-detail/booking-detail';
 
 import { HttpService } from '../../../providers/http.service';
@@ -17,17 +17,15 @@ export class MyBookingsPage {
   constructor(
     public modalCtrl: ModalController,
     public httpService: HttpService,
-  ) {
-    
-  }
+    public navCtrl: NavController
+  ) { }
 
   ionViewWillEnter() {
     this.list();  
   }
 
   itemSelected(booking_token) {
-      let modal = this.modalCtrl.create(BookingDetailPage, { booking_token:booking_token });
-      modal.present();
+    this.navCtrl.push(BookingDetailPage, { booking_token:booking_token });
   }
 
   list(start: number = 0) {
