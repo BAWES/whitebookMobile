@@ -62,10 +62,13 @@ export class MyApp {
     public popoverCtrl: PopoverController
   ) {
     this.initializeApp();
-    this.loadEventList(); // load logged in user event list
     this.loadCategoryList(); // load category listing
     this.isUserLoggedIn  = (this.authService.getAccessToken()) ? true : false;
     this.updateMenu();
+
+    if(this.isUserLoggedIn) {
+      this.loadEventList(); // load logged in user event list
+    }
 
     //check cart session id 
     let cartSessionId = window.localStorage.getItem('cart-session-id');
@@ -163,9 +166,9 @@ export class MyApp {
   * load event listing
   */
   loadEventList(start: number = 0) {
-    if (this.authService.getAccessToken()) {
-      this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => this.events = events);  
-    }
+    this.httpService.get(this._urlEvent +'?offset='+start).subscribe(events => {
+      this.events = events;
+    });  
   }
 
   updateMenu() {

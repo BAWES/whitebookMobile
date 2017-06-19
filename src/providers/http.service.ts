@@ -123,9 +123,8 @@ export class HttpService {
           return Observable.empty<Response>();
       }
 
-      alert("Error: "+errMsg);
       if (error.status == 401) {
-         this._events.publish("internet:authentication error");
+         this._events.publish("user:logout");
          this._auth.logout('401 authention error');
         return Observable.empty<Response>()
       }
