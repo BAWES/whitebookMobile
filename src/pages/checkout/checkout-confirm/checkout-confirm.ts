@@ -14,7 +14,7 @@ import { GlobalService } from '../../../providers/global.service';
 
 export class CheckoutConfirmPage {
 
-  public cartItems:any;
+  public cartItems:any[] = [];
   public summary:any;
   public delivery_vendors:any;
   public start:number = 0;
