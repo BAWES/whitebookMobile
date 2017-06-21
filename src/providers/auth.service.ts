@@ -160,7 +160,7 @@ export class Authentication {
     authHeader.append("Authorization", "Basic "+ btoa(`${email}:${password}`));
     const url = this.url + this._urlBasicAuth;
     return this._http.get(url, {headers: authHeader})
-      .catch((err) => this._handleError(err))
+      //.catch((err) => this._handleError(err))
       .first()
       .map((res: Response) => res.json());
   }

@@ -54,7 +54,9 @@ export class LoginPage {
                 this.navCtrl.setRoot(Home)
               });
             }
-        })
+        }, (error) => {
+          this._baseService.showToast('Invalid Login Credentials.');
+        });
       }
   }
 
