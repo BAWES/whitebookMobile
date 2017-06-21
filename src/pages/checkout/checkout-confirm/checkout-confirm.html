@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content padding>
 
-  <ion-list class="header" *ngIf="errors.length == 0">
+  <ion-list class="header" *ngIf="errors.length == 0 && cartItems.length > 0">
       <ion-col width-36-inline-block>
           <strong>Image</strong>
       </ion-col>
@@ -15,19 +15,19 @@
           <strong>Detail</strong>
       </ion-col>
   </ion-list>
-  <div class="" approxItemHeight="40px" *ngIf="!(errors.length > 0) && cartItems">
+  <div class="" approxItemHeight="40px" *ngIf="errors.length == 0 && cartItems.length > 0">
   
     <ion-list *ngFor="let item of cartItems" >
       <ion-row class="header">
           <ion-col width-20 position-relative>
-              <img src="{{ _config.images_210 }}/{{item.image_path}}">
+              <img src="{{_config.images_210}}/{{item.image_path}}">
           </ion-col>
-          <ion-col width-70 class="button-container">
-              <h3>{{item.item_name}}</h3>
-              <ion-label> QTY :  {{item.cart_quantity}}</ion-label>
-              <ion-label> Vendor :  {{item.vendor}}</ion-label>
+          <ion-col width-80 class="button-container">
+              <h3>{{ item.item_name }}</h3>
+              <ion-label> QTY :  {{ item.cart_quantity}}</ion-label>
+              <ion-label> Vendor :  {{ item.vendor}}</ion-label>
               <h2>Item Total : KD {{ item.total }}</h2>  
-              
+
               <div *ngIf="item.options.length">
                   <small>Options</small>
                   <ion-label *ngFor="let option of item.options" > <small>{{option.menu_item_name}} X {{option.quantity}}</small></ion-label>
@@ -51,7 +51,7 @@
               </div>                      
           </ion-col>        
       </ion-row>
-    </ion-list>    
+    </ion-list>
     
     <ion-list summary *ngIf="summary" >
       <ion-row *ngIf="summary.subtotal">
