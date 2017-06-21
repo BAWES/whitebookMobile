@@ -21,6 +21,10 @@ export class Home {
   public themes:any;
   public themeID: any;
   public cartCount:number = 0;
+  
+  public selectOptions = {
+    title: 'What\'s your occasion?'
+  };
 
   constructor(
     public navCtrl: NavController,
