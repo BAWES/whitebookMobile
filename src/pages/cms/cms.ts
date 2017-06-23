@@ -8,25 +8,23 @@ import { HttpService } from '../../providers/http.service';
 })
 export class Cms {
 
-  public pageID : number = 0;
-  public detail : any;
+  public slug: string;
+  public detail: any;
 
   constructor(
     public navParams: NavParams,    
     public httpService : HttpService
     ) {
-    this.pageID =  this.navParams.get('id');
+    this.slug =  this.navParams.get('slug');
   }
 
   ionViewDidLoad() {
-    if (this.pageID) {
-        this.pageDetail(this.pageID);
-    }
+    this.pageDetail(this.slug);
   }
 
-  pageDetail(id){
-    this.httpService.get('/cms/' + id).subscribe(data => {
-      this.detail = data.json();
+  pageDetail(slug){
+    this.httpService.get('/cms/' + slug).subscribe(data => {
+      this.detail = data;
     })
   }
 }
