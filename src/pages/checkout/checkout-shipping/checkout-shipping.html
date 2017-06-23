@@ -14,7 +14,7 @@
 <ion-content padding>
   <ion-list radio-group [(ngModel)]="address_id">
     <ion-list-header>
-      List Of shipping Address  
+      List Of shipping Address for "{{ deliveryLocation }}" 
     </ion-list-header>
 
     <ion-item *ngFor="let address of addresses">

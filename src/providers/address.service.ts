@@ -22,6 +22,13 @@ export class AddressService {
     return this.httpService.get(this._urlAddrress);
   }
 
+  /**
+   * Get location detail 
+   */
+  location($id) {
+    return this.httpService.get(this._urlAddrress + '/location/' + $id);
+  }
+
   listAll(area_id: any) {
     return this.httpService.get(this._urlAddrress + '/all?area_id=' + area_id);  
   }
