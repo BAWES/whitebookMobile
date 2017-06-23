@@ -32,7 +32,7 @@ export class CreateAddressPage {
   public addressForm: FormGroup;
   public addressName: string = '';
   public addressType: string = '';
-  public areaName: string = '';
+  public areaName: any = '';
   public addressData: string = '';
 
   constructor(
@@ -50,9 +50,19 @@ export class CreateAddressPage {
         areaName: ['', Validators.required],
         addressData: ['', Validators.required],
       });
+    
+    if(this._navParams.get('title'))
+      this.title = this._navParams.get('title');
+  
+    if(this._navParams.get('area_id'))
+    {
+      this.addressForm.controls['areaName'].setValue(this._navParams.get('area_id'));
+      this.areaName = this._navParams.get('area_id');
+    }
+      
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() { 
     
     this.loadAdressTypes();
     this.loadLocations();

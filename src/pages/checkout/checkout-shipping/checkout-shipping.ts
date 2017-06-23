@@ -19,6 +19,7 @@ export class CheckoutShippingPage {
 
   public addresses: any;
   public address_id: number;
+  public deliveryLocation: string;
 
   constructor(
     public navCtrl: NavController,
@@ -34,10 +35,19 @@ export class CheckoutShippingPage {
   loadData () {
 
     let area_id = window.localStorage.getItem('delivery-location');
+    
+    this.addressService.location(area_id).subscribe(data => {
+      this.deliveryLocation = data.location;
+    });
+
+    console.log(area_id);
 
     this.addressService.listAll(area_id).subscribe(data=>{
          this.addresses = data;
-      })
+
+         if(this.addresses.length == 0)
+          this.newAddressModal();
+      });
   }
 
   cartModelPage () {
@@ -60,7 +70,10 @@ export class CheckoutShippingPage {
   }
 
   newAddressModal() {
-    let modal = this._modalCtrl.create(CreateAddressPage);
+    let modal = this._modalCtrl.create(CreateAddressPage, { 
+      area_id: window.localStorage.getItem('delivery-location'),
+      title: 'Add Shipping Address' 
+    });
     modal.present();
     modal.onDidDismiss(data => { 
        this.loadData(); // load list again
