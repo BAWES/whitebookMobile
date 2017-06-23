@@ -45,7 +45,7 @@ export class MyApp {
   public _urllogout: string = "/account/logout";
   //local variables
   public categoryList: any;
-  public personal: Array<{title: string, component: any, icon: any, pageID: number}>;
+  public personal: Array<{title: string, component: any, icon: any, slug: string}>;
   public events: any;
 
   constructor(
@@ -116,7 +116,7 @@ export class MyApp {
   */
   openUserPage(page) {
     
-    if (page.pageID == -1) {
+    if (page.slug == -1) {
         this.httpService.get(this._urllogout).
         subscribe(
           logout => {
@@ -131,9 +131,9 @@ export class MyApp {
     this.menu.close();
     
     if (page.component == Cms) {
-      this.nav.push(page.component,{id:page.pageID});
+      this.nav.push(page.component, { slug: page.slug });
     } else {
-      this.nav.push(page.component,{id:page.pageID});
+      this.nav.push(page.component);
     }
   }
 
@@ -174,26 +174,26 @@ export class MyApp {
   updateMenu() {
     
     this.personal = [
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', pageID:0},
-        { title : 'Directory', component: DirectoryListPage, icon:'list', pageID:0},
-        { title : 'Become Vendor', component:BecomeVendorPage, icon:'envelope-o', pageID:0},
-        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', pageID:7},
-        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', pageID:9},
-        { title : 'Packages', component:PackageListPage,icon:'archive', pageID:0},
-        { title : 'Contact', component:Contact,icon:'wpforms', pageID:0},
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null},
+        { title : 'Directory', component: DirectoryListPage, icon:'list', slug: null},
+        { title : 'Become Vendor', component:BecomeVendorPage, icon:'envelope-o', slug: null},
+        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', slug: 'terms-conditions'},
+        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', slug: 'privacy-policy'},
+        { title : 'Packages', component:PackageListPage,icon:'archive', slug: null},
+        { title : 'Contact', component:Contact,icon:'wpforms', slug: null},
     ];
 
     if (this.isUserLoggedIn) 
     {
-      this.personal.push({ title : 'My Bookings', component:MyBookingsPage,icon:'archive', pageID:0});
-      this.personal.push({ title : 'My Account', component:MyAccountPage,icon: 'user-circle', pageID:0});
-      this.personal.push({ title : 'My Wistlist', component:MyWishListPage,icon:'heart', pageID:0});
-      this.personal.push({ title : 'Address Book', component:MyAddressBookPage,icon:'address-book', pageID:0});
-      this.personal.push({ title : 'Logout', component:LoginPage, icon:'power-off', pageID: -1});
+      this.personal.push({ title : 'My Bookings', component:MyBookingsPage,icon:'archive', slug: null});
+      this.personal.push({ title : 'My Account', component:MyAccountPage,icon: 'user-circle', slug: null});
+      this.personal.push({ title : 'My Wistlist', component:MyWishListPage,icon:'heart', slug: null});
+      this.personal.push({ title : 'Address Book', component:MyAddressBookPage,icon:'address-book', slug: null});
+      this.personal.push({ title : 'Logout', component:LoginPage, icon:'power-off', slug: '-1'});
     } 
     else 
     {      
-      this.personal.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', pageID:0});
+      this.personal.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', slug: null});
     }
   }
 }
