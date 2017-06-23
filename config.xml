@@ -3,11 +3,12 @@
     <name>The White Book</name>
     <description>Book everything you need for your event</description>
     <author email="hello@thewhitebook.com.kw" href="https://thewhitebook.com.kw/">The White Book Team</author>
-    <content original-src="index.html" src="http://192.168.0.101:8100" />
+    <content original-src="index.html" src="http://192.168.0.100:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://192.168.1.103:8100" />
     <allow-navigation href="http://192.168.0.101:8100" />
+    <allow-navigation href="http://192.168.0.100:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -50,6 +51,8 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="FadeSplashScreen" value="false" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
