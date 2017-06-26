@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { HttpService } from '../../providers/http.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-cms',
@@ -13,7 +14,8 @@ export class Cms {
 
   constructor(
     public navParams: NavParams,    
-    public httpService : HttpService
+    public httpService : HttpService,
+    public translateService: TranslateService
     ) {
     this.slug =  this.navParams.get('slug');
   }

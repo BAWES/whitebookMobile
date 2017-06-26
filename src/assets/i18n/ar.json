@@ -21,5 +21,18 @@
   "My Wistlist": "بلدي ويستليست",
   "Address Book": "دليل العناوين",
   "Logout": "الخروج",
-  "Sign In": "تسجيل الدخول"  
+  "Sign In": "تسجيل الدخول",
+  "Business": "اعمال",
+  "Please enter business name": "الرجاء إدخال اسم النشاط التجاري",
+  "Name": "اسم",
+  "Please enter name": "الرجاء إدخال الاسم",
+  "Mobile": "التليفون المحمول",
+  "Please enter mobile": "الرجاء إدخال الجوال",
+  "Email": "البريد الإلكتروني",
+  "Please enter email detail": "الرجاء إدخال تفاصيل البريد الإلكتروني",
+  "Licence": "رخصة",
+  "Please enter licence detail": "الرجاء إدخال تفاصيل الترخيص",
+  "Description": "وصف",
+  "Please enter description": "الرجاء إدخال الوصف",
+  "Submit": "عرض"  
 }
