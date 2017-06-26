@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, MenuController, Platform, AlertController, PopoverController, ModalController,Events } from 'ionic-angular';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
+import { TranslateService } from '@ngx-translate/core';
 
 // pages
 import { Home } from '../pages/home/home';
@@ -57,26 +58,13 @@ export class MyApp {
     public httpService: HttpService,
     public authService: Authentication,
     public cartService: CartService,
+    public translateService: TranslateService,
     private _events: Events,
     private alertCtrl: AlertController,
     public popoverCtrl: PopoverController
   ) {
     this.initializeApp();
-    this.loadCategoryList(); // load category listing
-    this.isUserLoggedIn  = (this.authService.getAccessToken()) ? true : false;
-    this.updateMenu();
-
-    if(this.isUserLoggedIn) {
-      this.loadEventList(); // load logged in user event list
-    }
-
-    //check cart session id 
-    let cartSessionId = window.localStorage.getItem('cart-session-id');
     
-    if(!this.isUserLoggedIn && (!cartSessionId || cartSessionId == 'undefined')) {
-      this.cartService.getCartSessionId();
-    }
-
     this._events.subscribe('internet:offline', TokenSet => {
         this.nav.push(NoInternet);
         ///let popover = this.popoverCtrl.create(NoInternet);
@@ -95,12 +83,37 @@ export class MyApp {
   }
 
   initializeApp() {
+    this.translateService.setDefaultLang('en');
+
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault(); // Note ionic2 used StatusBar ionic 3 --> statusBar
       this.splashScreen.hide();
+
+      this.loadCategoryList(); // load category listing
+      this.isUserLoggedIn  = (this.authService.getAccessToken()) ? true : false;
+      this.updateMenu();
+
+      if(this.isUserLoggedIn) {
+        this.loadEventList(); // load logged in user event list
+      }
+
+      //check cart session id 
+      let cartSessionId = window.localStorage.getItem('cart-session-id');
+      
+      if(!this.isUserLoggedIn && (!cartSessionId || cartSessionId == 'undefined')) {
+        this.cartService.getCartSessionId();
+      }
     });
+  }
+
+  translateToEnglish(){
+    this.translateService.use('en');
+  }
+
+  translateToArabic(){
+    this.translateService.use('ar');
   }
 
   /*

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, ModalController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
@@ -23,7 +24,7 @@ export class Home {
   public cartCount:number = 0;
   
   public selectOptions = {
-    title: 'What\'s your occasion?'
+  //  title: 'Whats your occasion?'
   };
 
   constructor(
@@ -31,7 +32,8 @@ export class Home {
     public modalCtnl: ModalController,
     public httpService: Http,
     public cartService: CartService,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
     ) {
     this._urlThemeUrl = this._config.apiBaseUrl + '/themes';
     this.loadThemeList();
@@ -100,7 +102,7 @@ export class Home {
   //   this.httpService.get(this._urlCategory +'?offset='+start,false).subscribe(cateries => this.categories = cateries);
   // }
 
-  loadThemeList(start:number = 0){
+  loadThemeList(start:number = 0) {
     this.httpService.get(this._urlThemeUrl,false).subscribe(jsonResponse => {
       this.themes = jsonResponse.json();
     });

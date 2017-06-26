@@ -18,28 +18,35 @@
 
   <ion-content>
     <ion-list  main-menu class="main-menu">
-      <ion-list-header>Categories</ion-list-header>      
+      <ion-list-header>{{ Categories | translate }}</ion-list-header>      
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
           <i class="fa {{category.icon}}"></i>
-          <span class="label-{{category.icon}}">{{category.category_name}}</span>
+          <span class="label-{{category.icon}}" *ngIf="this.translateService.currentLang != 'ar'">{{ category.category_name }}</span>
+          <span class="label-{{category.icon}}" *ngIf="this.translateService.currentLang == 'ar'">{{ category.category_name_ar }}</span>
       </button>
     </ion-list>
     <ion-list secondary-menu>
       <br/>
-      <ion-list-header>User Section</ion-list-header>
+      <ion-list-header>{{ "User Section" | translate }}</ion-list-header>
       <button ion-item  *ngFor="let prsnl of personal" (click)="openUserPage(prsnl)">
         <i class="fa fa-{{prsnl.icon}}"></i>
-        {{prsnl.title}} 
+        {{ prsnl.title | translate }} 
+      </button>
+      <button ion-button block (click)="translateToEnglish()">
+        English
+      </button>
+      <button ion-button block (click)="translateToArabic()">
+        عربى
       </button>
     </ion-list>
   </ion-content>
-</ion-menu>
+</ion-menu> 
 
 <!-- Event Listing Right Sidebar-->
 <ion-menu [content]="content" side="right" id="menu2" persistent="true" >
   <ion-header>
     <ion-toolbar>
-      <ion-title>My Events</ion-title>
+      <ion-title>{{ "My Events" | translate }}</ion-title>
       <ion-buttons end>
         <button ion-item menuClose="menu2" class="close-menu">
             <ion-icon name="close"></ion-icon>
@@ -54,9 +61,11 @@
       </button>
     </ion-list>
     <ion-list>
-        <button *ngIf="isUserLoggedIn" ion-item nav-clear menu-close item-icon-right (click)="openEvents()">View All...</button>
+        <button *ngIf="isUserLoggedIn" ion-item nav-clear menu-close item-icon-right (click)="openEvents()">
+          {{ "View All..." | translate }} 
+        </button>
         <p ion-item class="authentication-failed" *ngIf="!sUserLoggedIn">
-          Please login to view event list
+          {{ "Please login to view event list" | translate }}
         </p>
     </ion-list>
   </ion-content>
