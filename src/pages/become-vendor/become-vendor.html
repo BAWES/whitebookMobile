@@ -1,61 +1,61 @@
 <ion-header>
   <ion-navbar class="top-nav">
-    <ion-title>Become Vendor</ion-title>
+    <ion-title>{{ "Become Vendor" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
     <form [formGroup]="becomeVendorForm" (ngSubmit)="submit()">
       <ion-item>
-        <ion-label floating>Business</ion-label>
+        <ion-label floating>{{ "Business" | translate }}</ion-label>
         <ion-input formControlName="business" type="text"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.business.valid && (becomeVendorForm.controls.business.touched ||  submitAttempt)">
-          <p>Please enter business name</p>
+          <p>{{ "Please enter business name" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label floating>Name</ion-label>
+        <ion-label floating>{{ "Name" | translate }}</ion-label>
         <ion-input formControlName="name" type="text"></ion-input>        
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.name.valid && (becomeVendorForm.controls.name.touched ||  submitAttempt)">
-          <p>Please enter name</p>
+          <p>{{ "Please enter name" | translate }}</p>
       </div>
       
       <ion-item>
-        <ion-label floating>Mobile</ion-label>
+        <ion-label floating>{{ "Mobile" | translate }}</ion-label>
         <ion-input formControlName="mobile" type="text"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.mobile.valid && (becomeVendorForm.controls.mobile.touched ||  submitAttempt)">
-          <p>Please enter mobile</p>
+          <p>{{ "Please enter mobile" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label floating>Email</ion-label>
+        <ion-label floating>{{ "Email" | translate }}</ion-label>
         <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.email.valid && (becomeVendorForm.controls.email.touched ||  submitAttempt)">
-          <p>Please enter email detail</p>
+          <p>{{ "Please enter email detail" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label floating>licence</ion-label>
+        <ion-label floating>{{ "Licence" | translate }}</ion-label>
         <ion-input formControlName="licence" type="text"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.licence.valid && (becomeVendorForm.controls.licence.touched ||  submitAttempt)">
-          <p>Please enter licence detail</p>
+          <p>{{ "Please enter licence detail" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label floating>Description</ion-label>
+        <ion-label floating>{{ "Description" | translate }}</ion-label>
         <ion-input formControlName="description" type="text"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!becomeVendorForm.controls.description.valid && (becomeVendorForm.controls.description.touched ||  submitAttempt)">
-          <p>Please enter description</p>
+          <p>{{ "Please enter description" | translate }}</p>
       </div>
       
       <ion-item text-center no-border>
-        <button ion-button>Submit</button>
+        <button ion-button>{{ "Submit" | translate }}</button>
       </ion-item>
     </form>    
   </ion-list>

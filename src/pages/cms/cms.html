@@ -1,8 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="detail">{{ detail.page_name }}</ion-title>
+    <ion-title *ngIf="detail">
+      <span *ngIf="this.translateService.currentLang != 'ar'">{{ detail.page_name }}</span>
+      <span *ngIf="this.translateService.currentLang == 'ar'">{{ detail.page_name_ar }}</span>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div *ngIf="detail" innerHTML = "{{ detail.page_content }}" class="scroll-content"></div>
+  <div *ngIf="detail && this.translateService.currentLang != 'ar'" innerHTML = "{{ detail.page_content }}" class="scroll-content"></div>
+  <div *ngIf="detail && this.translateService.currentLang == 'ar'" innerHTML = "{{ detail.page_content_ar }}" class="scroll-content"></div>
 </ion-content>

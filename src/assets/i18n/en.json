@@ -21,5 +21,18 @@
   "My Wistlist": "My Wistlist",
   "Address Book": "Address Book",
   "Logout": "Logout",
-  "Sign In": "Sign In"
+  "Sign In": "Sign In",
+  "Business": "Business",
+  "Please enter business name": "Please enter business name",
+  "Name": "Name",
+  "Please enter name": "Please enter name",
+  "Mobile": "Mobile",
+  "Please enter mobile": "Please enter mobile",
+  "Email": "Email",
+  "Please enter email detail": "Please enter email detail",
+  "Licence": "Licence",
+  "Please enter licence detail": "Please enter licence detail",
+  "Description": "Description",
+  "Please enter description": "Please enter description",
+  "Submit": "Submit"
 }
