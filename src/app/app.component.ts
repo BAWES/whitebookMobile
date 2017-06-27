@@ -115,13 +115,13 @@ export class MyApp {
   translateToArabic(){
     this.translateService.use('ar');
   }
-
+  
   /*
   * Open produdct listing page for perticular category
   */
   openPage(page) {
     this.menu.close();
-    this.nav.push(ListingPage,{title:page.category_name, id:page.category_id});
+    this.nav.push(ListingPage, { title: page.category_name, title_ar: page.category_name_ar, id: page.category_id });
   }
   
   /*

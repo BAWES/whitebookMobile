@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar persistent="true" >
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{ _config.translate(title, title_ar) }}</ion-title>
     <!--<ion-buttons end>
       <button ion-button menuToggle="right" >
           <ion-icon name="calendar"></ion-icon>
@@ -39,12 +39,14 @@
             </ion-thumbnail>
             <div *ngIf="product.notice != ''" class="callout-container">
                 <span class="callout light">
-                    Notice: {{product.notice}}
+                   {{ "Notice" | translate }} : {{product.notice}}
                 </span>
             </div>
           </div>
           <div class="detail-section text-center">
-            <h4 class="name"><strong>{{product.item_name}}</strong></h4>
+            <h4 class="name">
+              <strong>{{ _config.translate(product.item_name, product.item_name_ar) }}</strong>
+            </h4>
             
             <h6 class="price">
               <span *ngIf="product.item_base_price > 0">
@@ -54,20 +56,20 @@
                  KD {{ product.min_order_amount }}
               </span>
               <span *ngIf="!product.item_base_price && !product.min_order_amount">
-                 Price based on selection 
+                 {{ "Price based on selection" | translate }} 
               </span>
             </h6>
 
-            <h4 class="vendor"> {{product.vendor_name}}</h4>
+            <h4 class="vendor"> {{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h4>
           </div>
         </button>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-          <ion-infinite-scroll-content></ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
   </ion-grid>
 
   <div *ngIf="products !== undefined && !products.length" class="no-results">
-    <h3 text-center>No Product Found</h3>
+    <h3 text-center>{{ "No Product Found" | translate }}</h3>
   </div>
 </ion-content>

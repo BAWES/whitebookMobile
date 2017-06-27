@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Platform } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 // Custom
 import { EnvConfig } from '../app/environments/environments.token';
@@ -26,7 +27,11 @@ export class GlobalService {
   public browserOptions: string;
   public browserOptionsWithCache: string;
 
-  constructor(public platform: Platform, @Inject(EnvConfig) public envConfig) {
+  constructor(
+    public platform: Platform, 
+    @Inject(EnvConfig) public envConfig,
+    public translateService: TranslateService
+  ) {
       console.log("Loaded Environment: " + this.envConfig.environmentName);
 
       // Set base API endpoint based on env config
@@ -34,6 +39,14 @@ export class GlobalService {
 
       this.setupDeviceSpecificConfigs();
   }
+
+  translate(en, ar) {
+    if(this.translateService.currentLang != 'ar') {
+      return en;
+    }else{
+      return ar;
+    }
+  } 
 
   /**
    * Setup Device Specific Configs
