@@ -115,7 +115,7 @@ export class MyApp {
   translateToArabic(){
     this.translateService.use('ar');
   }
-
+  
   /*
   * Open produdct listing page for perticular category
   */
