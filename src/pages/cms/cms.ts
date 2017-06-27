@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { HttpService } from '../../providers/http.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-cms',
@@ -8,25 +9,24 @@ import { HttpService } from '../../providers/http.service';
 })
 export class Cms {
 
-  public pageID : number = 0;
-  public detail : any;
+  public slug: string;
+  public detail: any;
 
   constructor(
     public navParams: NavParams,    
-    public httpService : HttpService
+    public httpService : HttpService,
+    public translateService: TranslateService
     ) {
-    this.pageID =  this.navParams.get('id');
+    this.slug =  this.navParams.get('slug');
   }
 
   ionViewDidLoad() {
-    if (this.pageID) {
-        this.pageDetail(this.pageID);
-    }
+    this.pageDetail(this.slug);
   }
 
-  pageDetail(id){
-    this.httpService.get('/cms/' + id).subscribe(data => {
-      this.detail = data.json();
+  pageDetail(slug){
+    this.httpService.get('/cms/' + slug).subscribe(data => {
+      this.detail = data;
     })
   }
 }
