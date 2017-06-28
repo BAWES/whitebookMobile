@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 import { ProductImagePage } from '../product-image/product-image';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
@@ -38,7 +39,7 @@ export class ProductPage {
   public minQuantity:number = 1;
   public dateChange:boolean=false;
   public wishlistID:number=0;
-  public wishlistLbl:string = 'Add To Wishlist';
+  public wishlistLbl:string;
   //form variables
   public productForm:FormGroup;
   public area:number;
@@ -77,19 +78,20 @@ export class ProductPage {
     public httpService: HttpService,
     public formBuilder: FormBuilder,
     public cartService: CartService,
+    public translateService: TranslateService,
     public auth: Authentication
   ) {
     this.setDates();
 
     this.product_id = this._params.get('productId');
     
-    this._urlProductDetail = this._config.apiBaseUrl + '/product/detail?product_id=';
-    this._urlProductArea = this._config.apiBaseUrl + '/product/area?vendor_id=';
-    this._urlProductCapacity = this._config.apiBaseUrl + '/product/capacity';
-    this._urlProductDeliveryTimeSlot = this._config.apiBaseUrl + '/product/time-slot';
-    this._urlAddToCart = this._config.apiBaseUrl + '/cart';
-    this._urlFinalPrice = this._config.apiBaseUrl + '/product/final-price';
-    this._urlWishlist = '/wishlist';
+    this._urlProductDetail = this._config.apiBaseUrl + '/product/detail?language=' + this.translateService.currentLang + '&product_id=';
+    this._urlProductArea = this._config.apiBaseUrl + '/product/area?language=' + this.translateService.currentLang + '&vendor_id=';
+    this._urlProductCapacity = this._config.apiBaseUrl + '/product/capacity?language=' + this.translateService.currentLang;
+    this._urlProductDeliveryTimeSlot = this._config.apiBaseUrl + '/product/time-slot?language=' + this.translateService.currentLang;
+    this._urlAddToCart = this._config.apiBaseUrl + '/cart?language=' + this.translateService.currentLang;
+    this._urlFinalPrice = this._config.apiBaseUrl + '/product/final-price?language=' + this.translateService.currentLang;
+    this._urlWishlist = '/wishlist?language=' + this.translateService.currentLang;
     
     this.currentTime = new Date().getTime();
 
@@ -101,6 +103,10 @@ export class ProductPage {
       });
 
     this.isUserLogged = this.auth.getAccessToken();
+
+    this.translateService.get('Add To Wishlist').subscribe(value => {
+      this.wishlistLbl = value;
+    });
   }
 
   ionViewWillEnter() {    
@@ -179,11 +185,13 @@ export class ProductPage {
   
         if(data.operation == 'success') 
         {
-          let toast = this.toastCtrl.create({
-            message : 'Item added to cart',
-            duration : 4000
+          this.translateService.get('Item added to cart').subscribe(value => {
+            let toast = this.toastCtrl.create({
+              message : value,
+              duration : 4000
+            });
+            toast.present();
           });
-          toast.present();
 
           //update cart count
           this.getCartCount();
@@ -200,22 +208,25 @@ export class ProductPage {
           }
         }
         
-        let alert = this.alertCtrl.create({
-          title: 'Add to cart',
-          subTitle: msg,
-          buttons: ['OK']
-        });
-        alert.present();
+        this.translateService.get('Add to cart').subscribe(value => {
+          let alert = this.alertCtrl.create({
+            title: value,
+            subTitle: msg,
+            buttons: ['OK']
+          });
+          alert.present();
+        });          
 
       });
 
     } else {
-
-      let toast = this.toastCtrl.create({
-        message : 'Please check form carefully',
-        duration : 4000
+      this.translateService.get('Please check form carefully').subscribe(value => {
+        let toast = this.toastCtrl.create({
+          message : value,
+          duration : 4000
+        });
+        toast.present();
       });
-      toast.present();
     }
   }
 
@@ -395,23 +406,29 @@ export class ProductPage {
     }
 
     let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
-    this.httpService.get(url).subscribe(jsonResponse => {
-      this.wishlistID = jsonResponse;
-      if (this.wishlistID > 0) {
-        this.wishlistLbl = 'Remove From Wishlist';
+    
+    this.httpService.get(url).subscribe(jsonResponse => {      
+      this.wishlistID = jsonResponse;      
+      if (this.wishlistID > 0) 
+      {
+        this.translateService.get('Remove From Wishlist').subscribe(value => {
+          this.wishlistLbl = value;
+        });        
       }
     });
   }
 
-  manageWishlist() {
-      
+  manageWishlist() 
+  {      
       if(!this.isUserLogged)
       {
-        let alert = this.alertCtrl.create({
-          message: 'Please login to manage wishlist',
-          buttons: ['OK']
+        this.translateService.get('Please login to manage wishlist').subscribe(value => {
+          let alert = this.alertCtrl.create({
+            message: value,
+            buttons: ['OK']
+          });
+          alert.present();
         });
-        alert.present();
         return false;
       }
 
@@ -430,8 +447,10 @@ export class ProductPage {
     this.httpService.post(this._urlWishlist,param).subscribe(result => {
       
       if (result.operation == 'success'){
-          this.wishlistLbl = 'Remove From Wishlist';
+        this.translateService.get('Remove From Wishlist').subscribe(value => {
+          this.wishlistLbl = value;
           this.wishlistID = result.id;
+        });          
       }
 
       let toast = this.toastCtrl.create({
@@ -444,10 +463,14 @@ export class ProductPage {
   
   removeFromWishList() {
     this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(result => {
+      
       if (result.operation == 'success') {
-          this.wishlistLbl = 'Add From Wishlist';
+        this.translateService.get('Add From Wishlist').subscribe(value => {
+          this.wishlistLbl = value;
           this.wishlistID = 0;
+        });
       }
+
       let toast = this.toastCtrl.create({
         message : result.message,
         duration : 3000

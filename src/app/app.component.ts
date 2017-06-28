@@ -110,10 +110,12 @@ export class MyApp {
 
   translateToEnglish(){
     this.translateService.use('en');
+    this.platform.setDir('ltr', true);
   }
 
   translateToArabic(){
     this.translateService.use('ar');
+    this.platform.setDir('rtl', true);
   }
   
   /*

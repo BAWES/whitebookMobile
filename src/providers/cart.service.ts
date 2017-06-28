@@ -3,6 +3,7 @@ import { HttpService } from './http.service';
 import { Http } from '@angular/http';
 import { GlobalService } from '../providers/global.service';
 import { Authentication } from '../providers/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class CartService {
@@ -16,7 +17,8 @@ export class CartService {
     private httpService : HttpService,
     public http: Http,
     public authService: Authentication,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    public translateService: TranslateService
   ){
     this.isUserLogged = this.authService.getAccessToken();
 
@@ -37,6 +39,7 @@ export class CartService {
     }      
 
     let url = this.globalService.apiBaseUrl + this._urlCart + '/cart-session-id';
+    
     this.http.get(url).subscribe(response => {
       this.cartSessionId = response.json().cart_session_id;
       window.localStorage.setItem('cart-session-id', this.cartSessionId);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Authentication } from '../providers/auth.service';
 
@@ -11,6 +12,7 @@ export class AddressService {
 
   constructor(
     private httpService : HttpService,
+    public translateService: TranslateService,
     public authService: Authentication
   ){
   } 
@@ -26,21 +28,25 @@ export class AddressService {
    * Get location detail 
    */
   location($id) {
-    return this.httpService.get(this._urlAddrress + '/location/' + $id);
+    let url = this._urlAddrress + '/location/' + $id + '?language=' + this.translateService.currentLang;
+    return this.httpService.get(url);
   }
 
   listAll(area_id: any) {
-    return this.httpService.get(this._urlAddrress + '/all?area_id=' + area_id);  
+    let url = this._urlAddrress + '/all?area_id=' + area_id + '&language=' + this.translateService.currentLang;
+    return this.httpService.get(url);  
   }
 
   /**
    * Add addresses
    */
   add(params: any) {
-    return this.httpService.post(this._urlAddrress, params);
+    let url = this._urlAddrress + '?language=' + this.translateService.currentLang;
+    return this.httpService.post(url, params);
   }
 
   addGuestAddress(params: any) {
-    return this.httpService.post(this._urlcheckout + '/save-guest-address', params);
+    let url = this._urlcheckout + '/save-guest-address' + '?language=' + this.translateService.currentLang;
+    return this.httpService.post(url, params);
   }
 } 
