@@ -6,8 +6,8 @@
 -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Cart
+    <ion-title translate> 
+      {{ "Cart" | translate }}
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -20,17 +20,17 @@
 
   <ion-list *ngIf="cartItems && cartItems.length > 0">
     <ion-item class="border-top border-lighter">
-      <ion-label floating>Delivery area</ion-label>
+      <ion-label floating>{{ "Delivery area" | translate }}</ion-label>
       <ion-select [(ngModel)]="area_id" (ionChange)="deliveryDataChanged()" >
-          <ion-option *ngFor="let area of areas" value="{{ area.id }}">{{ area.location }}</ion-option>
+          <ion-option *ngFor="let area of areas" value="{{ area.id }}">{{ _config.translate(area.location, area.location_ar) }}</ion-option>
       </ion-select> 
     </ion-item>
     <ion-item class="border-top border-lighter">
-      <ion-label floating>Delivery Date</ion-label>
+      <ion-label floating>{{ "Delivery Date" | translate }}</ion-label>
       <ion-datetime displayFormat="YYYY-MM-DD" [min]="minDate" [max]="maxDate" [(ngModel)]="delivery_date" (ionChange)="deliveryDataChanged()"></ion-datetime>
     </ion-item>
     <ion-item class="border-top border-lighter">
-      <ion-label floating>Timeslot</ion-label>
+      <ion-label floating>{{ "Timeslot" | translate }}</ion-label>
       <ion-select [(ngModel)]="event_time" (ionChange)="deliveryDataChanged()" >
           <ion-option *ngFor="let timeslot of timeslots" value="{{ timeslot }}">{{ timeslot }}</ion-option>
       </ion-select> 
@@ -39,10 +39,10 @@
 
   <ion-list class="header" *ngIf="cartItems && cartItems.length > 0">
       <ion-col width-36-inline-block>
-          <strong>Image</strong>
+          <strong>{{ "Image" | translate }}</strong>
       </ion-col>
       <ion-col width-57-inline-block>
-          <strong>Detail</strong>
+          <strong>{{ "Detail" | translate }}</strong>
       </ion-col>
       <ion-col width-10 text-center close-btn position-relative>
       </ion-col>
@@ -55,26 +55,30 @@
               <img src="{{_config.images_210}}/{{item.image_path}}">
           </ion-col>
           <ion-col width-70 class="button-container">
-              <h3>{{ item.item_name }}</h3>
-              <ion-label> QTY :  {{ item.cart_quantity}}</ion-label>
-              <ion-label> Vendor :  {{ item.vendor}}</ion-label>
-              <h2>Item Total : KD {{ item.total }}</h2>  
+              <h3>{{ _config.translate(item.item_name, item.item_name_ar) }}</h3>
+              <ion-label> {{ "QTY" | translate }}  :  {{ item.cart_quantity }}</ion-label>
+              <ion-label> {{ "Vendor" | translate }} :  {{ item.vendor }}</ion-label>
+              <h2>{{ "Item Total" | translate }} : KD {{ item.total }}</h2>  
 
               <div *ngIf="item.options.length">
-                  <small>Options</small>
-                  <ion-label *ngFor="let option of item.options" > <small>{{option.menu_item_name}} X {{option.quantity}}</small></ion-label>
+                  <small>{{ "Options" | translate }}</small>
+                  <ion-label *ngFor="let option of item.options" > 
+                    <small>{{ _config.translate(option.menu_item_name, option.menu_item_name_ar) }} X {{option.quantity}}</small>
+                  </ion-label>
               </div>
 
               <div *ngIf="item.addons.length">
-                  <small>addons</small>
-                  <ion-label *ngFor="let addon of item.addons" > <small>{{addon.menu_item_name}} X {{addon.quantity}}</small></ion-label>
+                  <small>{{ "Addons" | translate }}</small>
+                  <ion-label *ngFor="let addon of item.addons"> 
+                    <small>{{ _config.translate(addon.menu_item_name, addon.menu_item_name_ar) }} X {{addon.quantity}}</small>
+                  </ion-label>
               </div>
 
               <div *ngIf="item.addons.length">
-                  <small>customs</small>
+                  <small>{{ "Customs" | translate }}</small>
                   <ion-label *ngFor="let custom of item.customs" > 
-                    <small>{{custom.question}}</small>
-                    <small>{{custom.answer}}</small>
+                    <small>{{ custom.question }}</small>
+                    <small>{{ custom.answer }}</small>
                   </ion-label>
               </div>
               
@@ -91,36 +95,36 @@
     <ion-list summary *ngIf="summary" >
       <ion-row *ngIf="summary.subtotal">
         <ion-col text-left>
-          <ion-label><strong>Sub Total</strong></ion-label>
+          <ion-label><strong>{{ "Sub Total" | translate }}</strong></ion-label>
         </ion-col>
         <ion-col text-right>
-          <ion-label>{{summary.subtotal}}</ion-label>
+          <ion-label>{{ summary.subtotal }}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let cost of delivery_vendors">
         <ion-col text-left>
-          <ion-label>Delivery Charge <br /><small>({{cost.vendor}})</small></ion-label>
+          <ion-label>{{ "Delivery Charge" | translate }} <br /><small>({{cost.vendor}})</small></ion-label>
         </ion-col>
         <ion-col text-right>
-          <ion-label>{{cost.charges}}</ion-label>
+          <ion-label>{{ cost.charges }}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="summary.total">
         <ion-col text-left>
-          <ion-label><strong>Total</strong></ion-label>
+          <ion-label><strong>{{ "Total" | translate }}</strong></ion-label>
         </ion-col>
         <ion-col text-right>
-          <ion-label>{{summary.total}}</ion-label>
+          <ion-label>{{ summary.total }}</ion-label>
         </ion-col>
       </ion-row>
     </ion-list>
   </div>
 
   <ion-item text-center checkout-btn *ngIf="cartItems && cartItems.length > 0">
-    <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> Checkout</button>
+    <button ion-button round width-99 padding color="dark" (click)="shippingModelPage()"> {{ "Checkout" | translate }}</button>
   </ion-item>
 
-   <p text-center *ngIf="!cartItems || cartItems.length == 0">No item(s) in cart</p>
+   <p text-center *ngIf="!cartItems || cartItems.length == 0">{{ "No item(s) in cart" | translate }}</p>
 </ion-content>
 
 
