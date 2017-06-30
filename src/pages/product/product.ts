@@ -297,7 +297,7 @@ export class ProductPage {
   loadTimeSlot(vendor_id) {
     this.dateChange = true;
     let url = this._urlProductDeliveryTimeSlot 
-      + '?vendor_id='+vendor_id+'&event_date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
+      + '&vendor_id='+vendor_id+'&event_date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
     
     this.http.get(url).subscribe(timeslots=>{
       this.timeslots = timeslots.json();  
@@ -388,7 +388,7 @@ export class ProductPage {
    * date change
    */
   loadProductCapacity(){
-    let url = this._urlProductCapacity+'?product_id='+this.product_id+'&deliver_date='+this.myDate;
+    let url = this._urlProductCapacity+'&product_id='+this.product_id+'&deliver_date='+this.myDate;
     this.http.get(url).subscribe(jsonResponse => {
       this.maxQuantity = parseInt(jsonResponse.json().capacity);
     });

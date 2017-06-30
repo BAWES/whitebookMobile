@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
 import { CreateAddressPage } from '../../account/create-address/create-address';
-
 import { AddressService } from '../../../providers/address.service';
+import { TranslateService } from '@ngx-translate/core';
+import { GlobalService } from '../../../providers/global.service';
 
 /*
   Generated class for the CheckoutShipping page.
@@ -24,8 +25,10 @@ export class CheckoutShippingPage {
   constructor(
     public navCtrl: NavController,
     public addressService: AddressService,
+    public translateService: TranslateService,
     public _alertCtrl : AlertController,
-    public _modalCtrl: ModalController
+    public _modalCtrl: ModalController,
+    public _config: GlobalService
   ) {}
 
   ionViewDidLoad() {
@@ -37,10 +40,8 @@ export class CheckoutShippingPage {
     let area_id = window.localStorage.getItem('delivery-location');
     
     this.addressService.location(area_id).subscribe(data => {
-      this.deliveryLocation = data.location;
+      this.deliveryLocation = this._config.translate(data.location, data.location_ar);      
     });
-
-    console.log(area_id);
 
     this.addressService.listAll(area_id).subscribe(data=>{
          this.addresses = data;
@@ -57,11 +58,13 @@ export class CheckoutShippingPage {
   confirmPage() {
     
     if(!this.address_id) {
-      let alert = this._alertCtrl.create({
-        subTitle: 'Please select address.',
-        buttons: ['Okay!']
-      });
-      alert.present();
+      this.translateService.get('Please select address.').subscribe(value => {
+        let alert = this._alertCtrl.create({
+          subTitle: value,
+          buttons: ['Okay!']
+        });
+        alert.present();
+      });      
     }
     else
     {
@@ -69,14 +72,16 @@ export class CheckoutShippingPage {
     }    
   }
 
-  newAddressModal() {
-    let modal = this._modalCtrl.create(CreateAddressPage, { 
-      area_id: window.localStorage.getItem('delivery-location'),
-      title: 'Add Shipping Address' 
-    });
-    modal.present();
-    modal.onDidDismiss(data => { 
-       this.loadData(); // load list again
+  newAddressModal() {    
+    this.translateService.get('Add Shipping Address').subscribe(value => {
+      let modal = this._modalCtrl.create(CreateAddressPage, { 
+        area_id: window.localStorage.getItem('delivery-location'),
+        title: value
+      });
+      modal.present();
+      modal.onDidDismiss(data => { 
+        this.loadData(); // load list again
+      });
     });
   }
 }
