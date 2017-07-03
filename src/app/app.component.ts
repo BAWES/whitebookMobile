@@ -49,6 +49,8 @@ export class MyApp {
   public personal: Array<{title: string, component: any, icon: any, slug: string}>;
   public events: any;
 
+  public menuSide: string = 'left';
+
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
@@ -109,14 +111,16 @@ export class MyApp {
     });
   }
 
-  translateToEnglish(){
+  translateToEnglish() {
     this.translateService.use('en');
     this.platform.setDir('ltr', true);
+    //this.menuSide = 'left';
   }
 
   translateToArabic(){
     this.translateService.use('ar');
     this.platform.setDir('rtl', true);
+    //this.menuSide = 'right';
   }
   
   /*
