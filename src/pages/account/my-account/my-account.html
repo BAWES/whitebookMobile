@@ -6,70 +6,70 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>My Account</ion-title>
+    <ion-title>{{ "My Account" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-item>
     <ion-title text-center>
-      Update Accocunt Detail
+      {{ "Update Accocunt Detail" | translate }}
     </ion-title>
   </ion-item>
   <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" novalidate>
     <ion-list>
       <ion-item>
-        <ion-label stacked>First Name</ion-label>
+        <ion-label stacked>{{ "First Name" | translate }}</ion-label>
         <ion-input formControlName="firstName" type="text" [(ngModel)]="firstName"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.firstName.valid && (!profileForm.controls.firstName.touched ||  submitAttempt)">
-        <p>Please enter First name</p>
+        <p>{{ "Please enter First name" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label stacked> Last Name</ion-label>
+        <ion-label stacked>{{ "Last Name" | translate }}</ion-label>
         <ion-input formControlName="lastName" type="text" [(ngModel)]="lastName"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.lastName.valid && (!profileForm.controls.lastName.touched ||  submitAttempt)">
-        <p>Please enter Last name</p>
+        <p>{{ "Please enter Last name" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label stacked>Email</ion-label>
+        <ion-label stacked>{{ "Email" | translate }}</ion-label>
         <ion-input formControlName="email" type="text" [(ngModel)]="email"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.email.valid && (!profileForm.controls.email.touched ||  submitAttempt)">
-        <p>Please enter email address</p>
+        <p>{{ "Please enter email address" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label stacked>Date of Birth</ion-label>
+        <ion-label stacked>{{ "Date of Birth" | translate }}</ion-label>
         <ion-datetime formControlName="dob" displayFormat="MM/DD/YYYY" [(ngModel)]="dob"></ion-datetime>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.dob.valid && (!profileForm.controls.dob.touched ||  submitAttempt)">
-        <p>Please enter Date of Birth</p>
+        <p>{{ "Please enter Date of Birth" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label stacked>Gender</ion-label>
+        <ion-label stacked>{{ "Gender" | translate }}</ion-label>
           <ion-select formControlName="gender" [(ngModel)]="gender">
-            <ion-option selected='{{gender}} == "Male"' value="Male">Male</ion-option>
-            <ion-option selected='{{gender}} == "Female"' value="Female">Female</ion-option>
+            <ion-option selected='{{gender}} == "Male"' value="Male">{{ "Male" | translate }}</ion-option>
+            <ion-option selected='{{gender}} == "Female"' value="Female">{{ "Female" | translate }}</ion-option>
           </ion-select>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.gender.valid && (!profileForm.controls.gender.touched ||  submitAttempt)">
-        <p>Please select gender</p>
+        <p>{{ "Please select gender" | translate }}</p>
       </div>
 
       <ion-item>
-        <ion-label stacked>Mobile</ion-label>
+        <ion-label stacked>{{ "Mobile" | translate }}</ion-label>
         <ion-input formControlName="mobile" type="text" [(ngModel)]="mobile"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!profileForm.controls.mobile.valid && (!profileForm.controls.mobile.touched ||  submitAttempt)">
-        <p>Please enter mobile number</p>
+        <p>{{ "Please enter mobile number" | translate }}</p>
       </div>
     </ion-list>
     <div padding>
-      <button ion-button round full color="dark">Save</button>
+      <button ion-button round full color="dark">{{ "Save" | translate }}</button>
     </div>
   </form>
 </ion-content>

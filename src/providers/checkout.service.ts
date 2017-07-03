@@ -17,7 +17,7 @@ export class CheckoutService {
    */
   confirm(params) {    
     let cartSessionId = window.localStorage.getItem('cart-session-id');
-    let url = '/checkout/confirm?cart-session-id=' + cartSessionId + '&language=' + this.translateService.currentLang;;
+    let url = '/checkout/confirm?cart-session-id=' + cartSessionId + '&language=' + this.translateService.currentLang;
     return this.httpService.post(url, params);
   }
 }

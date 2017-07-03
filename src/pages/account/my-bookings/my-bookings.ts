@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 import { BookingDetailPage } from '../booking-detail/booking-detail';
-
+import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class MyBookingsPage {
   constructor(
     public modalCtrl: ModalController,
     public httpService: HttpService,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public translateService: TranslateService,
   ) { }
 
   ionViewWillEnter() {
@@ -29,7 +30,8 @@ export class MyBookingsPage {
   }
 
   list(start: number = 0) {
-      this.httpService.get(this._urlBookingUrl +'?offset='+start).subscribe(data=>{
+     let url = this._urlBookingUrl + '?offset=' + start + '&language=' + this.translateService.currentLang;
+      this.httpService.get(url).subscribe(data=>{
          this.bookingList = data;
       })
   }
@@ -39,9 +41,10 @@ export class MyBookingsPage {
   * will load more data just like pagination
   */
   doInfinite(infiniteScroll) {
+    let url = this._urlBookingUrl + '?offset=' + this.start + '&language=' + this.translateService.currentLang;
     let bookings;
      this.start += 20;
-      this.httpService.get(this._urlBookingUrl +'?offset='+this.start).subscribe(data=>{
+      this.httpService.get(url).subscribe(data=>{
          bookings = data;
          for(let booking of bookings) {
           this.bookingList.push(booking);

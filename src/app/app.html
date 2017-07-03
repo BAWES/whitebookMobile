@@ -1,5 +1,5 @@
 <!-- Main Menu Left Sidebar-->
-<ion-menu [content]="content" side="left" id="menu1" persistent="true" >
+<ion-menu [content]="content" side="{{ menuSide }}" id="menu1" persistent="true" >
   <ion-header>
     <ion-toolbar>
       <ion-buttons start main-menu-search-icon>
@@ -15,7 +15,6 @@
     </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
   <ion-content>
     <ion-list  main-menu class="main-menu">
       <ion-list-header>{{ Categories | translate }}</ion-list-header>      
@@ -41,35 +40,6 @@
     </ion-list>
   </ion-content>
 </ion-menu> 
-
-<!-- Event Listing Right Sidebar-->
-<ion-menu [content]="content" side="right" id="menu2" persistent="true" >
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>{{ "My Events" | translate }}</ion-title>
-      <ion-buttons end>
-        <button ion-item menuClose="menu2" class="close-menu">
-            <ion-icon name="close"></ion-icon>
-        </button>
-    </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content event-menu>
-    <ion-list>
-      <button ion-item nav-clear menu-close item-icon-right *ngFor="let event of events">
-        {{event.event_name}} 
-      </button>
-    </ion-list>
-    <ion-list>
-        <button *ngIf="isUserLoggedIn" ion-item nav-clear menu-close item-icon-right (click)="openEvents()">
-          {{ "View All..." | translate }} 
-        </button>
-        <p ion-item class="authentication-failed" *ngIf="!sUserLoggedIn">
-          {{ "Please login to view event list" | translate }}
-        </p>
-    </ion-list>
-  </ion-content>
-</ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav id="nav" [root]="rootPage" #content swipe-back-enabled="false"></ion-nav>

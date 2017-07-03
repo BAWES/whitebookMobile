@@ -7,32 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Address Book</ion-title>
+    <ion-title>{{ "Address Book" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-item text-center>
-      <button ion-button round color="dark" class="padding-16" (click)="create()">+ Add new address</button>
+      <button ion-button round color="dark" class="padding-16" (click)="create()">+ {{ "Add new address" | translate }}</button>
   </ion-item>
   <ion-list  approxItemHeight="50px">
     <ion-card *ngFor="let address of addresses">
       <ion-card-header position-relative>
-        <ion-title float-left>{{address.address_name | slice:0:10}}</ion-title>
+        <ion-title float-left>{{ address.address_name | slice:0:10 }}</ion-title>
         <ion-buttons float-right >
           <button no-background (click)="update(address.address_id)"><ion-icon name="create"></ion-icon></button>
           <button no-background (click)="delete(address.address_id)"><ion-icon name="trash" ></ion-icon></button>
         </ion-buttons>
         </ion-card-header>
         <ion-card-content>
-          {{address.address_data}},{{address.city_name}},{{address.location}}
+          {{ address.address_data }}, 
+          {{ _config.translate(address.city_name, address.city_name_ar) }},
+          {{ _config.translate(address.location, address.location_ar) }}
         </ion-card-content>
       </ion-card>
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
-        loadingText="Loading more data...">
+        loadingText='{{ "Loading more data..." | translate }}'>
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

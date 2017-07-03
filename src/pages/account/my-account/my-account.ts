@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpService } from '../../../providers/http.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-my-account',
@@ -10,7 +11,7 @@ import { HttpService } from '../../../providers/http.service';
 
 export class MyAccountPage {
 
-  public _urlProfileUrl:string = '/account'
+  public _urlProfileUrl:string;
   public profileForm:FormGroup;    
   public submitAttempt: boolean = false;
 
@@ -24,7 +25,8 @@ export class MyAccountPage {
   constructor(
     public toastCtrl:ToastController,
     public formBuilder: FormBuilder,
-    public httpService: HttpService
+    public httpService: HttpService,
+    public translateService: TranslateService,
     ) {
        this.profileForm = this.formBuilder.group({
         firstName: ['', Validators.required],
@@ -34,6 +36,8 @@ export class MyAccountPage {
         gender: ['', Validators.required],
         mobile: ['', Validators.required],
       });
+
+      this._urlProfileUrl = '/account?language=' + this.translateService.currentLang;
     }
 
   ionViewDidLoad() {
@@ -60,7 +64,7 @@ export class MyAccountPage {
   saveProfile() {
     let result;
     this.submitAttempt = true;
-    console.log(this.profileForm.valid);
+    
     if (this.profileForm.valid) {
       let paramas = {
         'customer_name':this.profileForm.value.firstName,
