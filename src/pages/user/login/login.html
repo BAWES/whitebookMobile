@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar class="top-nav">
-    <ion-title text-center>Login</ion-title>
+    <ion-title text-center>{{ "Login" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding >  
@@ -12,33 +12,35 @@
     </ion-item>
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
      <ion-item>
-        <ion-label floating>Email</ion-label>
+        <ion-label floating>{{ "Email" | translate }}</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.touched || submitAttempt) ">
-        <p *ngIf="loginForm.controls.email.errors.required">Please enter email address</p>
-        <p *ngIf="!loginForm.controls.email.errors.required && loginForm.controls.email.errors.invalidEmail">Please enter valid email address</p>
+        <p *ngIf="loginForm.controls.email.errors.required">{{ "Please enter email address" | translate }}</p>
+        <p *ngIf="!loginForm.controls.email.errors.required && loginForm.controls.email.errors.invalidEmail">
+          {{ "Please enter valid email address" | translate }}
+        </p>
       </div>
       <ion-item>
-        <ion-label floating>Password</ion-label>
+        <ion-label floating>{{ "Password" | translate }}</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.touched || submitAttempt) ">
-        <p>Please enter password</p>
+        <p>{{ "Please enter password" | translate }}</p>
       </div>
       <ion-item text-center no-border margin-top-25>
-        <button width-75 ion-button round color="dark" >Login</button>
+        <button width-75 ion-button round color="dark">{{ "Login" | translate }}</button>
       </ion-item>
     </form> 
       <ion-item text-center no-border>
-        <button no-background (click)='forgetPasswordPage()' font-size-16>Forget password?</button>
+        <button no-background (click)='forgetPasswordPage()' font-size-16>{{ "Forget password?" | translate }}</button>
       </ion-item>
       <ion-item text-center margin-top-25>
-          <div>OR</div>
+          <div>{{ "OR" | translate }}</div>
           <hr/>
       </ion-item>
   </ion-list>
   <ion-item text-center no-border>
-      Don't have an account?<button (click)="registerPage()" font-size-16 no-background>Sign Up</button>
+      {{ "Don't have an account?" | translate }}<button (click)="registerPage()" font-size-16 no-background>{{ "Sign Up" | translate }}</button>
   </ion-item>
 </ion-content>
