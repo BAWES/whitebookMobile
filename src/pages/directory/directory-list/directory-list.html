@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>Directory</ion-title>    
+    <ion-title text-center>{{ "Directory" | translate }}</ion-title>    
   </ion-navbar>
 </ion-header>
 
@@ -12,14 +12,14 @@
 
       <ion-item *ngFor="let vendor of item">
         <button ion-item (click)="rowSelected(vendor)">
-          {{ vendor.vendor_name }}
+          {{ _config.translate(vendor.vendor_name, vendor.vendor_name_ar) }}
         </button>
       </ion-item>
  
     </ion-item-group>
 
     <div *ngIf="directory !== undefined && !directory.length" class="no-results">
-      <p text-center>No Results</p>
+      <p text-center>{{ "No Results" | translate }}</p>
     </div>
 
 </ion-content>
