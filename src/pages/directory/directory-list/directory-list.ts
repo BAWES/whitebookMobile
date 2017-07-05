@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
 
 import { GlobalService } from '../../../providers/global.service';
-
+import { TranslateService } from '@ngx-translate/core';
 import { DirectoryViewPage } from '../directory-view/directory-view';
 
 @Component({
@@ -20,9 +20,10 @@ export class DirectoryListPage {
   constructor(
     public navCtrl: NavController,
     public httpService: Http,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ) {
-    this._urlDirectory = this._config.apiBaseUrl + '/directory';
+    this._urlDirectory = this._config.apiBaseUrl + '/directory?language=' + this.translateService.currentLang;
   }
 
   ionViewDidLoad() {

@@ -1,6 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>{{ vendor.vendor_name }}</ion-title>    
+    <ion-title text-center>
+    	{{ _config.translate(vendor.vendor_name, vendor.vendor_name_ar) }}
+    </ion-title>    
   </ion-navbar>
 </ion-header>
 
@@ -10,15 +12,15 @@
 		<img src="{{ _config.vendor_logo }}/{{ vendor.vendor_logo_path }}" />
 	</ion-thumbnail>
 
-	<h2>Description</h2>
+	<h2>{{ "Description" | translate }}</h2>
 
 	<div innerHTML="{{	vendor.short_description }}"></div>
 
-	<h2>Return policy</h2>
+	<h2>{{ "Return policy" | translate }}</h2>
 
 	<div innerHTML="{{ vendor.vendor_return_policy }}"></div>
 
-	<h2 *ngIf="products.length > 0">Products</h2>
+	<h2 *ngIf="products.length > 0">{{ "Products" | translate }}</h2>
 
 	<ion-grid class="category-product-listing {{productView}}">
 		<ion-list class="scroll-content" *ngFor="let product of products" class="product-items" (click)="productDetail(product.item_id)">
@@ -30,12 +32,12 @@
 	            </ion-thumbnail>
 	            <div *ngIf="product.notice != ''" class="callout-container">
 	                <span class="callout light">
-	                    Notice: {{product.notice}}
+	                    {{ "Notice" }}: {{product.notice}}
 	                </span>
 	            </div>
 	          </div>
 	          <div class="detail-section text-center">
-	            <h4 class="name"><strong>{{product.item_name}}</strong></h4>
+	            <h4 class="name"><strong>{{ _config.translate(product.item_name, product.item_name_ar) }}</strong></h4>
 	            
 	            <h6 class="price">
 	              <span *ngIf="product.item_base_price > 0">
@@ -45,11 +47,11 @@
 	                 KD {{ product.min_order_amount }}
 	              </span>
 	              <span *ngIf="!product.item_base_price && !product.min_order_amount">
-	                 Price based on selection 
+	                 {{ "Price based on selection" | translate }}
 	              </span>
 	            </h6>
 
-	            <h4 class="vendor"> {{product.vendor_name}}</h4>
+	            <h4 class="vendor"> {{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h4>
 	          </div>
 	        </button>
 	    </ion-list>
