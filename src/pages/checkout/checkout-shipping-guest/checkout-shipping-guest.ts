@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
-
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpService } from '../../../providers/http.service';
-
 import { AddressService } from '../../../providers/address.service';
+import { GlobalService } from '../../../providers/global.service';
 
 /*
   Generated class for the CheckoutShipping page.
@@ -39,6 +38,7 @@ export class CheckoutShippingGuestPage {
     public _alertCtrl : AlertController,
     public formBuilder: FormBuilder,
     public httpService: HttpService,
+    public _config: GlobalService
   ) {
       this.addressForm = this.formBuilder.group({
         addressName: ['', Validators.required],

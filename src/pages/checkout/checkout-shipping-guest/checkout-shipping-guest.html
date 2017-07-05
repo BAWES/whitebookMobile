@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Shipping</ion-title>
+    <ion-title>{{ "Shipping" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,38 +17,40 @@
     <ion-list>                
         <ion-item>
             <ion-title text-center>
-                Customer Information 
+                {{ "Customer Information" | translate }} 
             </ion-title>
         </ion-item>
         <ion-item>
-            <ion-label stacked>First Name*</ion-label>
+            <ion-label stacked>{{ "First Name" | translate }}*</ion-label>
             <ion-input [(ngModel)]="firstname" formControlName="firstname" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Last Name*</ion-label>
+            <ion-label stacked>{{ "Last Name" | translate }}*</ion-label>
             <ion-input [(ngModel)]="lastname" formControlName="lastname" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Email*</ion-label>
+            <ion-label stacked>{{ "Email" | translate }}*</ion-label>
             <ion-input [(ngModel)]="email" formControlName="email" type="email"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Mobile*</ion-label>
+            <ion-label stacked>{{ "Mobile" | translate }}*</ion-label>
             <ion-input [(ngModel)]="mobile" formControlName="mobile" type="text"></ion-input>
         </ion-item>
         <ion-item>
             <ion-title text-center>
-                Delivery Details
+                {{ "Delivery Details" | translate }}
             </ion-title>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Address Name*</ion-label>
+            <ion-label stacked>{{ "Address Name" | translate }}*</ion-label>
             <ion-input [(ngModel)]="addressName" formControlName="addressName" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Type*</ion-label>
+            <ion-label stacked>{{ "Type" | translate }}*</ion-label>
             <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
-            <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{type.type_name}}</ion-option>
+                <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">
+                    {{ _config.translate(type.type_name, type.type_name_ar) }}
+                </ion-option>
             </ion-select>
         </ion-item>
         <!--<div *ngIf="questionsAnswersResponse">
@@ -60,7 +62,7 @@
         <div *ngIf="locationQuestion">
         <ion-item *ngFor="let question of locationQuestion">
             <ion-label stacked>
-                {{question?.question}}
+                {{ _config.translate(question.question, question.question_ar) }}
                 <span *ngIf="question.required == 1">*</span>
             </ion-label>
             <ion-input [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
@@ -75,17 +77,21 @@
         </ion-item>
         -->
         <ion-item>
-        <ion-label stacked>Other direction or note*</ion-label>
+        <ion-label stacked>{{ "Other direction or note" | translate }}*</ion-label>
         <ion-input [(ngModel)]="addressData" type="text" formControlName="addressData"></ion-input>
         </ion-item>   
     </ion-list>     
   </form>
   
   <ion-item text-center no-border>
-      <button type="button" width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> Next</button>
+      <button type="button" width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> 
+          {{ "Next" | translate }}
+      </button>
   </ion-item>
         
   <ion-item text-center checkout-btn >
-    <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> Back To Cart</button>
+    <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> 
+        {{ "Back To Cart" | translate }}
+    </button>
   </ion-item>
 </ion-content>

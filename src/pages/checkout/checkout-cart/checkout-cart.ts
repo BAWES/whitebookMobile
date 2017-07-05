@@ -8,9 +8,8 @@ import { Authentication } from '../../../providers/auth.service';
 
 @Component({
   selector: 'page-checkout-cart',
-  templateUrl: 'checkout-cart.html'
+  templateUrl: 'checkout-cart.html',
 })
-
 export class CheckoutCartPage {
 
   //api request urls
@@ -48,7 +47,7 @@ export class CheckoutCartPage {
     public toastCtrl : ToastController,
     public cartService: CartService,
     public authService: Authentication,
-    public _config: GlobalService
+    public _config: GlobalService,
     ) {
       this.isUserLoggedIn = this.authService.getAccessToken();
 

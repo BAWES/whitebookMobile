@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController, AlertController, Platform } from 'ionic-angular';
 import { GlobalService } from '../../../providers/global.service';
 import { HttpService } from '../../../providers/http.service';
-
+import { TranslateService } from '@ngx-translate/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Declaring cordova so we can use it for the plugin
@@ -30,6 +30,7 @@ export class BookingDetailPage {
     public navCtrl: NavController,
     public httpRequest: HttpService,    
     public _config:GlobalService,
+    public translateService: TranslateService,
     public _alertCtrl : AlertController,
     private platform: Platform
   ) {
@@ -41,14 +42,15 @@ export class BookingDetailPage {
   }
 
   detail(booking_token) {
-      this.httpRequest.get(this._urlBookingEndpoint + '/' + booking_token).subscribe(data=>{
-         this.bookingDetail = data;
-      })
+    let url = this._urlBookingEndpoint + '/' + booking_token + '?language=' + this.translateService.currentLang;
+    this.httpRequest.get(url).subscribe(data=>{
+        this.bookingDetail = data;
+    });
   }
 
   payNow(bookingToken) {
     // Load in app browser to billing portal with Authkey
-    let billingUrl = this._config.apiBaseUrl + `/tap?booking_token=` + bookingToken;
+    let billingUrl = this._config.apiBaseUrl + `/tap?booking_token=` + bookingToken + '&language=' + this.translateService.currentLang;
     this.loadUrl(billingUrl);
   }
     
@@ -89,23 +91,45 @@ export class BookingDetailPage {
     
     if(url.indexOf("success") !== -1){
       this._browser.close();
+      
+      let subTitle, button;
+
+      this.translateService.get('We got your payment').subscribe(value => {
+        subTitle = value;
+      });
+      
+      this.translateService.get('Great!').subscribe(value => {
+        button = value;
+      });
+      
       // Show Alert with success message
       let alert = this._alertCtrl.create({
-        subTitle: 'We got your payment',
-        buttons: ['Great!']
+        subTitle: subTitle,
+        buttons: button
       });
       alert.present();
-
+      
       //refresh page 
       this.navCtrl.pop();
     }
 
     if(url.indexOf("error") !== -1){
       this._browser.close();
+      
+      let subTitle, button;
+
+      this.translateService.get('Payment not processed successfully').subscribe(value => {
+        subTitle = value;
+      });
+      
+      this.translateService.get('Okay!').subscribe(value => {
+        button = value;
+      });
+      
       // Show Alert with success message
       let alert = this._alertCtrl.create({
-        subTitle: 'Payment not processed successfully',
-        buttons: ['Okay!']
+        subTitle: subTitle,
+        buttons: button
       });
       alert.present();
     }

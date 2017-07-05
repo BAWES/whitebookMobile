@@ -1,6 +1,6 @@
 <ion-header *ngIf= "bookingDetail">
   <ion-navbar>
-    <ion-title>Booking Detail : #{{bookingDetail.booking_id}}</ion-title>
+    <ion-title>{{ "Booking Detail" | translate }} : #{{bookingDetail.booking_id}}</ion-title>
   <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close" ></ion-icon>
@@ -11,38 +11,38 @@
 <ion-content padding style="margin-top:40px;margin-bottom:80px;">
   <div *ngIf="bookingDetail">
   <ion-row>
-    <ion-label>Booking Details</ion-label>
+    <ion-label>{{ "Booking Details" | translate }}</ion-label>
   </ion-row>
     <ion-list>
-        <ion-item><strong>Booking ID:</strong> #{{bookingDetail?.booking_id}}</ion-item>
-        <ion-item><strong>Date Added:</strong> {{bookingDetail?.created_datetime}}</ion-item>
-        <ion-item><strong>Vendor:</strong> {{bookingDetail?.vendor}}</ion-item>
-        <ion-item><strong>Payment Method:</strong> {{bookingDetail?.payment_method}}</ion-item>
-        <ion-item><strong>Order Status:</strong> {{bookingDetail?.booking_status}}</ion-item>
+        <ion-item><strong>{{ "Booking ID" | translate }}:</strong> #{{bookingDetail?.booking_id}}</ion-item>
+        <ion-item><strong>{{ "Date Added" | translate }}:</strong> {{bookingDetail?.created_datetime}}</ion-item>
+        <ion-item><strong>{{ "Vendor" | translate }}:</strong> {{ _config.translate(bookingDetail?.vendor, bookingDetail?.vendor_ar) }}</ion-item>
+        <ion-item><strong>{{ "Payment Method" | translate }}:</strong> {{ bookingDetail?.payment_method }}</ion-item>
+        <ion-item><strong>{{ "Order Status" | translate }}:</strong> {{ bookingDetail?.booking_status }}</ion-item>
     </ion-list>
-    <ion-row><ion-label>Item Details</ion-label></ion-row>
+    <ion-row><ion-label>{{ "Item Details" | translate }}</ion-label></ion-row>
     <ion-list *ngFor = "let item of bookingDetail?.items ">
-        <ion-item><strong>Item Name:</strong> {{item?.item_name}}</ion-item>
-        <ion-item><strong>QTY:</strong> {{item?.quantity }}</ion-item>
-        <ion-item><strong>Delivery Datetime	:</strong> <br/>{{item?.delivery_date}}<br/>{{item?.timeslot}}</ion-item>
-        <ion-item><strong>Price: KD</strong> {{ item?.total }}</ion-item>
-        <ion-item><strong>Delivery Address</strong><br/><ion-col><p innerHTML = "{{ item?.delivery_address }}"></p></ion-col></ion-item>
+        <ion-item><strong>{{ "Item Name" | translate }}:</strong> {{ _config.translate(item?.item_name, item?.item_name_ar) }}</ion-item>
+        <ion-item><strong>{{ "QTY" | translate }}:</strong> {{item?.quantity }}</ion-item>
+        <ion-item><strong>{{ "Delivery Datetime" | translate }}	:</strong> <br/>{{item?.delivery_date}}<br/>{{item?.timeslot}}</ion-item>
+        <ion-item><strong>{{ "Price" | translate }}: KD</strong> {{ item?.total }}</ion-item>
+        <ion-item><strong>{{ "Delivery Address" | translate }}</strong><br/><ion-col><p innerHTML = "{{ item?.delivery_address }}"></p></ion-col></ion-item>
     </ion-list>
     <ion-list>
-      <ion-col>Subtotal:</ion-col>
+      <ion-col>{{ "Sub Total" | translate }}:</ion-col>
       <ion-col text-right><strong>KD {{bookingDetail?.total_without_delivery}}</strong></ion-col>
     </ion-list>
     <ion-list>
-      <ion-col>Delivery Charge:</ion-col>
+      <ion-col>{{ "Delivery Charge" | translate }}:</ion-col>
       <ion-col text-right><strong>KD {{bookingDetail?.total_delivery_charge}}</strong></ion-col>
     </ion-list>
     <ion-list>
-      <ion-col><strong>Total:</strong></ion-col>
+      <ion-col><strong>{{ "Total" | translate }}:</strong></ion-col>
       <ion-col text-right><strong>KD {{bookingDetail?.total_with_delivery}}</strong></ion-col>
     </ion-list>
     </div>
     <div *ngIf="!bookingDetail">
-      Booking detail not found.
+      {{ "Booking detail not found." | translate }}
     </div>
 
     <br />
@@ -50,5 +50,5 @@
 
 </ion-content>
 <ion-footer *ngIf="bookingDetail?.booking_status == 'Accepted' && !bookingDetail?.transaction_id">
-  <button ion-button full (click)="payNow(bookingDetail?.booking_token)">Pay Now</button>
+  <button ion-button full (click)="payNow(bookingDetail?.booking_token)">{{ "Pay Now" | translate }}</button>
 </ion-footer>

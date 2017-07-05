@@ -49,6 +49,8 @@ export class MyApp {
   public personal: Array<{title: string, component: any, icon: any, slug: string}>;
   public events: any;
 
+  public menuSide: string = 'left';
+
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
@@ -82,10 +84,11 @@ export class MyApp {
    })
   }
 
-  initializeApp() {
-    this.translateService.setDefaultLang('en');
-
+  initializeApp() {    
     this.platform.ready().then(() => {
+
+      this.translateService.setDefaultLang('en');
+      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault(); // Note ionic2 used StatusBar ionic 3 --> statusBar
@@ -108,12 +111,16 @@ export class MyApp {
     });
   }
 
-  translateToEnglish(){
+  translateToEnglish() {
     this.translateService.use('en');
+    this.platform.setDir('ltr', true);
+    //this.menuSide = 'left';
   }
 
   translateToArabic(){
     this.translateService.use('ar');
+    this.platform.setDir('rtl', true);
+    //this.menuSide = 'right';
   }
   
   /*
@@ -121,7 +128,7 @@ export class MyApp {
   */
   openPage(page) {
     this.menu.close();
-    this.nav.push(ListingPage,{title:page.category_name, id:page.category_id});
+    this.nav.push(ListingPage, { title: page.category_name, title_ar: page.category_name_ar, id: page.category_id });
   }
   
   /*

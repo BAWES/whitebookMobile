@@ -7,14 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Select Shipping Address </ion-title>
+    <ion-title>{{ "Select Shipping Address" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list radio-group [(ngModel)]="address_id">
     <ion-list-header>
-      List Of shipping Address for "{{ deliveryLocation }}" 
+      {{ "List Of shipping Address for" | translate }} : {{ deliveryLocation }} 
     </ion-list-header>
 
     <ion-item *ngFor="let address of addresses">
@@ -24,8 +24,8 @@
           {{ q.response_text }} 
         </p>   
         <p>{{ address.address_data }}</p>
-        <p>{{ address.city_name }}</p>
-        <p>{{ address.location }}</p>
+        <p>{{ _config.translate(address.city_name, address.city_name_ar) }}</p>
+        <p>{{ _config.translate(address.location, address.location_ar) }}</p>
       </ion-label>
       <ion-radio value="{{ address.address_id }}"></ion-radio>
     </ion-item>
@@ -33,14 +33,20 @@
   </ion-list>
 
   <ion-item text-center no-border>
-    <button width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> Next</button>
+    <button width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> 
+      {{ "Next" | translate}}
+    </button>
   </ion-item>
   
   <ion-item text-center no-border>
-    <button width-99 round ion-button color="dark" padding-17 (click)="newAddressModal()"> Add New Address</button>
+    <button width-99 round ion-button color="dark" padding-17 (click)="newAddressModal()"> 
+      {{ "Add New Address" | translate }}
+    </button>
   </ion-item>
   
   <ion-item text-center checkout-btn >
-    <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> Back To Cart</button>
+    <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> 
+      {{ "Back To Cart" | translate }}
+    </button>
   </ion-item>
 </ion-content>

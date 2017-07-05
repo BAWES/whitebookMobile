@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Success</ion-title>
+    <ion-title>{{ "Success" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,9 +16,9 @@
       <ion-icon name="checkmark-circle"></ion-icon>
     </ion-item>
     <ion-item text-center>
-      <h1>Congratulation!</h1>
-      <h4>You Booking Has Been Accpeted</h4>
-      <button round color="dark" (click)="dismiss()" ion-button>Got it</button>
+      <h1>{{ "Congratulation!" | translate }}</h1>
+      <h4>{{ "Your Booking Has Been Accpeted" | translate }}</h4>
+      <button round color="dark" (click)="dismiss()" ion-button>{{ "Got it" | translate }}</button>
     </ion-item>
 
   </ion-list>

@@ -41,10 +41,10 @@ export class GlobalService {
   }
 
   translate(en, ar) {
-    if(this.translateService.currentLang != 'ar') {
-      return en;
-    }else{
+    if(this.translateService.currentLang == 'ar' && ar) {
       return ar;
+    }else{
+      return en;
     }
   } 
 

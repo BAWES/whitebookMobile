@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpService } from '../../../providers/http.service';
+import { GlobalService } from '../../../providers/global.service';
+import { TranslateService } from '@ngx-translate/core';
 import { Base } from '../../../providers/base';
 
 @Component({
@@ -11,11 +13,11 @@ import { Base } from '../../../providers/base';
 export class CreateAddressPage {
 
   // api urls
-  public _urlAddressType = '/address/type';
-  public _urlAddress = '/address';
-  public _urlLocation = '/address/location';
-  public _urlAddressQuestion = '/address/questions?address_type_id=';
-  public _urlSingleAddress = '/address/view?address_id=';
+  public _urlAddressType = '/address/type?language=' + this.translateService.currentLang;
+  public _urlAddress = '/address?language=' + this.translateService.currentLang;
+  public _urlLocation = '/address/location?language=' + this.translateService.currentLang;
+  public _urlAddressQuestion = '/address/questions?language=' + this.translateService.currentLang + '&address_type_id=';
+  public _urlSingleAddress = '/address/view?language=' + this.translateService.currentLang + '&address_id=';
   
   // local variables
   public title: string = 'Create New Address'; 
@@ -39,6 +41,8 @@ export class CreateAddressPage {
     public _viewCtrl : ViewController,
     public _toastCtrl:ToastController,
     public httpService: HttpService,
+    public _config: GlobalService,
+    public translateService: TranslateService,
     public _base:Base,
     public formBuilder: FormBuilder,
     public _navParams: NavParams,
@@ -58,8 +62,7 @@ export class CreateAddressPage {
     {
       this.addressForm.controls['areaName'].setValue(this._navParams.get('area_id'));
       this.areaName = this._navParams.get('area_id');
-    }
-      
+    }      
   }
 
   ionViewDidLoad() { 
@@ -73,6 +76,10 @@ export class CreateAddressPage {
         this.loadAddressDetail(this.address_id);
     }
     // this._base.endLoading();
+     
+    this.translateService.get(this.title).subscribe(value => {
+      this.title = value;
+    }); 
   }
 
   /**
@@ -116,13 +123,13 @@ export class CreateAddressPage {
       }
     } else {
 
-      console.log(this.addressForm);
-
-      let toast = this._toastCtrl.create({
-        message : 'Please check form carefully',
-        duration : 4000
-      });
-      toast.present();
+      this.translateService.get('Please check form carefully').subscribe(value => {
+        let toast = this._toastCtrl.create({
+          message : value,
+          duration : 4000
+        });
+        toast.present();
+      });      
     }
   }
 

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>My Wishlist</ion-title>
+    <ion-title>{{ "My Wishlist" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,10 +9,12 @@
     <ion-col text-left>
       <ion-list>
       <ion-item>
-        <ion-label>Filter By</ion-label>
+        <ion-label>{{ "Filter By" | translate }}</ion-label>
         <ion-select text-left [(ngModel)]="category" (ionChange)="filterProduct()">
-          <ion-option value="0">All</ion-option>
-          <ion-option *ngFor="let category of categoryList" value="{{category.category_id}}">{{category.category_name}}</ion-option>
+          <ion-option value="0">{{ "All" | translate }}</ion-option>
+          <ion-option *ngFor="let category of categoryList" value="{{category.category_id}}">
+            {{ _config.translate(category.category_name, category.category_name_ar) }}
+          </ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
@@ -25,12 +27,12 @@
     <ion-card style="margin-bottom: 12px;">
     <div (click)="productDetail(product.item_id)">
       <ion-item>
-        <h2>{{product.vendor_name}}</h2>
+        <h2>{{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h2>
       </ion-item>
       <ion-img src="{{_config.images_1000}}/{{product.image_path}}"></ion-img>
     </div>
     <ion-card-content>
-      <p>{{product.item_name}}</p>
+      <p>{{ _config.translate(product.item_name, product.item_name_ar) }}</p>
       <p>
         <span *ngIf="product.item_base_price > 0">
             KD {{ product.item_base_price }}
@@ -39,11 +41,11 @@
             KD {{ product.min_order_amount }}
         </span>
         <span *ngIf="!product.item_base_price && !product.min_order_amount">
-            Price based on selection 
+            {{ "Price based on selection" | translate }}
         </span>
       </p>
       <button (click)="removeProduct(product.wishlist_id)">
-        Remove From wishlist
+        {{ "Remove From Wishlist" | translate }}
       </button>
     </ion-card-content>
   </ion-card>
@@ -52,6 +54,6 @@
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 <div *ngIf="whishlist !== undefined && !whishlist.length" class="no-results">
-    <p text-center>No Results</p>
+    <p text-center>{{ "No Results" | translate }}</p>
 </div>
 </ion-content>

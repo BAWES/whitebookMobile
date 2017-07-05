@@ -18,6 +18,7 @@ export class ListingPage {
   public _urlProductListing = '';
   public _urlParamas:string = '';
   public title : string;
+  public title_ar : string;
   public id : any;
   public productView :string;
   public category:any;
@@ -41,6 +42,7 @@ export class ListingPage {
     this.productView = 'grid-view';
     this.id = this._params.get('id');
     this.title = this._params.get('title');
+    this.title_ar = this._params.get('title_ar');
     this._urlParamas = '&category_id='+this.id;
     
     if(this._params.get('themeID') != undefined)

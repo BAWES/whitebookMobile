@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule, Http } from '@angular/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Ionic Native
@@ -102,6 +102,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CreateEventPage,
     SearchFilterPage,
     StringFilterPipe,
+    //TranslatePipe,
     PackageListPage,
     PackageDetailPage,
     BecomeVendorPage,
@@ -114,7 +115,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp),    
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -122,7 +123,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         useFactory: (createTranslateLoader),
         deps: [Http]
       }
-    }),
+    }), 
     // Custom Modules
     EnvironmentsModule
   ],
@@ -163,6 +164,13 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {
+        provide: TranslateLoader, 
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+    },
+    TranslateService,
+    
     GlobalService,
     Authentication,
     IonicStorageModule,

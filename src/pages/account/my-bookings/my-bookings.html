@@ -1,15 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>My Bookings</ion-title>
+    <ion-title>{{ "My Bookings" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <ion-list>
     <ion-item>
       <ion-row>
-        <ion-col text-center><strong>Booking ID</strong></ion-col>
-        <ion-col text-center><strong>Amount</strong></ion-col>
-        <ion-col text-center><strong>Payment</strong></ion-col>        
+        <ion-col text-center><strong>{{ "Booking ID" | translate }}</strong></ion-col>
+        <ion-col text-center><strong>{{ "Amount" | translate }}</strong></ion-col>
+        <ion-col text-center><strong>{{ "Payment" | translate }}</strong></ion-col>        
       </ion-row>
     </ion-item>
     </ion-list>
@@ -19,10 +19,10 @@
         <ion-col text-center>{{ booking.booking_id }}</ion-col>
         <ion-col text-center>KD {{ booking.total_with_delivery }}</ion-col>
         <ion-col text-center *ngIf="booking.booking_status == 'Accepted' && !booking.transaction_id">
-          Unpaid
+          {{ "Unpaid" | translate }}
         </ion-col>
         <ion-col text-center *ngIf="booking.booking_status == 'Accepted' && booking.transaction_id">
-          Paid
+          {{ "Paid" | translate }}
         </ion-col>
         <ion-col text-center *ngIf="booking.booking_status != 'Accepted'">
           -
@@ -33,7 +33,7 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
-      loadingText="Loading more data...">
+      loadingText='{{ "Loading more data..." | translate }}'>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

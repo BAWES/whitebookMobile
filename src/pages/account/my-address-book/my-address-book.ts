@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController, AlertController,ToastController } from 'ionic-angular';
 import { CreateAddressPage } from '../create-address/create-address';
-
+import { GlobalService } from '../../../providers/global.service';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 
 @Component({
@@ -9,17 +10,30 @@ import { HttpService } from '../../../providers/http.service';
   templateUrl: 'my-address-book.html'
 })
 export class MyAddressBookPage {
-    
-    public _urlAddressUrl: string = "/address";
-    public addresses:any;
-    public start:number = 0;
   
+  public _urlAddressUrl: string = "/address";
+  public addresses:any;
+  public start:number = 0;
+
+  private txtDeleteTitle; 
+  private txtDeleteMessage;
+
   constructor(
     public modalCtrl : ModalController,
     public alertCtrl: AlertController,
     public toastCtrl :ToastController,
-    public httpService: HttpService
-  ) {}
+    public httpService: HttpService,
+    public translateService: TranslateService,
+    public _config: GlobalService
+  ) {
+    this.translateService.get('Address Delete?').subscribe(value => {
+      this.txtDeleteTitle = value;
+    });
+    
+    this.translateService.get('Are you sure you want to delete this Address permanently from our system?').subscribe(value => {
+      this.txtDeleteMessage = value;
+    });
+  }
   
   ionViewDidLoad() {
     this.list();
@@ -42,16 +56,17 @@ export class MyAddressBookPage {
        this.list(); // load list again
     });
   }
-  delete(id){
+  delete(id) {
+    let url = this._urlAddressUrl+'?address_id='+ id + '&language=' + this.translateService.currentLang;
     let confirm = this.alertCtrl.create({
-      title: 'Address Delete?',
-      message: 'Are you sure you want to delete this Address permanently from our system?',
+      title: this.txtDeleteTitle,
+      message: this.txtDeleteMessage,
       buttons : [
         {
           text:'Yes',
           handler:() => {
             let result:any;
-            this.httpService.delete(this._urlAddressUrl+'?address_id='+id).subscribe(data=>{
+            this.httpService.delete(url).subscribe(data=>{
               result = data;
               this.list();
               let toast = this.toastCtrl.create({
@@ -78,7 +93,8 @@ export class MyAddressBookPage {
   * at view load
   */
   list(start: number = 0) {
-      this.httpService.get(this._urlAddressUrl +'?offset='+start).subscribe(data=>{
+      let url = this._urlAddressUrl + '?offset=' + start + '&language=' + this.translateService.currentLang;
+      this.httpService.get(url).subscribe(data=>{
          this.addresses = data;
       })
   }
@@ -88,9 +104,10 @@ export class MyAddressBookPage {
   * will load more data just like pagination
   */
   doInfinite(infiniteScroll) {
+      let url = this._urlAddressUrl +'?offset='+this.start + '&language=' + this.translateService.currentLang;
       let addressList;
       this.start += 10;
-      this.httpService.get(this._urlAddressUrl +'?offset='+this.start).subscribe(data=>{
+      this.httpService.get(url).subscribe(data=>{
          addressList = data;
          for(let address of addressList) {
           this.addresses.push(address);

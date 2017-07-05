@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar primary>
     <ion-title>{{ "Product Detail" | translate }}</ion-title>
+    <!--<ion-buttons end>
+      <button ion-button menuToggle="right" >
+          <ion-icon name="calendar"></ion-icon>
+      </button>
+    </ion-buttons>-->
     <ion-buttons end>
       <ion-badge *ngIf="cartCount > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
       <button ion-button (click)="openModel()" >
@@ -32,10 +37,10 @@
 
       <ion-segment [(ngModel)]="productSection">
         <ion-segment-button round value="pdescription">
-          {{ Description | translate }}
+          {{ "Description" | translate }}
         </ion-segment-button>
         <ion-segment-button round value="adescription">
-          {{ Addition | translate }}
+          {{ "Addition" | translate }}
         </ion-segment-button>
       </ion-segment>
   </ion-item>

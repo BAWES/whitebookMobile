@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { GlobalService } from '../providers/global.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class VendorService {
 
   constructor(
     private httpService : Http,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ){
      
   } 
@@ -21,7 +23,7 @@ export class VendorService {
     description: string
     ){
     
-    const url = this._config.apiBaseUrl + '/account/vendor-request';
+    const url = this._config.apiBaseUrl + '/account/vendor-request?language=' + this.translateService.currentLang;
 
     return this.httpService.post(url, {
           'business': business,
