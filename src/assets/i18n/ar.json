@@ -55,5 +55,13 @@
   "Addons": "إضافات",
   "Special Request": "طلب خاص",
   "Add To Cart" : "أضف إلى السلة",
-  "Options": "خيارات"  
+  "Options": "خيارات",
+  "Filters": "مرشحات",
+  "Delivery Date": "تاريخ التسليم او الوصول",
+  "Select Delivary Time Slot": "حدد ديليفاري تايم سلوت",
+  "Delivery Area": "منطقة التسليم",
+  "Price Range": "نطاق السعر",
+  "Select Themes": "حدد المظاهر",
+  "Select Vendors": "حدد الموردين",
+  "Filter": "منقي"
 }
