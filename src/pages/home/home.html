@@ -1,11 +1,14 @@
 <ion-header>
   <ion-navbar class="top-nav">
     <ion-buttons start>
-      <button ion-button menuToggle="left" >
+      <button ion-button menuToggle="menu1" *ngIf="translateService.currentLang!='ar'">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <button ion-button menuToggle="menu2" *ngIf="translateService.currentLang=='ar'">
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-left>{{ "White Book" | translate }}</ion-title>
+    <ion-title>{{ "White Book" | translate }}</ion-title>
     <!--<ion-buttons end>
       <button ion-button menuToggle="right">
           <ion-icon name="calendar"></ion-icon>
