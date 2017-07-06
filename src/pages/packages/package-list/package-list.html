@@ -12,10 +12,10 @@
       <ion-card-title>
         {{ _config.translate(pack.package_name, pack.package_name_ar) }}
       </ion-card-title>
-      <p *ngIf="_config.currentLang == 'en'">
+      <p *ngIf="translateService.currentLang == 'en'">
         {{ pack.package_description | slice:0:200 }}...
       </p>
-      <p *ngIf="_config.currentLang == 'ar'">
+      <p *ngIf="translateService.currentLang == 'ar'">
         {{ pack.package_description_ar | slice:0:200 }}...
       </p>
     </ion-card-content>

@@ -1,23 +1,23 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Contact</ion-title>
+    <ion-title>{{ "Contact" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <form [formGroup]="contactForm" (ngSubmit)="sendMail()">
     <ion-item>
-      <ion-label>Name*</ion-label>
+      <ion-label>{{ "Name" | translate }}*</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email*</ion-label>
+      <ion-label>{{ "Email" | translate }}*</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Description*</ion-label>
+      <ion-label>{{ "Description" | translate }}*</ion-label>
       <ion-textarea formControlName="description"></ion-textarea>
     </ion-item>
-    <button ion-button type="submit" [disabled]="!contactForm.valid">Send</button>
+    <button ion-button type="submit" [disabled]="!contactForm.valid">{{ "Send" | translate }}</button>
   </form>
 </ion-content>

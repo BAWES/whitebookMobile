@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Base } from '../../providers/base';
 import { Http } from '@angular/http';
 import { GlobalService } from '../../providers/global.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-contact',
@@ -22,10 +23,11 @@ export class Contact {
     private httpService: Http,
     public viewCtrl : ViewController,
     public _base : Base,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ) {
 
-    this._urlContactUrl = this._config.apiBaseUrl + "/account/contact";
+    this._urlContactUrl = this._config.apiBaseUrl + "/account/contact?language=" + this.translateService.currentLang;
 
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -53,14 +55,20 @@ export class Contact {
         this.httpService.post(this._urlContactUrl,paramas).subscribe(data=>{
           result = data.json();
           if (result.operation == 'success' ) {
-            let toast = this.toastCtrl.create({
-              message: 'Mail Sent Successfully',
-              duration: 3000
+            
+            this.translateService.get('Mail Sent Successfully').subscribe(value => {
+              let toast = this.toastCtrl.create({
+                message: value,
+                duration: 3000
+              });
+              toast.present();
             });
-            toast.present();
+                        
             this._base.endLoading()
             this.viewCtrl.dismiss();
-          } else {
+          } 
+          else 
+          {
             let toast = this.toastCtrl.create({
               message: result.message,
               duration: 3000
