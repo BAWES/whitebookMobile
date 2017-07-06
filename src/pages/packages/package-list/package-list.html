@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Package Listing</ion-title>
+    <ion-title>{{ "Package Listing" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -10,10 +10,13 @@
   <img src="{{_config.s3}}/{{pack.package_background_image}}" >
     <ion-card-content>
       <ion-card-title>
-        {{pack.package_name}}
+        {{ _config.translate(pack.package_name, pack.package_name_ar) }}
       </ion-card-title>
-      <p>
-        {{pack.package_description | slice:0:200}}...
+      <p *ngIf="_config.currentLang == 'en'">
+        {{ pack.package_description | slice:0:200 }}...
+      </p>
+      <p *ngIf="_config.currentLang == 'ar'">
+        {{ pack.package_description_ar | slice:0:200 }}...
       </p>
     </ion-card-content>
 
@@ -42,6 +45,6 @@
 </div>
 
 <div *ngIf="package !== undefined && !package.length" class="no-results">
-    <h3 text-center>No Package Found</h3>
+    <h3 text-center>{{ "No Package Found" | translate }}</h3>
   </div>
 </ion-content>

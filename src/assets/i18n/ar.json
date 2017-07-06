@@ -172,7 +172,13 @@
   "Don't have an account?" : "ليس لديك حساب؟",
   "Receive Password" : "تلقي كلمة المرور",
   "Cancel" : "إلغاء",
-  "Directory" : "دليل",
   "Return policy" : "سياسة العائدات",
-  "Products" : "منتجات"
+  "Products" : "منتجات",
+  "Package Listing": "حزمة قائمة",
+  "No Package Found": "لم يتم العثور على حزمة",
+  "Package Detail": "حزمة التفاصيل",
+  "Average price": "متوسط ​​السعر",
+  "No of guests": "لا للضيوف",
+  "Items": "العناصر",
+  "Package Items": "حزمة البنود"
 }
