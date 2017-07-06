@@ -114,13 +114,13 @@ export class MyApp {
   translateToEnglish() {
     this.translateService.use('en');
     this.platform.setDir('ltr', true);
-    //this.menuSide = 'left';
+    this.menuSide = 'left';
   }
 
   translateToArabic(){
     this.translateService.use('ar');
     this.platform.setDir('rtl', true);
-    //this.menuSide = 'right';
+    this.menuSide = 'right';
   }
   
   /*
