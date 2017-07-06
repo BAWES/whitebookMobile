@@ -21,12 +21,13 @@ export class GlobalService {
   public vendor_logo = this.s3 + '/vendor_logo';
   public menu_item = this.s3 + "/vendor_menu_item";
   public menu_item_thumbnail = this.s3 + "/vendor_menu_item/thumbnail";
+  public currentLang = 'en';
 
   // InAppBrowser Settings
   public browserTarget: string;
   public browserOptions: string;
   public browserOptionsWithCache: string;
-
+  
   constructor(
     public platform: Platform, 
     @Inject(EnvConfig) public envConfig,
@@ -38,6 +39,8 @@ export class GlobalService {
       this.apiBaseUrl = this.envConfig.apiEndpoint;
 
       this.setupDeviceSpecificConfigs();
+
+      this.currentLang = this.translateService.currentLang;
   }
 
   translate(en, ar) {

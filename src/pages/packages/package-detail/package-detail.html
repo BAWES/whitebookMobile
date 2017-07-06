@@ -1,35 +1,42 @@
 <ion-header>
   <ion-navbar primary>
-    <ion-title>Package Detail</ion-title>
+    <ion-title>{{ "Package Detail" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="package-detail" >
   <div class="scroll-content" *ngIf="detail" >
     <ion-item text-wrap no-border>
-      <h1 text-center>{{detail.package_name}}</h1>
-        <img src="{{_config.s3}}/{{detail.package_background_image}}" >
-        <h3 text-center>Average price: {{detail.package_avg_price}}</h3>
-        <h3 text-center>No of guests: {{detail.package_number_of_guests}}</h3>
+      <h1 text-center *ngIf="_config.currentLang == 'en'">{{ detail.package_name }}</h1>
+      <h1 text-center *ngIf="_config.currentLang == 'ar'">{{ detail.package_name_ar }}</h1>    
+      <img src="{{_config.s3}}/{{detail.package_background_image}}" >
+      <h3 text-center>{{ "Average price" | translate }} : {{detail.package_avg_price}}</h3>
+      <h3 text-center>{{ "No of guests" | translate }}: {{detail.package_number_of_guests}}</h3>
     </ion-item>
-    <div padding text-justify>
-      {{detail.package_description}}
+    <div padding text-justify *ngIf="_config.currentLang == 'en'">
+      {{ detail.package_description }}
+    </div>
+    <div padding text-justify *ngIf="_config.currentLang == 'ar'">
+      {{ detail.package_description_ar }}
     </div>
   </div>
 
 <div class="" *ngIf="detail" >
     <ion-item text-wrap no-border>
-      <h1 text-center>Items</h1>
+      <h1 text-center>{{ "Items" | translate }}</h1>
         <img src="{{_config.s3}}/{{detail.package_background_image}}" >
-        <h3 text-center>Average price: {{detail.package_avg_price}}</h3>
-        <h3 text-center>No of guests: {{detail.package_number_of_guests}}</h3>
+        <h3 text-center>{{ "Average price" | translate }} : {{detail.package_avg_price}}</h3>
+        <h3 text-center>{{ "No of guests" | translate }}: {{detail.package_number_of_guests}}</h3>
     </ion-item>
-    <div padding text-justify>
-      {{detail.package_description}}
+    <div padding text-justify *ngIf="_config.currentLang == 'en'">
+      {{ detail.package_description }}
+    </div>
+    <div padding text-justify *ngIf="_config.currentLang == 'ar'">
+      {{ detail.package_description_ar }}
     </div>
 
     <hr/>
-    <h1 text-center>Package Items</h1>
+    <h1 text-center>{{ "Package Items" | translate }}</h1>
     <hr/>
     <div class="content" *ngIf="items" >
       <ion-card *ngFor="let item of items" (click)="detailItem(item.item_id)">
@@ -37,17 +44,23 @@
           <img src="{{_config.images_530}}/{{item.image}}" >
           <div *ngIf="item.notice != ''" class="callout-container">
                 <span class="callout light">
-                    Notice: {{item.notice}}
+                    {{ "Notice" | translate }}: {{item.notice}}
                 </span>
             </div>
         </div>
         <ion-card-content>
-          <ion-card-title>
+          <ion-card-title *ngIf="_config.currentLang == 'en'">
             {{ item.item_name }}
           </ion-card-title>
+          <ion-card-title *ngIf="_config.currentLang == 'ar'">
+            {{ item.item_name_ar }}
+          </ion-card-title>
           <ion-row class="row" no-padding="">
-            <ion-col class="col">
+            <ion-col class="col" *ngIf="_config.currentLang == 'en'">
               {{ item.vendor_name }}
+            </ion-col>
+            <ion-col class="col" *ngIf="_config.currentLang == 'ar'">
+              {{ item.vendor_name_ar }}
             </ion-col>
             <ion-col class="col">
               <span *ngIf="item.item_base_price > 0">
@@ -57,7 +70,7 @@
                  KD {{ item.min_order_amount }}
               </span>
               <span *ngIf="!item.item_base_price && !item.min_order_amount">
-                 Price based on selection 
+                 {{ "Price based on selection" | translate }}
               </span>
             </ion-col>
           </ion-row>
@@ -65,6 +78,5 @@
       </ion-card>
     </div>
   </div>
-
-  
+ 
 </ion-content>
