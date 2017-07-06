@@ -117,26 +117,26 @@ export class ListingPage {
     modal.present();
     modal.onDidDismiss(data => {
       this._urlParamas = '&category_id='+this.id;
-
-      if(data.filterDeliveryArea)
+  
+      if(data && data.filterDeliveryArea)
         this._urlParamas += '&requestedLocation=' + data.filterDeliveryArea;
 
-      if(data.filterDeliveryDate)
+      if(data && data.filterDeliveryDate)
         this._urlParamas += '&requestedDeliverDate='+data.filterDeliveryDate;
       
-      if(data.filterDeliveryTime)
+      if(data && data.filterDeliveryTime)
         this._urlParamas += '&requestedDeliverTime='+data.filterDeliveryTime;
 
-      if(data.filterMinPrice)
+      if(data && data.filterMinPrice)
         this._urlParamas += '&requestedMinPrice='+data.filterMinPrice;
 
-      if(data.filterMaxPrice)
+      if(data && data.filterMaxPrice)
         this._urlParamas += '&requestedMaxPrice='+data.filterMaxPrice;
       
-      if(data.filterVendors)
+      if(data && data.filterVendors)
         this._urlParamas += '&requestedVendor='+data.filterVendors;
 
-      if(data.filterTheme)
+      if(data && data.filterTheme)
         this._urlParamas += '&requestedTheme='+data.filterTheme;
 
       this.loadProducts();
