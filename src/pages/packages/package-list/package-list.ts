@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
-
+import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
 
 import { PackageDetailPage } from '../../../pages/packages/package-detail/package-detail';
@@ -19,7 +19,8 @@ export class PackageListPage {
   constructor(
     public navCtrl: NavController,
     public httpService: Http,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ) {
     this._urlPackage = this._config.apiBaseUrl + '/package';
   }

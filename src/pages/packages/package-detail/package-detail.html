@@ -7,16 +7,16 @@
 <ion-content class="package-detail" >
   <div class="scroll-content" *ngIf="detail" >
     <ion-item text-wrap no-border>
-      <h1 text-center *ngIf="_config.currentLang == 'en'">{{ detail.package_name }}</h1>
-      <h1 text-center *ngIf="_config.currentLang == 'ar'">{{ detail.package_name_ar }}</h1>    
+      <h1 text-center *ngIf="translateService.currentLang == 'en'">{{ detail.package_name }}</h1>
+      <h1 text-center *ngIf="translateService.currentLang == 'ar'">{{ detail.package_name_ar }}</h1>    
       <img src="{{_config.s3}}/{{detail.package_background_image}}" >
       <h3 text-center>{{ "Average price" | translate }} : {{detail.package_avg_price}}</h3>
       <h3 text-center>{{ "No of guests" | translate }}: {{detail.package_number_of_guests}}</h3>
     </ion-item>
-    <div padding text-justify *ngIf="_config.currentLang == 'en'">
+    <div padding text-justify *ngIf="translateService.currentLang == 'en'">
       {{ detail.package_description }}
     </div>
-    <div padding text-justify *ngIf="_config.currentLang == 'ar'">
+    <div padding text-justify *ngIf="translateService.currentLang == 'ar'">
       {{ detail.package_description_ar }}
     </div>
   </div>
@@ -28,10 +28,10 @@
         <h3 text-center>{{ "Average price" | translate }} : {{detail.package_avg_price}}</h3>
         <h3 text-center>{{ "No of guests" | translate }}: {{detail.package_number_of_guests}}</h3>
     </ion-item>
-    <div padding text-justify *ngIf="_config.currentLang == 'en'">
+    <div padding text-justify *ngIf="translateService.currentLang == 'en'">
       {{ detail.package_description }}
     </div>
-    <div padding text-justify *ngIf="_config.currentLang == 'ar'">
+    <div padding text-justify *ngIf="translateService.currentLang == 'ar'">
       {{ detail.package_description_ar }}
     </div>
 
@@ -49,17 +49,17 @@
             </div>
         </div>
         <ion-card-content>
-          <ion-card-title *ngIf="_config.currentLang == 'en'">
+          <ion-card-title *ngIf="translateService.currentLang == 'en'">
             {{ item.item_name }}
           </ion-card-title>
-          <ion-card-title *ngIf="_config.currentLang == 'ar'">
+          <ion-card-title *ngIf="translateService.currentLang == 'ar'">
             {{ item.item_name_ar }}
           </ion-card-title>
           <ion-row class="row" no-padding="">
-            <ion-col class="col" *ngIf="_config.currentLang == 'en'">
+            <ion-col class="col" *ngIf="translateService.currentLang == 'en'">
               {{ item.vendor_name }}
             </ion-col>
-            <ion-col class="col" *ngIf="_config.currentLang == 'ar'">
+            <ion-col class="col" *ngIf="translateService.currentLang == 'ar'">
               {{ item.vendor_name_ar }}
             </ion-col>
             <ion-col class="col">

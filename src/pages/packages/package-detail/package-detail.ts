@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
 
 import { ProductPage } from '../../product/product';
@@ -22,7 +22,8 @@ export class PackageDetailPage {
     public navCtrl: NavController,
     private _params : NavParams,
     public httpService: Http,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ) {
     this._urlPackage = this._config.apiBaseUrl + '/package/';
     this.id = this._params.get('id');
