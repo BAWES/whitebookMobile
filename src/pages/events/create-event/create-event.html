@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>My Event</ion-title>
+    <ion-title>{{ "My Events" | translate }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close" ></ion-icon>
@@ -24,39 +24,41 @@
   <form [formGroup]="eventForm" (ngSubmit)="saveEvent()" novalidate>
   <ion-list>
     <ion-item>
-      <ion-label>Event Name</ion-label>
+      <ion-label>{{ "Event Name" | translate }}</ion-label>
       <ion-input formControlName="eventName" type="text" [(ngModel)]="eventName"></ion-input>
     </ion-item>
     <div class="error-message" *ngIf="!eventForm.controls.eventName.valid && (eventForm.controls.eventName.touched ||  submitAttempt)">
-      <p>Please enter event name</p>
+      <p>{{ "Please enter event name" | translate }}</p>
     </div>
     <ion-item>
-      <ion-label>Event Date</ion-label>
+      <ion-label>{{ "Event Date" | translate }}</ion-label>
       <ion-datetime displayFormat="MM/DD/YYYY" formControlName="eventDate" [(ngModel)]="eventDate"></ion-datetime>
     </ion-item>
     <div class="error-message" *ngIf="!eventForm.controls.eventDate.valid && (eventForm.controls.eventDate.touched ||  submitAttempt)">
-      <p>Please select event date</p>
+      <p>{{ "Please select event date" | translate }}</p>
     </div>
     <ion-item>
-      <ion-label>Event Type</ion-label>
+      <ion-label>{{ "Event Type" | translate }}</ion-label>
         <ion-select formControlName="eventType" [(ngModel)]="eventType">
-          <ion-option *ngFor="let type of eventTypeList" selected="eventType == {{type.type_name}}" value="{{type.type_name}}">{{type.type_name}}</ion-option>
+          <ion-option *ngFor="let type of eventTypeList" selected="eventType == {{type.type_name}}" value="{{type.type_name}}">
+            {{ type.type_name }}
+          </ion-option>
         </ion-select>
     </ion-item>
     <div class="error-message" *ngIf="!eventForm.controls.eventType.valid && (eventForm.controls.eventType.touched ||  submitAttempt)">
-      <p>Please select event type</p>
+      <p>{{ "Please select event type" | translate }}</p>
     </div>
     <ion-item>
-      <ion-label>Number Of Guest</ion-label>
+      <ion-label>{{ "Number Of Guest" | translate }}</ion-label>
       <ion-input formControlName="eventGuest" type="text" [(ngModel)]="eventGuest"></ion-input>
     </ion-item>
     <div class="error-message" *ngIf="!eventForm.controls.eventGuest.valid && (eventForm.controls.eventGuest.touched ||  submitAttempt)">
-      <p>Please enter event guest</p>
+      <p>{{ "Please enter event guest" | translate }}</p>
     </div>
   </ion-list>
   </form>
 
   <div padding>
-    <button ion-button round full color="dark" (click)="saveEvent()">Save Event</button>
+    <button ion-button round full color="dark" (click)="saveEvent()">{{ "Save Event" | translate }}</button>
   </div>
 </ion-content>

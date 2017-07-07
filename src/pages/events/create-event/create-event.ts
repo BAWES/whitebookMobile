@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
+import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 
 @Component({
@@ -30,7 +30,8 @@ export class CreateEventPage {
     public toastCtrl : ToastController,
     private formBuilder: FormBuilder,
     private httpService: HttpService,
-    private _navParams: NavParams
+    private _navParams: NavParams,
+    private translateService: TranslateService
   ) {
     this.eventForm = this.formBuilder.group({
         eventName: ['', Validators.required],
@@ -44,7 +45,9 @@ export class CreateEventPage {
     this.loadEventType();
     this.eventID = this._navParams.get("event_id")
     if (this.eventID != 0) {
-      this.eventTitle = 'Update Event';
+      this.translateService.get('Update Event').subscribe(value => {
+        this.eventTitle = value;
+      });      
       this.loadEventDetail(this.eventID);
     }
   }
@@ -118,11 +121,15 @@ export class CreateEventPage {
     this.httpService.post(this._urlEventUrl,paramas).subscribe(data=>{
         result = data;
         if (result.operation == 'success' ) {
-          let toast = this.toastCtrl.create({
-            message: 'Event Saved Successfully',
-            duration: 3000
+          
+          this.translateService.get('Event Saved Successfully').subscribe(value => {
+            let toast = this.toastCtrl.create({
+              message: value,
+              duration: 3000
+            });
+            toast.present();
           });
-          toast.present();
+          
           this.viewCtrl.dismiss();
         } else {
           let toast = this.toastCtrl.create({
@@ -142,11 +149,15 @@ export class CreateEventPage {
     this.httpService.patch(this._urlEventUrl,paramas).subscribe(data=>{
         result = data;
         if (result.operation == 'success' ) {
-          let toast = this.toastCtrl.create({
-            message: 'Event Updated Successfully',
-            duration: 3000
+          
+          this.translateService.get('Event Updated Successfully').subscribe(value => {
+            let toast = this.toastCtrl.create({
+              message: value,
+              duration: 3000
+            });
+            toast.present();
           });
-          toast.present();
+          
           this.viewCtrl.dismiss();
         } else {
           let toast = this.toastCtrl.create({

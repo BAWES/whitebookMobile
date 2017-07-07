@@ -4,7 +4,7 @@ import { NavController,ViewController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
 
 import { GlobalService } from '../../providers/global.service';
-
+import { TranslateService } from '@ngx-translate/core';
 import { ProductPage } from '../product/product';
 
 @Component({
@@ -22,7 +22,8 @@ export class SearchItemPage {
     public navCtrl: NavController,
     public viewCtrl: ViewController,
     public httpRequest: Http,
-    public _config: GlobalService
+    public _config: GlobalService,
+    public translateService: TranslateService
   ) {
     this._searchUrl = this._config.apiBaseUrl + '/search?q=';
   }
