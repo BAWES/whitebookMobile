@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, ModalController, ToastController } from 'ionic-angular';
-
 import { CreateEventPage } from '../create-event/create-event';
-
+import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 
 @Component({
@@ -18,14 +17,26 @@ export class MyEventsPage {
   public resultData :any;
   public start:number = 0;
 
+  public txtDelTitle: string;
+  public txtDelMessage: string;
+
   constructor(
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public httpService: HttpService
+    public httpService: HttpService,
+    public translateService: TranslateService
   ) {
     this.start=0;
     this.list();
+
+    this.translateService.get('Event Delete?').subscribe(value => {
+      this.txtDelTitle = value;
+    });
+
+    this.translateService.get('Are you sure you want to delete this Event permanently from our system?').subscribe(value => {
+      this.txtDelMessage = value;
+    });
   }
 
   ionViewDidLoad() {
@@ -64,8 +75,8 @@ export class MyEventsPage {
   delete(events){
     let response;
     let confirm = this.alertCtrl.create({
-      title: 'Event Delete?',
-      message: 'Are you sure you want to delete this Event permanently from our system?',
+      title: this.txtDelTitle,
+      message: this.txtDelMessage,
       buttons : [
         {
           text:'Yes',

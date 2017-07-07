@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Events List</ion-title>
+    <ion-title>{{ "Events List" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-item text-center>
-      <button ion-button round color="dark" padding-16 (click)="create()">+ Add new Event</button>
+      <button ion-button round color="dark" padding-16 (click)="create()">+ {{ "Add new Event" | translate }}</button>
   </ion-item>
   <ion-list [virtualScroll]="events" approxItemHeight="50px">
     <ion-item *virtualItem="let events">
@@ -33,7 +33,7 @@
  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
-      loadingText="Loading more data...">
+      loadingText="{{ 'Loading more data...' | translate }}">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
