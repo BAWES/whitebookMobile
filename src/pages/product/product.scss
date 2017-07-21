@@ -69,3 +69,14 @@ page-product {
 .swiper-slide img {
     margin: auto;
 }
+
+/*.avatarVideo:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 120px;
+    z-index: 100;
+    background: transparent url(../assets/images/bt_play.png) no-repeat center;
+    pointer-events: none;
+}*/

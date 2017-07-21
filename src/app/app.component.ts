@@ -23,7 +23,7 @@ import { NoInternet } from '../pages/no-internet/no-internet';
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
 
-import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
+import { CommunityListPage } from '../pages/community/community-list/community-list';
 
 // providers
 import { HttpService } from '../providers/http.service';
@@ -195,7 +195,7 @@ export class MyApp {
     
     this.personal = [
         { title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null},
-        { title : 'Directory', component: DirectoryListPage, icon:'list', slug: null},
+        { title : 'Community', component: CommunityListPage, icon:'list', slug: null},
         { title : 'Become Vendor', component:BecomeVendorPage, icon:'envelope-o', slug: null},
         { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', slug: 'terms-conditions'},
         { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', slug: 'privacy-policy'},

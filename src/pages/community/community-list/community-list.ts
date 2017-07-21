@@ -4,17 +4,17 @@ import { NavController } from 'ionic-angular';
 
 import { GlobalService } from '../../../providers/global.service';
 import { TranslateService } from '@ngx-translate/core';
-import { DirectoryViewPage } from '../directory-view/directory-view';
+import { CommunityViewPage } from '../community-view/community-view';
 
 @Component({
-  selector: 'directory-list',
-  templateUrl: 'directory-list.html'
+  selector: 'community-list',
+  templateUrl: 'community-list.html'
 })
 
-export class DirectoryListPage {
+export class CommunityListPage {
   
-  public _urlDirectory: string;
-  public directory : any = [];
+  public _urlcommunity: string;
+  public community : any = [];
   public keys: any = [];
 
   constructor(
@@ -23,20 +23,20 @@ export class DirectoryListPage {
     public _config: GlobalService,
     public translateService: TranslateService
   ) {
-    this._urlDirectory = this._config.apiBaseUrl + '/directory?language=' + this.translateService.currentLang;
+    this._urlcommunity = this._config.apiBaseUrl + '/community?language=' + this.translateService.currentLang;
   }
 
   ionViewDidLoad() {
-    this.loadDirectory();
+    this.loadcommunity();
   }
 
   /**
    * method to load direcoty
    */
-  loadDirectory() {
-    this.httpService.get(this._urlDirectory).subscribe(jsonResponse => {
+  loadcommunity() {
+    this.httpService.get(this._urlcommunity).subscribe(jsonResponse => {
       let result = jsonResponse.json();
-      this.directory = this.generateArray(result.directory);
+      this.community = this.generateArray(result.community);
       this.keys = result.keys;
     });
   }
@@ -51,7 +51,7 @@ export class DirectoryListPage {
    */
   rowSelected(model) {
     // Load Detail Page
-    this.navCtrl.push(DirectoryViewPage, {
+    this.navCtrl.push(CommunityViewPage, {
       'model': model
     });
   }

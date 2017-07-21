@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>{{ "Directory" | translate }}</ion-title>    
+    <ion-title text-center>{{ "Community" | translate }}</ion-title>    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-item-group *ngFor="let item of directory; let i= index">
+    <ion-item-group *ngFor="let item of community; let i= index">
  
       <ion-item-divider light>{{ keys[i] }}</ion-item-divider>
 
@@ -18,7 +18,7 @@
  
     </ion-item-group>
 
-    <div *ngIf="directory !== undefined && !directory.length" class="no-results">
+    <div *ngIf="community !== undefined && !community.length" class="no-results">
       <p text-center>{{ "No Results" | translate }}</p>
     </div>
 
