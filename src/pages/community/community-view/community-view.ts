@@ -6,17 +6,17 @@ import { GlobalService } from '../../../providers/global.service';
 import { ProductPage } from '../../product/product';
 
 @Component({
-  selector: 'page-directory-view',
-  templateUrl: 'directory-view.html'
+  selector: 'page-community-view',
+  templateUrl: 'community-view.html'
 })
-export class DirectoryViewPage {
+export class CommunityViewPage {
 
   public vendor: any = [];
   public products : any = [];
   public start:number = 0;
   public productView :string;
 
-  public _urlDirectory = '';
+  public _urlcommunity = '';
   public _urlParamas = '';
 
   constructor(
@@ -26,7 +26,7 @@ export class DirectoryViewPage {
     public _config: GlobalService
   ) {
 
-    this._urlDirectory = this._config.apiBaseUrl + '/directory/view';
+    this._urlcommunity = this._config.apiBaseUrl + '/community/view';
   
     this.vendor = params.get('model');
     this.productView = 'grid-view';
@@ -42,7 +42,7 @@ export class DirectoryViewPage {
    * Load product listing
    */
   loadProducts() {
-    this.httpService.get(this._urlDirectory+'?offset=0'+this._urlParamas)
+    this.httpService.get(this._urlcommunity+'?offset=0'+this._urlParamas)
       .subscribe(
         data => {
           this.products = data.json();
@@ -58,7 +58,7 @@ export class DirectoryViewPage {
     console.log('Begin async operation');
     let items;
     this.start+=10;
-    this.httpService.get(this._urlDirectory +'?offset='+this.start+this._urlParamas).subscribe(data=>{
+    this.httpService.get(this._urlcommunity +'?offset='+this.start+this._urlParamas).subscribe(data=>{
         items = data.json();
         for(let item of items) {
           this.products.push(item);

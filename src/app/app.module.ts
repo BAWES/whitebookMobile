@@ -51,9 +51,9 @@ import { ProductImagePage } from '../pages/product-image/product-image';
 import { ProductVideoPage } from '../pages/product-video/product-video';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
-// Directory
-import { DirectoryListPage } from '../pages/directory/directory-list/directory-list';
-import { DirectoryViewPage } from '../pages/directory/directory-view/directory-view';
+// Community
+import { CommunityListPage } from '../pages/community/community-list/community-list';
+import { CommunityViewPage } from '../pages/community/community-view/community-view';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -112,8 +112,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     NoInternet,
     Cms,
     Contact,
-    DirectoryListPage,
-    DirectoryViewPage
+    CommunityListPage,
+    CommunityViewPage
   ],
   imports: [
     BrowserModule,
@@ -163,8 +163,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     NoInternet,
     Cms,
     Contact,
-    DirectoryListPage,
-    DirectoryViewPage
+    CommunityListPage,
+    CommunityViewPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
