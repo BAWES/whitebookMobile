@@ -25,6 +25,11 @@
           <img src="{{_config.images_530}}/{{image.image_path}}" >
         </ion-thumbnail>
       </ion-slide>
+      <ion-slide *ngFor="let video of product.videos">
+        <ion-thumbnail class="avatarVideo" (click)="openVideo(video)">
+          <img src="https://img.youtube.com/vi/{{ video.video }}/default.jpg" >
+        </ion-thumbnail>
+      </ion-slide>
     </ion-slides>
     
       <h3 text-center>

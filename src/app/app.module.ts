@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { NativeStorage } from '@ionic-native/native-storage';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 // App Imports
 import { MyApp } from './app.component';
@@ -47,6 +48,7 @@ import { SearchItemPage } from '../pages/search-item/search-item';
 import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 import { ProductImagePage } from '../pages/product-image/product-image';
+import { ProductVideoPage } from '../pages/product-video/product-video';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
 // Directory
@@ -82,6 +84,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ListingPage,
     ProductPage,
     ProductImagePage,
+    ProductVideoPage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,
@@ -134,6 +137,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ListingPage,
     ProductPage,
     ProductImagePage,
+    ProductVideoPage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,
@@ -179,6 +183,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     SplashScreen,
     StatusBar,
     NativeStorage,
+    YoutubeVideoPlayer,
     HttpService,
     VendorService,
     CheckoutService,
