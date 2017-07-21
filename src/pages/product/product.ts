@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ProductImagePage } from '../product-image/product-image';
+import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 
 import { GlobalService } from '../../providers/global.service';
@@ -73,13 +75,15 @@ export class ProductPage {
     public modalCtnl: ModalController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
+    public navCtrl: NavController,
     public _config: GlobalService,
     public http: Http,
     public httpService: HttpService,
     public formBuilder: FormBuilder,
     public cartService: CartService,
     public translateService: TranslateService,
-    public auth: Authentication
+    public auth: Authentication,
+    private youtube: YoutubeVideoPlayer
   ) {
     this.setDates();
 
@@ -461,6 +465,15 @@ export class ProductPage {
     })
   }
   
+  openVideo(video) {
+    this.youtube.openVideo(video.video);
+
+    /*this.navCtrl.push(ProductVideoPage, {
+      'video': video,
+      'item': this.product.item
+    });*/
+  }
+
   removeFromWishList() {
     this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(result => {
       
