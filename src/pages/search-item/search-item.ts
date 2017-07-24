@@ -29,33 +29,40 @@ export class SearchItemPage {
   }
 
   ionViewDidLoad() {
-    this.initializeItems('All');
+    this.loadItems('All');
   }
 
-  initializeItems(searchText:string = 'All') {
-    this.httpRequest.get(this._searchUrl + searchText + '&offset=0').subscribe(data=>
-      this.items = data.json()
-    )
-    this.searching = false;
+  /**
+   * Get initial set of items
+   * @param {string} [searchText='All'] 
+   * @memberof SearchItemPage
+   */
+  loadItems(searchText:string = 'All') {
+    this.httpRequest
+      .get(this._searchUrl + searchText + '&offset=0')
+      .subscribe((data)=> {
+          this.items = data.json();
+          this.searching = false;
+      });
   }
 
-  getItems(ev: any) {
+  /**
+   * Load the items
+   * @param {*} ev 
+   * @memberof SearchItemPage
+   */
+  onSearchInput(ev: any) {
     this.searching = true;
     
-    // Reset items back to all of the items
-    this.initializeItems(ev.target.value);
-
-    // set val to the value of the searchbar
-    let val = ev.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.item_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+    // Load new set of items based on user input 
+    this.items = [];
+    this.loadItems(ev.target.value);
   }
 
+  /**
+   * Dismiss the current page
+   * @memberof SearchItemPage
+   */
   dismiss() {
     this.viewCtrl.dismiss();
   }
