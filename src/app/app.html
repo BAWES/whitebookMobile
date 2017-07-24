@@ -71,7 +71,6 @@
   <ion-content>
     <!-- Main Categories -->
     <ion-list main-menu class="main-menu">
-      <ion-list-header>{{ Categories | translate }}</ion-list-header>      
       <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
           <i class="fa {{category.icon}}"></i>
           <span class="label-{{category.icon}}">{{ category.category_name_ar }}</span>
