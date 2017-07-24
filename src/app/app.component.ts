@@ -44,9 +44,12 @@ export class MyApp {
   public _urlEvent: string = "/event";
   public _urlCategory: string = "/category";
   public _urllogout: string = "/account/logout";
+
   //local variables
   public categoryList: any;
-  public personal: Array<{title: string, component: any, icon: any, slug: string}>;
+  public personalPages: Array<{title: string, component: any, icon: any, slug: string}>;
+  public generalPages: Array<{title: string, component: any, icon: any, slug: string}>;
+  public legalPages: Array<{title: string, component: any, icon: any, slug: string}>;
   public events: any;
 
   public menuSide: string = 'left';
@@ -192,28 +195,37 @@ export class MyApp {
   }
 
   updateMenu() {
-    
-    this.personal = [
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null},
-        { title : 'Community', component: CommunityListPage, icon:'list', slug: null},
-        { title : 'Become Vendor', component:BecomeVendorPage, icon:'envelope-o', slug: null},
-        { title : 'Terms & Condition', component:Cms,icon:'bookmark-o', slug: 'terms-conditions'},
-        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', slug: 'privacy-policy'},
+    // Setup the General Pages
+    this.generalPages = [
         { title : 'Packages', component:PackageListPage,icon:'archive', slug: null},
+        { title : 'Community', component: CommunityListPage, icon:'list', slug: null},
+        { title : 'Become a Vendor', component:BecomeVendorPage, icon:'envelope-o', slug: null},
         { title : 'Contact', component:Contact,icon:'wpforms', slug: null},
     ];
 
+    // Legal Pages
+    this.legalPages = [
+        { title : 'Terms & Conditions', component:Cms,icon:'bookmark-o', slug: 'terms-conditions'},
+        { title : 'Privacy Policy', component:Cms,icon:'bookmark-o', slug: 'privacy-policy'},
+    ];
+    
+    // Setup the personal pages
+    this.personalPages = [
+        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null},
+    ];
+
+    // Add Personal Pages based on Login Status
     if (this.isUserLoggedIn) 
     {
-      this.personal.push({ title : 'My Bookings', component:MyBookingsPage,icon:'archive', slug: null});
-      this.personal.push({ title : 'My Account', component:MyAccountPage,icon: 'user-circle', slug: null});
-      this.personal.push({ title : 'My Wistlist', component:MyWishListPage,icon:'heart', slug: null});
-      this.personal.push({ title : 'Address Book', component:MyAddressBookPage,icon:'address-book', slug: null});
-      this.personal.push({ title : 'Logout', component:LoginPage, icon:'power-off', slug: '-1'});
+      this.personalPages.push({ title : 'My Bookings', component:MyBookingsPage,icon:'archive', slug: null});
+      this.personalPages.push({ title : 'My Account', component:MyAccountPage,icon: 'user-circle', slug: null});
+      this.personalPages.push({ title : 'My Wistlist', component:MyWishListPage,icon:'heart', slug: null});
+      this.personalPages.push({ title : 'Address Book', component:MyAddressBookPage,icon:'address-book', slug: null});
+      this.personalPages.push({ title : 'Logout', component:LoginPage, icon:'power-off', slug: '-1'});
     } 
     else 
     {      
-      this.personal.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', slug: null});
+      this.personalPages.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', slug: null});
     }
   }
 }
