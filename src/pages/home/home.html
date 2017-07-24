@@ -31,8 +31,7 @@
         <ion-select placeholder="{{ 'Whats your occasion?' | translate }}" [(ngModel)]="themeID" id="themeID" (ionChange)="showData()" [selectOptions]="selectOptions">
           <ion-option value="0">{{ "All Themes" | translate }}</ion-option>
           <ion-option *ngFor="let item of themes" value="{{item.theme_id}}">
-            <span *ngIf="this.translateService.currentLang == 'ar'">{{ item.theme_name_ar }}</span>
-            <span *ngIf="this.translateService.currentLang != 'ar'">{{ item.theme_name }}</span>
+            {{ _config.translate(item.theme_name, item.theme_name_ar) }}
           </ion-option>
         </ion-select>
       </div>  
