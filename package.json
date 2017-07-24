@@ -6,6 +6,7 @@
     "scripts": {
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
+        "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve"
     },
@@ -15,14 +16,14 @@
         "ionic_sass": "./config/sass.config.js"
     },
     "dependencies": {
-        "@angular/common": "4.0.2",
-        "@angular/compiler": "4.0.2",
-        "@angular/compiler-cli": "4.0.2",
-        "@angular/core": "4.0.2",
-        "@angular/forms": "4.0.2",
-        "@angular/http": "4.0.2",
-        "@angular/platform-browser": "4.0.2",
-        "@angular/platform-browser-dynamic": "4.0.2",
+        "@angular/common": "4.1.3",
+        "@angular/compiler": "4.1.3",
+        "@angular/compiler-cli": "4.1.3",
+        "@angular/core": "4.1.3",
+        "@angular/forms": "4.1.3",
+        "@angular/http": "4.1.3",
+        "@angular/platform-browser": "4.1.3",
+        "@angular/platform-browser-dynamic": "4.1.3",
         "@ionic-native/core": "^3.6.1",
         "@ionic-native/in-app-browser": "^3.12.1",
         "@ionic-native/native-storage": "^3.5.0",
@@ -43,18 +44,18 @@
         "cordova-plugin-whitelist": "^1.3.1",
         "cordova-plugin-youtube-video-player": "^1.0.6",
         "font-awesome": "^4.7.0",
-        "ionic-angular": "3.1.1",
         "ionic-plugin-keyboard": "^2.2.1",
+        "ionic-angular": "3.5.2",
         "ionicons": "3.0.0",
-        "rxjs": "5.1.1",
-        "sw-toolbox": "3.4.0",
-        "zone.js": "^0.8.10"
+        "rxjs": "5.4.0",
+        "sw-toolbox": "3.6.0",
+        "zone.js": "0.8.12"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "1.3.7",
+        "@ionic/app-scripts": "2.0.2",
         "@ionic/cli-plugin-cordova": "1.4.1",
         "@ionic/cli-plugin-ionic-angular": "1.3.2",
-        "typescript": "~2.2.1"
+        "typescript": "2.3.4"
     },
     "cordovaPlugins": [
         "cordova-plugin-console",
