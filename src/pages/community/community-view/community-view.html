@@ -20,6 +20,21 @@
 
 	<div innerHTML="{{ vendor.vendor_return_policy }}"></div>
 
+	<h2 *ngIf="reviews.length > 0">{{ "Reviews" | translate }}</h2>
+
+	<ion-item *ngFor="let review of reviews" class="vendor-review">
+		<ul class="review-rating">
+			<li *ngFor="let i of getReviewIcons(review.rating); let i = index">
+				<ion-icon name="star"></ion-icon>
+			</li>
+		</ul>
+		<div class="review-author">{{ 'By' | translate }} {{ review.customer }}  </div>
+		<div class="review-time">{{ review.created_at }}</div>
+		<div class="review-review">
+				{{ review.review }}
+		</div>
+	</ion-item>
+
 	<h2 *ngIf="products.length > 0">{{ "Products" | translate }}</h2>
 
 	<ion-grid class="category-product-listing {{productView}}">
