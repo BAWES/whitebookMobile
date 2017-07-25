@@ -1,13 +1,12 @@
-<ion-header>
-  <br />
-  <ion-title>{{ "No Internet Connection" | translate }}</ion-title>
-</ion-header>
 <ion-content padding>
-  <div class="scroll-content">
-      {{ "Sorry, no Internet connectivity detected. Please reconnect and try again." | translate }}
-
-      <br />
-
+  <div class="no-internet-msg">
       
+    <h2>{{ "No Internet Connection" | translate }}</h2>
+
+    <h3>{{ "Sorry, no Internet connectivity detected. Please reconnect and try again." | translate }}</h3>
+
+    <br />
+
+    <button ion-button (click)="refresh()">{{ 'Try Again' | translate }}</button>
   </div>
 </ion-content>

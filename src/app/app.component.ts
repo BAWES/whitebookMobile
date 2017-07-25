@@ -76,6 +76,10 @@ export class MyApp {
         //popover.present();
     });
 
+    this._events.subscribe('internet:reconnect', TokenSet => {
+        this.initializeApp();
+    });
+
     this._events.subscribe('user:login', TokenSet => {
       this.isUserLoggedIn = true;
       this.updateMenu();

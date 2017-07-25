@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NavController  } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+import { Home } from '../home/home';
 
 @Component({
   selector: 'page-no-internet',
@@ -6,7 +9,14 @@ import { Component } from '@angular/core';
 })
 export class NoInternet {
 
-  constructor() {}
+  constructor(
+    public events: Events, 
+    public navCtrl: NavController
+  ) { }
 
+  refresh() {
+    this.events.publish('internet:reconnect');
+    this.navCtrl.setRoot(Home);
+  }
 }
 
