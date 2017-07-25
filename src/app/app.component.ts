@@ -76,7 +76,7 @@ export class MyApp {
         //popover.present();
     });
 
-    this._events.subscribe('internet:reconnect', TokenSet => {
+    this._events.subscribe('internet:reconnect', params => {
         this.initializeApp();
     });
 

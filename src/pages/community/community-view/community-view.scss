@@ -34,4 +34,27 @@ page-community-view {
     .top-filter-tool-bar button{background: none;}
     ion-img, ion-img img {min-width: 250px;min-height: 250px;}
     .callout-container {    width: 100px;position: absolute;left: 15px;font-size: 11px;top: 152px;background: #fff;padding: 2px;}
+
+    .review-rating {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .review-rating li {
+        display: inline-block;
+        color: #ffa500;
+    }
+    .review-rating li + li {
+        margin-left: .1em;
+    }
+    .review-author {
+        margin-bottom: 5px;
+    }
+    .review-time {
+        margin-bottom: 5px;
+    }
+    .vendor-review {
+        padding-left: 0px;
+    }
 }

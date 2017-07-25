@@ -13,6 +13,7 @@ export class CommunityViewPage {
 
   public vendor: any = [];
   public products : any = [];
+  public reviews: any = [];
   public start:number = 0;
   public productView :string;
 
@@ -31,6 +32,7 @@ export class CommunityViewPage {
     this.vendor = params.get('model');
     this.productView = 'grid-view';
     this._urlParamas = '&vendor_id=' + this.vendor.vendor_id;
+    this.loadReviews();
     this.loadProducts();
   }
   
@@ -42,12 +44,17 @@ export class CommunityViewPage {
    * Load product listing
    */
   loadProducts() {
-    this.httpService.get(this._urlcommunity+'?offset=0'+this._urlParamas)
-      .subscribe(
-        data => {
-          this.products = data.json();
-        }
-      );
+    let url = this._urlcommunity+'?offset=0' + this._urlParamas;
+    this.httpService.get(url).subscribe(data => {
+      this.products = data.json();
+    });
+  }
+
+  loadReviews() {
+    let url = this._config.apiBaseUrl + '/community/reviews/' + this.vendor.vendor_id;
+    this.httpService.get(url).subscribe(data => {
+      this.reviews = data.json();
+    });
   }
 
   /*
@@ -66,5 +73,17 @@ export class CommunityViewPage {
       console.log('Begin async operation');
       infiniteScroll.complete();
     })
+  }
+
+  /**
+   * return html to display rating 
+   */
+  getReviewIcons(rat){
+    let icons = [];
+    for (let i = 1; i <= rat; i++) {
+			icons.push(i);
+    }
+    console.log(icons);
+    return icons;
   }
 }
