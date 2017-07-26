@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 
+//services 
 import { GlobalService } from '../../../providers/global.service';
+import { HttpService } from '../../../providers/http.service';
+
+//pages 
 import { ProductPage } from '../../product/product';
+import { VendorReviewPage } from '../vendor-review/vendor-review';
 
 @Component({
   selector: 'page-community-view',
@@ -16,14 +21,17 @@ export class CommunityViewPage {
   public reviews: any = [];
   public start:number = 0;
   public productView :string;
+  public canAddReview :Boolean = false;
 
   public _urlcommunity = '';
   public _urlParamas = '';
 
   constructor(
     public navCtrl: NavController,
+    public modalCtnl: ModalController,
     params: NavParams,
-    public httpService: Http,
+    public http: Http,
+    public httpService: HttpService,
     public _config: GlobalService
   ) {
 
@@ -45,15 +53,16 @@ export class CommunityViewPage {
    */
   loadProducts() {
     let url = this._urlcommunity+'?offset=0' + this._urlParamas;
-    this.httpService.get(url).subscribe(data => {
+    this.http.get(url).subscribe(data => {
       this.products = data.json();
     });
   }
 
   loadReviews() {
-    let url = this._config.apiBaseUrl + '/community/reviews/' + this.vendor.vendor_id;
-    this.httpService.get(url).subscribe(data => {
-      this.reviews = data.json();
+    let url = '/community/reviews/' + this.vendor.vendor_id;
+    this.httpService.get(url, true).subscribe(data => {
+      this.reviews = data.reviews;
+      this.canAddReview = data.canAddReview;
     });
   }
 
@@ -65,7 +74,7 @@ export class CommunityViewPage {
     console.log('Begin async operation');
     let items;
     this.start+=10;
-    this.httpService.get(this._urlcommunity +'?offset='+this.start+this._urlParamas).subscribe(data=>{
+    this.http.get(this._urlcommunity +'?offset='+this.start+this._urlParamas).subscribe(data=>{
         items = data.json();
         for(let item of items) {
           this.products.push(item);
@@ -78,12 +87,24 @@ export class CommunityViewPage {
   /**
    * return html to display rating 
    */
-  getReviewIcons(rat){
+  getReviewIcons(rat) {
     let icons = [];
     for (let i = 1; i <= rat; i++) {
 			icons.push(i);
     }
     console.log(icons);
     return icons;
+  }
+
+  openReviewModal() {
+    let modal = this.modalCtnl.create(VendorReviewPage, { vendor: this.vendor });
+    modal.present();
+    modal.onDidDismiss(data => {
+      if(data.reviewSubmitted) {
+        this.canAddReview = false; 
+      }else{
+        this.canAddReview = true; 
+      }
+    });
   }
 }

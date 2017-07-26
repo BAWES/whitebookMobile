@@ -54,6 +54,7 @@ import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 // Community
 import { CommunityListPage } from '../pages/community/community-list/community-list';
 import { CommunityViewPage } from '../pages/community/community-view/community-view';
+import { VendorReviewPage } from '../pages/community/vendor-review/vendor-review';
 
 // packages Page
 import { PackageListPage } from '../pages/packages/package-list/package-list';
@@ -113,7 +114,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Cms,
     Contact,
     CommunityListPage,
-    CommunityViewPage
+    CommunityViewPage,
+    VendorReviewPage
   ],
   imports: [
     BrowserModule,
@@ -164,7 +166,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Cms,
     Contact,
     CommunityListPage,
-    CommunityViewPage
+    CommunityViewPage,
+    VendorReviewPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

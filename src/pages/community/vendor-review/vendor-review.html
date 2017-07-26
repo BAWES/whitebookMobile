@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title translate> 
+      {{ "Add Review" | translate }}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="reviewForm" (ngSubmit)="submit()">
+      <ul>
+          <li *ngFor="let icon of icons(); let i = index" (click)="updateRating(i)">
+              <ion-icon [name]="icon"></ion-icon>
+          </li>
+      </ul>
+  
+    <ion-textarea formControlName="review" placeholder="Enter your review here..."></ion-textarea>
+  
+    <button ion-button type="submit" [disabled]="!reviewForm.valid">{{ "Send" | translate }}</button>
+  </form>
+</ion-content>
