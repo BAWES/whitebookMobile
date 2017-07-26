@@ -35,6 +35,8 @@
 		</div>
 	</ion-item>
 
+	<button ion-button full class="add-review-button"	*ngIf="canAddReview" (click)="openReviewModal()">{{ 'Add Review' | translate }}</button>
+
 	<h2 *ngIf="products.length > 0">{{ "Products" | translate }}</h2>
 
 	<ion-grid class="category-product-listing {{productView}}">
