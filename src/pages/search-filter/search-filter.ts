@@ -67,19 +67,30 @@ export class SearchFilterPage {
   }
 
   ionViewDidLoad() {
-      this.today = new Date();
-      this.today.setHours(0,0,0);
-      this.todayStr  = this.today.toISOString().substring(0,10);
-      console.log(this.todayStr);
       
-      if(!this.filterDeliveryDate)
-        this.filterDeliveryDate = this.todayStr;
+    if(!this.filterDeliveryDate)
+        this.setDefaultDeliveryDate();
 
       this.loadProductArea();
       this.loadCategoryList();
       this.loadThemeList();
       this.loadVendorList();
       this.loadPriceRange();
+  }
+
+  setDefaultDeliveryDate() {
+    this.today = new Date();
+    this.today.setHours(0,0,0);
+    this.todayStr  = this.today.toISOString().substring(0,10);
+    this.filterDeliveryDate = this.todayStr;
+  }
+
+  reset() {
+    this.filterDeliveryArea = null;
+    this.filterDeliveryDate = null;
+    this.filterDeliveryTime = null;
+    this.filterVendors = [];
+    this.filterTheme = [];     
   }
 
   dismiss() {
