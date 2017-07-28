@@ -67,7 +67,16 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <ion-item text-center no-border margin-top-25>
-      <button width-99 ion-button round color="dark" (click)="dismiss()">{{ "Filter" | translate }}</button>
-  </ion-item>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+  <ion-row>
+    <ion-col>
+      <button ion-button full (click)="reset()">{{ "Reset" | translate }}</button>
+    </ion-col>
+    <ion-col>  
+      <button ion-button full color="dark" (click)="dismiss()">{{ "Apply" | translate }}</button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>    
+</ion-footer>
