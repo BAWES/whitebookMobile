@@ -15,7 +15,7 @@
       </button>
     </ion-buttons>-->
     <ion-buttons end>
-      <ion-badge *ngIf="cartCount > 0" class="cart-indicator" color="danger">&nbsp;</ion-badge>
+      <ion-badge *ngIf="cartCount > 0" class="cart-indicator" color="danger">{{ cartCount }}</ion-badge>
       <button ion-button (click)="openModel()" >
         <ion-icon name="cart"></ion-icon>
       </button>
