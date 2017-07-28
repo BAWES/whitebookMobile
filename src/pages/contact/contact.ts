@@ -32,6 +32,7 @@ export class Contact {
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
+      topic: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
@@ -50,6 +51,7 @@ export class Contact {
       let paramas = {
         'name':this.contactForm.value.name,
         'email':this.contactForm.value.email,
+        'topic':this.contactForm.value.topic,
         'msg':this.contactForm.value.description,
         }
         this.httpService.post(this._urlContactUrl,paramas).subscribe(data=>{

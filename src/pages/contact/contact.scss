@@ -1,3 +1,15 @@
+$app-direction: multi;
+
 page-contact {
-    button{float: right;}
+    button{
+        margin-top: 10px !important;
+        @include ltr() {
+            float: left;
+            margin-left: 15px !important;
+        }
+        @include rtl() {
+            float: right;
+            margin-right: 15px !important;
+        }
+    }
 }
