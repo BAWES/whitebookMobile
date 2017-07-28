@@ -218,9 +218,7 @@ export class MyApp {
     ];
     
     // Setup the personal pages
-    this.personalPages = [
-        { title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null},
-    ];
+    this.personalPages = [];
 
     // Add Personal Pages based on Login Status
     if (this.isUserLoggedIn) 
@@ -233,6 +231,7 @@ export class MyApp {
     } 
     else 
     {      
+      this.personalPages.push({ title : 'Track Booking', component:BookingTrackPage, icon:'archive', slug: null}),
       this.personalPages.push({ title : 'Sign In', component:LoginPage,icon:'sign-in', slug: null});
     }
   }
