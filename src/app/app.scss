@@ -81,6 +81,14 @@ span.label-gift-favour-icon{top: 33px;}
 .home-feature-category button i{display: inline-block;width: 35px;}
 .home-feature-category button i.saythankyou-category{display: inline-block;width: 33px;}
 
+.cart-indicator {
+    border-radius: 50%;
+    padding: 5px;
+    position: absolute;
+    right: 0px;
+    top: -7px;
+    z-index: 999;
+}
 
 [text-center]{text-align: center;}
 
