@@ -3,16 +3,18 @@ import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-
+//Pages
 import { ProductImagePage } from '../product-image/product-image';
 import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
-
+//Services
+import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../providers/global.service';
 import { CartService } from '../../providers/cart.service';
 import { HttpService } from '../../providers/http.service';
 import { Authentication } from '../../providers/auth.service';
+import { ProductService } from '../../providers/product.service';
+import { WishlistService } from '../../providers/logged-in/wishlist.service';
 
 @Component({
   selector: 'page-product',
@@ -20,14 +22,6 @@ import { Authentication } from '../../providers/auth.service';
 })
 
 export class ProductPage {
-  
-  public _urlProductDetail = '';
-  public _urlProductArea = '';
-  public _urlProductCapacity = '';
-  public _urlProductDeliveryTimeSlot = '';
-  public _urlAddToCart = '';
-  public _urlWishlist = '';
-  public _urlFinalPrice = '';
  
   public cartCount:number = 0;
   public productSection:string = "pdescription";
@@ -82,20 +76,14 @@ export class ProductPage {
     public formBuilder: FormBuilder,
     public cartService: CartService,
     public translateService: TranslateService,
+    public productService: ProductService,
+    public wishlistService: WishlistService,
     public auth: Authentication,
     private youtube: YoutubeVideoPlayer
   ) {
     this.setDates();
 
     this.product_id = this._params.get('productId');
-    
-    this._urlProductDetail = this._config.apiBaseUrl + '/product/detail?language=' + this.translateService.currentLang + '&product_id=';
-    this._urlProductArea = this._config.apiBaseUrl + '/product/area?language=' + this.translateService.currentLang + '&vendor_id=';
-    this._urlProductCapacity = this._config.apiBaseUrl + '/product/capacity?language=' + this.translateService.currentLang;
-    this._urlProductDeliveryTimeSlot = this._config.apiBaseUrl + '/product/time-slot?language=' + this.translateService.currentLang;
-    this._urlAddToCart = this._config.apiBaseUrl + '/cart?language=' + this.translateService.currentLang;
-    this._urlFinalPrice = this._config.apiBaseUrl + '/product/final-price?language=' + this.translateService.currentLang;
-    this._urlWishlist = '/wishlist?language=' + this.translateService.currentLang;
     
     this.currentTime = new Date().getTime();
 
@@ -238,9 +226,9 @@ export class ProductPage {
  * method to load product detail
  */
   loadProductDetail() {
-    this.http.get(this._urlProductDetail+this.product_id).subscribe(
+    this.productService.loadProductDetail(this.product_id).subscribe(
       response => {
-        this.product = response.json(); 
+        this.product = response; 
 
         if(this.product.item.item_minimum_quantity_to_order > 0) {
           this.minQuantity = this.product.item.item_minimum_quantity_to_order;  
@@ -267,31 +255,24 @@ export class ProductPage {
         });
 
         this.loadFinalPrice();
-        this.loadProductArea(this.product.vendor);
+        this.loadProductArea(this.product.vendor.vendor_id);
       }
     );
   }
 
   loadFinalPrice() {
-    let param = {
-      'item_id' : this.product_id,
-      'quantity' : this.quantity,
-      'menu_item' : this.menuItem
-    }
-    this.http.post(this._urlFinalPrice, param).subscribe(jsonResponse => {
-      this.total = jsonResponse.json().total;
+    this.productService.loadFinalPrice(this.product_id, this.quantity, this.menuItem).subscribe(jsonResponse => {
+      this.total = jsonResponse.total;
     });
   }
 
   /**
    * method to load product area
    */
-  loadProductArea(vendor) {
-    if (vendor) {
-        this.http.get(this._urlProductArea + vendor.vendor_id).subscribe(areaList => {
-        this.vendorAreaList = areaList.json();
-      });
-    }
+  loadProductArea(vendor_id) {
+    this.productService.loadProductArea(vendor_id).subscribe(areaList => {
+      this.vendorAreaList = areaList.json();
+    });
   }
  
   /**
@@ -300,14 +281,10 @@ export class ProductPage {
    */
   loadTimeSlot(vendor_id) {
     this.dateChange = true;
-    let url = this._urlProductDeliveryTimeSlot 
-      + '&vendor_id='+vendor_id+'&event_date='+this.myDate+'&time='+this.currentTime+'&current_date='+this.todayStr;
-    
-    this.http.get(url).subscribe(timeslots=>{
-      this.timeslots = timeslots.json();  
+    this.productService.loadTimeSlot(vendor_id, this.myDate, this.currentTime, this.todayStr).subscribe(timeslots => {
+      this.timeslots = timeslots;  
+      this.loadProductCapacity(); // loading product capacity
     });
-    
-    this.loadProductCapacity(); // loading product capacity
   }
 
   /**
@@ -391,11 +368,18 @@ export class ProductPage {
    * method to load product capacity on 
    * date change
    */
-  loadProductCapacity(){
-    let url = this._urlProductCapacity+'&product_id='+this.product_id+'&deliver_date='+this.myDate;
-    this.http.get(url).subscribe(jsonResponse => {
+  loadProductCapacity() {
+    this.productService.productCapacity(this.product_id, this.myDate).subscribe(jsonResponse => {
       this.maxQuantity = parseInt(jsonResponse.json().capacity);
     });
+  }  
+  
+  /**
+   * Play youtube video
+   * @param video 
+   */
+  openVideo(video) {
+    this.youtube.openVideo(video.video);
   }
   
   /**
@@ -409,9 +393,7 @@ export class ProductPage {
       return false;
     }
 
-    let url = this._urlWishlist+'/exist' +'?product_id='+this.product_id;
-    
-    this.httpService.get(url).subscribe(jsonResponse => {      
+    this.wishlistService.getStatus(this.product_id).subscribe(jsonResponse => {      
       this.wishlistID = jsonResponse;      
       if (this.wishlistID > 0) 
       {
@@ -444,13 +426,9 @@ export class ProductPage {
   }
 
   addToWishList() {
-    
-    let param = {
-      'item_id' : this.product_id
-    }
-    this.httpService.post(this._urlWishlist,param).subscribe(result => {
+    this.wishlistService.add(this.product_id).subscribe(result => {
       
-      if (result.operation == 'success'){
+      if (result.operation == 'success') {
         this.translateService.get('Remove From Wishlist').subscribe(value => {
           this.wishlistLbl = value;
           this.wishlistID = result.id;
@@ -464,18 +442,9 @@ export class ProductPage {
       toast.present();
     })
   }
-  
-  openVideo(video) {
-    this.youtube.openVideo(video.video);
-
-    /*this.navCtrl.push(ProductVideoPage, {
-      'video': video,
-      'item': this.product.item
-    });*/
-  }
 
   removeFromWishList() {
-    this.httpService.delete(this._urlWishlist + '?wishlist_id='+this.wishlistID).subscribe(result => {
+    this.wishlistService.delete(this.wishlistID).subscribe(result => {
       
       if (result.operation == 'success') {
         this.translateService.get('Add From Wishlist').subscribe(value => {

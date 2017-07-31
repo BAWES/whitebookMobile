@@ -2,19 +2,13 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavParams, ViewController } from 'ionic-angular';
 import { GlobalService } from '../../providers/global.service';
+import { ProductService } from '../../providers/product.service';
 
 @Component({
   selector: 'page-search-filter',
   templateUrl: 'search-filter.html'
 })
 export class SearchFilterPage {
-
-  //Api urls
-  public _urlProductArea = '';
-  public _urlCategory: string = "";
-  public _urlThemes: string = "";
-  public _urlVendors: string = "";
-  public _urlPriceRange: string = '';
 
   public today:any;
   public todayStr:any;
@@ -46,15 +40,10 @@ export class SearchFilterPage {
   constructor(
     public viewCtrl:ViewController,
     public httpService: Http,
+    public productService: ProductService,
     public _config: GlobalService,
     private _params : NavParams,
-    ) {
-    this._urlProductArea = this._config.apiBaseUrl + '/product/area';
-    this._urlCategory = this._config.apiBaseUrl + "/category";
-    this._urlThemes = this._config.apiBaseUrl + "/product/theme";
-    this._urlVendors = this._config.apiBaseUrl + "/product/vendors";
-    this._urlPriceRange = this._config.apiBaseUrl + "/product/price-range";
-
+  ) {
     this.filterDeliveryArea = this._params.get('requestedLocation');
     this.filterDeliveryDate = this._params.get('requestedDeliverDate');
     this.filterDeliveryTime = this._params.get('requestedDeliverTime');
@@ -109,8 +98,7 @@ export class SearchFilterPage {
   }
   
   loadPriceRange() {
-      this.httpService.get(this._urlPriceRange).subscribe(data => {
-        let result = data.json();
+      this.productService.loadPriceRange().subscribe(result => {
         this.minRange = result.minRange;
         this.maxRange = result.maxRange;
 
@@ -141,8 +129,8 @@ export class SearchFilterPage {
    * method to load product area
    */
   loadProductArea() {
-      this.httpService.get(this._urlProductArea).subscribe(areaList=>{
-        this.areaList = areaList.json()
+      this.productService.loadAreas().subscribe(result => {
+        this.areaList = result; 
       });
   }
   
@@ -150,8 +138,8 @@ export class SearchFilterPage {
   * load category list
   */
   loadCategoryList(){
-    this.httpService.get(this._urlCategory,false).subscribe(cateries => {
-      this.categoryList = cateries.json()
+    this.productService.getCategoryList().subscribe(result => {
+      this.categoryList = result;
     });
   }
   
@@ -159,17 +147,17 @@ export class SearchFilterPage {
   * load theme list
   */
   loadThemeList(){
-    this.httpService.get(this._urlThemes,false).subscribe(theme => {
-      this.themeList = theme.json()
+    this.productService.getThemeList().subscribe(result => {
+      this.themeList = result;
     });
   }
   
   /*
   * load vendor list
   */
-  loadVendorList(){
-    this.httpService.get(this._urlVendors,false).subscribe(vendor => {
-      this.vendorList = vendor.json()
+  loadVendorList() {
+    this.productService.getVendorList().subscribe(result => {
+      this.vendorList = result;
     });
   }
 }

@@ -18,11 +18,6 @@ import { GlobalService } from '../../../providers/global.service';
 })
 export class CheckoutShippingGuestPage {
   
-  // api urls
-  public _urlAddressType = '/address/type';
-  public _urlLocation = '/address/location';
-  public _urlAddressQuestion = '/address/questions?address_type_id=';
-
   public addressTypeData: any;
   public locationData: any;
   public locationQuestion: any;
@@ -112,7 +107,7 @@ export class CheckoutShippingGuestPage {
    * load address type
    */
   loadAdressTypes() {
-    this.httpService.get(this._urlAddressType).subscribe(data => {
+    this.addressService.loadAdressTypes().subscribe(data => {
       this.questionsAnswers = [];
       this.addressTypeData = data;
     })
@@ -122,7 +117,7 @@ export class CheckoutShippingGuestPage {
    * load all locations
    */
   loadLocations() {
-    this.httpService.get(this._urlLocation).subscribe(data => {
+    this.addressService.loadLocations().subscribe(data => {
       this.locationData = data;
     })
   }
@@ -131,7 +126,7 @@ export class CheckoutShippingGuestPage {
   * load questions of address type
   */
   loadQuestions(address_type_id : number) {
-    this.httpService.get(this._urlAddressQuestion+address_type_id).subscribe(data => {
+    this.addressService.loadQuestions(address_type_id).subscribe(data => {
       this.locationQuestion = data;
       this.questionsAnswers[0]= null;
       this.locationQuestion.forEach((question,index) => {

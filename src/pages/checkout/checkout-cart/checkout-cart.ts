@@ -12,9 +12,6 @@ import { Authentication } from '../../../providers/auth.service';
 })
 export class CheckoutCartPage {
 
-  //api request urls
-  public _urlCart = '/cart';
-
   public area_id: any;
   public event_time: string;
   public delivery_date: string;

@@ -110,5 +110,4 @@ export class CheckoutConfirmPage {
   back() {
     this.navCtrl.pop();
   }
-
 }
