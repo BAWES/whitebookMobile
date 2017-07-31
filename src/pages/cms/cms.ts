@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
+
+// Services 
 import { HttpService } from '../../providers/http.service';
+import { CmsService } from '../../providers/cms.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -15,7 +18,8 @@ export class Cms {
   constructor(
     public navParams: NavParams,    
     public httpService : HttpService,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    public cmsService: CmsService
     ) {
     this.slug =  this.navParams.get('slug');
   }
@@ -24,8 +28,8 @@ export class Cms {
     this.pageDetail(this.slug);
   }
 
-  pageDetail(slug){
-    this.httpService.get('/cms/' + slug).subscribe(data => {
+  pageDetail(slug) {
+    this.cmsService.load(slug).subscribe(data => {
       this.detail = data;
     })
   }
