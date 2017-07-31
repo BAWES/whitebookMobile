@@ -141,7 +141,7 @@ export class HttpService {
     // Build Headers with Bearer Token
     const headers = new Headers();
     
-    // check if this need to add due to without logged in access to service
+    // check if this need to add, due to without logged in access to service
     if (addBearer) {
       // Get Bearer Token from Auth Service
       const bearerToken = this._auth.getAccessToken();

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+//Services 
 import { HttpService } from '../../../providers/http.service';
 import { GlobalService } from '../../../providers/global.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Base } from '../../../providers/base';
+import { AddressService } from '../../../providers/address.service';
 
 @Component({
   selector: 'page-create-address',
@@ -12,13 +14,6 @@ import { Base } from '../../../providers/base';
 })
 export class CreateAddressPage {
 
-  // api urls
-  public _urlAddressType = '/address/type?language=' + this.translateService.currentLang;
-  public _urlAddress = '/address?language=' + this.translateService.currentLang;
-  public _urlLocation = '/address/location?language=' + this.translateService.currentLang;
-  public _urlAddressQuestion = '/address/questions?language=' + this.translateService.currentLang + '&address_type_id=';
-  public _urlSingleAddress = '/address/view?language=' + this.translateService.currentLang + '&address_id=';
-  
   // local variables
   public title: string = 'Create New Address'; 
   public addressTypeData: any;
@@ -44,6 +39,7 @@ export class CreateAddressPage {
     public _config: GlobalService,
     public translateService: TranslateService,
     public _base:Base,
+    public addressService: AddressService,
     public formBuilder: FormBuilder,
     public _navParams: NavParams,
   ) {
@@ -136,11 +132,8 @@ export class CreateAddressPage {
   /**
    * Save new address
    */
-  saveNewAddress(paramas) {
-      let result;
-      this.httpService.post(this._urlAddress,paramas).subscribe(data=>{
-      result = data;
-      
+  saveNewAddress(paramas) {      
+    this.addressService.add(paramas).subscribe(result => {       
       let toast = this._toastCtrl.create({
         message: result.message,
         duration: 3000
@@ -156,10 +149,7 @@ export class CreateAddressPage {
    * update request to update address
    */
   saveExistingAddress(paramas) {
-      let result;
-      this.httpService.patch(this._urlAddress,paramas).subscribe(data=>{
-      result = data;
-      
+    this.addressService.update(paramas).subscribe(result => {      
       let toast = this._toastCtrl.create({
         message: result.message,
         duration: 3000
@@ -168,14 +158,14 @@ export class CreateAddressPage {
       if (result.operation == "success") {
           this._viewCtrl.dismiss();
       }
-    })
+    });
   }
 
   /**
    * load address type
    */
   loadAdressTypes() {
-    this.httpService.get(this._urlAddressType).subscribe(data => {
+    this.addressService.loadAdressTypes().subscribe(data => {
       this.questionsAnswers = [];
       this.addressTypeData = data;
     })
@@ -185,16 +175,16 @@ export class CreateAddressPage {
    * load all locations
    */
   loadLocations() {
-    this.httpService.get(this._urlLocation).subscribe(data => {
+    this.addressService.loadLocations().subscribe(data => {
       this.locationData = data;
-    })
+    });
   }
 
   /*
   * load questions of address type
   */
   loadQuestions(address_type_id : number) {
-    this.httpService.get(this._urlAddressQuestion+address_type_id).subscribe(data => {
+    this.addressService.loadQuestions(address_type_id).subscribe(data => {
       this.locationQuestion = data;
       this.questionsAnswers[0]= null;
       this.locationQuestion.forEach((question,index) => {
@@ -204,9 +194,9 @@ export class CreateAddressPage {
           if (answers.address_type_question_id == question.ques_id) {
               this.questionsAnswers[question.ques_id] = answers.response_text;
           }
-        })
+        });
       });
-    })
+    });
   }
 
   /*
@@ -214,8 +204,7 @@ export class CreateAddressPage {
   */
   loadAddressDetail(address_id: number) {
     let addressDetail: any;
-      this.httpService.get(this._urlSingleAddress+address_id).subscribe(data => {
-      addressDetail = data;
+    this.addressService.detail(address_id).subscribe(addressDetail => {
       this.addressName = addressDetail.address.address_name;
       this.addressType = addressDetail.address.address_type_id;
       this.areaName = addressDetail.address.area_id;

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController, AlertController, Platform } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+//Services 
 import { GlobalService } from '../../../providers/global.service';
 import { HttpService } from '../../../providers/http.service';
+import { BookingService } from '../../../providers/booking.service';
 import { TranslateService } from '@ngx-translate/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Declaring cordova so we can use it for the plugin
 declare var cordova: any;
@@ -21,8 +23,6 @@ export class BookingDetailPage {
 
   public bookingDetail:any;
 
-  public _urlBookingEndpoint: string = "/bookings";
-  
   constructor(    
     private inAppBrowser: InAppBrowser,
     public _viewCtrl:ViewController,
@@ -31,6 +31,7 @@ export class BookingDetailPage {
     public httpRequest: HttpService,    
     public _config:GlobalService,
     public translateService: TranslateService,
+    public bookingService: BookingService,
     public _alertCtrl : AlertController,
     private platform: Platform
   ) {
@@ -42,8 +43,7 @@ export class BookingDetailPage {
   }
 
   detail(booking_token) {
-    let url = this._urlBookingEndpoint + '/' + booking_token + '?language=' + this.translateService.currentLang;
-    this.httpRequest.get(url).subscribe(data=>{
+    this.bookingService.detail(booking_token).subscribe(data=>{
         this.bookingDetail = data;
     });
   }

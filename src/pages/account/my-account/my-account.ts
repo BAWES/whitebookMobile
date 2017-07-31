@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { HttpService } from '../../../providers/http.service';
-import { TranslateService } from '@ngx-translate/core';
+//Services 
+import { AccountService } from '../../../providers/logged-in/account.service';
 
 @Component({
   selector: 'page-my-account',
@@ -25,8 +25,7 @@ export class MyAccountPage {
   constructor(
     public toastCtrl:ToastController,
     public formBuilder: FormBuilder,
-    public httpService: HttpService,
-    public translateService: TranslateService,
+    public accountService: AccountService
     ) {
        this.profileForm = this.formBuilder.group({
         firstName: ['', Validators.required],
@@ -36,8 +35,6 @@ export class MyAccountPage {
         gender: ['', Validators.required],
         mobile: ['', Validators.required],
       });
-
-      this._urlProfileUrl = '/account?language=' + this.translateService.currentLang;
     }
 
   ionViewDidLoad() {
@@ -50,7 +47,7 @@ export class MyAccountPage {
   */
   getProfile() {
     let profileDetail:any;
-      this.httpService.get(this._urlProfileUrl).subscribe(data=>{
+    this.accountService.detail().subscribe(data => {
          profileDetail = data;
          this.firstName = profileDetail.customer_name;
          this.lastName = profileDetail.customer_last_name;
@@ -66,6 +63,7 @@ export class MyAccountPage {
     this.submitAttempt = true;
     
     if (this.profileForm.valid) {
+
       let paramas = {
         'customer_name':this.profileForm.value.firstName,
         'customer_last_name':this.profileForm.value.lastName,
@@ -74,14 +72,13 @@ export class MyAccountPage {
         'customer_mobile':this.profileForm.value.mobile,
         'customer_dateofbirth':this.profileForm.value.dob
       }
-      this.httpService.patch(this._urlProfileUrl,paramas).subscribe(data=>{
-      result = data;
-      let toast = this.toastCtrl.create({
-        message: result.message,
-        duration: 3000
+      this.accountService.update(paramas).subscribe(result => {
+        let toast = this.toastCtrl.create({
+          message: result.message,
+          duration: 3000
+        });
+        toast.present();  
       });
-      toast.present();  
-      })
     }
   }
 }
