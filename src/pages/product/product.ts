@@ -270,8 +270,8 @@ export class ProductPage {
    * method to load product area
    */
   loadProductArea(vendor_id) {
-    this.productService.loadProductArea(vendor_id).subscribe(areaList => {
-      this.vendorAreaList = areaList.json();
+    this.productService.loadProductArea(vendor_id).subscribe(result => {
+      this.vendorAreaList = result;
     });
   }
  
@@ -369,8 +369,8 @@ export class ProductPage {
    * date change
    */
   loadProductCapacity() {
-    this.productService.productCapacity(this.product_id, this.myDate).subscribe(jsonResponse => {
-      this.maxQuantity = parseInt(jsonResponse.json().capacity);
+    this.productService.productCapacity(this.product_id, this.myDate).subscribe(result => {
+      this.maxQuantity = parseInt(result.capacity);
     });
   }  
   

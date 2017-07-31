@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
+//Pages
 import { ProductPage } from '../../product/product';
+//Services
 import { HttpService } from '../../../providers/http.service';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
+import { ProductService } from '../../../providers/product.service';
+import { WishlistService } from '../../../providers/logged-in/wishlist.service';
 
 @Component({
   selector: 'page-my-wish-list',
@@ -12,7 +16,6 @@ import { GlobalService } from '../../../providers/global.service';
 
 export class MyWishListPage {
   
-  public _wishlistUrl: string = "/wishlist";
   public _categoryListUrl = '/category';
   public whishlist:any;
   public categoryList:any;
@@ -30,6 +33,8 @@ export class MyWishListPage {
     public toastCtrl : ToastController,
     public httpRequest: HttpService,
     public translateService: TranslateService,
+    public wishlistService: WishlistService,
+    public productService: ProductService,
     public _config: GlobalService
   ) {
     this.translateService.get('Remove wishlist product?').subscribe(value => {
@@ -51,8 +56,7 @@ export class MyWishListPage {
   /**
    * method to remove whishlist item
    */
-  removeProduct(wishlist_id:number) {
-    let url = this._wishlistUrl+'?wishlist_id='+wishlist_id + '&language=' + this.translateService.currentLang;
+  removeProduct(wishlist_id:number) {    
     let alert = this.alertCtrl.create({
       title : this.txtRemoveTitle,
       message : this.txtRemoveMessage,
@@ -61,7 +65,7 @@ export class MyWishListPage {
           text: 'Yes',
           handler:() => {
             let result:any;
-            this.httpRequest.delete(url).subscribe(data=>{
+            this.wishlistService.delete(wishlist_id).subscribe(data=>{
               result = data;
               this.list();
               let toast = this.toastCtrl.create({
@@ -96,8 +100,7 @@ export class MyWishListPage {
   */
   list(start: number = 0) {
       this.waiting = true;
-      let url = this._wishlistUrl +'?offset='+start+'&category_id='+this.category + '&language=' + this.translateService.currentLang;
-      this.httpRequest.get(url).subscribe(data=>{
+      this.wishlistService.list(start, this.category).subscribe(data=>{
          this.whishlist = data;
          this.waiting = false;
       })
@@ -110,22 +113,20 @@ export class MyWishListPage {
   doInfinite(infiniteScroll) {
     let items;
     this.start+=10;
-    let url = this._wishlistUrl +'?offset='+this.start+'&category_id='+this.category + '&language=' + this.translateService.currentLang;
-    this.httpRequest.get(url).subscribe(data=>{
+    this.wishlistService.list(this.start, this.category).subscribe(data => {
         items = data;
         for(let item of items) {
           this.whishlist.push(item);
         }
-      infiniteScroll.complete();
-    })
+        infiniteScroll.complete();
+    });
   }
 
-/**
- * method to show category listing
- */
+  /**
+   * method to show category listing
+   */
   loadCategoryList() {
-    let url = this._categoryListUrl + '?language=' + this.translateService.currentLang;
-    this.httpRequest.get(url).subscribe(data=>{
+    this.productService.getCategoryList().subscribe(data=>{
          this.categoryList = data;
     });
   }

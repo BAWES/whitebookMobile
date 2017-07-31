@@ -67,7 +67,7 @@ export class CartService {
     if(time_slot) 
       url += '&time_slot=' + time_slot;
 
-    return this.httpService.get(url + '&cart-session-id=' + this.cartSessionId);
+    return this.httpService.get(url + '&cart-session-id=' + this.cartSessionId, true);
   }
 
   /**
@@ -81,7 +81,8 @@ export class CartService {
 
     return this.httpService.post(
       this._urlCart  + '?cart-session-id=' + this.cartSessionId, 
-      params
+      params,
+      true
     );
   }
 
@@ -90,7 +91,7 @@ export class CartService {
    */
   delete(cart_id: number) {
     let url = this._urlCart+'?cart_id='+cart_id + '&cart-session-id=' + this.cartSessionId;
-    return this.httpService.delete(url);
+    return this.httpService.delete(url, true);
   }
 
   /**
@@ -98,6 +99,6 @@ export class CartService {
    */
   count() {
     let url = this._urlCart + '/count?cart-session-id=' + this.cartSessionId;
-    return this.httpService.get(url);
+    return this.httpService.get(url, true);
   }
 }

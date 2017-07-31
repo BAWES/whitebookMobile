@@ -3,6 +3,7 @@ import { ModalController, NavController } from 'ionic-angular';
 import { BookingDetailPage } from '../booking-detail/booking-detail';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
+import { BookingService } from '../../../providers/booking.service';
 
 @Component({
   selector: 'page-my-bookings',
@@ -19,6 +20,7 @@ export class MyBookingsPage {
     public httpService: HttpService,
     public navCtrl: NavController,
     public translateService: TranslateService,
+    public bookingService: BookingService
   ) { }
 
   ionViewWillEnter() {
@@ -30,26 +32,23 @@ export class MyBookingsPage {
   }
 
   list(start: number = 0) {
-     let url = this._urlBookingUrl + '?offset=' + start + '&language=' + this.translateService.currentLang;
-      this.httpService.get(url).subscribe(data=>{
-         this.bookingList = data;
-      })
+    this.bookingService.list(start).subscribe(data=>{
+       this.bookingList = data;
+    });
   }
 
-   /*
-  * Method perform infinite scroll which 
-  * will load more data just like pagination
-  */
+  /*
+   * Method perform infinite scroll which 
+   * will load more data just like pagination
+   */
   doInfinite(infiniteScroll) {
-    let url = this._urlBookingUrl + '?offset=' + this.start + '&language=' + this.translateService.currentLang;
     let bookings;
-     this.start += 20;
-      this.httpService.get(url).subscribe(data=>{
-         bookings = data;
-         for(let booking of bookings) {
-          this.bookingList.push(booking);
-        }
-        infiniteScroll.complete();
-      })
+    this.start += 20;
+    this.bookingService.list(this.start).subscribe(bookings => {
+      for(let booking of bookings) {
+        this.bookingList.push(booking);
+      }
+      infiniteScroll.complete();
+    });
   }
 }
