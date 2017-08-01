@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { MenuController, NavController } from 'ionic-angular';
 import { Home } from '../../home/home';
 
 @Component({
@@ -9,11 +9,20 @@ import { Home } from '../../home/home';
 
 export class CheckoutCompletedPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(
+    public navCtrl: NavController,
+    public menuCtrl: MenuController
+  ) {}
 
   dismiss() {
-    this.navCtrl.setRoot(Home).then(()=>{
+    this.navCtrl.setRoot(Home);
+    this.navCtrl.popToRoot();
+
+    /*this.navCtrl.setRoot(Home).then(data => {
       this.navCtrl.popToRoot();
-    })
+      this.menuCtrl.enable(true, 'menu1');
+      this.menuCtrl.enable(true, 'menu2');
+    });*/
   }
 }
+ 

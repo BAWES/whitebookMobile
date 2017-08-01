@@ -73,14 +73,15 @@ export class CheckoutConfirmPage {
       if(response.operation == 'success') 
       {
         this.navCtrl
-          .push(CheckoutCompletedPage, { arr_booking_id : response.arr_booking_id })
-          .then(() => {
+          .push(CheckoutCompletedPage, { arr_booking_id : response.arr_booking_id });
+
+          /*.then(() => {
             // first we find the index of the current view controller:
             const index = this.viewCtrl.index;
             // then we remove it from the navigation stack
             this.navCtrl.remove(index);
             this.navCtrl.remove(index - 1);//shipping page 
-          });
+          });*/
       }
       else
       {
