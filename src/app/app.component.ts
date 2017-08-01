@@ -205,7 +205,7 @@ export class MyApp {
   updateMenu() {
     // Setup the General Pages
     this.generalPages = [
-        { title : 'Packages', component:PackageListPage,icon:'archive', slug: null},
+        //{ title : 'Packages', component:PackageListPage,icon:'archive', slug: null},
         { title : 'Community', component: CommunityListPage, icon:'list', slug: null},
         { title : 'Become a Vendor', component:BecomeVendorPage, icon:'envelope-o', slug: null},
         { title : 'Contact', component:Contact,icon:'wpforms', slug: null},
