@@ -16,7 +16,7 @@
     </ion-buttons>-->
     <ion-buttons end>
       <ion-badge *ngIf="cartCount > 0" class="cart-indicator" color="danger">{{ cartCount }}</ion-badge>
-      <button ion-button (click)="openModel()" >
+      <button ion-button (click)="gotoCart()" >
         <ion-icon name="cart"></ion-icon>
       </button>
     </ion-buttons>
@@ -26,7 +26,7 @@
 <ion-content padding>
       <h1 class="logo"></h1>
       <h4 text-center>{{ "Book everything you need for your event" | translate }}</h4>
-      <h6 text-center>{{ "You pick, we take care of the rest. Your friends will be jealous, guaranteed!" | translate }}</h6>
+      <h6 text-center>{{ "You pick, we take care of the rest. Your friends will be jealous, guaranteed!" | translate }}</h6>      
       <div class="selectbox">
         <ion-select placeholder="{{ 'Whats your occasion?' | translate }}" [(ngModel)]="themeID" id="themeID" (ionChange)="showData()" [selectOptions]="selectOptions">
           <ion-option value="0">{{ "All Themes" | translate }}</ion-option>

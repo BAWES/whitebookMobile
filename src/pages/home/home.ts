@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, ModalController } from 'ionic-angular';
+import { MenuController, NavController, ModalController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { CheckoutCompletedPage } from '../checkout/checkout-completed/checkout-completed';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
 
@@ -33,10 +34,15 @@ export class Home {
     public httpService: Http,
     public cartService: CartService,
     public _config: GlobalService,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    public menuCtrl: MenuController
     ) {
     this._urlThemeUrl = this._config.apiBaseUrl + '/themes';
     this.loadThemeList();
+
+    this.menuCtrl.enable(true, 'menu1');
+    //  this.menuCtrl.enable(true, 'menu2');
+ 
   }
   
   ionViewWillEnter() {    
@@ -46,12 +52,8 @@ export class Home {
   mySlideOptions = {initialSlide: 1,loop: true,autoplay:true,speed :3000,pager : true};
   categorySlideOptions = {initialSlide: 1,loop: true,autoplay:false,speed :3000,slidesPerView: 2};
   
-  openModel() {
-    let modal = this.modalCtnl.create(CheckoutCartPage);
-    modal.present();
-    modal.onDidDismiss(data => { 
-      this.getCartCount();
-    });
+  gotoCart() {
+    this.navCtrl.push(CheckoutCartPage);
   }
   
   getCartCount() {

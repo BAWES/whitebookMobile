@@ -62,11 +62,7 @@ export class ListingPage {
   }
   
   openModel() {
-    let modal = this.modalCtnl.create(CheckoutCartPage);
-    modal.present();
-    modal.onDidDismiss(data => { 
-      this.getCartCount();
-    });
+    this.navCtrl.push(CheckoutCartPage);
   }
 
   getCartCount() {
