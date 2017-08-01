@@ -52,6 +52,8 @@ export class CheckoutCartPage {
       this.delivery_date = window.localStorage.getItem('delivery-date');
       this.event_time = window.localStorage.getItem('event_time');
 
+      console.log(this.event_time);
+      
       this.setDates();
     }
 
