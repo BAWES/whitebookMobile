@@ -1,9 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      {{ "Confirm Your Booking" | translate }}
-    </ion-title>
-  </ion-toolbar>
+  <ion-navbar>
+    <ion-title>{{ "Confirm Your Booking" | translate }}</ion-title>
+  </ion-navbar>
 </ion-header>
 <ion-content padding>
 
@@ -87,10 +85,6 @@
 
   <ion-item text-center checkout-btn *ngIf="errors.length == 0">
     <button ion-button round width-99 padding color="dark" (click)="confirm()"> {{ "Confirm" | translate }}</button>
-  </ion-item>
-
-  <ion-item text-center checkout-btn>
-    <button ion-button round width-99 padding (click)="back()"> {{ "Back" | translate }}</button>
   </ion-item>
 
 </ion-content>

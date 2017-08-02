@@ -5,14 +5,62 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{ "Select Shipping Address" | translate }}</ion-title>
+    <ion-title>{{ "Shipping Address" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list radio-group [(ngModel)]="address_id">
+
+  <!-- address form if no addresses --> 
+  
+  <form [formGroup]="addressForm" (ngSubmit)="saveAddress()" *ngIf="showAddressForm">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>{{ "Name" | translate }}*</ion-label>
+        <ion-input [(ngModel)]="addressName" formControlName="addressName" type="text"></ion-input>
+        <p *ngIf="addressForm.controls['addressName'].errors && addressForm.controls['addressName'].dirty">
+           {{ "Name field required" | translate }}
+        </p>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ "Type" | translate }}*</ion-label>
+        <ion-select [(ngModel)]="addressType" (ionChange)="loadQuestions(addressType)" formControlName="addressType">
+          <ion-option *ngFor= "let type of addressTypeData" value="{{type.type_id}}">{{ _config.translate(type.type_name, type.type_name_ar) }}</ion-option>
+        </ion-select>
+        <p *ngIf="addressForm.controls['addressType'].errors && addressForm.controls['addressType'].dirty">
+          {{ "Type field required" | translate }}
+        </p>
+      </ion-item>
+      <!--<div *ngIf="questionsAnswersResponse">
+      <ion-item *ngFor="let answerResponse of questionsAnswersResponse">
+          <ion-label fixed>{{answerResponse.question}}</ion-label><ion-label *ngIf="answerResponse.required == 1">*</ion-label>
+          <ion-input [(ngModel)]="questionsAnswers[answerResponse.question_id]" class="class_{{answerResponse.question_id}}" [ngModelOptions]="{standalone: true}">{{answerResponse.response_text}}</ion-input>
+      </ion-item>
+      </div>-->
+      <div *ngIf="locationQuestion">
+        <ion-item *ngFor="let question of locationQuestion">
+          <ion-label stacked>
+            {{ _config.translate(question?.question, question?.question_ar) }}
+            <span *ngIf="question.required == 1">*</span>
+          </ion-label>
+          <ion-input required [value]="questionsAnswers[question.ques_id]" [(ngModel)]="questionsAnswers[question.ques_id]" class="class_{{question.ques_id}}" [ngModelOptions]="{standalone: true}"></ion-input>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label stacked>{{ "Other direction or note" | translate }}*</ion-label>
+        <ion-input [(ngModel)]="addressData" type="text" formControlName="addressData"></ion-input>
+        <p *ngIf="addressForm.controls['addressData'].errors && addressForm.controls['addressData'].dirty">
+          {{ "Other direction or note field required" | translate }}
+        </p>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button round full color="dark">{{ "Next" | translate }}</button>
+    </div>
+  </form>
+
+  <ion-list radio-group [(ngModel)]="address_id" *ngIf="!showAddressForm">
     <ion-list-header>
       {{ "List Of shipping Address for" | translate }} : {{ deliveryLocation }} 
     </ion-list-header>
@@ -32,19 +80,19 @@
 
   </ion-list>
 
-  <ion-item text-center no-border>
+  <ion-item text-center no-border *ngIf="!showAddressForm">
     <button width-99 round ion-button color="dark" padding-17 add-to-cart (click)="confirmPage()"> 
       {{ "Next" | translate}}
     </button>
   </ion-item>
   
-  <ion-item text-center no-border>
+  <ion-item text-center no-border *ngIf="!showAddressForm">
     <button width-99 round ion-button color="dark" padding-17 (click)="newAddressModal()"> 
       {{ "Add New Address" | translate }}
     </button>
   </ion-item>
   
-  <ion-item text-center checkout-btn >
+  <ion-item text-center checkout-btn *ngIf="!showAddressForm">
     <button ion-button padding-17 width-99 round outline (click)="cartModelPage()"> 
       {{ "Back To Cart" | translate }}
     </button>
