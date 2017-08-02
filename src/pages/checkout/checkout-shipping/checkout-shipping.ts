@@ -1,26 +1,32 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ModalController } from 'ionic-angular';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+//Pages
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
 import { CreateAddressPage } from '../../account/create-address/create-address';
+//Services
 import { AddressService } from '../../../providers/address.service';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
 
-/*
-  Generated class for the CheckoutShipping page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-checkout-shipping',
   templateUrl: 'checkout-shipping.html'
 })
 export class CheckoutShippingPage {
 
+  public addressForm: FormGroup;
+
   public addresses: any;
   public address_id: number;
   public deliveryLocation: string;
+  public showAddressForm: boolean = false; 
+  
+  //address form variable 
+  public addressTypeData: any;
+  public locationQuestion: any;
+  public questionsAnswers: any = [];
+  public questionsAnswersResponse: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -28,10 +34,17 @@ export class CheckoutShippingPage {
     public translateService: TranslateService,
     public _alertCtrl : AlertController,
     public _modalCtrl: ModalController,
-    public _config: GlobalService
-  ) {}
+    public _config: GlobalService,
+    public formBuilder: FormBuilder
+  ) {
+    this.addressForm = this.formBuilder.group({
+        addressName: ['', Validators.required],
+        addressType: ['', Validators.required],
+        addressData: ['', Validators.required],
+      });
+  }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.loadData();
   }
 
@@ -46,8 +59,12 @@ export class CheckoutShippingPage {
     this.addressService.listAll(area_id).subscribe(data=>{
          this.addresses = data;
 
-         if(this.addresses.length == 0)
-          this.newAddressModal();
+         if(this.addresses.length == 0) {
+           this.loadAdressTypes();
+           this.showAddressForm = true;
+         } else {
+           this.showAddressForm = false;
+         }          
       });
   }
 
@@ -83,5 +100,75 @@ export class CheckoutShippingPage {
         this.loadData(); // load list again
       });
     });
+  }
+  
+  /*
+  * load questions of address type
+  */
+  loadQuestions(address_type_id : number) {
+    this.addressService.loadQuestions(address_type_id).subscribe(data => {
+      this.locationQuestion = data;
+      this.questionsAnswers[0]= null;
+      this.locationQuestion.forEach((question,index) => {
+        this.questionsAnswers[question.ques_id] = '';
+        
+        this.questionsAnswersResponse.forEach((answers,index) => {
+          if (answers.address_type_question_id == question.ques_id) {
+              this.questionsAnswers[question.ques_id] = answers.response_text;
+          }
+        });
+      });
+    });
+  }
+  
+  /**
+   * load address type
+   */
+  loadAdressTypes() {
+    this.addressService.loadAdressTypes().subscribe(data => {
+      this.questionsAnswers = [];
+      this.addressTypeData = data;
+    })
+  }
+
+  /**
+   * save address
+   */
+  saveAddress() {
+    
+    if (this.addressForm.valid) {
+
+      let paramas = {
+        'address_type_id':this.addressForm.value.addressType,
+        'area_id': window.localStorage.getItem('delivery-location'),
+        'address_name':this.addressForm.value.addressName,
+        'address_data':this.addressForm.value.addressData,
+        'questions_answers':this.questionsAnswers,
+        "address_archived": "no",
+      }
+      
+      this.addressService.add(paramas).subscribe(result => {       
+        console.log(result);
+        if (result.operation == "success") {
+          this.navCtrl.push(CheckoutConfirmPage, { address_id: result.address_id });
+        } else {
+          let alert = this._alertCtrl.create({
+            subTitle: result.message,
+            buttons: ['Okay!']
+          });
+          alert.present();        
+        }
+      });
+      
+    } else {
+
+      this.translateService.get('Please check form carefully').subscribe(value => {
+        let alert = this._alertCtrl.create({
+          subTitle: value,
+          buttons: ['Okay!']
+        });
+        alert.present();
+      });      
+    }
   }
 }
