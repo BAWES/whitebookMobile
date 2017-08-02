@@ -16,6 +16,25 @@ export class ProductService {
     ) { } 
     
     /**
+     * Search products
+     * @param searchText 
+     * @param offset 
+     */
+    search(searchText: string, offset: number = 0) {
+        let url = '/search?q=' + searchText + '&offset=0';
+        return this.httpService.get(url);  
+    }
+
+    /**
+     * List products
+     * @param params 
+     */
+    list(params: string) {
+        let url = this._urlProduct + '/list' + params;
+        return this.httpService.get(url);  
+    }
+
+    /**
      * Load product detail 
      * @param product_id 
      */

@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-
+// Products
 import { ProductPage } from '../product/product';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { SearchFilterPage } from '../search-filter/search-filter';
+// Services 
 import { GlobalService } from '../../providers/global.service';
 import { CartService } from '../../providers/cart.service';
+import { ProductService } from '../../providers/product.service';
 
 @Component({
   selector: 'page-listing',
@@ -15,7 +17,6 @@ import { CartService } from '../../providers/cart.service';
 })
 export class ListingPage {
   
-  public _urlProductListing = '';
   public _urlParamas:string = '';
   public title : string;
   public title_ar : string;
@@ -32,10 +33,10 @@ export class ListingPage {
     public modalCtnl: ModalController,
     public httpService: Http,
     public cartService: CartService,
+    public productService: ProductService,
     public _config: GlobalService
   ) {
     this._urlParamas = '';
-    this._urlProductListing = this._config.apiBaseUrl + '/product/list';
   }
 
   ionViewDidLoad() {
@@ -58,7 +59,7 @@ export class ListingPage {
   } 
 
   productDetail(id) {
-    this.navCtrl.push(ProductPage,{productId:id});
+    this.navCtrl.push(ProductPage, { productId:id });
   }
   
   openModel() {
@@ -143,12 +144,9 @@ export class ListingPage {
    * Load product listing
    */
   loadProducts() {
-    this.httpService.get(this._urlProductListing+'?offset=0'+this._urlParamas)
-      .subscribe(
-        data => {
-          this.products = data.json();
-        }
-      );
+    this.productService.list('?offset=0' + this._urlParamas).subscribe(result => {
+      this.products = result;
+    });
   }
 
   /*
@@ -156,16 +154,13 @@ export class ListingPage {
   * will load more data just like pagination
   */
   doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
     let items;
-    this.start+=10;
-    this.httpService.get(this._urlProductListing +'?offset='+this.start+this._urlParamas).subscribe(data=>{
-        items = data.json();
-        for(let item of items) {
+    this.start += 10;
+    this.productService.list('?offset=' + this.start + this._urlParamas).subscribe(items => {
+      for(let item of items) {
           this.products.push(item);
-        }
-      console.log('Begin async operation');
+      }
       infiniteScroll.complete();
-    })
+    });
   }
 }
