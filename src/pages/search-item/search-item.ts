@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController,ViewController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
-
-import { GlobalService } from '../../providers/global.service';
-import { TranslateService } from '@ngx-translate/core';
+// Pages
 import { ProductPage } from '../product/product';
+// Services 
+import { TranslateService } from '@ngx-translate/core';
+import { GlobalService } from '../../providers/global.service';
+import { ProductService } from '../../providers/product.service';
 
 @Component({
   selector: 'page-search-item',
@@ -14,7 +16,6 @@ import { ProductPage } from '../product/product';
 
 export class SearchItemPage {
 
-  public _searchUrl:string = '';
   public items: any;
   public searching: any = false;
 
@@ -23,10 +24,9 @@ export class SearchItemPage {
     public viewCtrl: ViewController,
     public httpRequest: Http,
     public _config: GlobalService,
-    public translateService: TranslateService
-  ) {
-    this._searchUrl = this._config.apiBaseUrl + '/search?q=';
-  }
+    public translateService: TranslateService,
+    public productService: ProductService
+  ) { }
 
   ionViewDidLoad() {
     this.loadItems('All');
@@ -38,12 +38,10 @@ export class SearchItemPage {
    * @memberof SearchItemPage
    */
   loadItems(searchText:string = 'All') {
-    this.httpRequest
-      .get(this._searchUrl + searchText + '&offset=0')
-      .subscribe((data)=> {
-          this.items = data.json();
-          this.searching = false;
-      });
+    this.productService.search(searchText).subscribe(result => {
+      this.items = result;
+      this.searching = false;
+    });
   }
 
   /**
