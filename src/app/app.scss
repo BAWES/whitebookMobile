@@ -15,6 +15,16 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+$app-direction: multi;
+
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+ion-app {
+    @include rtl() {
+        font-family: 'Droid Arabic Kufi', serif !important;
+    }    
+}
+
 i.venues-category{background: url(../assets/images/sprit.png) no-repeat -3px -8px;}
 i.invitation-category{background:  url(../assets/images/sprit.png) no-repeat -83px -12px;}
 i.supply-category{background: url(../assets/images/sprit.png) no-repeat  -292px -11px;}
