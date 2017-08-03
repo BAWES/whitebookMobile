@@ -2,14 +2,21 @@ page-listing {
     .category-product-listing {
         padding-top: 20px;
     }
-    .category-product-listing .name,.category-product-listing .vendor,.category-product-listing .price{font-size: 13px;color:#000;font-weight: normal;}
+    .category-product-listing .name,
+    .category-product-listing .vendor,
+    .category-product-listing .price { 
+        font-size: 13px;
+        color:#000;
+        font-weight: normal;
+        text-align: center;
+    }
     .category-product-listing .vendor,
     .category-product-listing .price{margin: 0px;font-weight: normal;margin-bottom: 6px;}
     .category-product-listing .name{margin-top: 9px;margin-bottom:3px;}
     .category-product-listing .price{margin-bottom:17px;}
     .category-product-listing img {
-        height: 180px;
-        width: 180px;
+        height: auto;
+        width: 100%;
     }
     .bar-buttons-md[end][text-center] {text-align: center;}
     .top-filter-tool-bar.item-ios.item-block .item-inner{border: none;}

@@ -27,8 +27,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<ion-grid class="category-product-listing {{productView}}">
-    <ion-list class="scroll-content" *ngFor="let product of products" class="product-items" (click)="productDetail(product.item_id)">
+  <ion-grid class="category-product-listing {{productView}}">
+    <ion-row>
+      <ion-col class="scroll-content" *ngFor="let product of products" align-items-center col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 class="product-items" (click)="productDetail(product.item_id)">
         <button detail-none ion-item>
           <div class="gallery-section">
             <!--
@@ -47,7 +48,7 @@
             <h4 class="name">
               <strong>{{ _config.translate(product.item_name, product.item_name_ar) }}</strong>
             </h4>
-            
+            <h4 class="vendor"> {{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h4>            
             <h6 class="price">
               <span *ngIf="product.item_base_price > 0">
                  KD {{ product.item_base_price }}
@@ -58,16 +59,16 @@
               <span *ngIf="!product.item_base_price && !product.min_order_amount">
                  {{ "Price based on selection" | translate }} 
               </span>
-            </h6>
-
-            <h4 class="vendor"> {{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h4>
+            </h6>            
           </div>
         </button>
-      </ion-list>
-      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <div *ngIf="products !== undefined && !products.length" class="no-results">
     <h3 text-center>{{ "No Product Found" | translate }}</h3>
