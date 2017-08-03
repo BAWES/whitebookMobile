@@ -5,6 +5,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateService, TranslatePipe, TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 // Ionic Native
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -124,6 +125,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   ],
   imports: [
     BrowserModule,
+    LazyLoadImageModule, 
     HttpModule,
     IonicModule.forRoot(MyApp),    
     IonicStorageModule.forRoot(),

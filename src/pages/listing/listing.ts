@@ -27,6 +27,9 @@ export class ListingPage {
   public start:number = 0;
   public cartCount:number = 0;
 
+  public defaultImage = 'assets/images/item-default.png';
+  public imageOffset = 100;
+
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,

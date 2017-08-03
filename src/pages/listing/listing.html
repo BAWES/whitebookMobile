@@ -35,7 +35,7 @@
             <ion-icon class="like-icon" name="heart-outline"></ion-icon>
             -->
             <ion-thumbnail class="avatarImage">
-              <img src="{{_config.images_530}}/{{product.image}}" >
+              <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + product.image" [offset]="imageOffset">
             </ion-thumbnail>
             <div *ngIf="product.notice != ''" class="callout-container">
                 <span class="callout light">
