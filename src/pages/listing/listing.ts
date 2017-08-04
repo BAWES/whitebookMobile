@@ -17,15 +17,16 @@ import { ProductService } from '../../providers/product.service';
 })
 export class ListingPage {
   
-  public _urlParamas:string = '';
+  public _urlParamas: string = '';
   public title : string;
   public title_ar : string;
   public id : any;
-  public productView :string;
-  public category:any;
-  public products : any;
-  public start:number = 0;
-  public cartCount:number = 0;
+  public productView: string;
+  public category: any;
+  public products: any;
+  public start: number = 0;
+  public cartCount: number = 0;
+  public filterCount: number = 1;
 
   public defaultImage = 'assets/images/item-default.png';
   public imageOffset = 100;
@@ -53,6 +54,8 @@ export class ListingPage {
     {
       this._urlParamas = '&requestedTheme='+this._params.get('themeID');  
     }    
+    
+    this.setDefaultDeliveryDate();
 
     this.loadProducts();
   }
@@ -84,6 +87,12 @@ export class ListingPage {
     modal.present();
   }
 
+  setDefaultDeliveryDate() {
+    let today = new Date();
+    today.setHours(0,0,0);
+    this._urlParamas = '&requestedDeliverDate=' + today.toISOString().substring(0,10);
+  }
+
   /**
    * Creates an object from URL encoded data
    */
@@ -110,6 +119,10 @@ export class ListingPage {
     return params;
   }
 
+  updateFilterCount() {
+
+  }
+
   searchFilter() {
     let urlParams = this.createObjFromURI(this._urlParamas);
     
@@ -117,27 +130,42 @@ export class ListingPage {
     modal.present();
     modal.onDidDismiss(data => {
       this._urlParamas = '&category_id='+this.id;
-  
-      if(data && data.filterDeliveryArea)
+      this.filterCount = 0;
+
+      if(data && data.filterDeliveryArea && data.filterDeliveryArea != '') {
         this._urlParamas += '&requestedLocation=' + data.filterDeliveryArea;
+        this.filterCount++;
+      }        
 
-      if(data && data.filterDeliveryDate)
+      if(data && data.filterDeliveryDate && data.filterDeliveryDate != '') {
         this._urlParamas += '&requestedDeliverDate='+data.filterDeliveryDate;
+        this.filterCount++;
+      }        
       
-      if(data && data.filterDeliveryTime)
+      if(data && data.filterDeliveryTime && data.filterDeliveryTime != '') {
         this._urlParamas += '&requestedDeliverTime='+data.filterDeliveryTime;
+        this.filterCount++;
+      }       
 
-      if(data && data.filterMinPrice)
+      if(data && data.filterMinPrice && data.filterMinPrice != '') {
         this._urlParamas += '&requestedMinPrice='+data.filterMinPrice;
+        this.filterCount++;
+      }        
 
-      if(data && data.filterMaxPrice)
+      if(data && data.filterMaxPrice && data.filterMaxPrice != '') { 
         this._urlParamas += '&requestedMaxPrice='+data.filterMaxPrice;
-      
-      if(data && data.filterVendors)
-        this._urlParamas += '&requestedVendor='+data.filterVendors;
+        this.filterCount++;
+      }
 
-      if(data && data.filterTheme)
+      if(data && data.filterVendors && data.filterVendors != '') {
+        this._urlParamas += '&requestedVendor='+data.filterVendors;
+        this.filterCount++;
+      }
+
+      if(data && data.filterTheme && data.filterTheme != '') {
         this._urlParamas += '&requestedTheme='+data.filterTheme;
+        this.filterCount++;
+      }
 
       this.loadProducts();
     });

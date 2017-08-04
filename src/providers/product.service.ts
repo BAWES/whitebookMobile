@@ -129,7 +129,7 @@ export class ProductService {
      * Load category list 
      */
     getCategoryList() {        
-        let url = this._urlProduct + '/category?language=' + this.translateService.currentLang;
+        let url = '/category?language=' + this.translateService.currentLang;
         return this.httpService.get(url);
     }
 }

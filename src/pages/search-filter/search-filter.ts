@@ -57,7 +57,7 @@ export class SearchFilterPage {
 
   ionViewDidLoad() {
       
-    if(!this.filterDeliveryDate)
+      if(!this.filterDeliveryDate)
         this.setDefaultDeliveryDate();
 
       this.loadProductArea();
@@ -80,6 +80,7 @@ export class SearchFilterPage {
     this.filterDeliveryTime = null;
     this.filterVendors = [];
     this.filterTheme = [];     
+    this.filterPrice = {lower: this.minRange, upper: this.maxRange}; 
   }
 
   dismiss() {
@@ -89,8 +90,8 @@ export class SearchFilterPage {
       'filterDeliveryArea':this.filterDeliveryArea,
       // 'filterAvailableForSale':this.filterAvailableForSale,
       // 'filterCategory': this.filterCategory,
-      'filterMinPrice':this.filterPrice.lower,
-      'filterMaxPrice':this.filterPrice.upper,
+      'filterMinPrice': this.filterPrice.lower != this.minRange ? this.filterPrice.lower : null,
+      'filterMaxPrice':this.filterPrice.upper != this.maxRange ? this.filterPrice.upper : null,
       'filterTheme':this.filterTheme,
       'filterVendors':this.filterVendors
     }

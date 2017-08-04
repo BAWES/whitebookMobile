@@ -28,7 +28,10 @@ page-listing {
     .grid-icon{margin-left:17px;}
     .filter-icon{margin-top: 11px;}
     .order-by-icon{margin-right: 13px !important;}
-    .search-icon{margin-right: 17px !important;}
+    .search-icon{
+        margin-right: 15px;
+        margin-left: 10px;
+    }
     .like-icon{position: absolute;bottom:3px;right: 14px;color: #fff;}
     .category-product-listing ion-col {position: relative;}
     .product-items{width:100%;}
@@ -46,5 +49,10 @@ page-listing {
     .top-filter-tool-bar button{background: none;}
     ion-img, ion-img img {min-width: 250px;min-height: 250px;}
     .callout-container {    width: 100px;position: absolute;left: 15px;font-size: 11px;top: 152px;background: #fff;padding: 2px;}
+    .top-filter-tool-bar ion-badge.badge {
+        position: absolute;
+        top: 8px;
+        background: red;
+    }
 }
     
