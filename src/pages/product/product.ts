@@ -8,6 +8,7 @@ import { ProductImagePage } from '../product-image/product-image';
 import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 //Services
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../providers/global.service';
 import { CartService } from '../../providers/cart.service';
@@ -79,7 +80,8 @@ export class ProductPage {
     public productService: ProductService,
     public wishlistService: WishlistService,
     public auth: Authentication,
-    private youtube: YoutubeVideoPlayer
+    private youtube: YoutubeVideoPlayer,
+    private socialSharing: SocialSharing
   ) {
     this.setDates();
 
@@ -104,6 +106,18 @@ export class ProductPage {
   ionViewWillEnter() {    
     this.getCartCount();
   } 
+
+  share() {
+    let message = this._config.translate(this.product.item.item_name, this.product.item.item_name_ar);
+    let subject = 'WhiteBook';
+    let file = '';
+    let url = this._config.frontend + '/browse/detail/' + this.product.item.slug;
+    this.socialSharing.share(message, subject, file, url).then(() => {
+      // Success! 
+    }).catch(() => {
+      // Error!
+    });
+  }
 
   /**
 	 * Sets the default dates for min/max validation
