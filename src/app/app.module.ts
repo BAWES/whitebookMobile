@@ -12,6 +12,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 // App Imports
 import { MyApp } from './app.component';
@@ -184,7 +185,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
         deps: [Http]
     },
     TranslateService,
-    
+    SocialSharing,
     GlobalService,
     Authentication,
     IonicStorageModule,

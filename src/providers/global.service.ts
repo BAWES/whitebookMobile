@@ -12,7 +12,8 @@ import { EnvConfig } from '../app/environments/environments.token';
 export class GlobalService {
 
   // Endpoint Urls
-  public apiBaseUrl :string;
+  public apiBaseUrl: string;
+  public frontend: string;
 
   public s3 = 'https://thewhitebook.s3.amazonaws.com';
   public images_210 = this.s3 + '/vendor_item_images_210';
@@ -36,6 +37,7 @@ export class GlobalService {
 
       // Set base API endpoint based on env config
       this.apiBaseUrl = this.envConfig.apiEndpoint;
+      this.frontend = this.envConfig.frontend;
 
       this.setupDeviceSpecificConfigs();
   }
