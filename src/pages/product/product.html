@@ -7,10 +7,15 @@
       </button>
     </ion-buttons>-->
     <ion-buttons end>
+      <button ion-button (click)="openSearchModel()" >
+        <ion-icon class="search-icon" name="search"></ion-icon>
+      </button>
+    </ion-buttons>    
+    <ion-buttons end>
       <ion-badge *ngIf="cartCount > 0" class="cart-indicator" color="danger">{{ cartCount }}</ion-badge>
       <button ion-button (click)="openModel()" >
         <ion-icon name="cart"></ion-icon>
-      </button>
+      </button>  
     </ion-buttons>
   </ion-navbar>
 </ion-header>
