@@ -16,8 +16,12 @@
   <ion-toolbar>
     <ion-row no-line class="top-filter-tool-bar">
         <ion-col text-left>
-          <button (click)="changeView('list-view')" left float-left><ion-icon class="list-icon" name="menu"></ion-icon></button>
-          <button (click)="changeView('grid-view')" left float-left ><ion-icon class="grid-icon" name="apps"></ion-icon></button>
+          <button (click)="changeView('list-view')" left float-left *ngIf="productView != 'list-view'">
+            <ion-icon class="list-icon" name="menu"></ion-icon>
+          </button>          
+          <button (click)="changeView('grid-view')" left float-left *ngIf="productView != 'grid-view'">
+            <ion-icon class="grid-icon" name="apps"></ion-icon>
+          </button>
         </ion-col>
         <ion-col text-right>
             <button (click)="searchFilter()">
@@ -31,8 +35,46 @@
 </ion-header>
 <ion-content>
   <ion-grid class="category-product-listing {{productView}}">
-    <ion-row>
+    
+    <ion-row  *ngIf="productView == 'grid-view'">
       <ion-col class="scroll-content" *ngFor="let product of products" align-items-center col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 class="product-items" (click)="productDetail(product.item_id)">
+        <button detail-none ion-item>
+          <div class="gallery-section">
+            <!--
+            <ion-icon class="like-icon" name="heart-outline"></ion-icon>
+            -->
+            <ion-thumbnail class="avatarImage">
+              <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + product.image" [offset]="imageOffset">
+            </ion-thumbnail>
+            <div *ngIf="product.notice != ''" class="callout-container">
+                <span class="callout light">
+                   {{ "Notice" | translate }} : {{product.notice}}
+                </span>
+            </div>
+          </div>
+          <div class="detail-section text-center">
+            <h4 class="name">
+              <strong>{{ _config.translate(product.item_name, product.item_name_ar) }}</strong>
+            </h4>
+            <h4 class="vendor"> {{ _config.translate(product.vendor_name, product.vendor_name_ar) }}</h4>            
+            <h6 class="price">
+              <span *ngIf="product.item_base_price > 0">
+                 KD {{ product.item_base_price }}
+              </span>
+              <span *ngIf="!product.item_base_price && product.min_order_amount > 0">
+                 KD {{ product.min_order_amount }}
+              </span>
+              <span *ngIf="!product.item_base_price && !product.min_order_amount">
+                 {{ "Price based on selection" | translate }} 
+              </span>
+            </h6>            
+          </div>
+        </button>
+      </ion-col>
+    </ion-row>  
+
+    <ion-row *ngIf="productView == 'list-view'" >  
+      <ion-col class="scroll-content" *ngFor="let product of products" align-items-center col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 class="product-items" (click)="productDetail(product.item_id)">
         <button detail-none ion-item>
           <div class="gallery-section">
             <!--
