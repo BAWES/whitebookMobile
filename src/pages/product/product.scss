@@ -12,9 +12,9 @@ page-product {
 }
 .product-detail-like-icon button{background: #fff;}
 .product-detail-like-icon button ion-icon{font-size: 21px;}
-.product-detail h2{    margin-top: 66px;font-size: 24px;text-align: center;font-weight: bold;}
+.product-detail h2.title { margin-top: 66px;font-size: 24px;text-align: center;font-weight: bold;}
 .product-detail h3{font-size: 13px;margin: 8px 0;}
-.product-detail h4{font-size: 20px;font-weight: bold;margin-bottom: 30px;padding-bottom: 30px;border-bottom: 1px solid #dedede;}
+.product-detail h4.price { font-size: 20px;font-weight: bold;margin-bottom: 30px;padding-bottom: 30px;border-bottom: 1px solid #dedede;}
 .product-detail ion-slides{margin: 32px 0;}
 .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {border-color: #000;opacity: 1;background: #000;color: #fff;}
 .segment-button{color:#000!important; }
@@ -86,3 +86,34 @@ page-product {
     margin-left: 10px;
     font-size: 25px;
 }
+
+.category-product-listing .name,
+.category-product-listing .vendor,
+.category-product-listing .price { 
+    font-size: 13px;
+    color:#000;
+    font-weight: normal;
+    text-align: center;
+}
+.category-product-listing .vendor,
+.category-product-listing .price{margin: 0px;font-weight: normal;margin-bottom: 6px;}
+.category-product-listing .name{margin-top: 9px;margin-bottom:3px;}
+.category-product-listing .price{margin-bottom:17px;}
+.category-product-listing img {
+    height: auto !important;
+    width: 100% !important;
+}
+
+// Grid View
+.grid-view .product-items{ width: 50%; float: left;text-align: center;padding: 0px;}
+.grid-view .list-md .label-md{margin: 0px; }
+
+.vendor{font-weight: bold;}
+
+.search-icon{
+        margin-right: 15px;
+        margin-left: 10px;
+    }
+    .like-icon{position: absolute;bottom:3px;right: 14px;color: #fff;}
+    .category-product-listing ion-col {position: relative;}
+    .product-items{width:100%;}

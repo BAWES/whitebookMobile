@@ -24,26 +24,26 @@ import { WishlistService } from '../../providers/logged-in/wishlist.service';
 })
 
 export class ProductPage {
- 
-  public cartCount:number = 0;
-  public productSection:string = "pdescription";
-  public product_id:number;
-  public product : any;
+
+  public cartCount: number = 0;
+  public productSection: string = "pdescription";
+  public product_id: number;
+  public product: any;
   public vendorAreaList: any;
-  
-  public timeslots:any = [];
-  public quantity:number = 1;
-  public maxQuantity:number = 0;
-  public minQuantity:number = 1;
-  public dateChange:boolean=false;
-  public wishlistID:number=0;
-  public wishlistLbl:string;
+
+  public timeslots: any = [];
+  public quantity: number = 1;
+  public maxQuantity: number = 0;
+  public minQuantity: number = 1;
+  public dateChange: boolean = false;
+  public wishlistID: number = 0;
+  public wishlistLbl: string;
   //form variables
-  public productForm:FormGroup;
-  public area:number;
-  public myDate:any;
-  public slots:any;
-  public submitAttempt:boolean = false;
+  public productForm: FormGroup;
+  public area: number;
+  public myDate: any;
+  public slots: any;
+  public submitAttempt: boolean = false;
   public total: number;
   public menuItem: any = [];
   public female_service: number;
@@ -59,12 +59,15 @@ export class ProductPage {
   public maxDate;
 
   mySlideOptions = {
-      initialSlide: 1,
-      loop: true,
-      autoplay:true,
-      speed :3000,
-      pager : true
-    };
+    initialSlide: 1,
+    loop: true,
+    autoplay: true,
+    speed: 3000,
+    pager: true
+  };
+
+  public defaultImage = 'assets/images/item-default.png';
+  public imageOffset = 100;
 
   constructor(
     private _params: NavParams,
@@ -87,15 +90,15 @@ export class ProductPage {
     this.setDates();
 
     this.product_id = this._params.get('productId');
-    
+
     this.currentTime = new Date().getTime();
 
     //form validation
     this.productForm = this.formBuilder.group({
-        area: ['', Validators.required],
-        myDate: ['', Validators.required],
-        slots: ['', Validators.required],
-      });
+      area: ['', Validators.required],
+      myDate: ['', Validators.required],
+      slots: ['', Validators.required],
+    });
 
     this.isUserLogged = this.auth.getAccessToken();
 
@@ -104,9 +107,9 @@ export class ProductPage {
     });
   }
 
-  ionViewWillEnter() {    
+  ionViewWillEnter() {
     this.getCartCount();
-  } 
+  }
 
   share() {
     let message = this._config.translate(this.product.item.item_name, this.product.item.item_name_ar);
@@ -123,20 +126,20 @@ export class ProductPage {
   /**
 	 * Sets the default dates for min/max validation
 	 */
-	setDates(){
-    
-		let today = new Date();
-		
-    today.setHours(0,0,0);
-    this.todayStr  = today.toISOString().substring(0,10);
-    
-    var dd = today.getDate();
-		var mm = today.getMonth(); // 0 is January, so we must add 1
-		var yyyy = today.getFullYear();
+  setDates() {
 
-		this.todayDate = new Date((yyyy), mm, dd).toISOString();
-		this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
-	}
+    let today = new Date();
+
+    today.setHours(0, 0, 0);
+    this.todayStr = today.toISOString().substring(0, 10);
+
+    var dd = today.getDate();
+    var mm = today.getMonth(); // 0 is January, so we must add 1
+    var yyyy = today.getFullYear();
+
+    this.todayDate = new Date((yyyy), mm, dd).toISOString();
+    this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
+  }
 
   ionViewDidLoad() {
     if (this.product_id) {
@@ -144,7 +147,7 @@ export class ProductPage {
       this.loadProductWishlistStatus()
     }
   }
-  
+
   /**
    * method to open checkout cart page
    */
@@ -157,8 +160,8 @@ export class ProductPage {
       this.cartCount = data;
     });
   }
-  
-  showImage(title: string, image: string) {    
+
+  showImage(title: string, image: string) {
     let params = {
       image: this._config.menu_item + '/' + image,
       title: title
@@ -170,9 +173,9 @@ export class ProductPage {
   addToCart() {
 
     this.submitAttempt = true;
-    
+
     if (this.productForm.valid) {
-      
+
       let params = {
         'item_id': this.product_id,
         'time_slot': this.slots,
@@ -185,13 +188,12 @@ export class ProductPage {
       };
 
       this.cartService.add(params).subscribe(data => {
-  
-        if(data.operation == 'success') 
-        {
+
+        if (data.operation == 'success') {
           this.translateService.get('Item added to cart').subscribe(value => {
             let toast = this.toastCtrl.create({
-              message : value,
-              duration : 4000
+              message: value,
+              duration: 4000
             });
             toast.present();
           });
@@ -203,14 +205,14 @@ export class ProductPage {
         }
 
         let msg = '';
- 
+
         for (var i in data.message) {
           var value = data.message[i];
           for (var j in value) {
             msg += value[j] + "<br />";
           }
         }
-        
+
         this.translateService.get('Add to cart').subscribe(value => {
           let alert = this.alertCtrl.create({
             title: value,
@@ -218,50 +220,50 @@ export class ProductPage {
             buttons: ['OK']
           });
           alert.present();
-        });          
+        });
 
       });
 
     } else {
       this.translateService.get('Please check form carefully').subscribe(value => {
         let toast = this.toastCtrl.create({
-          message : value,
-          duration : 4000
+          message: value,
+          duration: 4000
         });
         toast.present();
       });
     }
   }
 
-/**
- * method to load product detail
- */
+  /**
+   * method to load product detail
+   */
   loadProductDetail() {
     this.productService.loadProductDetail(this.product_id).subscribe(
       response => {
-        this.product = response; 
+        this.product = response;
 
-        if(this.product.item.item_minimum_quantity_to_order > 0) {
-          this.minQuantity = this.product.item.item_minimum_quantity_to_order;  
-        } 
+        if (this.product.item.item_minimum_quantity_to_order > 0) {
+          this.minQuantity = this.product.item.item_minimum_quantity_to_order;
+        }
 
-        if(this.product.item.included_quantity > this.minQuantity) {
-          this.minQuantity = this.product.item.included_quantity;  
-        } 
-  
-        this.quantity = this.minQuantity;        
+        if (this.product.item.included_quantity > this.minQuantity) {
+          this.minQuantity = this.product.item.included_quantity;
+        }
+
+        this.quantity = this.minQuantity;
 
         //create menu item array to save menu item qty 
 
         this.product.menu.forEach((value, index) => {
           value.vendorItemMenuItems.forEach((menu_item, index) => {
-             this.menuItem[menu_item.menu_item_id] = 0;  
+            this.menuItem[menu_item.menu_item_id] = 0;
           });
         });
 
         this.product.addons.forEach((value, index) => {
           value.vendorItemMenuItems.forEach((menu_item, index) => {
-             this.menuItem[menu_item.menu_item_id] = 0;  
+            this.menuItem[menu_item.menu_item_id] = 0;
           });
         });
 
@@ -285,7 +287,7 @@ export class ProductPage {
       this.vendorAreaList = result;
     });
   }
- 
+
   /**
    * method to load time slot 
    * for perticular vendor product
@@ -293,7 +295,7 @@ export class ProductPage {
   loadTimeSlot(vendor_id) {
     this.dateChange = true;
     this.productService.loadTimeSlot(vendor_id, this.myDate, this.currentTime, this.todayStr).subscribe(timeslots => {
-      this.timeslots = timeslots;  
+      this.timeslots = timeslots;
       this.loadProductCapacity(); // loading product capacity
     });
   }
@@ -302,24 +304,24 @@ export class ProductPage {
    *  method to increase quantity
    */
   add() {
-    
+
     if (this.maxQuantity == 0) {
-    
+
       let toast = this.toastCtrl.create({
-        message : 'Please select delivery date firstly',
-        duration : 2000
+        message: 'Please select delivery date firstly',
+        duration: 2000
       });
       toast.present();
 
       return false;
-    } 
+    }
 
-    if (this.quantity < this.maxQuantity ) {
+    if (this.quantity < this.maxQuantity) {
       this.quantity++;
-    }else{
+    } else {
       let toast = this.toastCtrl.create({
-        message : 'Max Quantity Available is ' + this.maxQuantity,
-        duration : 2000
+        message: 'Max Quantity Available is ' + this.maxQuantity,
+        duration: 2000
       });
       toast.present();
 
@@ -333,8 +335,8 @@ export class ProductPage {
   sub() {
     if (this.maxQuantity == 0) {
       let toast = this.toastCtrl.create({
-        message : 'Please select delivery date',
-        duration : 2000
+        message: 'Please select delivery date',
+        duration: 2000
       });
       toast.present();
     } else {
@@ -347,24 +349,24 @@ export class ProductPage {
   /**
    *  method to decrease menu item quantity
    */
-  subMenuItemQty(menu_item_id) {    
+  subMenuItemQty(menu_item_id) {
     var qty = parseInt(this.menuItem[menu_item_id]);
 
-    if(qty > 0) {
-      this.menuItem[menu_item_id] = qty - 1; 
+    if (qty > 0) {
+      this.menuItem[menu_item_id] = qty - 1;
       this.loadFinalPrice();
-    }       
+    }
   }
 
   /**
    *  method to increase menu item quantity
    */
-  addMenuItemQty(menu_item_id) {    
+  addMenuItemQty(menu_item_id) {
     var qty = parseInt(this.menuItem[menu_item_id]);
     this.menuItem[menu_item_id] = qty + 1;
     this.loadFinalPrice();
   }
-  
+
   /**
    * method to reset all values on 
    * area changes
@@ -383,8 +385,8 @@ export class ProductPage {
     this.productService.productCapacity(this.product_id, this.myDate).subscribe(result => {
       this.maxQuantity = parseInt(result.capacity);
     });
-  }  
-  
+  }
+
   /**
    * Play youtube video
    * @param video 
@@ -392,63 +394,58 @@ export class ProductPage {
   openVideo(video) {
     this.youtube.openVideo(video.video);
   }
-  
+
   /**
    * load is product is in Wishlist
    * of user
    */
-  loadProductWishlistStatus() 
-  {
-    if(!this.isUserLogged)
-    {
+  loadProductWishlistStatus() {
+    if (!this.isUserLogged) {
       return false;
     }
 
-    this.wishlistService.getStatus(this.product_id).subscribe(jsonResponse => {      
-      this.wishlistID = jsonResponse;      
-      if (this.wishlistID > 0) 
-      {
+    this.wishlistService.getStatus(this.product_id).subscribe(jsonResponse => {
+      this.wishlistID = jsonResponse;
+      if (this.wishlistID > 0) {
         this.translateService.get('Remove From Wishlist').subscribe(value => {
           this.wishlistLbl = value;
-        });        
+        });
       }
     });
   }
 
-  manageWishlist() 
-  {      
-      if(!this.isUserLogged)
-      {
-        this.translateService.get('Please login to manage wishlist').subscribe(value => {
-          let alert = this.alertCtrl.create({
-            message: value,
-            buttons: ['OK']
-          });
-          alert.present();
+  manageWishlist() {
+    if (!this.isUserLogged) {
+      this.translateService.get('Please login to manage wishlist').subscribe(value => {
+        let alert = this.alertCtrl.create({
+          message: value,
+          buttons: ['OK']
         });
-        return false;
-      }
+        alert.present();
+      });
+      return false;
+    }
 
-      if (this.wishlistID > 0) {
-        this.removeFromWishList();
-      } else {
-        this.addToWishList();
-      }
+    if (this.wishlistID > 0) {
+      this.removeFromWishList();
+    } else {
+      this.addToWishList();
+    }
   }
 
   addToWishList() {
     this.wishlistService.add(this.product_id).subscribe(result => {
-      
+
       if (result.operation == 'success') {
         this.translateService.get('Remove From Wishlist').subscribe(value => {
           this.wishlistLbl = value;
           this.wishlistID = result.id;
-        });          
+        });
       }
 
       let toast = this.toastCtrl.create({
-        message : result.message,
-        duration : 3000
+        message: result.message,
+        duration: 3000
       });
       toast.present();
     })
@@ -456,7 +453,7 @@ export class ProductPage {
 
   removeFromWishList() {
     this.wishlistService.delete(this.wishlistID).subscribe(result => {
-      
+
       if (result.operation == 'success') {
         this.translateService.get('Add From Wishlist').subscribe(value => {
           this.wishlistLbl = value;
@@ -465,13 +462,13 @@ export class ProductPage {
       }
 
       let toast = this.toastCtrl.create({
-        message : result.message,
-        duration : 3000
+        message: result.message,
+        duration: 3000
       });
       toast.present();
     })
   }
-  
+
   openSearchModel() {
     let modal = this.modalCtnl.create(SearchItemPage);
     modal.present();

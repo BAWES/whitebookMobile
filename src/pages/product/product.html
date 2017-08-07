@@ -22,7 +22,7 @@
 
 <ion-content class="product-detail" *ngIf="product">
   <ion-item text-wrap no-border>
-    <h2>{{ this._config.translate(product.item.item_name, product.item.item_name_ar) }}</h2>
+    <h2 class="title">{{ this._config.translate(product.item.item_name, product.item.item_name_ar) }}</h2>
      
     <ion-slides>
       <ion-slide *ngFor="let image of product.images">
@@ -42,8 +42,8 @@
       </h3>
 
       <h5 text-center *ngIf="product.notice != ''">{{ "Notice" | translate }} : {{product.notice}}</h5>
-      <h4 text-center *ngIf="total">{{ "Price" | translate }} : {{ total }}</h4>       
-      <h4 text-center *ngIf="!total">{{ "Price : Loading..." | translate }}</h4>       
+      <h4 class="price" text-center *ngIf="total">{{ "Price" | translate }} : {{ total }}</h4>       
+      <h4 class="price" text-center *ngIf="!total">{{ "Price : Loading..." | translate }}</h4>       
 
       <ion-segment [(ngModel)]="productSection">
         <ion-segment-button round value="pdescription" *ngIf="this._config.translate(product.item.item_additional_info, product.item.item_additional_info_ar)">
@@ -247,4 +247,44 @@
       {{ 'Share' | translate }}
     </button>
   </ion-item>
+  
+	<h2 *ngIf="product && product.similarItems.length > 0" text-center>{{ "Similar Products" | translate }}</h2>
+
+  <ion-grid class="category-product-listing grid-view">    
+    <ion-row>
+      <ion-col class="scroll-content" *ngFor="let similarItem of product.similarItems" align-items-center col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 class="product-items" (click)="productDetail(product.item_id)">
+        <button detail-none ion-item>
+          <div class="gallery-section">
+            <!--
+            <ion-icon class="like-icon" name="heart-outline"></ion-icon>
+            -->
+            <ion-thumbnail class="avatarImage">
+              <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + similarItem.image" [offset]="imageOffset">
+            </ion-thumbnail>
+            <div *ngIf="similarItem.notice != ''" class="callout-container">
+                <span class="callout light">
+                   {{ "Notice" | translate }} : {{similarItem.notice}}
+                </span>
+            </div>
+          </div>
+          <div class="detail-section text-center">
+            <h4 class="name">
+              <strong>{{ _config.translate(similarItem.item_name, similarItem.item_name_ar) }}</strong>
+            </h4>
+            <h6 class="price">
+              <span *ngIf="similarItem.item_base_price > 0">
+                 KD {{ similarItem.item_base_price }}
+              </span>
+              <span *ngIf="!similarItem.item_base_price && similarItem.min_order_amount > 0">
+                 KD {{ similarItem.min_order_amount }}
+              </span>
+              <span *ngIf="!similarItem.item_base_price && !similarItem.min_order_amount">
+                 {{ "Price based on selection" | translate }} 
+              </span>
+            </h6>            
+          </div>
+        </button>
+      </ion-col>
+    </ion-row>  
+	</ion-grid>
 </ion-content>
