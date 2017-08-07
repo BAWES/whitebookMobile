@@ -7,6 +7,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ProductImagePage } from '../product-image/product-image';
 import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
+import { SearchItemPage } from '../search-item/search-item';
 //Services
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
@@ -469,5 +470,10 @@ export class ProductPage {
       });
       toast.present();
     })
+  }
+  
+  openSearchModel() {
+    let modal = this.modalCtnl.create(SearchItemPage);
+    modal.present();
   }
 }
