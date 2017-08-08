@@ -106,7 +106,8 @@
     <div class="error-message" *ngIf="!timeslots.length && dateChange">
       <p>{{ "Item is not available on selected date" | translate }}</p>
     </div>
-    <ion-item>
+
+    <ion-item *ngIf="maxQuantity > 1">
       <div class="flex_row">
         <ion-icon (click)="sub()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
         <p class="quantity"> {{ quantity }} </p>
@@ -265,7 +266,7 @@
 
   <ion-grid class="category-product-listing grid-view">    
     <ion-row>
-      <ion-col class="scroll-content" *ngFor="let similarItem of product.similarItems" align-items-center col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 class="product-items" (click)="productDetail(product.item_id)">
+      <ion-col class="scroll-content" *ngFor="let similarItem of product.similarItems" align-items-center col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 class="product-items" (click)="productDetail(similarItem.item_id)">
         <button detail-none ion-item>
           <div class="gallery-section">
             <!--
