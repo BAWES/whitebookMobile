@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ViewChild, Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ToastController, Slides } from 'ionic-angular';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 //Pages
@@ -24,6 +24,8 @@ import { WishlistService } from '../../providers/logged-in/wishlist.service';
 })
 
 export class ProductPage {
+
+  @ViewChild(Slides) slides: Slides;
 
   public cartCount: number = 0;
   public productSection: string = "pdescription";
@@ -472,5 +474,11 @@ export class ProductPage {
   openSearchModel() {
     let modal = this.modalCtnl.create(SearchItemPage);
     modal.present();
+  }
+  
+  goToSlide(index, isVideo = false) {
+    if(isVideo)
+      index += this.product.images.length;
+    this.slides.slideTo(index, 500);
   }
 }
