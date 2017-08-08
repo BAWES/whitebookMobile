@@ -8,6 +8,7 @@ import { ProductImagePage } from '../product-image/product-image';
 import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
+
 //Services
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
@@ -88,7 +89,11 @@ export class ProductPage {
     public auth: Authentication,
     private youtube: YoutubeVideoPlayer,
     private socialSharing: SocialSharing
-  ) {
+  ) {    
+  }
+
+  ionViewWillEnter() {
+    
     this.setDates();
 
     this.product_id = this._params.get('productId');
@@ -107,10 +112,11 @@ export class ProductPage {
     this.translateService.get('Add To Wishlist').subscribe(value => {
       this.wishlistLbl = value;
     });
-  }
 
-  ionViewWillEnter() {
+    this.loadProductDetail();
+    
     this.getCartCount();
+    this.loadProductWishlistStatus()
   }
 
   share() {
@@ -141,13 +147,6 @@ export class ProductPage {
 
     this.todayDate = new Date((yyyy), mm, dd).toISOString();
     this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
-  }
-
-  ionViewDidLoad() {
-    if (this.product_id) {
-      this.loadProductDetail();
-      this.loadProductWishlistStatus()
-    }
   }
 
   /**
@@ -480,5 +479,9 @@ export class ProductPage {
     if(isVideo)
       index += this.product.images.length;
     this.slides.slideTo(index, 500);
+  }
+
+  productDetail(id) {
+    this.navCtrl.push(ProductPage, { productId:id });
   }
 }
