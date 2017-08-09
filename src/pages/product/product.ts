@@ -1,6 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ModalController, AlertController, ToastController, Slides } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController, AlertController, ToastController, Slides } from 'ionic-angular';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 //Pages
@@ -77,6 +77,7 @@ export class ProductPage {
     public modalCtnl: ModalController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public _config: GlobalService,
     public http: Http,
@@ -240,6 +241,8 @@ export class ProductPage {
    * method to load product detail
    */
   loadProductDetail() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
     this.productService.loadProductDetail(this.product_id).subscribe(
       response => {
         this.product = response;
@@ -270,6 +273,8 @@ export class ProductPage {
 
         this.loadFinalPrice();
         this.loadProductArea(this.product.vendor.vendor_id);
+
+        loading.dismiss();
       }
     );
   }
