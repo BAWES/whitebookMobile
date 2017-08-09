@@ -27,12 +27,12 @@
     <ion-slides>
       <ion-slide *ngFor="let image of product.images">
         <ion-thumbnail class="avatarImage">
-          <img src="{{_config.images_530}}/{{image.image_path}}" >
+          <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_530 + '/' + image.image_path" [offset]="imageOffset">
         </ion-thumbnail>
       </ion-slide>
       <ion-slide *ngFor="let video of product.videos">
         <ion-thumbnail class="avatarVideo" (click)="openVideo(video)">
-          <img src="https://img.youtube.com/vi/{{ video.video }}/default.jpg" >
+          <img [defaultImage]="defaultImage" [lazyLoad]="'https://img.youtube.com/vi/' + video.video + '/default.jpg'">
           <ion-icon name="logo-youtube"></ion-icon>
         </ion-thumbnail>
       </ion-slide>
@@ -41,10 +41,10 @@
     <ion-grid class="item_images">
       <ion-row>
         <ion-col *ngFor="let image of product.images; let i = index" col-3 col-md-2 (click)="goToSlide(i)">
-          <img src="{{_config.images_530}}/{{image.image_path}}">
+          <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + image.image_path">
         </ion-col>
         <ion-col *ngFor="let video of product.videos; let i = index" col-3 col-md-2 (click)="goToSlide(i, true)" class="avatarVideo">
-           <img src="https://img.youtube.com/vi/{{ video.video }}/default.jpg">
+           <img [defaultImage]="defaultImage" [lazyLoad]="'https://img.youtube.com/vi/' + video.video + '/default.jpg'">
            <ion-icon name="logo-youtube"></ion-icon>
         </ion-col>
       </ion-row>
