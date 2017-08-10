@@ -28,6 +28,18 @@ export class GlobalService {
   public browserOptions: string;
   public browserOptionsWithCache: string;
   
+  public facebook = {
+		apiUrl: 'https://graph.facebook.com/v2.3/',
+		appId: '927897987270774',
+		scope: ['email']
+	};
+	public google = {
+		apiUrl: 'https://www.googleapis.com/oauth2/v3/',
+    appId: '763967388698-khv64ob8aq5a04hv81q1ub1u6plcsuv7.apps.googleusercontent.com',
+    //400671186930-m07eu77bm43tgr30p90k6b9e1qgsva4p.apps.googleusercontent.com
+		scope: ['email']
+  };
+  
   constructor(
     public platform: Platform, 
     @Inject(EnvConfig) public envConfig,
