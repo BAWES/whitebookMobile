@@ -43,4 +43,19 @@
   <ion-item text-center no-border>
       {{ "Don't have an account?" | translate }}<button (click)="registerPage()" font-size-16 no-background>{{ "Sign Up" | translate }}</button>
   </ion-item>
+
+  <h4 padding>Login By...</h4>
+	<ion-list inset>
+		<ion-item (click)="login('facebook')">
+			<ion-icon name="logo-facebook" item-left></ion-icon>
+			Facebook
+    </ion-item>
+    <!--
+		<ion-item (click)="login('google')">
+			<ion-icon name="logo-google" item-left></ion-icon>
+			Google
+    </ion-item>
+    -->
+  </ion-list>
+  
 </ion-content>

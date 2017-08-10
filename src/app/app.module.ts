@@ -84,6 +84,8 @@ import { WishlistService } from '../providers/logged-in/wishlist.service';
 import { StringFilterPipe } from "./../pipes/string.filter.pipe";
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -190,6 +192,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     Authentication,
     IonicStorageModule,
     InAppBrowser,
+    GooglePlus,
     Base,
     SplashScreen,
     StatusBar,
@@ -203,7 +206,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     ProductService,
     BookingService,
     AccountService,
-    WishlistService
+    WishlistService,
+    Facebook
   ],
 })
 export class AppModule {}

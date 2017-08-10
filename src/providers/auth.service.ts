@@ -16,6 +16,7 @@ import { Platform, Events } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { GlobalService } from './global.service';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Injectable()
 export class Authentication {
@@ -43,6 +44,7 @@ export class Authentication {
     private nativeStorage: NativeStorage,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
+    private fb: Facebook
     ) {
     this.url = _config.apiBaseUrl;
     _platform.ready().then(() => {
@@ -78,6 +80,8 @@ export class Authentication {
         // alert("deleted from nativestorage");
       });
     }
+
+    //this.fb.logout();
 
     this._accessToken = null;
     this._updateLoginStatus();
@@ -194,6 +198,12 @@ createAccount(
           'mobile_number': mobileNumber,
       }), {headers: headers})
       .first()
+      .map((res: Response) => res.json());
+  }
+
+  validateFbToken(token) {
+    let url = this.url + '/auth/validate-fb-token';
+    return this._http.post(url, { 'token': token })
       .map((res: Response) => res.json());
   }
 
