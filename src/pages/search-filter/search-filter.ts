@@ -55,11 +55,8 @@ export class SearchFilterPage {
       this.filterTheme = this._params.get('requestedTheme').split(',');     
   }
 
-  ionViewDidLoad() {
-      
-      if(!this.filterDeliveryDate)
-        this.setDefaultDeliveryDate();
-
+  ionViewDidLoad() {      
+      this.setDefaultDeliveryDate();
       this.loadProductArea();
       this.loadCategoryList();
       this.loadThemeList();
@@ -70,17 +67,18 @@ export class SearchFilterPage {
   setDefaultDeliveryDate() {
     this.today = new Date();
     this.today.setHours(0,0,0);
-    this.todayStr  = this.today.toISOString().substring(0,10);
+    this.todayStr = this.today.toISOString().substring(0,10);    
     this.filterDeliveryDate = this.todayStr;
   }
 
   reset() {
-    this.filterDeliveryArea = null;
-    this.filterDeliveryDate = null;
+    this.filterDeliveryArea = null;    
     this.filterDeliveryTime = null;
     this.filterVendors = [];
     this.filterTheme = [];     
     this.filterPrice = {lower: this.minRange, upper: this.maxRange}; 
+    //default delivery date wil be today's date 
+    this.filterDeliveryDate = this.todayStr;
   }
 
   dismiss() {
