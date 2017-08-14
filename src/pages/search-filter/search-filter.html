@@ -13,7 +13,7 @@
   <ion-list>
     <ion-item>
       <ion-label>{{ "Delivery Date" | translate }}</ion-label>
-      <ion-datetime displayFormat="YYYY-MM-DD" min="{{todayStr}}" [(ngModel)]="filterDeliveryDate" max="2100-12-31"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MM-DD" min="{{ todayStr }}" [(ngModel)]="filterDeliveryDate" max="2100-12-31"></ion-datetime>
     </ion-item>
     <ion-item *ngIf="timeslots && timeslots.length">
       <ion-label>{{ "Select Delivary Time Slot" | translate }}</ion-label>
