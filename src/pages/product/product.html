@@ -262,7 +262,7 @@
     </button>
   </ion-item>
   
-	<h2 *ngIf="product && product.similarItems.length > 0" text-center>{{ "Similar Products" | translate }}</h2>
+	<h2 *ngIf="product && product.similarItems && product.similarItems.length > 0" text-center>{{ "Similar Products" | translate }}</h2>
 
   <ion-grid class="category-product-listing grid-view">    
     <ion-row>
@@ -300,5 +300,5 @@
         </button>
       </ion-col>
     </ion-row>  
-	</ion-grid>
+	</ion-grid> 
 </ion-content>
