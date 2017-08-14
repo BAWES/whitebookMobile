@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { GlobalService } from '../../providers/global.service';
 import { ProductService } from '../../providers/product.service';
 
@@ -38,6 +38,7 @@ export class SearchFilterPage {
     , '11:00 PM', '11:30 PM'];
 
   constructor(
+    public loadingCtrl: LoadingController,
     public viewCtrl:ViewController,
     public httpService: Http,
     public productService: ProductService,
@@ -56,12 +57,45 @@ export class SearchFilterPage {
   }
 
   ionViewDidLoad() {      
-      this.setDefaultDeliveryDate();
-      this.loadProductArea();
-      this.loadCategoryList();
-      this.loadThemeList();
-      this.loadVendorList();
-      this.loadPriceRange();
+    this.setDefaultDeliveryDate();
+    this.loadData();
+  }
+
+  loadData() {    
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.productService.filterData().subscribe(result => {
+      this.areaList = result.areas; 
+      this.categoryList = result.categories;
+      this.themeList = result.themes;
+      this.vendorList = result.vendors;
+
+      this.minRange = result.minRange;
+      this.maxRange = result.maxRange;
+
+      //set price 
+        
+      let minPrice, maxPrice = 0;
+
+      if(this._params.get('requestedMinPrice')){
+        minPrice = this._params.get('requestedMinPrice');
+      } else {
+        minPrice = this.minRange;
+      }
+
+      if(this._params.get('requestedMaxPrice')){
+        maxPrice = this._params.get('requestedMaxPrice');
+      } else {
+        maxPrice = this.maxRange;
+      }
+
+      this.filterPrice = {
+        lower: minPrice, 
+        upper: maxPrice
+      }; 
+
+      loading.dismiss();
+    });
   }
 
   setDefaultDeliveryDate() {
@@ -94,69 +128,5 @@ export class SearchFilterPage {
       'filterVendors':this.filterVendors
     }
       this.viewCtrl.dismiss(params);
-  }
-  
-  loadPriceRange() {
-      this.productService.loadPriceRange().subscribe(result => {
-        this.minRange = result.minRange;
-        this.maxRange = result.maxRange;
-
-        //set price 
-        
-        let minPrice, maxPrice = 0;
-
-        if(this._params.get('requestedMinPrice')){
-          minPrice = this._params.get('requestedMinPrice');
-        }else{
-          minPrice = this.minRange;
-        }
-
-        if(this._params.get('requestedMaxPrice')){
-          maxPrice = this._params.get('requestedMaxPrice');
-        }else{
-          maxPrice = this.maxRange;
-        }
-
-        this.filterPrice = {
-          lower: minPrice, 
-          upper: maxPrice
-        }; 
-      });
-  }
-
-  /**
-   * method to load product area
-   */
-  loadProductArea() {
-      this.productService.loadAreas().subscribe(result => {
-        this.areaList = result; 
-      });
-  }
-  
-  /*
-  * load category list
-  */
-  loadCategoryList(){
-    this.productService.getCategoryList().subscribe(result => {
-      this.categoryList = result;
-    });
-  }
-  
-  /*
-  * load theme list
-  */
-  loadThemeList(){
-    this.productService.getThemeList().subscribe(result => {
-      this.themeList = result;
-    });
-  }
-  
-  /*
-  * load vendor list
-  */
-  loadVendorList() {
-    this.productService.getVendorList().subscribe(result => {
-      this.vendorList = result;
-    });
   }
 }

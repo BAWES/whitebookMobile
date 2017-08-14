@@ -102,6 +102,14 @@ export class ProductService {
     }    
 
     /**
+     * Load filter data 
+     */
+    filterData() {
+        let url = this._urlProduct + "/filter-data";
+        return this.httpService.get(url);
+    }
+
+    /**
      * Load price range to filter 
      */
     loadPriceRange() {
