@@ -57,7 +57,6 @@
   "Options": "خيارات",
   "Filters": "مرشحات",
   "Delivery Date": "تاريخ التسليم او الوصول",
-  "Select Delivary Time Slot": "حدد ديليفاري تايم سلوت",
   "Delivery Area": "منطقة التسليم",
   "Price Range": "نطاق السعر",
   "Select Themes": "حدد المظاهر",
@@ -205,5 +204,6 @@
   "Reset": "إعادة تعيين",
   "Apply": "تطبيق",
   "Share": "شارك",
-  "Similar Products": "منتجات مماثلة"  
+  "Similar Products": "منتجات مماثلة",
+  "Delivery Time": "موعد التسليم"  
 }
