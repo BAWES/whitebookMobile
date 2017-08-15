@@ -1,0 +1,5 @@
+<ion-item (click)="onClick($event)" [class.no-value-selected]="!value">
+  <ion-label>{{ label }}</ion-label>
+  <ion-label text-right>{{ selectedItem? selectedItem[labelAttr] : placeholder }}</ion-label>
+  <ion-icon name="md-arrow-dropdown" item-right></ion-icon>
+</ion-item>

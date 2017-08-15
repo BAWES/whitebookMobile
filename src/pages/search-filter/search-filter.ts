@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { GlobalService } from '../../providers/global.service';
 import { ProductService } from '../../providers/product.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-search-filter',
@@ -44,6 +45,7 @@ export class SearchFilterPage {
     public productService: ProductService,
     public _config: GlobalService,
     private _params : NavParams,
+    public translateService: TranslateService
   ) {
     this.filterDeliveryArea = this._params.get('requestedLocation');
     this.filterDeliveryDate = this._params.get('requestedDeliverDate');

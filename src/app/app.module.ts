@@ -21,6 +21,7 @@ import { MyApp } from './app.component';
  * Modules
  */
 import { EnvironmentsModule } from './environments/environments.module';
+import { SelectSearchModule } from '../components/select-search/select-search.module';
 
 // Start Pages
 import { Home } from '../pages/home/home';
@@ -140,7 +141,8 @@ import { Facebook } from '@ionic-native/facebook';
       }
     }), 
     // Custom Modules
-    EnvironmentsModule
+    EnvironmentsModule,
+    SelectSearchModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
