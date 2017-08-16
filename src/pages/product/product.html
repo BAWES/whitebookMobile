@@ -20,7 +20,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="product-detail" *ngIf="product">
+<ion-content class="product-detail" *ngIf="productForm">
   <ion-item text-wrap no-border>
     <h2 class="title">{{ this._config.translate(product.item.item_name, product.item.item_name_ar) }}</h2>
      
@@ -78,31 +78,31 @@
   <form [formGroup]="productForm" (ngSubmit)="addToCart()" novalidate>
     <ion-item>
         <ion-label>{{ "Select Area" | translate }}</ion-label>
-      <ion-select [(ngModel)]="area" formControlName="area" (ionChange)= "resetValues()">
+      <ion-select formControlName="area_id" (ionChange)= "resetValues()">
         <ion-option *ngFor="let area of vendorAreaList" value="{{area.area_id}}">
           {{ this._config.translate(area.location, area.location_ar) }}
         </ion-option>
       </ion-select>
     </ion-item>
-    <div class="error-message" *ngIf="!productForm.controls.area.valid && (productForm.controls.area.touched ||  submitAttempt)">
+    <div class="error-message" *ngIf="!productForm.controls.area_id.valid && (productForm.controls.area_id.touched ||  submitAttempt)">
       <p>{{ "Please Select Area" | translate }}</p>
     </div>
     <ion-item>
       <ion-label>{{ "Select Delivery Date" | translate }}</ion-label>
-      <ion-datetime formControlName="myDate" displayFormat="YYYY-MM-DD" min="{{ todayDate }}" max="{{ maxDate }}" [(ngModel)]="myDate" (ionChange) = "loadTimeSlot(product.vendor.vendor_id)"></ion-datetime>
+      <ion-datetime formControlName="delivery_date" displayFormat="YYYY-MM-DD" min="{{ todayDate }}" max="{{ maxDate }}" [(ngModel)]="delivery_date" (ionChange) = "loadTimeSlot(product.vendor.vendor_id)"></ion-datetime>
     </ion-item>
-    <div class="error-message" *ngIf="productForm.controls.area.valid && !productForm.controls.myDate.valid && (productForm.controls.myDate.touched ||  submitAttempt)">
+    <div class="error-message" *ngIf="productForm.controls.area_id.valid && !productForm.controls.delivery_date.valid && (productForm.controls.delivery_date.touched ||  submitAttempt)">
       <p>{{ "Please Select Date" | translate }}</p>
     </div>
-    <ion-item *ngIf="timeslots && timeslots.length">
+    <ion-item *ngIf="timeslots.length">
       <ion-label>{{ "Select Delivary Time Slot" | translate }}</ion-label>
-      <ion-select [(ngModel)]="slots" formControlName="slots">
-          <ion-option *ngFor="let timeslot of timeslots" value="{{ timeslot }}">{{ timeslot }}</ion-option>
+      <ion-select formControlName="time_slot">
+          <ion-option *ngFor="let value of timeslots" value="{{ value }}">{{ value }}</ion-option>
       </ion-select>
     </ion-item>
-    <div class="error-message" *ngIf="timeslots && timeslots.length && productForm.controls.area.valid && productForm.controls.myDate.valid && !productForm.controls.slots.valid && (productForm.controls.slots.touched ||  submitAttempt)">
+    <div class="error-message" *ngIf="timeslots.length && productForm.controls.area_id.valid && productForm.controls.delivery_date.valid && !productForm.controls.time_slot.valid && (productForm.controls.time_slot.touched ||  submitAttempt)">
       <p>{{ "Please Select Time Slot" | translate }}</p>
-    </div>
+    </div> 
     <div class="error-message" *ngIf="!timeslots.length && dateChange">
       <p>{{ "Item is not available on selected date" | translate }}</p>
     </div>
@@ -127,10 +127,12 @@
           <div class = "price-table-col col">KD {{priceList.pricing_price_per_unit}}</div>
         </div>
     </ion-item>
+    
     <!-- addons -->
 
     <h2 *ngIf="product.addons.length > 0">{{ Addons | translate }}</h2>
-    <div *ngFor="let addon_menu of product.addons" class="menu_list">
+    <div *ngIf="product.addons.length > 0">
+      <div *ngFor="let addon_menu of product.addons" class="menu_list">
 
       <ion-list *ngIf="addon_menu.quantity_type == 'selection'">
 
@@ -151,7 +153,7 @@
               </div>
               <div class="qty_box_menu_item">
                 <ion-icon (click)="subMenuItemQty(addon_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-                <ion-input value="0" [(ngModel)]="menuItem[addon_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+                <ion-input formControlName="menu_item[{{addon_item.menu_item_id}}]" readonly></ion-input>
                 <ion-icon (click)="addMenuItemQty(addon_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
               </div>
             </div>            
@@ -169,7 +171,7 @@
         <ion-item *ngFor="let addon_item of addon_menu.vendorItemMenuItems">     
           <img src="{{_config.menu_item_thumbnail }}/{{ addon_item.image }}" item-right *ngIf="addon_item.image" (click)="showImage(addon_item.menu_item_name, addon_item.image)" />
           <div item-left>               
-            <ion-checkbox [(ngModel)]="menuItem[addon_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>      
+            <ion-checkbox formControlName="menu_item[{{addon_item.menu_item_id}}]"></ion-checkbox>      
             <ion-label>
               {{ this._config.translate(addon_item.menu_item_name, addon_item.menu_item_name_ar) }} 
               <i>{{ this._config.translate(addon_item.hint, addon_item.hint_ar) }}</i>
@@ -178,12 +180,12 @@
         </ion-item>
       </ion-list>
 
+      </div>
     </div>
 
     <!-- menues -->
 
     <h2 *ngIf="product.menu.length > 0">{{ Options | translate }}</h2>
-
     <div *ngFor="let menu of product.menu" class="menu_list">
            
       <ion-list *ngIf="menu.quantity_type == 'selection'">
@@ -203,7 +205,7 @@
               </div>
               <div class="qty_box_menu_item">
                 <ion-icon (click)="subMenuItemQty(menu_item.menu_item_id)" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
-                <ion-input value="0" [(ngModel)]="menuItem[menu_item.menu_item_id]" [ngModelOptions]="{standalone: true}" readonly></ion-input>
+                <ion-input value="0" formControlName="menu_item[{{menu_item.menu_item_id}}]" readonly></ion-input>
                 <ion-icon (click)="addMenuItemQty(menu_item.menu_item_id)" ios="ios-add-circle" md="md-add-circle"></ion-icon>
               </div>
             </div>
@@ -221,7 +223,7 @@
         <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
           <img src="{{_config.menu_item_thumbnail }}/{{ menu_item.image }}" item-right *ngIf="menu_item.image" (click)="showImage(menu_item.menu_item_name, menu_item.image)" />
           <div item-left>               
-            <ion-checkbox type="checkbox" [(ngModel)]="menuItem[menu_item.menu_item_id]" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            <ion-checkbox type="checkbox" formControlName="menu_item[{{menu_item.menu_item_id}}]"></ion-checkbox>
             <ion-label>
               {{ this._config.translate(menu_item.menu_item_name, menu_item.menu_item_name_ar) }} 
               <i>{{ this._config.translate(menu_item.hint, menu_item.hint_ar) }}</i>
@@ -230,19 +232,19 @@
         </ion-item>
       </ion-list>
     </div>
-
+  
     <!-- female service -->
 
     <ion-item *ngIf="product.have_female_service">
       <ion-label>{{ "Include Female Service" | translate }}</ion-label>
-      <ion-checkbox type="checkbox" [(ngModel)]="female_service" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-checkbox type="checkbox" formControlName="female_service"></ion-checkbox>
     </ion-item>
 
     <!-- special request -->
 
     <ion-item *ngIf="product.allow_special_request">
       <ion-label>{{ "Special Request" | translate }}</ion-label>
-      <ion-checkbox type="checkbox" [(ngModel)]="special_request" value="1" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-textarea formControlName="special_request"></ion-textarea>
     </ion-item>
 
     <ion-item no-border>
