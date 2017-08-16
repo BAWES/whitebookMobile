@@ -62,16 +62,9 @@ export class ProductService {
          
     /**
      * Load item final price 
-     * @param product_id
-     * @param quantity 
-     * @param menuItem  
+     * @param params
      */
-    loadFinalPrice(product_id, quantity, menuItem) {
-        let params = {
-            'item_id' : product_id,
-            'quantity' : quantity,
-            'menu_item' : menuItem
-        }    
+    loadFinalPrice(params) {
         let url = this._urlProduct + '/final-price?language=' + this.translateService.currentLang  
         return this.httpService.post(url, params);
     }

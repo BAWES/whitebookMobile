@@ -30,7 +30,7 @@ export class ProductPage {
 
   public cartCount: number = 0;
   public productSection: string = "pdescription";
-  public product_id: number;
+  public item_id: number;
   public product: any;
   public vendorAreaList: any;
 
@@ -43,17 +43,10 @@ export class ProductPage {
   public wishlistLbl: string;
   //form variables
   public productForm: FormGroup;
-  public area: number;
-  public myDate: any;
-  public slots: any;
   public submitAttempt: boolean = false;
-  public total: number;
-  public menuItem: any = [];
-  public female_service: number;
-  public special_request: string;
 
+  public total: number;  
   public cartErrors: any = [];
-
   public isUserLogged: boolean = false;
 
   public currentTime;
@@ -97,16 +90,9 @@ export class ProductPage {
     
     this.setDates();
 
-    this.product_id = this._params.get('productId');
+    this.item_id = this._params.get('productId');
 
     this.currentTime = new Date().getTime();
-
-    //form validation
-    this.productForm = this.formBuilder.group({
-      area: ['', Validators.required],
-      myDate: ['', Validators.required],
-      slots: ['', Validators.required],
-    });
 
     this.isUserLogged = this.auth.getAccessToken();
 
@@ -176,18 +162,13 @@ export class ProductPage {
 
     this.submitAttempt = true;
 
+    console.log(this.productForm);
+
     if (this.productForm.valid) {
 
-      let params = {
-        'item_id': this.product_id,
-        'time_slot': this.slots,
-        'delivery_date': this.myDate,
-        'quantity': this.quantity,
-        'area_id': this.area,
-        'menu_item': this.menuItem,
-        'female_service': this.female_service,
-        'special_request': this.special_request
-      };
+      let params = this.productForm.value;
+
+      console.log(params);
 
       this.cartService.add(params).subscribe(data => {
 
@@ -243,7 +224,7 @@ export class ProductPage {
   loadProductDetail() {
     let loading = this.loadingCtrl.create();
     loading.present();
-    this.productService.loadProductDetail(this.product_id).subscribe(
+    this.productService.loadProductDetail(this.item_id).subscribe(
       response => {
         this.product = response;
 
@@ -257,30 +238,49 @@ export class ProductPage {
 
         this.quantity = this.minQuantity;
 
-        //create menu item array to save menu item qty 
-
-        this.product.menu.forEach((value, index) => {
-          value.vendorItemMenuItems.forEach((menu_item, index) => {
-            this.menuItem[menu_item.menu_item_id] = 0;
-          });
-        });
-
-        this.product.addons.forEach((value, index) => {
-          value.vendorItemMenuItems.forEach((menu_item, index) => {
-            this.menuItem[menu_item.menu_item_id] = 0;
-          });
-        });
-
-        this.loadFinalPrice();
         this.loadProductArea(this.product.vendor.vendor_id);
-
+        this.intiateForm();
         loading.dismiss();
       }
     );
   }
 
+  intiateForm() {
+    
+    let formControls: any = {};
+
+    this.product.menu.forEach((value, index) => {
+      value.vendorItemMenuItems.forEach((menu_item, index) => {
+        formControls['menu_item[' + menu_item.menu_item_id + ']'] = [
+          menu_item.quantity_type == 'checkbox'? 1 : 0, []
+        ];
+      });
+    });
+
+    this.product.addons.forEach((value, index) => {
+      value.vendorItemMenuItems.forEach((menu_item, index) => {
+        formControls['menu_item[' + menu_item.menu_item_id + ']'] = [
+          menu_item.quantity_type == 'checkbox'? 1 : 0, []
+        ];
+      });
+    });
+
+    formControls['item_id'] = [this.item_id, Validators.required];
+    formControls['quantity'] = [this.quantity, Validators.required];
+    formControls['area_id'] = ['', Validators.required];
+    formControls['delivery_date'] = ['', Validators.required];
+    formControls['time_slot'] = ['', Validators.required];
+    formControls['female_service'] = [''];
+    formControls['special_request'] = [''];
+    
+    this.productForm = this.formBuilder.group(formControls);
+
+    this.loadFinalPrice();        
+  }
+
   loadFinalPrice() {
-    this.productService.loadFinalPrice(this.product_id, this.quantity, this.menuItem).subscribe(jsonResponse => {
+    let params = this.productForm.value;
+    this.productService.loadFinalPrice(params).subscribe(jsonResponse => {
       this.total = jsonResponse.total;
     });
   }
@@ -300,7 +300,12 @@ export class ProductPage {
    */
   loadTimeSlot(vendor_id) {
     this.dateChange = true;
-    this.productService.loadTimeSlot(vendor_id, this.myDate, this.currentTime, this.todayStr).subscribe(timeslots => {
+    this.productService.loadTimeSlot(
+      vendor_id, 
+      this.productForm.controls['delivery_date'].value, 
+      this.currentTime, 
+      this.todayStr
+    ).subscribe(timeslots => {
       this.timeslots = timeslots;
       this.loadProductCapacity(); // loading product capacity
     });
@@ -356,10 +361,10 @@ export class ProductPage {
    *  method to decrease menu item quantity
    */
   subMenuItemQty(menu_item_id) {
-    var qty = parseInt(this.menuItem[menu_item_id]);
-
+    let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
+    let qty = parseInt(control.value);
     if (qty > 0) {
-      this.menuItem[menu_item_id] = qty - 1;
+      control.setValue(qty - 1);
       this.loadFinalPrice();
     }
   }
@@ -368,8 +373,8 @@ export class ProductPage {
    *  method to increase menu item quantity
    */
   addMenuItemQty(menu_item_id) {
-    var qty = parseInt(this.menuItem[menu_item_id]);
-    this.menuItem[menu_item_id] = qty + 1;
+    let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
+    control.setValue(parseInt(control.value) + 1);
     this.loadFinalPrice();
   }
 
@@ -380,7 +385,7 @@ export class ProductPage {
   resetValues() {
     this.dateChange = false;
     this.timeslots = [];
-    this.myDate = '';
+    this.productForm.controls['delivery_date'].setValue('');
   }
 
   /**
@@ -388,7 +393,10 @@ export class ProductPage {
    * date change
    */
   loadProductCapacity() {
-    this.productService.productCapacity(this.product_id, this.myDate).subscribe(result => {
+    this.productService.productCapacity(
+      this.item_id, 
+      this.productForm.controls['delivery_date'].value
+    ).subscribe(result => {
       this.maxQuantity = parseInt(result.capacity);
     });
   }
@@ -410,7 +418,7 @@ export class ProductPage {
       return false;
     }
 
-    this.wishlistService.getStatus(this.product_id).subscribe(jsonResponse => {
+    this.wishlistService.getStatus(this.item_id).subscribe(jsonResponse => {
       this.wishlistID = jsonResponse;
       if (this.wishlistID > 0) {
         this.translateService.get('Remove From Wishlist').subscribe(value => {
@@ -440,7 +448,7 @@ export class ProductPage {
   }
 
   addToWishList() {
-    this.wishlistService.add(this.product_id).subscribe(result => {
+    this.wishlistService.add(this.item_id).subscribe(result => {
 
       if (result.operation == 'success') {
         this.translateService.get('Remove From Wishlist').subscribe(value => {

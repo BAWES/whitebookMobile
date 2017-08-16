@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "763967388698",
-    "project_id": "whitebook-174010"
+    "project_number": "941345147978",
+    "project_id": "whitebook-177007"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:763967388698:android:71e87a96057fdb57",
+        "mobilesdk_app_id": "1:941345147978:android:7ad69b931c4e0361",
         "android_client_info": {
-          "package_name": "com.ionicframework.myapp149470"
+          "package_name": "net.bawes.whitebook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "763967388698-up6rebaamqpb3d9pf36dpqb9r1uhsjt3.apps.googleusercontent.com",
+          "client_id": "941345147978-eknd96ncot2qio3okvdg98c7t1ufcgtq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ionicframework.myapp149470",
-            "certificate_hash": "0f1f798ac9dc5409dbc3ee86023f43becf8b8eed"
+            "package_name": "net.bawes.whitebook",
+            "certificate_hash": "97726f7e7aa75e687522966dcd69cca77ffe0815"
           }
         },
         {
-          "client_id": "763967388698-khv64ob8aq5a04hv81q1ub1u6plcsuv7.apps.googleusercontent.com",
+          "client_id": "941345147978-jhe17gcptckamm90lqdj7je0r34424of.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCpTSh8w99PNIiBUgLUccqMyOMYCQ9DwY"
+          "current_key": "AIzaSyDQD024KOV87pfpq3FV_0F5PJ7gqJdpFOI"
         }
       ],
       "services": {

@@ -103,7 +103,9 @@ export class LoginPage {
     } else {
       this.googlePlus.login({
         //'scopes': '... ', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-        'webClientId': '882152609344-ahm24v4mttplse2ahf35ffe4g0r6noso.apps.googleusercontent.com', 
+        'webClientId': '941345147978-jhe17gcptckamm90lqdj7je0r34424of.apps.googleusercontent.com'
+        //763967388698-rqkkus8f613ef7mji5of2le6bdog9b3p.apps.googleusercontent.com', 
+        //882152609344-ahm24v4mttplse2ahf35ffe4g0r6noso.apps.googleusercontent.com
         //763967388698-khv64ob8aq5a04hv81q1ub1u6plcsuv7.apps.googleusercontent.com
         // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
         //'offline': true, // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
