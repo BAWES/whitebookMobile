@@ -248,7 +248,8 @@
     </ion-item>
 
     <ion-item no-border>
-      <button full round ion-button color="dark" padding-17 add-to-cart> <ion-icon name="cart"></ion-icon>
+      <button full round ion-button color="dark" padding-17 add-to-cart> 
+        &nbsp;<ion-icon name="cart"></ion-icon>&nbsp;
         {{ "Add To Cart" | translate }}
       </button>
     </ion-item>
@@ -258,12 +259,11 @@
       {{ wishlistLbl }}
     </button>
   </ion-item>  
-  <ion-item>
-    <button full round border ion-button padding-17 (click)="share()">
-      {{ 'Share' | translate }}
-    </button>
-  </ion-item>
-  
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="share()"><ion-icon name="share-alt"></ion-icon></button>
+  </ion-fab>
+
 	<h2 *ngIf="product && product.similarItems && product.similarItems.length > 0" text-center>{{ "Similar Products" | translate }}</h2>
 
   <ion-grid class="category-product-listing grid-view">    
