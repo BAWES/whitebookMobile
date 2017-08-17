@@ -59,7 +59,7 @@ export class SearchFilterPage {
   }
 
   ionViewDidLoad() {      
-    this.setDefaultDeliveryDate();
+    //this.setDefaultDeliveryDate();
     this.loadData();
   }
 
@@ -109,12 +109,11 @@ export class SearchFilterPage {
 
   reset() {
     this.filterDeliveryArea = null;    
+    this.filterDeliveryDate = null;
     this.filterDeliveryTime = null;
     this.filterVendors = [];
     this.filterTheme = [];     
-    this.filterPrice = {lower: this.minRange, upper: this.maxRange}; 
-    //default delivery date wil be today's date 
-    this.filterDeliveryDate = this.todayStr;
+    this.filterPrice = {lower: this.minRange, upper: this.maxRange};     
   }
 
   dismiss() {

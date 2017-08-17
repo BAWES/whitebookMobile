@@ -26,7 +26,7 @@ export class ListingPage {
   public products: any;
   public start: number = 0;
   public cartCount: number = 0;
-  public filterCount: number = 1;
+  public filterCount: number = 0;
 
   public defaultImage = 'assets/images/item-default.png';
   public imageOffset = 100;
@@ -55,7 +55,7 @@ export class ListingPage {
       this._urlParamas = '&requestedTheme='+this._params.get('themeID');  
     }    
     
-    this.setDefaultDeliveryDate();
+    //this.setDefaultDeliveryDate();
 
     this.loadProducts();
   }
