@@ -25,47 +25,6 @@ page-product {
 [no-border] .label-md {margin: 13px 8px 0px 0;}
 [no-background] {background: none;}
 
-.menu_list .lbl_menu_item,
-.menu_list .qty_box_menu_item,
-.menu_list ion-icon,
-.menu_list ion-input {float: left;}
-.lbl_menu_item {
-    width: 100%;
-    margin-bottom: 5px;
-}
-.menu_list ion-input {
-    width: 35px;
-    height: 30px;
-    position: relative;
-    top: -5px;
-}
-.menu_list ion-input .text-input {
-    text-align: center;
-}
-
-.menu_list .item-inner {
-    border: none !important;
-    box-shadow: none !important;
-}
-.menu_list ion-item {border-bottom: 1px solid #dedede;}
-.menu_list ion-icon {position: relative;z-index: 999;}
-
-.menu_list .lbl_menu_item i {
-    font-size: 14px;
-    clear: both;
-    display: inline-block;
-}
-
-.menu_list ion-label,
-.menu_list ion-checkbox {
-    float: left;
-}
-
-.menu_list img {
-    position: relative;
-    z-index: 1;
-}
-
 .swiper-slide img {
     margin: auto;
 }

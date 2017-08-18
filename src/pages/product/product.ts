@@ -2,10 +2,10 @@ import { ViewChild, Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, LoadingController, AlertController, ToastController, Slides } from 'ionic-angular';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
 //Pages
+import { ProductFormPage } from '../product-form/product-form';
 import { ProductImagePage } from '../product-image/product-image';
-import { ProductVideoPage } from '../product-video/product-video';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 
@@ -13,11 +13,10 @@ import { SearchItemPage } from '../search-item/search-item';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../providers/global.service';
-import { CartService } from '../../providers/cart.service';
-import { HttpService } from '../../providers/http.service';
 import { Authentication } from '../../providers/auth.service';
 import { ProductService } from '../../providers/product.service';
 import { WishlistService } from '../../providers/logged-in/wishlist.service';
+import { CartService } from '../../providers/cart.service';
 
 @Component({
   selector: 'page-product',
@@ -28,32 +27,16 @@ export class ProductPage {
 
   @ViewChild(Slides) slides: Slides;
 
-  public cartCount: number = 0;
-  public productSection: string = "pdescription";
   public item_id: number;
   public product: any;
-  public vendorAreaList: any;
 
-  public timeslots: any = [];
-  public quantity: number = 1;
-  public maxQuantity: number = 0;
-  public minQuantity: number = 1;
-  public dateChange: boolean = false;
+  public cartCount: number = 0;
+  public productSection: string = "pdescription";
+  public isUserLogged: boolean = false;
+  
   public wishlistID: number = 0;
   public wishlistLbl: string;
-  //form variables
-  public productForm: FormGroup;
-  public submitAttempt: boolean = false;
-
-  public total: number;  
-  public cartErrors: any = [];
-  public isUserLogged: boolean = false;
-
-  public currentTime;
-  public todayStr;
-  public todayDate;
-  public maxDate;
-
+  
   mySlideOptions = {
     initialSlide: 1,
     loop: true,
@@ -74,34 +57,25 @@ export class ProductPage {
     public navCtrl: NavController,
     public _config: GlobalService,
     public http: Http,
-    public httpService: HttpService,
-    public formBuilder: FormBuilder,
-    public cartService: CartService,
     public translateService: TranslateService,
     public productService: ProductService,
+    public cartService: CartService,
     public wishlistService: WishlistService,
-    public auth: Authentication,
     private youtube: YoutubeVideoPlayer,
-    private socialSharing: SocialSharing
-  ) {    
+    private socialSharing: SocialSharing,    
+    public auth: Authentication
+  ) {        
+    this.isUserLogged = this.auth.getAccessToken();        
   }
 
   ionViewWillEnter() {
-    
-    this.setDates();
-
     this.item_id = this._params.get('productId');
-
-    this.currentTime = new Date().getTime();
-
-    this.isUserLogged = this.auth.getAccessToken();
 
     this.translateService.get('Add To Wishlist').subscribe(value => {
       this.wishlistLbl = value;
     });
 
-    this.loadProductDetail();
-    
+    this.loadProductDetail();    
     this.getCartCount();
     this.loadProductWishlistStatus()
   }
@@ -116,24 +90,6 @@ export class ProductPage {
     }).catch(() => {
       // Error!
     });
-  }
-
-  /**
-	 * Sets the default dates for min/max validation
-	 */
-  setDates() {
-
-    let today = new Date();
-
-    today.setHours(0, 0, 0);
-    this.todayStr = today.toISOString().substring(0, 10);
-
-    var dd = today.getDate();
-    var mm = today.getMonth(); // 0 is January, so we must add 1
-    var yyyy = today.getFullYear();
-
-    this.todayDate = new Date((yyyy), mm, dd).toISOString();
-    this.maxDate = new Date((yyyy + 1), mm, dd).toISOString();
   }
 
   /**
@@ -158,66 +114,6 @@ export class ProductPage {
     modal.present();
   }
 
-  addToCart() {
-
-    this.submitAttempt = true;
-
-    console.log(this.productForm);
-
-    if (this.productForm.valid) {
-
-      let params = this.productForm.value;
-
-      console.log(params);
-
-      this.cartService.add(params).subscribe(data => {
-
-        if (data.operation == 'success') {
-          this.translateService.get('Item added to cart').subscribe(value => {
-            let toast = this.toastCtrl.create({
-              message: value,
-              duration: 4000
-            });
-            toast.present();
-          });
-
-          //update cart count
-          this.getCartCount();
-
-          return true;
-        }
-
-        let msg = '';
-
-        for (var i in data.message) {
-          var value = data.message[i];
-          for (var j in value) {
-            msg += value[j] + "<br />";
-          }
-        }
-
-        this.translateService.get('Add to cart').subscribe(value => {
-          let alert = this.alertCtrl.create({
-            title: value,
-            subTitle: msg,
-            buttons: ['OK']
-          });
-          alert.present();
-        });
-
-      });
-
-    } else {
-      this.translateService.get('Please check form carefully').subscribe(value => {
-        let toast = this.toastCtrl.create({
-          message: value,
-          duration: 4000
-        });
-        toast.present();
-      });
-    }
-  }
-
   /**
    * method to load product detail
    */
@@ -227,178 +123,9 @@ export class ProductPage {
     this.productService.loadProductDetail(this.item_id).subscribe(
       response => {
         this.product = response;
-
-        if (this.product.item.item_minimum_quantity_to_order > 0) {
-          this.minQuantity = this.product.item.item_minimum_quantity_to_order;
-        }
-
-        if (this.product.item.included_quantity > this.minQuantity) {
-          this.minQuantity = this.product.item.included_quantity;
-        }
-
-        this.quantity = this.minQuantity;
-
-        this.loadProductArea(this.product.vendor.vendor_id);
-        this.intiateForm();
         loading.dismiss();
       }
     );
-  }
-
-  intiateForm() {
-    
-    let formControls: any = {};
-
-    this.product.menu.forEach((value, index) => {
-      value.vendorItemMenuItems.forEach((menu_item, index) => {
-        formControls['menu_item[' + menu_item.menu_item_id + ']'] = [
-          menu_item.quantity_type == 'checkbox'? 1 : 0, []
-        ];
-      });
-    });
-
-    this.product.addons.forEach((value, index) => {
-      value.vendorItemMenuItems.forEach((menu_item, index) => {
-        formControls['menu_item[' + menu_item.menu_item_id + ']'] = [
-          menu_item.quantity_type == 'checkbox'? 1 : 0, []
-        ];
-      });
-    });
-
-    formControls['item_id'] = [this.item_id, Validators.required];
-    formControls['quantity'] = [this.quantity, Validators.required];
-    formControls['area_id'] = ['', Validators.required];
-    formControls['delivery_date'] = ['', Validators.required];
-    formControls['time_slot'] = ['', Validators.required];
-    formControls['female_service'] = [''];
-    formControls['special_request'] = [''];
-    
-    this.productForm = this.formBuilder.group(formControls);
-
-    this.loadFinalPrice();        
-  }
-
-  loadFinalPrice() {
-    let params = this.productForm.value;
-    this.productService.loadFinalPrice(params).subscribe(jsonResponse => {
-      this.total = jsonResponse.total;
-    });
-  }
-
-  /**
-   * method to load product area
-   */
-  loadProductArea(vendor_id) {
-    this.productService.loadProductArea(vendor_id).subscribe(result => {
-      this.vendorAreaList = result;
-    });
-  }
-
-  /**
-   * method to load time slot 
-   * for perticular vendor product
-   */
-  loadTimeSlot(vendor_id) {
-    this.dateChange = true;
-    this.productService.loadTimeSlot(
-      vendor_id, 
-      this.productForm.controls['delivery_date'].value, 
-      this.currentTime, 
-      this.todayStr
-    ).subscribe(timeslots => {
-      this.timeslots = timeslots;
-      this.loadProductCapacity(); // loading product capacity
-    });
-  }
-
-  /**
-   *  method to increase quantity
-   */
-  add() {
-
-    if (this.maxQuantity == 0) {
-
-      let toast = this.toastCtrl.create({
-        message: 'Please select delivery date firstly',
-        duration: 2000
-      });
-      toast.present();
-
-      return false;
-    }
-
-    if (this.quantity < this.maxQuantity) {
-      this.quantity++;
-    } else {
-      let toast = this.toastCtrl.create({
-        message: 'Max Quantity Available is ' + this.maxQuantity,
-        duration: 2000
-      });
-      toast.present();
-
-      return false;
-    }
-  }
-
-  /**
-   *  method to decrease quantity
-   */
-  sub() {
-    if (this.maxQuantity == 0) {
-      let toast = this.toastCtrl.create({
-        message: 'Please select delivery date',
-        duration: 2000
-      });
-      toast.present();
-    } else {
-      if (this.quantity > this.minQuantity) {
-        this.quantity--;
-      }
-    }
-  }
-
-  /**
-   *  method to decrease menu item quantity
-   */
-  subMenuItemQty(menu_item_id) {
-    let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
-    let qty = parseInt(control.value);
-    if (qty > 0) {
-      control.setValue(qty - 1);
-      this.loadFinalPrice();
-    }
-  }
-
-  /**
-   *  method to increase menu item quantity
-   */
-  addMenuItemQty(menu_item_id) {
-    let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
-    control.setValue(parseInt(control.value) + 1);
-    this.loadFinalPrice();
-  }
-
-  /**
-   * method to reset all values on 
-   * area changes
-   */
-  resetValues() {
-    this.dateChange = false;
-    this.timeslots = [];
-    this.productForm.controls['delivery_date'].setValue('');
-  }
-
-  /**
-   * method to load product capacity on 
-   * date change
-   */
-  loadProductCapacity() {
-    this.productService.productCapacity(
-      this.item_id, 
-      this.productForm.controls['delivery_date'].value
-    ).subscribe(result => {
-      this.maxQuantity = parseInt(result.capacity);
-    });
   }
 
   /**
@@ -496,5 +223,13 @@ export class ProductPage {
 
   productDetail(id) {
     this.navCtrl.push(ProductPage, { productId:id });
+  }
+
+  openProductForm() {
+    let modal = this.modalCtnl.create(ProductFormPage, { product: this.product });
+    modal.onDidDismiss(data => {
+      this.getCartCount();
+    });
+    modal.present();
   }
 }
