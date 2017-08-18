@@ -52,6 +52,7 @@ import { ListingPage } from '../pages/listing/listing';
 import { ProductPage } from '../pages/product/product';
 import { ProductImagePage } from '../pages/product-image/product-image';
 import { ProductVideoPage } from '../pages/product-video/product-video';
+import { ProductFormPage } from '../pages/product-form/product-form';
 import { BecomeVendorPage } from '../pages/become-vendor/become-vendor';
 
 // Community
@@ -96,6 +97,7 @@ import { Facebook } from '@ionic-native/facebook';
     ProductPage,
     ProductImagePage,
     ProductVideoPage,
+    ProductFormPage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,
@@ -152,6 +154,7 @@ import { Facebook } from '@ionic-native/facebook';
     ProductPage,
     ProductImagePage,
     ProductVideoPage,
+    ProductFormPage,
     LoginPage,
     RegisterPage,
     ForgotPasswordPage,

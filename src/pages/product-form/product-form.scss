@@ -1,0 +1,67 @@
+.error-message p{text-align: right;margin: 0px;padding-top: 10px;color:#ff0000!important;padding-right: 10px;}
+.flex_row {display: -webkit-flex;display: flex;-webkit-flex-direction: row; flex-direction: row;}
+.quantity{width: 100%;font-size: 25px !important;text-align: center;margin-top: 4px;}
+
+form {
+    margin-bottom: 50px;
+}
+
+.menu_list ion-label i {
+    /* font-size: 10px; */
+    color: gray;
+    text-transform: capitalize;
+}
+
+[top-info] {
+    margin-top: 60px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+[top-info] h5 {
+    margin-top: -5px !important;
+    color: gray;
+    font-size: 15px;
+}
+.delivery-inputs ion-item {
+    padding: 0 !important;
+}
+.menu_list .lbl_menu_item,
+.menu_list .qty_box_menu_item,
+.menu_list ion-icon,
+.menu_list ion-input {float: left;}
+.lbl_menu_item {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.menu_list ion-input {
+    width: 35px;
+    height: 30px;
+    position: relative;
+    top: -5px;
+}
+.menu_list ion-input .text-input {
+    text-align: center;
+}
+
+.menu_list .item-inner {
+    border: none !important;
+    box-shadow: none !important;
+}
+.menu_list ion-item {border-bottom: 1px solid #dedede;}
+.menu_list ion-icon {position: relative;z-index: 999;}
+
+.menu_list .lbl_menu_item i {
+    font-size: 14px;
+    clear: both;
+    display: inline-block;
+}
+
+.menu_list ion-label,
+.menu_list ion-checkbox {
+    float: left;
+}
+
+.menu_list img {
+    position: relative;
+    z-index: 1;
+}
