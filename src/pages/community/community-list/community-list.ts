@@ -16,6 +16,8 @@ export class CommunityListPage {
   public _urlcommunity: string;
   public community : any = [];
   public keys: any = [];
+  
+  public defaultImage = 'assets/images/item-default.png';
 
   constructor(
     public navCtrl: NavController,
