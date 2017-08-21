@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class CmsService {
 
-  constructor(private httpService : Http) {     
+  constructor(private httpService : HttpService) {     
   } 
     
   /**
