@@ -212,6 +212,7 @@ import { Facebook } from '@ionic-native/facebook';
     BookingService,
     AccountService,
     WishlistService,
+    CmsService,
     Facebook
   ],
 })
