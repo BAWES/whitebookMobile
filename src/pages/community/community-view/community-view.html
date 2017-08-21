@@ -9,7 +9,7 @@
 <ion-content padding>
 
 	<ion-thumbnail>
-		<img src="{{ _config.vendor_logo }}/{{ vendor.vendor_logo_path }}" />
+		<img [defaultImage]="defaultImage" [lazyLoad]="_config.vendor_logo + '/' + vendor.vendor_logo_path" [offset]="imageOffset">
 	</ion-thumbnail>
 
 	<h2>{{ "Description" | translate }}</h2>
@@ -45,7 +45,7 @@
 	          <div class="gallery-section">
 	            <ion-icon class="like-icon" name="heart-outline"></ion-icon>
 	            <ion-thumbnail class="avatarImage">
-	              <img src="{{_config.images_530}}/{{product.image}}" >
+								<img [defaultImage]="defaultImage" [lazyLoad]="_config.images_530 + '/' + product.image" [offset]="imageOffset">
 	            </ion-thumbnail>
 	            <div *ngIf="product.notice != ''" class="callout-container">
 	                <span class="callout light">

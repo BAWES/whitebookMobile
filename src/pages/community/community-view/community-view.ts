@@ -26,6 +26,9 @@ export class CommunityViewPage {
   public _urlcommunity = '';
   public _urlParamas = '';
 
+  public defaultImage = 'assets/images/item-default.png';
+  public imageOffset = 100;
+    
   constructor(
     public navCtrl: NavController,
     public modalCtnl: ModalController,
