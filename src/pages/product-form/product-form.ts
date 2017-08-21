@@ -147,6 +147,8 @@ export class ProductFormPage {
 
         if (this.quantity < this.maxQuantity) {
             this.quantity++;
+            this.productForm.controls['quantity'].setValue(this.quantity);
+            this.loadFinalPrice();
         } else {
             let toast = this.toastCtrl.create({
                 message: 'Max Quantity Available is ' + this.maxQuantity,
@@ -170,6 +172,8 @@ export class ProductFormPage {
         } else {
             if (this.quantity > this.minQuantity) {
                 this.quantity--;
+                this.productForm.controls['quantity'].setValue(this.quantity);
+                this.loadFinalPrice();
             }
         }
     }
@@ -228,8 +232,6 @@ export class ProductFormPage {
     
           this.cartService.add(params).subscribe(data => {
     
-            console.log(data);
-
             if (data.operation == 'success') {
               this.translateService.get('Item added to cart').subscribe(value => {
                 let toast = this.toastCtrl.create({

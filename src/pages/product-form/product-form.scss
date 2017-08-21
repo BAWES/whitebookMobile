@@ -6,8 +6,11 @@ form {
     margin-bottom: 50px;
 }
 
+.price-table-col{border: 1px solid;text-align: center;}
+.price-table-col-header{background: #000;color: #fff;border: none;text-align: center;}
+.white-border-right{border-right: 1px solid #fff;}
+
 .menu_list ion-label i {
-    /* font-size: 10px; */
     color: gray;
     text-transform: capitalize;
 }
@@ -21,9 +24,6 @@ form {
     margin-top: -5px !important;
     color: gray;
     font-size: 15px;
-}
-.delivery-inputs ion-item {
-    padding: 0 !important;
 }
 .menu_list .lbl_menu_item,
 .menu_list .qty_box_menu_item,

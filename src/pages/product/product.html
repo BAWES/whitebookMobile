@@ -140,8 +140,10 @@
   <br />
 
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="product">
   <button ion-button full color="dark" (click)="openProductForm()">
-    {{ "Check Availability and Order" | translate }}
+    <span *ngIf="product.addons.length > 0">{{ "View Customization Options and Order" | translate }}</span>
+    <span *ngIf="product.addons.length == 0 && product.menu.length > 0">{{ "View Menu and Order" | translate }}</span>
+    <span *ngIf="product.menu.length == 0 && product.addons.length == 0">{{ "Check Availability and Order" | translate }}</span>
   </button>
 </ion-footer>
