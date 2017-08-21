@@ -31,7 +31,9 @@ export const environmentList = [
   },
   {
     envName: 'dev',
-    apiEndpoint: 'http://devapi.thewhitebook.com.kw/v1',
+    apiEndpoint: 'https://api.thewhitebook.com.kw/v1',
+    //apiEndpoint: 'http://localhost/whitebook/api/web/v1',
+    //apiEndpoint: 'http://devapi.thewhitebook.com.kw/v1',
     frontend: 'http://dev.thewhitebook.com.kw',
     environmentName: 'Dev Server'
   }
