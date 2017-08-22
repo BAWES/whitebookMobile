@@ -205,5 +205,20 @@
   "Apply": "تطبيق",
   "Share": "شارك",
   "Similar Products": "منتجات مماثلة",
-  "Delivery Time": "موعد التسليم"  
+  "Delivery Time": "موعد التسليم",
+  "We got your payment": "وصلنا دفعتك",
+  "Great!": "عظيم!",
+  "Payment not processed successfully": "لم تتم معالجة الدفع بنجاح",
+  "Okay!": "حسنا!",
+  "Address Delete?": "عنوان حذف؟",
+  "Are you sure you want to delete this Address permanently from our system?": "هل تريد بالتأكيد حذف هذا العنوان نهائيا من نظامنا؟",
+  "Please check cart items": "يرجى التحقق من عناصر العربة",
+  "Are you sure you want to remove product from cart?": "هل تريد بالتأكيد إزالة المنتج من سلة التسوق؟",
+  "Remove cart item?": "هل تريد إزالة عنصر سلة التسوق؟",
+  "Mail Sent Successfully": "تم إرسال البريد بنجاح",
+  "Please select delivery date": "يرجى تحديد تاريخ التسليم",
+  "Max Quantity Available is {{value}}": "{{value}} ماكس الكمية المتاحة",
+  "Invalid Login Credentials.": "اعتماد تسجيل الدخول غير صالح.",
+  "Login Successfully": "تسجيل الدخول بنجاح",
+  "Registered Successfully. Please check your email for activation link": "تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على رابط التنشيط"
 }

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ValidFields } from '../../../validators/valid.fields';
 
 //Services
 import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
-
-import { ValidFields } from '../../../validators/valid.fields';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-register',
@@ -21,7 +21,8 @@ export class RegisterPage {
     private navCtrl: NavController,
     private fb: FormBuilder,
     private _authService: Authentication,
-    private _baseService : Base
+    private _baseService : Base,
+    public translateService: TranslateService
     ) {
       this.registerForm = this.fb.group({
         firstName: ['', Validators.required],
@@ -60,7 +61,9 @@ export class RegisterPage {
           this._baseService.showToast(this.registerData.message,4000);
           this._baseService.endLoading();
         } else if (this.registerData.operation == 'success' ) {
-          this._baseService.showToast('Registered Successfully. Please check your email for activation link',4000);
+          this.translateService.get('Registered Successfully. Please check your email for activation link').subscribe(value => {
+            this._baseService.showToast(value, 4000);
+          });
           setTimeout(() => {
             this._baseService.endLoading();
             this.navCtrl.pop();

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, AlertController, LoadingController, ViewController,  } from 'ionic-angular';
-
+//Pages
 import { CheckoutCompletedPage } from '../checkout-completed/checkout-completed';
-
+//Services
 import { CheckoutService } from '../../../providers/checkout.service';
 import { CartService } from '../../../providers/cart.service';
 import { GlobalService } from '../../../providers/global.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-checkout-confirm',
@@ -36,6 +37,7 @@ export class CheckoutConfirmPage {
     public _loadingCtrl: LoadingController,
     public checkoutService: CheckoutService,
     public cartService: CartService,
+    public translateService: TranslateService,
     public _config: GlobalService
     ) {
       this.address_id = this.navParams.get('address_id'); 
@@ -85,9 +87,14 @@ export class CheckoutConfirmPage {
       }
       else
       {
+        let txtButton;
+        this.translateService.get('Okay!').subscribe(value => {
+          txtButton = value;
+        });
+
         let alert = this._alertCtrl.create({
           subTitle: response.message,
-          buttons: ['Okay!']
+          buttons: [txtButton]
         });
         alert.present();
       }

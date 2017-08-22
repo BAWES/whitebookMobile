@@ -3,16 +3,16 @@ import { NavController, Platform } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-
+import { ValidFields } from '../../../validators/valid.fields';
+//Pages
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'
 import { RegisterPage } from '../register/register';
 import { Home } from '../../home/home';
-
+//Services 
 import { Authentication } from '../../../providers/auth.service';
-
 import { Base } from '../../../providers/base';
 import { GlobalService } from '../../../providers/global.service';
-import { ValidFields } from '../../../validators/valid.fields';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-login',
@@ -36,7 +36,8 @@ export class LoginPage {
     private googlePlus: GooglePlus,
     public _config: GlobalService,
     private platform: Platform,
-    private fb: Facebook
+    private fb: Facebook,
+    public translateService: TranslateService
   ){
 
     this._authService.logout();
@@ -55,18 +56,24 @@ export class LoginPage {
         .subscribe(data=>{
             this.loginData = data;
             if (this.loginData.status == 401 ) {
-              this._baseService.showToast('Invalid Login Credentials.');
+              this.translateService.get('Invalid Login Credentials.').subscribe(value => {
+                this._baseService.showToast(value);
+              });              
               // this._baseService.endLoading();
             } else if (this.loginData.operation == 'success' ) {
               this._authService.setAccessToken(this.loginData.token, this.loginForm.value.email);
-              this._baseService.showToast('Login Successfully');
+              this.translateService.get('Login Successfully').subscribe(value => {
+                this._baseService.showToast(value);
+              });
               setTimeout(() => {
                 // this._baseService.endLoading();
                 this.navCtrl.setRoot(Home)
               });
             }
         }, (error) => {
-          this._baseService.showToast('Invalid Login Credentials.');
+          this.translateService.get('Invalid Login Credentials.').subscribe(value => {
+            this._baseService.showToast(value);
+          });
         });
       }
   }
@@ -87,16 +94,22 @@ export class LoginPage {
           this._authService.validateFbToken(res.authResponse.accessToken).subscribe(response => {
             if(response.operation == 'success') {
               this._authService.setAccessToken(response.token, response.email);
-              this._baseService.showToast('Login Successfully');
+              this.translateService.get('Login Successfully').subscribe(value => {
+                this._baseService.showToast(value);
+              });
               setTimeout(() => {
                 // this._baseService.endLoading();
                 this.navCtrl.setRoot(Home)
               });
             } else {
-              this._baseService.showToast('Invalid token.');
+              this.translateService.get('Invalid token.').subscribe(value => {
+                this._baseService.showToast(value);
+              });
             }              
           }, err => {
-            this._baseService.showToast('Error logging into Facebook');
+            this.translateService.get('Error logging into Facebook').subscribe(value => {
+              this._baseService.showToast(value);
+            });
           });    
         })
         .catch(e => console.log('Error logging into Facebook', e));    
