@@ -40,12 +40,12 @@
     
     <ion-grid class="item_images">
       <ion-row>
-        <ion-col *ngFor="let image of product.images; let i = index" col-3 col-md-2 (click)="goToSlide(i)">
+        <ion-col [ngClass]="(product.images.length < 2) ? 'hide' : ' '" *ngFor="let image of product.images; let i = index" col-3 col-md-2 (click)="goToSlide(i)">
           <img [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + image.image_path">
         </ion-col>
-        <ion-col *ngFor="let video of product.videos; let i = index" col-3 col-md-2 (click)="goToSlide(i, true)" class="avatarVideo">
-           <img [defaultImage]="defaultImage" [lazyLoad]="'https://img.youtube.com/vi/' + video.video + '/default.jpg'">
-           <ion-icon name="logo-youtube"></ion-icon>
+        <ion-col [ngClass]="(product.videos.length < 2) ? 'hide' : ' '" *ngFor="let video of product.videos; let i = index" col-3 col-md-2 (click)="goToSlide(i, true)" class="avatarVideo">
+          <img [defaultImage]="defaultImage" [lazyLoad]="'https://img.youtube.com/vi/' + video.video + '/default.jpg'">
+          <ion-icon name="logo-youtube"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
