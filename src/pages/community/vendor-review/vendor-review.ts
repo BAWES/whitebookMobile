@@ -95,9 +95,15 @@ export class VendorReviewPage {
                     }
                 }
 
+                let txtButton;
+
+                this.translateService.get('Okay!').subscribe(value => {
+                    txtButton = value;
+                });
+
                 let prompt = this.alertCtrl.create({
                     message: html,
-                    buttons: ["Ok"]
+                    buttons: [txtButton]
                 });
                 prompt.present();
             }

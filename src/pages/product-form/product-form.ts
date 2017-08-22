@@ -137,11 +137,13 @@ export class ProductFormPage {
      */
     add() {
         if (this.maxQuantity == 0) {
-            let toast = this.toastCtrl.create({
-                message: 'Please select delivery date firstly',
-                duration: 2000
-            });
-            toast.present();
+            this.translateService.get('Please select delivery date').subscribe(value => {
+                let toast = this.toastCtrl.create({
+                    message: value,
+                    duration: 2000
+                });
+                toast.present();
+            });            
             return false;
         }
 
@@ -150,11 +152,13 @@ export class ProductFormPage {
             this.productForm.controls['quantity'].setValue(this.quantity);
             this.loadFinalPrice();
         } else {
-            let toast = this.toastCtrl.create({
-                message: 'Max Quantity Available is ' + this.maxQuantity,
-                duration: 2000
-            });
-            toast.present();
+            this.translateService.get('Max Quantity Available is {{value}}', { value: this.maxQuantity}).subscribe(value => {
+                let toast = this.toastCtrl.create({
+                    message: value,
+                    duration: 2000
+                });
+                toast.present();
+            });            
             return false;
         }
     }

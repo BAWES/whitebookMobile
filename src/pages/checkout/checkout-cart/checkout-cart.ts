@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ViewController, ToastController } from 'ionic-angular';
+// Pages
 import { CheckoutShippingPage } from '../checkout-shipping/checkout-shipping';
 import { CheckoutShippingGuestPage } from '../checkout-shipping-guest/checkout-shipping-guest';
+// Services 
 import { CartService } from '../../../providers/cart.service';
 import { GlobalService } from '../../../providers/global.service';
 import { Authentication } from '../../../providers/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-checkout-cart',
@@ -44,6 +47,7 @@ export class CheckoutCartPage {
     public toastCtrl : ToastController,
     public cartService: CartService,
     public authService: Authentication,
+    public translateService: TranslateService,
     public _config: GlobalService,
     ) {
       this.isUserLoggedIn = this.authService.getAccessToken();
@@ -51,8 +55,6 @@ export class CheckoutCartPage {
       this.area_id = window.localStorage.getItem('delivery-location');
       this.delivery_date = window.localStorage.getItem('delivery-date');
       this.event_time = window.localStorage.getItem('event_time');
-
-      console.log(this.event_time);
       
       this.setDates();
     }
@@ -70,12 +72,26 @@ export class CheckoutCartPage {
   {
     if(this.errors.length > 0)
     {
-      let alert = this.alertCtrl.create({
-        title : 'Warning',
-        message : 'Please check cart items',
-        buttons : ['Okay']
-      });
-      alert.present();  
+        let title, message, txtButton;
+
+        this.translateService.get('Warning').subscribe(value => {        
+          title = value;
+        });
+
+        this.translateService.get('Please check cart items').subscribe(value => {        
+          message = value;
+        });
+
+        this.translateService.get('Okay!').subscribe(value => {        
+          txtButton = value;
+        });
+
+        let alert = this.alertCtrl.create({
+          title : title,
+          message : message,
+          buttons : [txtButton]
+        });
+        alert.present();  
     }
     else
     {
@@ -140,9 +156,20 @@ export class CheckoutCartPage {
 	}
 
   removeItem(cart_id) {
+
+    let title, message;
+
+    this.translateService.get('Remove cart item?').subscribe(value => {        
+      title = value;
+    });
+
+    this.translateService.get('Are you sure you want to remove product from cart?').subscribe(value => {        
+      message = value;
+    });
+
     let alert = this.alertCtrl.create({
-      title : 'Remove cart item?',
-      message : 'Are you sure you want to remove product from cart?',
+      title : title,
+      message : message,
       buttons : [
         {
           text: 'Yes',
