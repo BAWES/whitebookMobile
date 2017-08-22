@@ -9,7 +9,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding style="margin-top:40px;margin-bottom:80px;">
-  <div *ngIf="bookingDetail">
+  <div *ngIf="bookingDetail && !bookingDetail.operation">
   <ion-row>
     <ion-label>{{ "Booking Details" | translate }}</ion-label>
   </ion-row>
@@ -41,7 +41,7 @@
       <ion-col text-right><strong>KD {{bookingDetail?.total_with_delivery}}</strong></ion-col>
     </ion-list>
     </div>
-    <div *ngIf="!bookingDetail">
+    <div *ngIf="bookingDetail && bookingDetail.operation == 'error'" class="error">
       {{ "Booking detail not found." | translate }}
     </div>
 
