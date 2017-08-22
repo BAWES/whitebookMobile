@@ -1,33 +1,34 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar class="top-nav">
     <ion-title>{{ "Contact" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  <form [formGroup]="contactForm" (ngSubmit)="sendMail()">
-    <ion-item>
-      <ion-label stacked>{{ "Name" | translate }}*</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>{{ "Email" | translate }}*</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>{{ "Topic" | translate }}*</ion-label>
-      <ion-select formControlName="topic">
-        <ion-option>Edit or cancel orders</ion-option>
-        <ion-option>Shipping & Delivery</ion-option>
-        <ion-option>Return, Refunds</ion-option>
-        <ion-option>Ordering</ion-option> 
-        <ion-option>Other</ion-option>
-      </ion-select>  
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>{{ "Description" | translate }}*</ion-label>
-      <ion-textarea formControlName="description"></ion-textarea>
-    </ion-item>
-    <button ion-button type="submit" [disabled]="!contactForm.valid">{{ "Send" | translate }}</button>
-  </form>
+  <ion-list>
+    <form [formGroup]="contactForm" (ngSubmit)="sendMail()">
+      <ion-item>
+        <ion-label floating>{{ "Name" | translate }}*</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ "Email" | translate }}*</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ "Topic" | translate }}*</ion-label>
+        <ion-select formControlName="topic">
+          <ion-option>Edit or cancel orders</ion-option>
+          <ion-option>Shipping & Delivery</ion-option>
+          <ion-option>Return, Refunds</ion-option>
+          <ion-option>Ordering</ion-option> 
+          <ion-option>Other</ion-option>
+        </ion-select>  
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ "Description" | translate }}*</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <button ion-button type="submit" [disabled]="!contactForm.valid">{{ "Send" | translate }}</button>
+    </form>
+  </ion-list>
 </ion-content>
