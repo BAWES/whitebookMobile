@@ -49,8 +49,9 @@
   "Price Chart": "الرسم البياني للسعر",
   "Quantity": "كمية",
   "Include Female Service": "وتشمل خدمة الإناث",
-  "atleast": "على الأقل",
-  "upto": "يصل إلى",
+  "Select": "تحديد",
+  " atleast": "على الأقل",
+  " upto": "يصل إلى",
   "Addons": "إضافات",
   "Special Request": "طلب خاص",
   "Add To Cart" : "أضف إلى السلة",
@@ -220,5 +221,8 @@
   "Max Quantity Available is {{value}}": "{{value}} ماكس الكمية المتاحة",
   "Invalid Login Credentials.": "اعتماد تسجيل الدخول غير صالح.",
   "Login Successfully": "تسجيل الدخول بنجاح",
-  "Registered Successfully. Please check your email for activation link": "تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على رابط التنشيط"
-}
+  "Registered Successfully. Please check your email for activation link": "تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على رابط التنشيط",
+  "Price on selection of menu items": "السعر على اختيار عناصر القائمة",
+  "Min. order amount": "دقيقة. كمية الطلب",
+  "select {min} {{max}}": "select {min} {{max}}"
+} 
