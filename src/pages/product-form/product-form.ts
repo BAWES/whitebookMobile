@@ -136,7 +136,7 @@ export class ProductFormPage {
      *  method to increase quantity
      */
     add() {
-        if (this.maxQuantity == 0) {
+        /*if (this.maxQuantity == 0) {
             this.translateService.get('Please select delivery date').subscribe(value => {
                 let toast = this.toastCtrl.create({
                     message: value,
@@ -160,14 +160,17 @@ export class ProductFormPage {
                 toast.present();
             });            
             return false;
-        }
+        }*/
+        this.quantity++;
+        this.productForm.controls['quantity'].setValue(this.quantity);
+        this.loadFinalPrice();
     }
 
     /**
      *  method to decrease quantity
      */
     sub() {
-        if (this.maxQuantity == 0) {
+        /*if (this.maxQuantity == 0) {
             let toast = this.toastCtrl.create({
                 message: 'Please select delivery date',
                 duration: 2000
@@ -179,6 +182,12 @@ export class ProductFormPage {
                 this.productForm.controls['quantity'].setValue(this.quantity);
                 this.loadFinalPrice();
             }
+        }*/
+
+        if (this.quantity > this.minQuantity) {
+            this.quantity--;
+            this.productForm.controls['quantity'].setValue(this.quantity);
+            this.loadFinalPrice();
         }
     }
 
@@ -223,6 +232,9 @@ export class ProductFormPage {
             this.productForm.controls['delivery_date'].value
         ).subscribe(result => {
             this.maxQuantity = parseInt(result.capacity);
+            /*if(this.quantity > this.maxQuantity) {
+                this.quantity = this.maxQuantity;
+            }*/
         });
     }
 
