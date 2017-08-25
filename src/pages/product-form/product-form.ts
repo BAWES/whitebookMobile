@@ -25,7 +25,7 @@ export class ProductFormPage {
     //form variables
     public productForm: FormGroup;
     public submitAttempt: boolean = false;
-
+    public menuRange: any = [];  
     public total: number;  
     public cartErrors: any = [];
 
@@ -197,6 +197,7 @@ export class ProductFormPage {
     subMenuItemQty(menu_item_id) {
         let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
         let qty = parseInt(control.value);
+
         if (qty > 0) {
             control.setValue(qty - 1);
             this.loadFinalPrice();
@@ -208,8 +209,131 @@ export class ProductFormPage {
      */
     addMenuItemQty(menu_item_id) {
         let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
-        control.setValue(parseInt(control.value) + 1);
-        this.loadFinalPrice();
+        let qty = control.value;
+        let max = this.getMenuMaxQuantity(menu_item_id);
+        let total = this.getMenuTotalQuantity(menu_item_id);
+
+        if(total + 1 <= max || max == 0) {
+            control.setValue(parseInt(control.value) + 1);
+            this.loadFinalPrice();
+        } else {
+            this.translateService.get('Max {{value1}} items allowed in select menu', { "value1" : max }).subscribe(value => {
+                let toast = this.toastCtrl.create({
+                    message: value,
+                    duration: 2000
+                });
+                toast.present();
+            });            
+        }   
+    }
+
+    getMenuMaxQuantity(menu_item_id: number) {        
+        for(let i of this.product.menu) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    return i.max_quantity;
+                }
+            }
+        }   
+
+        for(let i of this.product.addons) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    return i.max_quantity;
+                }
+            }
+        }   
+    }
+
+    getMenuMinQuantity(menu_item_id: number) {
+        for(let i of this.product.menu) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    return i.min_quantity;
+                }
+            }
+        }   
+        for(let i of this.product.addons) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    return i.min_quantity;
+                }
+            }
+        }   
+    }
+
+    validateMenuItemCheck(menu_item_id) {
+        let control = this.productForm.controls['menu_item[' + menu_item_id + ']'];
+        
+        //no need to validate for unchecking checkbox 
+        if(control.value == false)
+            return true;
+        
+        let max = this.getMenuMaxQuantity(menu_item_id);
+        let total = this.getMenuTotalQuantity(menu_item_id);
+        
+        if(total <= max || max == 0) {
+            this.loadFinalPrice();
+            return true;            
+        } else {
+            control.value == false;
+
+            this.translateService.get('Max {{value1}} items allowed in select menu', { "value1" : max }).subscribe(value => {
+                let toast = this.toastCtrl.create({
+                    message: value,
+                    duration: 2000
+                });
+                toast.present();
+            });         
+        }   
+    }
+
+    getMenuTotalQuantity(menu_item_id: number) {
+        
+        let menu_type;
+
+        //get current menu's menu items 
+        let menuItems = [];
+        for(let i of this.product.menu) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    menu_type = i.quantity_type;
+                    menuItems = i.vendorItemMenuItems;
+                    break;        
+                }
+            }
+        }
+        for(let i of this.product.addons) {
+            for(let j of i.vendorItemMenuItems) {
+                if(j.menu_item_id == menu_item_id) {
+                    menu_type = i.quantity_type;
+                    menuItems = i.vendorItemMenuItems;
+                    break;        
+                }
+            }
+        }
+
+        //get total 
+        let total = 0;
+        for(let menuItem of menuItems) {
+
+            //checkbox
+
+            if(menu_type == 'checkbox' && this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value == true) {
+                total += 1;
+            }
+            
+            //selection  
+            if(menu_type != 'checkbox') {
+                total += parseInt(this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value);
+            }               
+
+            console.log(total);
+        }
+
+        console.log(total);
+
+        return total;
     }
 
     /**
