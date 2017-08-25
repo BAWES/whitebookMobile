@@ -151,7 +151,7 @@
         <ion-item *ngFor="let menu_item of menu.vendorItemMenuItems">
           <img src="{{_config.menu_item_thumbnail }}/{{ menu_item.image }}" item-right *ngIf="menu_item.image" (click)="showImage(menu_item.menu_item_name, menu_item.image)" />
           <div item-left>               
-            <ion-checkbox type="checkbox" formControlName="menu_item[{{menu_item.menu_item_id}}]"></ion-checkbox>
+            <ion-checkbox type="checkbox" formControlName="menu_item[{{menu_item.menu_item_id}}]" (click)="validateMenuItemCheck(menu_item.menu_item_id)"></ion-checkbox>
             <ion-label>
               {{ this._config.translate(menu_item.menu_item_name, menu_item.menu_item_name_ar) }} 
               <i>{{ this._config.translate(menu_item.hint, menu_item.hint_ar) }}</i>
