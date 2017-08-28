@@ -17,8 +17,9 @@ export class CommunityListPage {
   public community : any = [];
   public keys: any = [];
   
-  public defaultImage = 'assets/images/item-default.png';
-
+  public errorImage = 'assets/images/error-image.png';
+  public defaultImage = 'assets/images/loading_spinner.gif';
+  
   constructor(
     public navCtrl: NavController,
     public httpService: Http,

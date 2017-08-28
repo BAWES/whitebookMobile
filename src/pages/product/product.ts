@@ -45,7 +45,8 @@ export class ProductPage {
     pager: true
   };
 
-  public defaultImage = 'assets/images/item-default.png';
+  public errorImage = 'assets/images/error-image.png';
+  public defaultImage = 'assets/images/loading_spinner.gif';
   public imageOffset = 100;
 
   constructor(
@@ -77,7 +78,7 @@ export class ProductPage {
 
     this.loadProductDetail();    
     this.getCartCount();
-    this.loadProductWishlistStatus()
+    this.loadProductWishlistStatus();
   }
 
   share() {
