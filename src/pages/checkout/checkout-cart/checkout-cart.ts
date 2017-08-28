@@ -40,6 +40,9 @@ export class CheckoutCartPage {
   public minDate;
 	public maxDate;
 
+  public errorImage = 'assets/images/error-image.png';
+  public defaultImage = 'assets/images/loading_spinner.gif';
+  
   constructor(
     public navCtrl: NavController, 
     public viewCtrl : ViewController,

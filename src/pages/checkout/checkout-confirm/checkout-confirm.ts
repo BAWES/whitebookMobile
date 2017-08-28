@@ -21,6 +21,9 @@ export class CheckoutConfirmPage {
   public start:number = 0;
   public address_id: any;
   
+  public errorImage = 'assets/images/error-image.png';
+  public defaultImage = 'assets/images/loading_spinner.gif';
+  
   //customer info 
   public firstname: any;
   public lastname: any;
