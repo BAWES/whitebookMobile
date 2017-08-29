@@ -26,7 +26,7 @@ export class ProductFormPage {
     public productForm: FormGroup;
     public submitAttempt: boolean = false;
     public menuRange: any = [];  
-    public total: number;  
+    public total: number = 0;  
     public cartErrors: any = [];
 
     public currentTime;
@@ -213,7 +213,7 @@ export class ProductFormPage {
         let max = this.getMenuMaxQuantity(menu_item_id);
         let total = this.getMenuTotalQuantity(menu_item_id);
 
-        if(total + 1 <= max || max == 0) {
+        if(total + 1 <= max || !max || max == 0) {
             control.setValue(parseInt(control.value) + 1);
             this.loadFinalPrice();
         } else {
@@ -272,7 +272,7 @@ export class ProductFormPage {
         let max = this.getMenuMaxQuantity(menu_item_id);
         let total = this.getMenuTotalQuantity(menu_item_id);
         
-        if(total <= max || max == 0) {
+        if(total <= max || !max || max == 0) {
             this.loadFinalPrice();
             return true;            
         } else {
