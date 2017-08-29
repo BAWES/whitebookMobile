@@ -53,16 +53,16 @@
       <p>{{ "Item is not available on selected date" | translate }}</p>
     </div>
 
-    <ion-item>
+    <ion-item *ngIf="maxQuantity > 1 && product.type.type_name != 'Package'">
       <div class="flex_row">
         <ion-icon (click)="sub()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
         <p class="quantity"> {{ quantity }} </p>
         <ion-icon (click)="add()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
       </div>
     </ion-item>
-    
+
     <!-- price -->
-    <ion-item *ngIf="product.hide_price_chart != 1 && product.price.length > 0">
+    <ion-item *ngIf="product.item.hide_price_chart != 1 && product.price.length > 0">
       <h1 text-center>{{ "Price Chart" | translate }}</h1>
         <div class = "row border" border>
           <div class = "price-table-col-header white-border-right col">{{ "Quantity" | translate }}</div>

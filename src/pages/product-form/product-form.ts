@@ -56,7 +56,7 @@ export class ProductFormPage {
         }
   
         this.quantity = this.minQuantity;          
-        
+  
         this.currentTime = new Date().getTime();    
     }
 
