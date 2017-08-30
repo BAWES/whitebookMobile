@@ -55,6 +55,7 @@
 
     <ion-item *ngIf="maxQuantity > 1 && product.type.type_name != 'Package'">
       <div class="flex_row">
+        <p class="qty_label">{{ product.item.quantity_label }}</p>
         <ion-icon (click)="sub()" ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
         <p class="quantity"> {{ quantity }} </p>
         <ion-icon (click)="add()" ios="ios-add-circle" md="md-add-circle"></ion-icon>
