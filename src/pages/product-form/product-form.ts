@@ -276,7 +276,7 @@ export class ProductFormPage {
             this.loadFinalPrice();
             return true;            
         } else {
-            control.value == false;
+            control.setValue(false);
 
             this.translateService.get('Max {{value1}} items allowed in select menu', { "value1" : max }).subscribe(value => {
                 let toast = this.toastCtrl.create({
