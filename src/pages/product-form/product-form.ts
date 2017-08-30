@@ -100,10 +100,59 @@ export class ProductFormPage {
     }
 
     loadFinalPrice() {
-        let params = this.productForm.value;
+        /*let params = this.productForm.value;
         this.productService.loadFinalPrice(params).subscribe(jsonResponse => {
             this.total = jsonResponse.total;
-        });
+        });*/
+        
+        this.total = Number(this.product.item.item_base_price);
+
+        let included_quantity = 1;
+        let increment_value = Number(this.product.item.item_price_per_unit);
+                
+        for(let price of this.product.price)
+        {
+            if(price.range_from <= this.quantity && price.range_to >= this.quantity)
+            {
+                increment_value = Number(price.pricing_price_per_unit);
+                break;
+            }
+        } 
+
+        if (this.product.item.included_quantity > 0) {
+            let included_quantity = Number(this.product.item.included_quantity);
+        } 
+                
+        if(this.product.item.minimum_increment < 1)
+        {
+            this.product.item.minimum_increment = 1;
+        }
+        
+        // by this price will get increase by "price per increment" for each "min increment" qty added to cart  
+        
+        this.total += ((this.quantity - Number(included_quantity)) / Number(this.product.item.minimum_increment)) * increment_value;
+        
+        // menu item can be manu_item => quantity pair or array of menu items 
+        
+        for(let menu of this.product.menu) 
+        {
+            for(let menuItem of menu.vendorItemMenuItems)
+            {                        
+                if(menu.quantity_type == 'checkbox' && this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value == true) 
+                    this.total += Number(menuItem['price']);
+
+                if(menu.quantity_type != 'checkbox')
+                    this.total += Number(menuItem['price']) * this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value;
+            }                    
+        }
+
+        for(let menu of this.product.addons) 
+        {
+            for(let menuItem of menu.vendorItemMenuItems)
+            {                        
+                this.total += Number(menuItem['price'])  * this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value;
+            }                    
+        }
     }
 
     /**
@@ -327,11 +376,7 @@ export class ProductFormPage {
             if(menu_type != 'checkbox') {
                 total += parseInt(this.productForm.controls['menu_item[' + menuItem.menu_item_id + ']'].value);
             }               
-
-            console.log(total);
         }
-
-        console.log(total);
 
         return total;
     }
