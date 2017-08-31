@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, ViewController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/debounceTime';
 // Pages
 import { ProductPage } from '../product/product';
@@ -19,6 +20,8 @@ export class SearchItemPage {
   public items: any;
   public searching: any = false;
 
+  private query: Observable<string> = new Observable;
+
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
@@ -26,7 +29,11 @@ export class SearchItemPage {
     public _config: GlobalService,
     public translateService: TranslateService,
     public productService: ProductService
-  ) { }
+  ) { 
+    /*this.query.subscribe(function(value) {
+      this.loadItems(value);  
+    });*/
+  }
 
   ionViewDidLoad() {
     this.loadItems('All');
@@ -54,7 +61,7 @@ export class SearchItemPage {
     
     // Load new set of items based on user input 
     this.items = [];
-    this.loadItems(ev.target.value);
+    this.loadItems(ev.value);
   }
 
   /**

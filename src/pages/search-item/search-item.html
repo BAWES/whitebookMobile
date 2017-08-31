@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-searchbar (ionInput)="onSearchInput($event)" placeholder="Search Item"></ion-searchbar>
+    <ion-searchbar (ionChange)="onSearchInput($event)" [debounce]="1000" placeholder="Search Item"></ion-searchbar>    
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         {{ "Close" | translate }}
