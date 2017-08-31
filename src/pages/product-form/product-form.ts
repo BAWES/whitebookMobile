@@ -28,6 +28,7 @@ export class ProductFormPage {
     public menuRange: any = [];  
     public total: number = 0;  
     public cartErrors: any = [];
+    public notAvailableForSelectedDate: boolean = false;
 
     public currentTime;
     public todayStr;
@@ -401,6 +402,10 @@ export class ProductFormPage {
             this.productForm.controls['delivery_date'].value
         ).subscribe(result => {
             this.maxQuantity = parseInt(result.capacity);
+
+            if(this.maxQuantity == 0)
+                this.notAvailableForSelectedDate = true;
+            
             /*if(this.quantity > this.maxQuantity) {
                 this.quantity = this.maxQuantity;
             }*/

@@ -49,7 +49,7 @@
     <div class="error-message" *ngIf="timeslots.length && productForm.controls.area_id.valid && productForm.controls.delivery_date.valid && !productForm.controls.time_slot.valid && (productForm.controls.time_slot.touched ||  submitAttempt)">
       <p>{{ "Please Select Time Slot" | translate }}</p>
     </div> 
-    <div class="error-message" *ngIf="!timeslots.length && dateChange">
+    <div class="error-message" *ngIf="notAvailableForSelectedDate">
       <p>{{ "Item is not available on selected date" | translate }}</p>
     </div>
 
