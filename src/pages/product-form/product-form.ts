@@ -21,6 +21,7 @@ export class ProductFormPage {
     public maxQuantity: number = 0;
     public minQuantity: number = 1;
     public dateChange: boolean = false;
+    public showQuantityBox: boolean = true;
     
     //form variables
     public productForm: FormGroup;
@@ -56,7 +57,11 @@ export class ProductFormPage {
            this.minQuantity = this.product.item.included_quantity;
         }
   
-        this.quantity = this.minQuantity;          
+        this.quantity = this.minQuantity;     
+        
+        if(this.product.type.type_name == 'Package') {
+            this.showQuantityBox = false;
+        }        
   
         this.currentTime = new Date().getTime();    
     }
@@ -406,6 +411,10 @@ export class ProductFormPage {
             if(this.maxQuantity == 0)
                 this.notAvailableForSelectedDate = true;
             
+            if(this.maxQuantity <= 1 || this.product.type.type_name == 'Package') {
+                this.showQuantityBox = false;
+            }
+             
             /*if(this.quantity > this.maxQuantity) {
                 this.quantity = this.maxQuantity;
             }*/
