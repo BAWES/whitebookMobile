@@ -224,5 +224,6 @@
   "Registered Successfully. Please check your email for activation link": "تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني للحصول على رابط التنشيط",
   "Price on selection of menu items": "السعر على اختيار عناصر القائمة",
   "Min. order amount": "دقيقة. كمية الطلب",
-  "Max {{value1}} items allowed in select menu": "ماكس {{value1}} المسموح بها في القائمة المحددة"
+  "Max {{value1}} items allowed in select menu": "ماكس {{value1}} المسموح بها في القائمة المحددة",
+  "Shopping Cart": "عربة التسوق"
 } 
