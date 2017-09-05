@@ -29,8 +29,7 @@ export class ListingPage {
   public filterCount: number = 0;
 
   public errorImage = 'assets/images/error-image.png';
-  public defaultImage = 'assets/images/loading_spinner.gif';
-  public imageOffset = 100;
+  public defaultImage = 'assets/images/loading_spinner.gif';//'assets/images/error-image.png';
 
   constructor(
     public navCtrl: NavController,
