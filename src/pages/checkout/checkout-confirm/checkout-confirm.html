@@ -3,96 +3,81 @@
     <ion-title>{{ "Confirm Your Booking" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
 
-  <ion-list class="header" *ngIf="errors.length == 0 && cartItems.length > 0">
-      <ion-col width-36-inline-block>
-          <strong>{{ "Image" | translate }}</strong>
-      </ion-col>
-      <ion-col width-57-inline-block>
-          <strong>{{ "Detail" | translate }}</strong>
-      </ion-col>
-  </ion-list>
-  <div class="" approxItemHeight="40px" *ngIf="errors.length == 0 && cartItems.length > 0">
-  
-    <ion-list *ngFor="let item of cartItems" >
-      <ion-row class="header">
-          <ion-col width-20 position-relative>
-              <img [errorImage]="errorImage" [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + item.image_path">
-          </ion-col>
-          <ion-col width-80 class="button-container">
-              <h3>{{ _config.translate(item.item_name, item.item_name_ar) }}</h3>
-              <ion-label> {{ QTY | translate }} :  {{ item.cart_quantity}}</ion-label>
-              <ion-label> {{ Vendor | translate }} :  {{ item.vendor}}</ion-label>
-              <h2>{{ "Item Total" | translate }} : KD {{ item.total }}</h2>  
-
-              <div *ngIf="item.options.length">
-                  <small>{{ "Options" | translate }}</small>
-                  <ion-label *ngFor="let option of item.options"> 
-                    <small>{{ _config.translate(option.menu_item_name, option.menu_item_name_ar) }} X {{option.quantity}}</small>
-                  </ion-label>
-              </div>
-
-              <div *ngIf="item.addons.length">
-                  <small>{{ "Addons" | translate }}</small>
-                  <ion-label *ngFor="let addon of item.addons"> 
-                    <small>{{ _config.translate(addon.menu_item_name, addon.menu_item_name_ar) }} X {{addon.quantity}}</small>
-                  </ion-label>
-              </div>
-
-              <div *ngIf="item.addons.length">
-                  <small>{{ "Customs" | translate }}</small>
-                  <ion-label *ngFor="let custom of item.customs" > 
-                    <small>{{ custom.question }}</small>
-                    <small>{{ custom.answer }}</small>
-                  </ion-label>
-              </div>
-              
-              <div *ngFor="let error of item.errors" class="cart-error-wrapper">
-                <p>{{ error }}</p>
-              </div>                      
-          </ion-col>        
-      </ion-row>
-    </ion-list>
+    <div  *ngIf="errors.length == 0 && cartItems.length > 0">
+      <ion-grid>
+          <ion-row *ngFor="let item of cartItems" class="header">
+              <ion-col col-4>
+                  <img [errorImage]="errorImage" [defaultImage]="defaultImage" [lazyLoad]="_config.images_210 + '/' + item.image_path">
+              </ion-col>
+              <ion-col col-8 class="details">
     
-    <ion-list summary *ngIf="summary" >
-      <ion-row *ngIf="summary.subtotal">
-        <ion-col text-left>
-          <ion-label><strong>{{ "Sub Total" | translate }}</strong></ion-label>
-        </ion-col>
-        <ion-col text-right>
-          <ion-label>{{summary.subtotal}}</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngFor="let cost of delivery_vendors">
-        <ion-col text-left>
-          <ion-label>{{ "Delivery Charge" | translate }} <br /><small>({{cost.vendor}})</small></ion-label>
-        </ion-col>
-        <ion-col text-right>
-          <ion-label>{{ cost.charges }}</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="summary.total">
-        <ion-col text-left>
-          <ion-label><strong>{{ "Total" | translate }}</strong></ion-label>
-        </ion-col>
-        <ion-col text-right>
-          <ion-label>{{ summary.total }}</ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-list>
-  </div>
+                  <h3>
+                    {{ _config.translate(item.item_name, item.item_name_ar) }}
+                    <ion-badge class="qty">X {{ item.cart_quantity }}</ion-badge>
+                  </h3>
+                  
+                  <!--<ion-label> {{ "Vendor" | translate }} :  {{ item.vendor }}</ion-label>-->
+                  
+                  <div *ngIf="item.options.length" class="options">
+                      <small>{{ "Options" | translate }}</small>
+                      <ion-badge *ngFor="let option of item.options">
+                        {{ _config.translate(option.menu_item_name, option.menu_item_name_ar) }} X {{option.quantity}}
+                      </ion-badge>
+                  </div>
+    
+                  <div *ngIf="item.addons.length" class="addons">
+                      <small>{{ "Addons" | translate }}</small>
+                      <ion-badge *ngFor="let addon of item.addons"> 
+                        {{ _config.translate(addon.menu_item_name, addon.menu_item_name_ar) }} X {{addon.quantity}}
+                      </ion-badge>
+                  </div>
+    
+                  <div *ngIf="item.customs.length" class="customs">
+                      <small>{{ "Customs" | translate }}</small>
+                      <ion-label *ngFor="let custom of item.customs" > 
+                        <small>{{ custom.question }}</small>
+                        <small>{{ custom.answer }}</small>
+                      </ion-label>
+                  </div>
+                  
+                  <h2>KD {{ item.total }}</h2>  
+                  
+                  <div *ngFor="let error of item.errors" class="cart-error-wrapper">
+                    <p>{{ error }}</p>
+                  </div>                      
+              </ion-col>
+          </ion-row>
+      </ion-grid>
 
-  <ion-item text-center checkout-btn *ngIf="errors.length == 0">
-    <button ion-button round width-99 padding color="dark" (click)="confirm()"> {{ "Confirm" | translate }}</button>
-  </ion-item>
+      <ion-list class="summary" *ngIf="summary" >
+          <ion-item *ngIf="summary.subtotal">
+            <span pull-left>{{ "Sub Total" | translate }}</span>
+            <span pull-right>{{ summary.subtotal }}</span>
+          </ion-item>
+          <ion-item *ngFor="let cost of delivery_vendors">
+            <span pull-left>{{ "Delivery Charge" | translate }} <br /><small>({{cost.vendor}})</small></span>
+            <span pull-right>{{ cost.charges }}</span>
+          </ion-item>
+          <ion-item *ngIf="summary.total">
+            <span pull-left>{{ "Total" | translate }}</span>
+            <span pull-right>{{ summary.total }}</span>
+          </ion-item>
+      </ion-list>
+
+      <ion-item text-center checkout-btn *ngIf="errors.length == 0">
+        <button ion-button round width-99 padding color="dark" (click)="confirm()"> {{ "Confirm" | translate }}</button>
+      </ion-item>
+    </div>
+    
+    <div *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">
+      <p text-center>{{ "No Results" | translate }}</p>
+    </div>
+
+    <div *ngIf="errors.length > 0" class="no-results">
+      <p text-center>{{ "Please check your cart" | translate }}</p>
+    </div>
 
 </ion-content>
 
-<ion-content *ngIf="(carItems !== undefined && !carItems.length)" class="no-results">
-    <p text-center>{{ "No Results" | translate }}</p>
-</ion-content>
-
-<ion-content *ngIf="errors.length > 0" class="no-results">
-    <p text-center>{{ "Please check your cart" | translate }}</p>
-</ion-content>
