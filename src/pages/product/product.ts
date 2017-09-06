@@ -8,6 +8,7 @@ import { ProductFormPage } from '../product-form/product-form';
 import { ProductImagePage } from '../product-image/product-image';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
+import { ListingPage } from '../listing/listing';
 
 //Services
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -232,5 +233,9 @@ export class ProductPage {
       this.getCartCount();
     });
     modal.present();
+  }
+
+  viewSimilar() {
+    this.navCtrl.push(ListingPage, { vendorID : this.product.vendor.vendor_id })
   }
 }
