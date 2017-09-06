@@ -45,14 +45,26 @@ export class ListingPage {
 
   ionViewDidLoad() {
     this.productView = 'grid-view';
+
     this.id = this._params.get('id');
     this.title = this._params.get('title');
     this.title_ar = this._params.get('title_ar');
-    this._urlParamas = '&category_id='+this.id;
     
+    if(this.id)
+    {
+      this._urlParamas += '&category_id='+this.id;
+    }    
+    
+    if(this._params.get('vendorID') != undefined)
+    {
+      this._urlParamas += '&requestedVendor='+this._params.get('vendorID');  
+      this.filterCount++;
+    }
+
     if(this._params.get('themeID') != undefined)
     {
-      this._urlParamas = '&requestedTheme='+this._params.get('themeID');  
+      this._urlParamas += '&requestedTheme='+this._params.get('themeID');  
+      this.filterCount++;
     }    
     
     //this.setDefaultDeliveryDate();

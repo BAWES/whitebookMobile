@@ -8,7 +8,7 @@
   "User Section": "قسم المستخدم",
   "My Events": "أحداثي",
   "Please login to view event list": "الرجاء تسجيل الدخول لعرض قائمة الأحداث",
-  "View All...": "عرض الكل ...",
+  "View All...": "عرض الكل ...",  
   "Track Booking": "المسار الحجز",
   "Community": "دليل",
   "Become Vendor": "تصبح بائع",
@@ -225,5 +225,6 @@
   "Price on selection of menu items": "السعر على اختيار عناصر القائمة",
   "Min. order amount": "دقيقة. كمية الطلب",
   "Max {{value1}} items allowed in select menu": "ماكس {{value1}} المسموح بها في القائمة المحددة",
-  "Shopping Cart": "عربة التسوق"
+  "Shopping Cart": "عربة التسوق",
+  "View All": "عرض الكل",
 } 
