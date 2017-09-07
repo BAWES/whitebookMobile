@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook } from '@ionic-native/facebook';
 import { ValidFields } from '../../../validators/valid.fields';
 //Pages
 import { ForgotPasswordPage } from '../forgot-password/forgot-password'

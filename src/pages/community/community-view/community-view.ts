@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-
 //services 
 import { GlobalService } from '../../../providers/global.service';
 import { HttpService } from '../../../providers/http.service';
-
 //pages 
 import { ProductPage } from '../../product/product';
 import { VendorReviewPage } from '../vendor-review/vendor-review';

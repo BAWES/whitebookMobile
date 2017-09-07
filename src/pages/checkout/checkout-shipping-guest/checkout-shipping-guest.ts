@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { CheckoutConfirmPage } from '../checkout-confirm/checkout-confirm';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+//Services
 import { HttpService } from '../../../providers/http.service';
 import { AddressService } from '../../../providers/address.service';
 import { GlobalService } from '../../../providers/global.service';

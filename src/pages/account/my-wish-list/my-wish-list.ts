@@ -3,7 +3,6 @@ import { NavController, AlertController, ToastController } from 'ionic-angular';
 //Pages
 import { ProductPage } from '../../product/product';
 //Services
-import { HttpService } from '../../../providers/http.service';
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
 import { ProductService } from '../../../providers/product.service';
@@ -31,7 +30,6 @@ export class MyWishListPage {
     public navCtrl: NavController,
     public alertCtrl:AlertController,
     public toastCtrl : ToastController,
-    public httpRequest: HttpService,
     public translateService: TranslateService,
     public wishlistService: WishlistService,
     public productService: ProductService,

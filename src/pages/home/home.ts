@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { MenuController, NavController, ModalController } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
-
-import { CheckoutCompletedPage } from '../checkout/checkout-completed/checkout-completed';
+import { MenuController, NavController } from 'ionic-angular';
+//Pages
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart'
 import { ListingPage } from '../listing/listing';
-
+//Services
+import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../providers/cart.service';
 import { GlobalService } from '../../providers/global.service';
 
@@ -30,7 +29,6 @@ export class Home {
 
   constructor(
     public navCtrl: NavController,
-    public modalCtnl: ModalController,
     public httpService: Http,
     public cartService: CartService,
     public _config: GlobalService,

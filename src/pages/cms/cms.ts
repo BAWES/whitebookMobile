@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-
 // Services 
-import { HttpService } from '../../providers/http.service';
 import { CmsService } from '../../providers/cms.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,7 +15,6 @@ export class Cms {
 
   constructor(
     public navParams: NavParams,    
-    public httpService : HttpService,
     public translateService: TranslateService,
     public cmsService: CmsService
     ) {

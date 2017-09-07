@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
-
+//Services
 import { GlobalService } from '../../../providers/global.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CommunityViewPage } from '../community-view/community-view';

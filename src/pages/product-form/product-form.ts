@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, AlertController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 // Services 
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../providers/cart.service';

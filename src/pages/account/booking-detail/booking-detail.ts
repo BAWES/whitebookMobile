@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController, AlertController, Platform } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 //Services 
 import { GlobalService } from '../../../providers/global.service';
-import { HttpService } from '../../../providers/http.service';
 import { BookingService } from '../../../providers/booking.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,7 +28,6 @@ export class BookingDetailPage {
     public _viewCtrl:ViewController,
     public _navParams:NavParams,
     public navCtrl: NavController,
-    public httpRequest: HttpService,    
     public _config:GlobalService,
     public translateService: TranslateService,
     public bookingService: BookingService,

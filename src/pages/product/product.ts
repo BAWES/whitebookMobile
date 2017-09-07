@@ -1,15 +1,12 @@
 import { ViewChild, Component } from '@angular/core';
-import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController, LoadingController, AlertController, ToastController, Slides } from 'ionic-angular';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
-
 //Pages
 import { ProductFormPage } from '../product-form/product-form';
 import { ProductImagePage } from '../product-image/product-image';
 import { CheckoutCartPage } from '../checkout/checkout-cart/checkout-cart';
 import { SearchItemPage } from '../search-item/search-item';
 import { ListingPage } from '../listing/listing';
-
 //Services
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TranslateService } from '@ngx-translate/core';
@@ -58,7 +55,6 @@ export class ProductPage {
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public _config: GlobalService,
-    public http: Http,
     public translateService: TranslateService,
     public productService: ProductService,
     public cartService: CartService,

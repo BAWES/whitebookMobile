@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 //Services
 import { VendorService } from '../../providers/vendor.service';
 import { Base } from '../../providers/base';

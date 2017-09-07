@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+//Services
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 

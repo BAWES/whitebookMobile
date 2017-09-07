@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ValidFields } from '../../../validators/valid.fields';
-
 //Services
 import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
@@ -17,6 +16,7 @@ export class RegisterPage {
   registerForm : FormGroup;
   registerData : any;
   submitAttempt : boolean = false;
+
   constructor(
     private navCtrl: NavController,
     private fb: FormBuilder,
@@ -34,7 +34,7 @@ export class RegisterPage {
         gender: ['', Validators.required],
         mobileNumber: ['', Validators.compose([Validators.required,ValidFields.isValidMobile])],
       },
-        {validator: ValidFields.passwordMatch('password', 'confirmPassword')}
+        { validator: ValidFields.passwordMatch('password', 'confirmPassword') }
       );
     }
     
