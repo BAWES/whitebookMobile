@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController, ModalController, ToastController } from 'ionic-angular';
+//Pages
 import { CreateEventPage } from '../create-event/create-event';
+//Services
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 

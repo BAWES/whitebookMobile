@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 // Products
 import { ProductPage } from '../product/product';
@@ -35,7 +34,6 @@ export class ListingPage {
     public navCtrl: NavController,
     private _params : NavParams,
     public modalCtnl: ModalController,
-    public httpService: Http,
     public cartService: CartService,
     public productService: ProductService,
     public _config: GlobalService

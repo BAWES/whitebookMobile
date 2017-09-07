@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
+//Services
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
-
+//Pages
 import { ProductPage } from '../../product/product';
 
 @Component({
@@ -18,6 +19,7 @@ export class PackageDetailPage {
   public id:any
   public detail:any;
   public items:any;
+
   constructor(
     public navCtrl: NavController,
     private _params : NavParams,

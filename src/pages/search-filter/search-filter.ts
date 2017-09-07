@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavParams, ViewController, LoadingController } from 'ionic-angular';
+//Services
 import { GlobalService } from '../../providers/global.service';
 import { ProductService } from '../../providers/product.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,7 +42,6 @@ export class SearchFilterPage {
   constructor(
     public loadingCtrl: LoadingController,
     public viewCtrl:ViewController,
-    public httpService: Http,
     public productService: ProductService,
     public _config: GlobalService,
     private _params : NavParams,

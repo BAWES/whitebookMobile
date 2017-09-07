@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
 //models 
 import { Vendor } from '../../../models/vendor';
-
 //services 
 import { HttpService } from '../../../providers/http.service';
-import { GlobalService } from '../../../providers/global.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -30,13 +27,11 @@ export class VendorReviewPage {
     reviewForm : FormGroup;
 
     constructor(
-        public navCtrl: NavController, 
         public viewCtrl : ViewController,
         public alertCtrl : AlertController,
         public httpService: HttpService,
         private formBuilder: FormBuilder,
         private navParams: NavParams,
-        public _config: GlobalService,
         public translateService: TranslateService
     ) {
         this.vendor = this.navParams.get('vendor');

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Home } from '../../home/home';
 
 @Component({
@@ -10,8 +10,7 @@ import { Home } from '../../home/home';
 export class CheckoutCompletedPage {
 
   constructor(
-    public navCtrl: NavController,
-    public menuCtrl: MenuController
+    public navCtrl: NavController
   ) {}
 
   dismiss() {

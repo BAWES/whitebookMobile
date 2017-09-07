@@ -25,14 +25,10 @@ export class SearchItemPage {
   constructor(
     public navCtrl: NavController,
     public viewCtrl: ViewController,
-    public httpRequest: Http,
     public _config: GlobalService,
     public translateService: TranslateService,
     public productService: ProductService
-  ) { 
-    /*this.query.subscribe(function(value) {
-      this.loadItems(value);  
-    });*/
+  ) {     
   }
 
   ionViewDidLoad() {

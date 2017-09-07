@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController } from 'ionic-angular';
+//Services
 import { TranslateService } from '@ngx-translate/core';
 import { GlobalService } from '../../../providers/global.service';
-
+//Pages
 import { PackageDetailPage } from '../../../pages/packages/package-detail/package-detail';
 
 @Component({

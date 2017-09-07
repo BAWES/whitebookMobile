@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalController, AlertController,ToastController } from 'ionic-angular';
+import { ModalController, AlertController, ToastController } from 'ionic-angular';
+
 //Pages
 import { CreateAddressPage } from '../create-address/create-address';
+
 //Services
 import { GlobalService } from '../../../providers/global.service';
 import { TranslateService } from '@ngx-translate/core';

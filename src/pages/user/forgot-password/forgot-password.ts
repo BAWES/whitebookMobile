@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
+//Services
 import { Authentication } from '../../../providers/auth.service';
 import { Base } from '../../../providers/base';
-
+//Validation
 import { ValidFields } from '../../../validators/valid.fields';
 
 @Component({
@@ -16,6 +16,7 @@ export class ForgotPasswordPage {
   resetForm : FormGroup;
   resetFormData : any;
   submitAttempt :boolean = false;
+  
   constructor(
     private _viewCtrl : ViewController,
     private _fb: FormBuilder,

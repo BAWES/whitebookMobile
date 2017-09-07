@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+//Pages
 import { BookingDetailPage } from '../booking-detail/booking-detail';
+//Services
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../../providers/http.service';
 import { BookingService } from '../../../providers/booking.service';
@@ -16,7 +18,6 @@ export class MyBookingsPage {
   public start:number = 0;
 
   constructor(
-    public modalCtrl: ModalController,
     public httpService: HttpService,
     public navCtrl: NavController,
     public translateService: TranslateService,
