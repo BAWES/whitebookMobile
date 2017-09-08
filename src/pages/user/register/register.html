@@ -85,8 +85,14 @@
         <button ion-button round width-75 color="dark">{{ "Register" | translate }}</button>
       </ion-item>
     </form>
+
+    <button full round (click)='register("facebook")' font-size-16>{{ "Register With Facebook" | translate }}</button>
+    
     <ion-item text-center no-border>
       <button no-background (click)='dismiss()' font-size-16>{{ "Already have an account?" | translate }}</button>
     </ion-item>
+
+    
+
   </ion-list>
 </ion-content>
