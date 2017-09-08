@@ -1,4 +1,18 @@
 page-register {
     .toolbar-title{margin-right: 71px;font-weight: normal;}
     .error-message p{margin: 0px;padding-top: 10px;color:#ff0000!important;}
+    
+    .item {
+        padding-left: 0 !important;
+    }
+
+    form {
+        margin-bottom: 0px;
+    }
+
+    .button { 
+        margin-top: 15px;
+        padding: 0 !important;
+        height: 40px;
+    }
 }

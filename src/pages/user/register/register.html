@@ -81,18 +81,14 @@
       <div class="error-message" *ngIf="registerForm.controls.password.valid && registerForm.controls.confirmPassword.valid && !registerForm.hasError('passwordNotMatch')">
           <p>{{ "Confirm password & Password doesn't Match" | translate }}</p>
       </div>
-      <ion-item text-center no-border margin-top-25>
-        <button ion-button round width-75 color="dark">{{ "Register" | translate }}</button>
-      </ion-item>
+      
+      <button ion-button round full color="dark">{{ "Register" | translate }}</button>
+      
     </form>
 
-    <button full round (click)='register("facebook")' font-size-16>{{ "Register With Facebook" | translate }}</button>
+    <button ion-button full round (click)='register("facebook")'>{{ "Register With Facebook" | translate }}</button>
     
-    <ion-item text-center no-border>
-      <button no-background (click)='dismiss()' font-size-16>{{ "Already have an account?" | translate }}</button>
-    </ion-item>
-
+    <button ion-button round full color="secondary" (click)='dismiss()'>{{ "Already have an account?" | translate }}</button>
     
-
   </ion-list>
 </ion-content>
