@@ -195,7 +195,6 @@ export class ListingPage {
   * will load more data just like pagination
   */
   doInfinite(infiniteScroll) {
-    let items;
     this.start += 10;
     this.productService.list('?offset=' + this.start + this._urlParamas).subscribe(items => {
       for(let item of items) {

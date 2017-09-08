@@ -20,10 +20,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginPage {
   
-  private _browser;
-  private _browserLoadEvents;
-  private _browserCloseEvents;
-
   loginForm: FormGroup;
   loginData: any;
   submitAttempt: boolean = false;

@@ -1,17 +1,14 @@
 <ion-header>
-  <ion-navbar class="top-nav">
-    <ion-title text-center>{{ "Login" | translate }}</ion-title>
-  </ion-navbar>
+  <ion-navbar class="top-nav"></ion-navbar>
 </ion-header>
-<ion-content padding >  
-  <ion-list>
-      <ion-item class="item-profile" no-border>
-        <div class="item-avatar" text-center>
-          <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
-        </div>
-    </ion-item>
+<ion-content padding>  
+    
+    <div class="item-avatar" text-center>
+      <img src="http://dev.thewhitebook.com.kw/images/logo.svg">
+    </div>
+    
     <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
-     <ion-item>
+      <ion-item>
         <ion-label floating>{{ "Email" | translate }}</ion-label>
         <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
@@ -28,34 +25,16 @@
       <div class="error-message" *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.touched || submitAttempt) ">
         <p>{{ "Please enter password" | translate }}</p>
       </div>
-      <ion-item text-center no-border margin-top-25>
-        <button width-75 ion-button round color="dark">{{ "Login" | translate }}</button>
-      </ion-item>
-    </form> 
-      <ion-item text-center no-border>
-        <button no-background (click)='forgetPasswordPage()' font-size-16>{{ "Forget password?" | translate }}</button>
-      </ion-item>
-      <ion-item text-center margin-top-25>
-          <div>{{ "OR" | translate }}</div>
-          <hr/>
-      </ion-item>
-  </ion-list>
-  <ion-item text-center no-border>
-      {{ "Don't have an account?" | translate }}<button (click)="registerPage()" font-size-16 no-background>{{ "Sign Up" | translate }}</button>
-  </ion-item>
+      <span class="btn-password" (click)='forgetPasswordPage()'>{{ "Forget password?" | translate }}</span>
 
-  <h4 padding>Login By...</h4>
-	<ion-list inset>
-		<ion-item (click)="login('facebook')">
-			<ion-icon name="logo-facebook" item-left></ion-icon>
-			Facebook
-    </ion-item>
-    <!--
-		<ion-item (click)="login('google')">
-			<ion-icon name="logo-google" item-left></ion-icon>
-			Google
-    </ion-item>
-    -->
-  </ion-list>
-  
+      <button ion-button round full color="dark">{{ "Login" | translate }}</button>      
+      
+    </form> 
+
+    <button ion-button round full login-btn (click)="login('facebook')">
+      {{ "Login With Facebook" | translate }}
+    </button>
+    
+    <button (click)="registerPage()" color="secondary" ion-button round full>{{ "Sign Up" | translate }}</button>
+    
 </ion-content>
