@@ -97,7 +97,6 @@
       }
     },
     "platforms": [
-      "android",
       "browser"
     ]
   }

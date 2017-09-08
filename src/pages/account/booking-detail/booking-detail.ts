@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ViewController, AlertController, Platform } from 'ionic-angular';
+import { NavParams, NavController, ViewController, AlertController } from 'ionic-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 //Services 
@@ -31,8 +31,7 @@ export class BookingDetailPage {
     public _config:GlobalService,
     public translateService: TranslateService,
     public bookingService: BookingService,
-    public _alertCtrl : AlertController,
-    private platform: Platform
+    public _alertCtrl : AlertController
   ) {
     this.detail(this._navParams.get('booking_token'));
   }
