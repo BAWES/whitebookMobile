@@ -13,44 +13,44 @@
   <ion-content>
     <!-- Main Categories -->
     <ion-list main-menu class="main-menu">
-      <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
+      <ion-item *ngFor="let category of categoryList" (click)="openPage(category)">
           <i class="fa {{category.icon}}"></i>
           <span class="label-{{category.icon}}">{{ category.category_name }}</span>
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- General Nav -->
     <ion-list>
       <ion-list-header>{{ "General" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of generalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of generalPages" (click)="openUserPage(page)">
         <i class="fa fa-{{page.icon}}"></i>
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Personal Nav -->
     <ion-list>
       <ion-list-header>{{ "Account" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of personalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of personalPages" (click)="openUserPage(page)">
         <i class="fa fa-{{page.icon}}"></i>
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Language Selection -->
     <ion-list>
       <ion-list-header>{{ "Language" | translate }}</ion-list-header>
-      <button ion-item (click)="translateToArabic()">
+      <ion-item ion-item (click)="translateToArabic()">
         عربى
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Legal Nav -->
     <ion-list>
       <ion-list-header>{{ "Legal" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of legalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of legalPages" (click)="openUserPage(page)">
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
   </ion-content>
@@ -71,44 +71,44 @@
   <ion-content>
     <!-- Main Categories -->
     <ion-list main-menu class="main-menu">
-      <button ion-item nav-clear menu-close item-icon-right *ngFor="let category of categoryList" (click)="openPage(category)">
+      <ion-item *ngFor="let category of categoryList" (click)="openPage(category)">
           <i class="fa {{category.icon}}"></i>
           <span class="label-{{category.icon}}">{{ category.category_name_ar }}</span>
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- General Nav -->
     <ion-list>
       <ion-list-header>{{ "General" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of generalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of generalPages" (click)="openUserPage(page)">
         <i class="fa fa-{{page.icon}}"></i>
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Personal Nav -->
     <ion-list>
       <ion-list-header>{{ "Account" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of personalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of personalPages" (click)="openUserPage(page)">
         <i class="fa fa-{{page.icon}}"></i>
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Language Selection -->
     <ion-list>
       <ion-list-header>{{ "Language" | translate }}</ion-list-header>
-      <button ion-item (click)="translateToEnglish()">
+      <ion-item (click)="translateToEnglish()">
         English
-      </button>
+      </ion-item>
     </ion-list>
 
     <!-- Legal Nav -->
     <ion-list>
       <ion-list-header>{{ "Legal" | translate }}</ion-list-header>
-      <button ion-item  *ngFor="let page of legalPages" (click)="openUserPage(page)">
+      <ion-item *ngFor="let page of legalPages" (click)="openUserPage(page)">
         {{ page.title | translate }} 
-      </button>
+      </ion-item>
     </ion-list>
 
   </ion-content>

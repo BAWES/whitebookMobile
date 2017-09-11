@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 //Services
 import { Authentication } from '../../../providers/auth.service';
@@ -19,6 +19,7 @@ export class ForgotPasswordPage {
   
   constructor(
     private _viewCtrl : ViewController,
+    private _navCtrl: NavController,
     private _fb: FormBuilder,
     private _authService:Authentication,
     private _baseService : Base
@@ -28,8 +29,8 @@ export class ForgotPasswordPage {
     });
   }
 
-  dismiss() {
-    this._viewCtrl.dismiss();
+  back() {
+    this._navCtrl.pop();
   }
 
   sendPassword(){
@@ -45,7 +46,7 @@ export class ForgotPasswordPage {
         } else if (this.resetFormData.operation == 'success') {
           this._baseService.showToast(this.resetFormData.message,4000);
           this._baseService.endLoading();
-          this.dismiss();
+          this._navCtrl.pop();
         }
       });
     }
